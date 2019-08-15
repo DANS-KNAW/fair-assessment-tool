@@ -44,6 +44,8 @@
         .panel-heading {background-color: #2795c8!important; background-image:"";}
         .panel-title {background-color: #2795c8!important; font-size: 13px;}
         .panel-title a {color: #FFFFFF;}
+        h1 {color: #02AEDB;}
+        img#text-bubble { margin-left: 20px; }
     </style>
 
     <script>
@@ -55,6 +57,9 @@
                 //var opt = $(this).find('option:selected')[0];
             });
             update();
+        }
+        function show_letter(letter, percent) {
+            document.getElementById(("image-" + letter).toLowerCase()).src = letter + "_" + Math.floor(percent / 10) * 10 + ".jpg"
         }
         /* Call this function whenever there is a state change */
         function update() {
@@ -71,15 +76,10 @@
             }
             var fscore = parseInt($("#q1").val()) + parseInt($("#q2").val()) +
                     parseInt($("#q3").val()) + parseInt($("#q4").val());
-            //$("#fbar").attr('style', "width: " +  (fscore / 17.0) * 100 + "%");
-            if (fscore > 0) {
-                $("#fscore").html(".").attr('style', "width: " +  (fscore / 17.0) * 100 + "px");
-            }
-            else {
-                $("#fscore").html("");
-            }
-            //$("#fscore").html(fscore);
-            $("#fstars").html(createStars(fscore/17.0 * 5));
+            var percent = Math.round(fscore / 17.0 * 100)
+            $("#fscore").html(percent + "%");
+            show_letter("F", percent);
+<!--            document.getElementById("image-f").src="A.jpg"-->
             var ascore = parseInt($("#q5").val()) + parseInt($("#q6").val()) +
                     parseInt($("#q7").val());
             //$("#abar").attr('style', "width: " +  (ascore / 10.0) * 100 + "%");
@@ -176,411 +176,373 @@
 <body>
 
 <div class="container">
-    <img src="dans.png" alt="DANS">
-    <br><br>
-    <p>Welcome to the DANS FAIR Data self-assessment tool. Using this tool you will be able to assess
-        the 'FAIRness' of a dataset and determine how to enhance its FAIRness (where applicable).</p>
-    <p>
-    This self-assessment tool has been designed predominantly for data librarians and IT staff, but could be used
-    by software engineers developing FAIR Data tools and services, and researchers provided they have assistance
-    from research support staff.</p>
-    <p>
-    You will be asked questions related to the principles underpinning Findable, Accessible, Interoperable and
-    Reusable. Once you have answered all the questions in each section you will be given a ‘green bar’ indicator based
-    on your answers in that section, and when all sections are completed, an overall 'FAIRness' indicator is provided.</p>
-    <p>
-    Please be aware that additional explanatory information is provided within the tool. The (i) information button
-    provides an overview of each of the FAIR high-level elements (Findable, Accessible, Interoperable and Reusable).
-    Additionally, each question is hyperlinked, leading users to explanatory information and links to wider resources
-    on related topics.
-    </p>
-    <br>
-    <div class="bs-example">
-        <div class="panel-group" id="accordion">
+    <div class="fair">
+
+        <div class="intro">
+            <!-- Introduction -->
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="dans.png" alt="DANS">
+                </div>
+                <div class="col-md-10">
+                    <br>
+                    <h1>FAIR data assessment</h1>
+                    <br>
+                    <p>Welcome to the DANS FAIR Data self-assessment tool. Using this tool you will be able to assess
+                        the 'FAIRness' of a dataset and determine how to enhance its FAIRness (where applicable).</p>
+                    <p>
+                    This self-assessment tool has been designed predominantly for data librarians and IT staff, but could be used
+                    by software engineers developing FAIR Data tools and services, and researchers provided they have assistance
+                    from research support staff.</p>
+                    <p>
+                    You will be asked questions related to the principles underpinning Findable, Accessible, Interoperable and
+                    Reusable. Once you have answered all the questions in each section you will be given a ‘green bar’ indicator based
+                    on your answers in that section, and when all sections are completed, an overall 'FAIRness' indicator is provided.</p>
+                    <p>
+                    Please be aware that additional explanatory information is provided within the tool. The (i) information button
+                    provides an overview of each of the FAIR high-level elements (Findable, Accessible, Interoperable and Reusable).
+                    Additionally, each question is hyperlinked, leading users to explanatory information and links to wider resources
+                    on related topics.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-group">
 
             <!-- Findable -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#collapseOne">FINDABLE</a>
-                        <a href="#fhelp" data-toggle="modal" data-target="#findable_info">
-                        <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
-                        </span>
-                        </a>
-                    </h4>
+            <div class="row">
+                <div class="col-md-2">
+                    <img id="image-f" src="F_100.jpg" alt="F">
+                    <div id="fscore"/></div>
+                    <img id="text-bubble" src="text_ballon_text.jpg">
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <form>
-                            <div class="form-group row">
-                                <label for="q1" class="col-sm-6 col-form-label">
-                                    <a href="#" data-toggle="modal" data-target="#info_q1">
-                                    Does the dataset have any identifiers assigned?
-                                    </a>
-                                </label>
+                <div class="col-md-10">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapseOne">FINDABLE</a>
+                                <a href="#fhelp" data-toggle="modal" data-target="#findable_info">
+                                <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
+                                </span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <form>
+                                <div class="form-group row">
+                                    <label for="q1" class="col-sm-6 col-form-label">
+                                        <a href="#" data-toggle="modal" data-target="#info_q1">
+                                        Does the dataset have any identifiers assigned?
+                                        </a>
+                                    </label>
 
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q1">
-                                        <option value="8">Globally Unique, citable and persistent (e.g. DOI, PURL, ARK
-                                            or Handle)
-                                        </option>
-                                        <option value="3">Web address (URL)</option>
-                                        <option value="1">Local identifier</option>
-                                        <option value="0" selected="selected">No identifier</option>
-                                    </select>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q1">
+                                            <option value="8">Globally Unique, citable and persistent (e.g. DOI, PURL, ARK
+                                                or Handle)
+                                            </option>
+                                            <option value="3">Web address (URL)</option>
+                                            <option value="1">Local identifier</option>
+                                            <option value="0" selected="selected">No identifier</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="q2" class="col-sm-6 col-form-label">
-                                    <a href="#" data-toggle="modal" data-target="#info_q2">
-                                    Is the dataset identifier included in
-                                    all metadata records/files describing the data?
-                                    </a>
-                                </label>
+                                <div class="form-group row">
+                                    <label for="q2" class="col-sm-6 col-form-label">
+                                        <a href="#" data-toggle="modal" data-target="#info_q2">
+                                        Is the dataset identifier included in
+                                        all metadata records/files describing the data?
+                                        </a>
+                                    </label>
 
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q2">
-                                        <option value="1">Yes</option>
-                                        <option value="0" selected="selected">No</option>
-                                    </select>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q2">
+                                            <option value="1">Yes</option>
+                                            <option value="0" selected="selected">No</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="q3" class="col-sm-6 col-form-label">
-                                    <a href="#" data-toggle="modal" data-target="#info_q3">
-                                    How is the data described with metadata?
-                                    </a>
-                                </label>
+                                <div class="form-group row">
+                                    <label for="q3" class="col-sm-6 col-form-label">
+                                        <a href="#" data-toggle="modal" data-target="#info_q3">
+                                        How is the data described with metadata?
+                                        </a>
+                                    </label>
 
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q3">
-                                        <option value="4">Comprehensively (see suggestion) using a
-                                            recognised formal machine-readable metadata schema.
-                                        </option>
-                                        <option value="3">Comprehensively, but in a text-based, non-standard
-                                            format.
-                                        </option>
-                                        <option value="2">Brief title and description</option>
-                                        <option value="0" selected="selected">The data is not described</option>
-                                    </select>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q3">
+                                            <option value="4">Comprehensively (see suggestion) using a
+                                                recognised formal machine-readable metadata schema.
+                                            </option>
+                                            <option value="3">Comprehensively, but in a text-based, non-standard
+                                                format.
+                                            </option>
+                                            <option value="2">Brief title and description</option>
+                                            <option value="0" selected="selected">The data is not described</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="q4" class="col-sm-6 col-form-label">
-                                    <a href="#" data-toggle="modal" data-target="#info_q4">
-                                    What type of repository or registry is the metadata record in?
-                                    </a>
-                                </label>
+                                <div class="form-group row">
+                                    <label for="q4" class="col-sm-6 col-form-label">
+                                        <a href="#" data-toggle="modal" data-target="#info_q4">
+                                        What type of repository or registry is the metadata record in?
+                                        </a>
+                                    </label>
 
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q4">
-                                        <option value="4">Data is in one place but discoverable through several registries</option>
-                                        <option value="2">Generalist public repository</option>
-                                        <option value="2">Domain-specific repository</option>
-                                        <option value="2">Local institutional repository</option>
-                                        <option value="0" selected="selected">
-                                            The data is not described in any repository
-                                        </option>
-                                    </select>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q4">
+                                            <option value="4">Data is in one place but discoverable through several registries</option>
+                                            <option value="2">Generalist public repository</option>
+                                            <option value="2">Domain-specific repository</option>
+                                            <option value="2">Local institutional repository</option>
+                                            <option value="0" selected="selected">
+                                                The data is not described in any repository
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-<!--                        <div class="w3-border">-->
-<!--                            <div id="fbar" class="w3-container w3-padding w3-green" style="width:0;">-->
-<!--                                <div class="w3-center" id="demo"></div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-                        <div id="fscore" class="stars" />
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
 
 
             <!-- Accessible -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#collapseTwo">ACCESSIBLE</a>
-                        <a href="#" data-toggle="modal" data-target="#accessible_info">
-                        <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
-                        </span>
-                        </a>
-                    </h4>
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="A.jpg" alt="A">
                 </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <form>
-
-                            <div class="form-group row">
-                                <label for="q5" class="col-sm-6 col-form-label">
-                                    <a href="#" data-toggle="modal" data-target="#info_q5">
-                                    How accessible is the data?
-                                    </a>
-                                </label>
-
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q5">
-                                        <option value="5">Publicly accessible</option>
-                                        <option value="5">
-                                            Fully accessible to persons who meet explicitly stated conditions,
-                                            e.g. ethics approval for sensitive data
-                                        </option>
-                                        <option value="4">A de-identified / modified subset of the data is publicly
-                                            accessible
-                                        </option>
-                                        <option value="3">Embargoed access after a specified date</option>
-                                        <option value="2">Unspecified conditional access e.g. contact the data custodian for access</option>
-                                        <option value="1">Access to metadata only</option>
-                                        <option value="0" selected="selected">No access to data or metadata</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row">
-                                <label for="q6" class="col-sm-6 col-form-label">
-                                    <a href="#" data-toggle="modal" data-target="#info_q6">
-                                    Is the data available online without requiring specialised
-                                    protocols or tools once access has been approved?
-                                    </a>
-                                </label>
-
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q6">
-                                        <option value="4">Standard web service API (e.g. OGC)</option>
-                                        <option value="3">Non-standard web service (e.g.
-                                            OpenAPI/Swagger/informal API)
-                                        </option>
-                                        <option value="2">File download from online location</option>
-                                        <option value="1">By individual arrangement</option>
-                                        <option value="0" selected="selected">No access to data</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row">
-                                <label for="q7" class="col-sm-6 col-form-label">
-                                    <a href="#" data-toggle="modal" data-target="#info_q7">
-                                    Will the metadata record be available even if the data is no
-                                    longer available?
+                <div class="col-md-10">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapseTwo">ACCESSIBLE</a>
+                                <a href="#" data-toggle="modal" data-target="#accessible_info">
+                                <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
+                                </span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <form>
+                                <div class="form-group row">
+                                    <label for="q5" class="col-sm-6 col-form-label">
+                                        <a href="#" data-toggle="modal" data-target="#info_q5">
+                                        How accessible is the data?
                                         </a>
-                                </label>
+                                    </label>
 
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q7">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
-                                        <option value="0" selected="selected">Unsure</option>
-                                    </select>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q5">
+                                            <option value="5">Publicly accessible</option>
+                                            <option value="5">
+                                                Fully accessible to persons who meet explicitly stated conditions,
+                                                e.g. ethics approval for sensitive data
+                                            </option>
+                                            <option value="4">A de-identified / modified subset of the data is publicly
+                                                accessible
+                                            </option>
+                                            <option value="3">Embargoed access after a specified date</option>
+                                            <option value="2">Unspecified conditional access e.g. contact the data custodian for access</option>
+                                            <option value="1">Access to metadata only</option>
+                                            <option value="0" selected="selected">No access to data or metadata</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
 
-                        </form>
-<!--                        <div class="w3-border">-->
-<!--                            <div id="abar" class="w3-container w3-padding w3-green" style="width:1%">-->
-<!--                                <div class="w3-center" id="idemo"></div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-                        <div id="ascore" class="stars" />
+                                <div class="form-group row">
+                                    <label for="q6" class="col-sm-6 col-form-label">
+                                        <a href="#" data-toggle="modal" data-target="#info_q6">
+                                        Is the data available online without requiring specialised
+                                        protocols or tools once access has been approved?
+                                        </a>
+                                    </label>
+
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q6">
+                                            <option value="4">Standard web service API (e.g. OGC)</option>
+                                            <option value="3">Non-standard web service (e.g.
+                                                OpenAPI/Swagger/informal API)
+                                            </option>
+                                            <option value="2">File download from online location</option>
+                                            <option value="1">By individual arrangement</option>
+                                            <option value="0" selected="selected">No access to data</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label for="q7" class="col-sm-6 col-form-label">
+                                        <a href="#" data-toggle="modal" data-target="#info_q7">
+                                        Will the metadata record be available even if the data is no
+                                        longer available?
+                                            </a>
+                                    </label>
+
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q7">
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                            <option value="0" selected="selected">Unsure</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Interoperable -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#collapseThree">INTEROPERABLE</a>
-                        <a href="#" data-toggle="modal" data-target="#interoperable_info">
-                        <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
-                        </span>
-                        </a>
-                    </h4>
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="F_100.jpg" alt="F">
                 </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
+                <div class="col-md-10">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapseThree">INTEROPERABLE</a>
+                                <a href="#" data-toggle="modal" data-target="#interoperable_info">
+                                <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
+                                </span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <form>
+                                <div class="form-group row">
 
-                        <form>
-                            <div class="form-group row">
+                                    <label for="q8" class="col-sm-6 col-form-label">
+                                        <a href="#reusable_info" data-toggle="modal" data-target="#info_q8">
+                                            What (file) format(s) is the data available in?
+                                        </a>
+                                    </label>
 
-                                <label for="q8" class="col-sm-6 col-form-label">
-                                    <a href="#reusable_info" data-toggle="modal" data-target="#info_q8">
-                                        What (file) format(s) is the data available in?
-                                    </a>
-                                </label>
-
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q8">
-                                        <option value="2">In a structured, open standard, machine-readable format</option>
-                                        <option value="1">In a structured, open standard, non-machine-readable format</option>
-                                        <option value="0" selected="selected">Mostly in a proprietary format</option>
-                                    </select>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q8">
+                                            <option value="2">In a structured, open standard, machine-readable format</option>
+                                            <option value="1">In a structured, open standard, non-machine-readable format</option>
+                                            <option value="0" selected="selected">Mostly in a proprietary format</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label for="q9" class="col-sm-6 col-form-label">
-                                    <a href="#" data-toggle="modal" data-target="#info_q9">
-                                    What best describes the types of vocabularies/ontologies/tagging schemas used to
-                                    define the data elements?
-                                    </a>
-                                </label>
+                                <div class="form-group row">
+                                    <label for="q9" class="col-sm-6 col-form-label">
+                                        <a href="#" data-toggle="modal" data-target="#info_q9">
+                                        What best describes the types of vocabularies/ontologies/tagging schemas used to
+                                        define the data elements?
+                                        </a>
+                                    </label>
 
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q9">
-                                        <option value="3">Standardised open and universal using resolvable global
-                                            identifiers linking to explanations
-                                        </option>
-                                        <option value="2">Standardised vocabularies/ontologies/schema without global identifiers</option>
-                                        <option value="1">No standards have been applied in the description of data elements</option>
-                                        <option value="0" selected="selected">Data elements not described</option>
-                                    </select>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q9">
+                                            <option value="3">Standardised open and universal using resolvable global
+                                                identifiers linking to explanations
+                                            </option>
+                                            <option value="2">Standardised vocabularies/ontologies/schema without global identifiers</option>
+                                            <option value="1">No standards have been applied in the description of data elements</option>
+                                            <option value="0" selected="selected">Data elements not described</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
 
-                            <div class="form-group row">
-                                <label for="q10" class="col-sm-6 col-form-label">
-                                    <a href="#" data-toggle="modal" data-target="#info_q10">
-                                        How is the metadata linked to other data and metadata (to enhance context and
-                                        clearly indicate relationships)?
-                                    </a>
-                                </label>
+                                <div class="form-group row">
+                                    <label for="q10" class="col-sm-6 col-form-label">
+                                        <a href="#" data-toggle="modal" data-target="#info_q10">
+                                            How is the metadata linked to other data and metadata (to enhance context and
+                                            clearly indicate relationships)?
+                                        </a>
+                                    </label>
 
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q10">
-                                        <option value="3">
-                                            Metadata is represented in a machine readable format,
-                                            e.g. in a linked data format such as Resource Description Framework (RDF).
-                                        </option>
-                                        <option value="2">The metadata record includes URI links to related metadata,
-                                            data and definitions
-                                        </option>
-                                        <option value="0" selected="selected">There are no links to other metadata</option>
-                                    </select>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q10">
+                                            <option value="3">
+                                                Metadata is represented in a machine readable format,
+                                                e.g. in a linked data format such as Resource Description Framework (RDF).
+                                            </option>
+                                            <option value="2">The metadata record includes URI links to related metadata,
+                                                data and definitions
+                                            </option>
+                                            <option value="0" selected="selected">There are no links to other metadata</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <!-- Question removed...
-                            <div class="form-group row">
-                                <label for="q11" class="col-sm-6 col-form-label">
-                                    Does the metadata state how you wish your data to be cited?
-                                </label>
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q11">
-                                        <option value="1">Yes</option>
-                                        <option value="0" selected="selected">No</option>
-                                    </select>
-                                </div>
-                            </div>
-                            -->
-
-                        </form>
-<!--                        <div class="w3-border">-->
-<!--                            <div id="ibar" class="w3-container w3-padding w3-green" style="width:1%">-->
-<!--                                <div class="w3-center" id="iidemo"></div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-                        <div id="iscore" class="stars" />
-
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Reusable -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#collapseFour">REUSABLE</a>
-                        <a href="#fhelp" data-toggle="modal" data-target="#reusable_info">
-                        <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
-                        </span>
-                        </a>
-                    </h4>
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="F_100.jpg" alt="F">
                 </div>
-                <div id="collapseFour" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <form>
-                            <div class="form-group row">
-                                <label for="q11" class="col-sm-6 col-form-label">
-                                    <a href="#" data-toggle="modal" data-target="#info_q11">
-                                    Which of the following best describes the license/usage rights attached to the data?
-                                    </a>
-                                </label>
+                <div class="col-md-10">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapseFour">REUSABLE</a>
+                                <a href="#fhelp" data-toggle="modal" data-target="#reusable_info">
+                                <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
+                                </span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <form>
+                                <div class="form-group row">
+                                    <label for="q11" class="col-sm-6 col-form-label">
+                                        <a href="#" data-toggle="modal" data-target="#info_q11">
+                                        Which of the following best describes the license/usage rights attached to the data?
+                                        </a>
+                                    </label>
 
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q11">
-                                        <option value="4">Standard machine-readable license (e.g. Creative Commons)</option>
-                                        <option value="3">Standard text based license</option>
-                                        <option value="3">
-                                            Non-standard machine-readable license
-                                            (clearly indicating under what conditions the data may be reused)
-                                        </option>
-                                        <option value="2">Non-standard text-based license</option>
-                                        <option value="0" selected="selected">No license</option>
-                                    </select>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q11">
+                                            <option value="4">Standard machine-readable license (e.g. Creative Commons)</option>
+                                            <option value="3">Standard text based license</option>
+                                            <option value="3">
+                                                Non-standard machine-readable license
+                                                (clearly indicating under what conditions the data may be reused)
+                                            </option>
+                                            <option value="2">Non-standard text-based license</option>
+                                            <option value="0" selected="selected">No license</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
 
-                            <div class="form-group row">
-                                <label for="q12" class="col-sm-6 col-form-label">
-                                    <a href="#" data-toggle="modal" data-target="#info_q12">
-                                        How much provenance information has been captured to facilitate data reuse?
-                                    </a>
-                                </label>
+                                <div class="form-group row">
+                                    <label for="q12" class="col-sm-6 col-form-label">
+                                        <a href="#" data-toggle="modal" data-target="#info_q12">
+                                            How much provenance information has been captured to facilitate data reuse?
+                                        </a>
+                                    </label>
 
-                                <div class="col-sm-6">
-                                    <select class="form-control" id="q12">
-                                        <option value="3">Fully recorded in a machine readable format</option>
-                                        <option value="2">Fully recorded in a text format</option>
-                                        <option value="1">Partially recorded</option>
-                                        <option value="0" selected="selected">No provenance information is recorded</option>
-                                    </select>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="q12">
+                                            <option value="3">Fully recorded in a machine readable format</option>
+                                            <option value="2">Fully recorded in a text format</option>
+                                            <option value="1">Partially recorded</option>
+                                            <option value="0" selected="selected">No provenance information is recorded</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-
-
-                        </form>
-<!--                        <div class="w3-border">-->
-<!--                            <div id="rbar" class="w3-container w3-padding w3-green" style="width:1%">-->
-<!--                                <div class="w3-center" id="rdemo"></div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-                        <div id="rscore" class="stars" />
-
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <h5>Total across F.A.I.R</h5>
-
-<!--        <div class="w3-border">-->
-<!--            <div id="tbar" class="w3-container w3-padding w3-green" style="width:0%">-->
-<!--                <div class="w3-center" id="tdemo"></div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <div id="tscore" class="stars" />
         <br>
-        <p>
-        To learn more about making your data more FAIR visit: <a href="https://www.ands.org.au/fair">www.ands.org.au/fair</a>
-        </p>
-        <p><strong>Note:</strong> Click on the linked heading text to expand or collapse accordion panels.</p>
-
-        <b>Tool Disclaimer:</b> The ARDC FAIR data Self-Assessment Tool has been developed by ARDC.
-        It is provided purely for educational and informational purposes. It is based on our interpretation of the
-        <a href="https://www.force11.org/group/fairgroup/fairprinciples"
-           target="_blank">FAIR Data Principles</a> with the acknowledgement that there are other interpretations of
-        the principles.
-        Please also see other tools like the <a href="https://doi.org/10.4225/08/5a12348f8567b" target="_blank">
-        CSIRO 5 star data rating tool</a> and the <a href="https://www.surveymonkey.com/r/fairdat" target="_blank">
-        DANS FAIRdat tool</a> which provided valuable inspiration in developing this tool.
-        <p>
-        The scores arising from this tool are intended for self assessment purposes only and to trigger thinking
-        and discussion around possible ways of making data more FAIR.
     </div>
 
 </div>
@@ -1400,3 +1362,4 @@ You answered <span id="q4_answer"></span> which gave you <span id="q4_score"></s
 
 </body>
 </html>
+
