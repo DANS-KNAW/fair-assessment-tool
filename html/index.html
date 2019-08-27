@@ -51,6 +51,8 @@
         #text-bubble-improve, #text-bubble-complete {position: absolute;top: 0px;left: 0px;}
         #fscore-improve, #fscore-complete {padding-top: 25px; padding-left: 10px;}
         #ascore-improve, #ascore-complete {padding-top: 25px; padding-left: 10px;}
+        #iscore-improve, #iscore-complete {padding-top: 25px; padding-left: 10px;}
+        #rscore-improve, #rscore-complete {padding-top: 25px; padding-left: 10px;}
 
     </style>
 
@@ -61,7 +63,7 @@
             update();
         }
 
-        function check_box(element) {
+        function get_value(element) {
             if (checked(element)) { return parseInt(document.getElementById(element).value); } else { return 0.0;}
         }
 
@@ -104,8 +106,8 @@
         /* ----------------------------- F ----------------------------- */
         function update_F() {
             var fscore1 = parseInt($("#fq1").val());
-            var fscore2 = check_box("fq2.1") + check_box("fq2.2") + check_box("fq2.3");
-            var fscore3 = check_box("fq3.1") + check_box("fq3.2");
+            var fscore2 = get_value("fq2.1") + get_value("fq2.2") + get_value("fq2.3");
+            var fscore3 = get_value("fq3.1") + get_value("fq3.2");
             var fscore = fscore1 + fscore2 + fscore3;
 <!--            var percent = Math.round(fscore / 100.0 * 100);-->
             show_letter("F", "fscore", fscore);
@@ -113,38 +115,32 @@
 
         /* ----------------------------- A ----------------------------- */
         function update_A() {
-            var ascore1 = check_box("aq1.1") + check_box("aq1.2") + check_box("aq1.3");
+            var ascore1 = get_value("aq1.1") + get_value("aq1.2") + get_value("aq1.3");
             var ascore2 = parseInt($("#aq2").val());
-            var ascore3 = check_box("aq3.1") + check_box("aq3.2");
-            var ascore4 = check_box("aq4.1") + check_box("aq4.2");
-            var ascore5 = check_box("aq5.1") + check_box("aq5.2");
+            var ascore3 = get_value("aq3.1") + get_value("aq3.2");
+            var ascore4 = get_value("aq4.1") + get_value("aq4.2");
+            var ascore5 = get_value("aq5.1") + get_value("aq5.2");
             var ascore = ascore1 + ascore2 + ascore3 + ascore4 + ascore5;
             show_letter("A", "ascore", ascore);
         }
 
         /* ----------------------------- I ----------------------------- */
         function update_I() {
-            var iscore = parseInt($("#q8").val()) + parseInt($("#q9").val()) +
-                    parseInt($("#q10").val());
-            //$("#ibar").attr('style', "width: " +  (iscore / 8.0) * 100 + "%");
-            if (iscore > 0) {
-                $("#iscore").html(".").attr('style', "width: " +  (iscore / 8.0) * 100 + "px");
-            }
-            else {
-                $("#iscore").html("");
-            }
+            var iscore1 = parseInt($("#iq1").val());
+            var iscore2 = parseInt($("#iq2").val());
+            var iscore3 = parseInt($("#iq3").val());
+            var iscore4 = parseInt($("#iq4").val());
+            var iscore = iscore1 + iscore2 + iscore3 + iscore4;
+            show_letter("I", "iscore", iscore);
         }
 
         /* ----------------------------- R ----------------------------- */
         function update_R() {
-            var rscore = parseInt($("#q11").val()) + parseInt($("#q12").val());
-            //$("#rbar").attr('style', "width: " +  (rscore / 7.0) * 100 + "%");
-            if (rscore > 0) {
-                $("#rscore").html(".").attr('style', "width: " +  (rscore / 7.0) * 100 + "px");
-            }
-            else {
-                $("#rscore").html("");
-            }
+            var rscore1 = parseInt($("#rq1").val());
+            var rscore2 = parseInt($("#rq2").val());
+            var rscore3 = parseInt($("#rq3").val());
+            var rscore = rscore1 + rscore2 + rscore3;
+            show_letter("R", "rscore", rscore);
         }
     </script>
 
@@ -292,7 +288,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <br><br><br><br>
-                    <img id="image-a" src="F_100.jpg" alt="F">
+                    <img id="image-a" src="F_100.jpg" alt="A">
                     <div class="bubble">
                         <a id="A-improve" href="#ahelp" data-toggle="modal" data-target="#A_improve">
                             <span>
@@ -415,16 +411,30 @@
             <!-- Interoperable -->
             <div class="row">
                 <div class="col-md-2">
-                    <img src="F_100.jpg" alt="F">
+                    <br><br>
+                    <img id="image-i" src="F_100.jpg" alt="I">
+                    <div class="bubble">
+                        <a id="I-improve" href="#ahelp" data-toggle="modal" data-target="#I_improve">
+                            <span>
+                                <div id="iscore-improve"></div>
+                                <img id="text-bubble-improve" src="text_ballon_transparant.png"/>
+                            </span>
+                        </a>
+                        <a id="I-complete" href="#fhelp" data-toggle="modal" data-target="#I_complete">
+                            <span>
+                                <div id="iscore-complete"></div>
+                                <img id="text-bubble-complete" src="text_ballon_transparant.png"/>
+                            </span>
+                        </a>
+                    </div>
                 </div>
                 <div class="col-md-10">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapseThree">INTEROPERABLE</a>
-                                <a href="#" data-toggle="modal" data-target="#interoperable_info">
-                                <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
-                                </span>
+                                INTEROPERABLE
+                                <a href="#ahelp" data-toggle="modal" data-target="#interoperable_info">
+                                    <span class="pull-right glyphicon glyphicon-info-sign"></span>
                                 </a>
                             </h4>
                         </div>
@@ -432,60 +442,76 @@
                             <form>
                                 <div class="form-group row">
 
-                                    <label for="q8" class="col-sm-6 col-form-label">
-                                        <a href="#reusable_info" data-toggle="modal" data-target="#info_q8">
-                                            What (file) format(s) is the data available in?
+                                    <label for="iq1" class="col-sm-6 col-form-label">
+                                        To what extent did you use standardized controlled vocabularies and/or ontologies in describing your dataset?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_iq1">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="q8">
-                                            <option value="2">In a structured, open standard, machine-readable format</option>
-                                            <option value="1">In a structured, open standard, non-machine-readable format</option>
-                                            <option value="0" selected="selected">Mostly in a proprietary format</option>
+                                        <select class="form-control" id="iq1" onchange="update_I()">
+                                            <option value="25">International, generic standardized controlled vocabularies</option>
+                                            <option value="20">I generated project-specific vocabularies</option>
+                                            <option value="15">I made mappings to more commonly used ontologies and vocabularies</option>
+                                            <option value="0">No standardized controlled vocabularies/ontologies</option>
+                                            <option value="0" selected>---</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="q9" class="col-sm-6 col-form-label">
-                                        <a href="#" data-toggle="modal" data-target="#info_q9">
-                                        What best describes the types of vocabularies/ontologies/tagging schemas used to
-                                        define the data elements?
+                                    <label for="iq2" class="col-sm-6 col-form-label">
+                                        Do you link to other (meta)data and is this (meta)data online resolvable?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_iq2">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="q9">
-                                            <option value="3">Standardised open and universal using resolvable global
-                                                identifiers linking to explanations
-                                            </option>
-                                            <option value="2">Standardised vocabularies/ontologies/schema without global identifiers</option>
-                                            <option value="1">No standards have been applied in the description of data elements</option>
-                                            <option value="0" selected="selected">Data elements not described</option>
+                                        <select class="form-control" id="iq2" onchange="update_I()">
+                                            <option value="25">Yes, and these are online accessible</option>
+                                            <option value="15">Yes, not online accessible</option>
+                                            <option value="0">No</option>
+                                            <option value="0" selected>---</option>
                                         </select>
                                     </div>
                                 </div>
 
 
                                 <div class="form-group row">
-                                    <label for="q10" class="col-sm-6 col-form-label">
-                                        <a href="#" data-toggle="modal" data-target="#info_q10">
-                                            How is the metadata linked to other data and metadata (to enhance context and
-                                            clearly indicate relationships)?
+                                    <label for="iq3" class="col-sm-6 col-form-label">
+                                        Did you provide contextual information about your dataset?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_iq3">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="q10">
-                                            <option value="3">
-                                                Metadata is represented in a machine readable format,
-                                                e.g. in a linked data format such as Resource Description Framework (RDF).
-                                            </option>
-                                            <option value="2">The metadata record includes URI links to related metadata,
-                                                data and definitions
-                                            </option>
-                                            <option value="0" selected="selected">There are no links to other metadata</option>
+                                        <select class="form-control" id="iq3" onchange="update_I()">
+                                            <option value="25">ORCID</option>
+                                            <option value="20">Reference to publications</option>
+                                            <option value="15">References to other datasets</option>
+                                            <option value="0">No contextual metadata</option>
+                                            <option value="0" selected>---</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="iq4" class="col-sm-6 col-form-label">
+                                        Did you describe scientific links between your dataset and other datasets?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_iq4">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
+                                        </a>
+                                    </label>
+
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="iq4" onchange="update_I()">
+                                            <option value="25">Yes, via PID (such as DOI and/or ORCID)</option>
+                                            <option value="15">Yes on descriptive level</option>
+                                            <option value="0">No</option>
+                                            <option value="0" selected>---</option>
                                         </select>
                                     </div>
                                 </div>
@@ -498,58 +524,92 @@
             <!-- Reusable -->
             <div class="row">
                 <div class="col-md-2">
-                    <img src="F_100.jpg" alt="F">
+                    <img id="image-r" src="F_100.jpg" alt="R">
+                    <div class="bubble">
+                        <a id="R-improve" href="#ahelp" data-toggle="modal" data-target="#R_improve">
+                            <span>
+                                <div id="rscore-improve"></div>
+                                <img id="text-bubble-improve" src="text_ballon_transparant.png"/>
+                            </span>
+                        </a>
+                        <a id="R-complete" href="#fhelp" data-toggle="modal" data-target="#R_complete">
+                            <span>
+                                <div id="rscore-complete"></div>
+                                <img id="text-bubble-complete" src="text_ballon_transparant.png"/>
+                            </span>
+                        </a>
+                    </div>
                 </div>
                 <div class="col-md-10">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapseFour">REUSABLE</a>
-                                <a href="#fhelp" data-toggle="modal" data-target="#reusable_info">
-                                <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
-                                </span>
+                                REUSABLE
+                                <a href="#rhelp" data-toggle="modal" data-target="#reusable_info">
+                                    <span class="pull-right glyphicon glyphicon-info-sign"></span>
                                 </a>
                             </h4>
                         </div>
                         <div class="panel-body">
                             <form>
                                 <div class="form-group row">
-                                    <label for="q11" class="col-sm-6 col-form-label">
-                                        <a href="#" data-toggle="modal" data-target="#info_q11">
-                                        Which of the following best describes the license/usage rights attached to the data?
+                                    <label for="rq1" class="col-sm-6 col-form-label">
+                                        Did you provide rich information about provenance of your data?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_rq1">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="q11">
-                                            <option value="4">Standard machine-readable license (e.g. Creative Commons)</option>
-                                            <option value="3">Standard text based license</option>
-                                            <option value="3">
-                                                Non-standard machine-readable license
-                                                (clearly indicating under what conditions the data may be reused)
-                                            </option>
-                                            <option value="2">Non-standard text-based license</option>
-                                            <option value="0" selected="selected">No license</option>
+                                        <select class="form-control" id="rq1" onchange="update_R()">
+                                            <option value="30">Origin of data is clear</option>
+                                            <option value="25">For reused data: citations in place</option>
+                                            <option value="20">Workflow description for collecting data(machine readable)</option>
+                                            <option value="15">Processing of the data described</option>
+                                            <option value="10">Information about versioning</option>
+                                            <option value="0" selected>---</option>
                                         </select>
                                     </div>
                                 </div>
 
-
                                 <div class="form-group row">
-                                    <label for="q12" class="col-sm-6 col-form-label">
-                                        <a href="#" data-toggle="modal" data-target="#info_q12">
-                                            How much provenance information has been captured to facilitate data reuse?
+                                    <label for="rq2" class="col-sm-6 col-form-label">
+                                        Which usage license are you planning to add to your dataset?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_rq2">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="q12">
-                                            <option value="3">Fully recorded in a machine readable format</option>
-                                            <option value="2">Fully recorded in a text format</option>
-                                            <option value="1">Partially recorded</option>
-                                            <option value="0" selected="selected">No provenance information is recorded</option>
+                                        <select class="form-control" id="rq2" onchange="update_R()">
+                                            <option value="40">CC0 Waver (open access)</option>
+                                            <option value="20">Restriced access</option>
+                                            <option value="20">Embargo</option>
+                                            <option value="10">Other access</option>
+                                            <option value="0" selected>---</option>
                                         </select>
                                     </div>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="rq3" class="col-sm-6 col-form-label">
+                                        Does your metadata meet domain standards?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_rq3">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
+                                        </a>
+                                    </label>
+
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="rq3" onchange="update_R()">
+                                            <option value="30">Domain standards in metadata</option>
+                                            <option value="20">Generic standards</option>
+                                            <option value="10">Some domain standards and some generic standards</option>
+                                            <option value="0">No standards used </option>
+                                            <option value="0" selected>---</option>
+                                        </select>
+                                    </div>
+
                                 </div>
                             </form>
                         </div>
@@ -646,6 +706,95 @@
             <div class="modal-body">
                 <p>
                     A - Hyvä hyvä!
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="I_improve" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Want to improve?</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    I - Haluatko parantaa?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="I_complete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Want to improve?</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    I - Hyvä hyvä!
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="R_improve" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Want to improve?</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    R - Haluatko parantaa?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="R_complete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Want to improve?</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    R - Hyvä hyvä!
                 </p>
             </div>
             <div class="modal-footer">
@@ -1145,7 +1294,7 @@
 </div>
 
 
-<div id="info_q10" class="modal fade" role="dialog">
+<div id="info_iq1" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -1206,7 +1355,7 @@
 </div>
 
 
-<div id="info_q11" class="modal fade" role="dialog">
+<div id="info_iq2" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -1264,7 +1413,99 @@ Creative Commons Attribution 4.0 International License&lt;/a&gt;.
     </div>
 </div>
 
-<div id="info_q12" class="modal fade" role="dialog">
+<div id="info_iq3" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">About provenance</h4>
+            </div>
+            <div class="modal-body">
+                <p>Data provenance is used to document where a piece of data comes from and the
+                    process and methodology by which it is produced.  It is important to confirm
+                    the authenticity of data enabling trust, credibility and reproducibility.
+                    This is becoming increasingly important, especially in the eScience community
+                    where research is data intensive and often involves complex data transformations
+                    and procedures.
+                    <a href="https://www.ands.org.au/partners-and-communities/ands-communities/data-provenance-interest-group"
+                            target="_blank">
+                        Read more…</a>
+                    Provenance vocabularies such as <a href="https://www.w3.org/2005/Incubator/prov/XGR-prov-20101214/#Recommendations"
+                            target="_blank">
+                        Provenir Ontology (PROV-O) and others</a>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="info_rq1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">R 1</h4>
+            </div>
+            <div class="modal-body">
+                <p>r111</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="info_rq2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">R 2</h4>
+            </div>
+            <div class="modal-body">
+                <p>r222</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="info_rq3" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">R 3</h4>
+            </div>
+            <div class="modal-body">
+                <p>r333</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="info_iq4" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
