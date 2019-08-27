@@ -36,61 +36,94 @@
         .w3-padding{padding:8px 0px!important}
         .w3-green,.w3-hover-green:hover{color:#fff!important;background-color:#4CAF50!important}
         .w3-border{border:1px solid #ccc!important}
-        .glyphicon-info-sign {font-size: 1.3em; color: #FFFFFF;}
-        a:link {color: #000000;}
+        .panel-heading .glyphicon-info-sign {font-size: 1.3em; color: #FFFFFF;}
+        .panel-body .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
+        a:link {color: #000000; text-decoration: none;}
         a:visited {color: #000000;}
         a {color: #000000;}
         .panel {background-color: #f5f5f5; border: 0px;}
         .panel-heading {background-color: #2795c8!important; background-image:"";}
-        .panel-title {background-color: #2795c8!important; font-size: 13px;}
-        .panel-title a {color: #FFFFFF;}
+        .panel-title {/* background-color: #2795c8!important; */font-size: 13px;}
+        .panel-title {color: #FFFFFF;}
         h1 {color: #02AEDB;}
-        img#text-bubble { margin-left: 20px; }
+        .bubble {position: relative;}
+        .bubble a:hover {color: #2795c8;}
+        #text-bubble-improve, #text-bubble-complete {position: absolute;top: 0px;left: 0px;}
+        #fscore-improve, #fscore-complete {padding-top: 25px; padding-left: 10px;}
+        #ascore-improve, #ascore-complete {padding-top: 25px; padding-left: 10px;}
+
     </style>
 
     <script>
         $('document').ready(initialise);
+
         function initialise() {
-            $(document).on('change', 'select', function() {
-                update();
-                // if you want to do stuff based on the OPTION element:
-                //var opt = $(this).find('option:selected')[0];
-            });
             update();
         }
-        function show_letter(letter, percent) {
-            document.getElementById(("image-" + letter).toLowerCase()).src = letter + "_" + Math.floor(percent / 10) * 10 + ".jpg"
+
+        function check_box(element) {
+            if (checked(element)) { return parseInt(document.getElementById(element).value); } else { return 0.0;}
         }
-        /* Call this function whenever there is a state change */
+
+        function checked(element) {
+            return Boolean(document.getElementById(element).checked == true);
+        }
+
+        function show_letter(letter, element, score) {
+            document.getElementById(("image-" + letter).toLowerCase()).src = "F" + "_" + Math.floor(score / 10) * 10 + ".jpg"
+            show_score(letter, element, score);
+        }
+
+        function show_score(letter, element, score) {
+            var improve = document.getElementById(letter + "-improve")
+            var complete = document.getElementById(letter + "-complete")
+            if (score < 100.0){
+                improve.style.display = "block";
+                complete.style.display = "none";
+                $("#" + element + "-improve").html(score + "% Want to improve?");
+            } else {
+                improve.style.display = "none";
+                complete.style.display = "block";
+                $("#" + element + "-complete").html(score + "% Well done!");
+            }
+        }
+
         function update() {
             /*
             In all of the following variable names, if there is a prefix of [fair], it stands for
             Findable, Accessible, Interoperable and Reusable respectively.  For example, fscore refers
             to the score for 'Findable'.
-             The prefix q is for question, so, for example, '#q1' is a reference to question 1.
+            q refers to a question, for example, '#fq1' is a reference to question 1 for Findable.
             */
-            /* If there is no identifier in the dataset, then the following question must default to no */
-            if (parseInt($("#q1").val()) === 0) {
-                $("#q2").val(0);
-                $("#q2").enabled = false;
-            }
-            var fscore = parseInt($("#q1").val()) + parseInt($("#q2").val()) +
-                    parseInt($("#q3").val()) + parseInt($("#q4").val());
-            var percent = Math.round(fscore / 17.0 * 100)
-            $("#fscore").html(percent + "%");
-            show_letter("F", percent);
-<!--            document.getElementById("image-f").src="A.jpg"-->
-            var ascore = parseInt($("#q5").val()) + parseInt($("#q6").val()) +
-                    parseInt($("#q7").val());
-            //$("#abar").attr('style', "width: " +  (ascore / 10.0) * 100 + "%");
-            if (ascore > 0) {
-                $("#ascore").html(".").attr('style', "width: " +  (ascore / 10.0) * 100 + "px");
-            }
-            else {
-                $("#ascore").html("");
-            }
-            // $("#ascore").html(ascore);
-            $("#astars").html(createStars(ascore/10.0 * 5));
+            update_F();
+            update_A();
+            update_I();
+            update_R();
+        }
+
+        /* ----------------------------- F ----------------------------- */
+        function update_F() {
+            var fscore1 = parseInt($("#fq1").val());
+            var fscore2 = check_box("fq2.1") + check_box("fq2.2") + check_box("fq2.3");
+            var fscore3 = check_box("fq3.1") + check_box("fq3.2");
+            var fscore = fscore1 + fscore2 + fscore3;
+<!--            var percent = Math.round(fscore / 100.0 * 100);-->
+            show_letter("F", "fscore", fscore);
+        }
+
+        /* ----------------------------- A ----------------------------- */
+        function update_A() {
+            var ascore1 = check_box("aq1.1") + check_box("aq1.2") + check_box("aq1.3");
+            var ascore2 = parseInt($("#aq2").val());
+            var ascore3 = check_box("aq3.1") + check_box("aq3.2");
+            var ascore4 = check_box("aq4.1") + check_box("aq4.2");
+            var ascore5 = check_box("aq5.1") + check_box("aq5.2");
+            var ascore = ascore1 + ascore2 + ascore3 + ascore4 + ascore5;
+            show_letter("A", "ascore", ascore);
+        }
+
+        /* ----------------------------- I ----------------------------- */
+        function update_I() {
             var iscore = parseInt($("#q8").val()) + parseInt($("#q9").val()) +
                     parseInt($("#q10").val());
             //$("#ibar").attr('style', "width: " +  (iscore / 8.0) * 100 + "%");
@@ -100,8 +133,10 @@
             else {
                 $("#iscore").html("");
             }
-            // $("#iscore").html(iscore);
-            $("#istars").html(createStars(iscore/8.0 * 5));
+        }
+
+        /* ----------------------------- R ----------------------------- */
+        function update_R() {
             var rscore = parseInt($("#q11").val()) + parseInt($("#q12").val());
             //$("#rbar").attr('style', "width: " +  (rscore / 7.0) * 100 + "%");
             if (rscore > 0) {
@@ -110,64 +145,6 @@
             else {
                 $("#rscore").html("");
             }
-            // $("#rscore").html(rscore);
-            $("#rstars").html(createStars(rscore/7.0 * 5));
-            var tscore = fscore / 17 + ascore / 10.0 + iscore / 8.0 + rscore / 6.0;
-            //$("#tbar").attr('style', "width: " +  tscore * 25.0 + "%");
-            if (tscore > 0) {
-                $("#tscore").html(".").attr('style', "width: " +  tscore * 25 + "px");
-            }
-            else {
-                $("#tscore").html("");
-            }
-            console.log(tscore)
-            $("#tstars").html(createStars(tscore/4.0 * 5));
-            $("#q1_answer").html('<i>' + $("#q1 option:selected").text() + '</i>');
-            $("#q1_score").html($("#q1").val());
-            $("#q2_answer").html('<i>' + $("#q2 option:selected").text() + '</i>');
-            $("#q2_score").html($("#q2").val());
-            $("#q3_answer").html('<i>' + $("#q3 option:selected").text() + '</i>');
-            $("#q3_score").html($("#q3").val());
-            $("#q4_answer").html('<i>' + $("#q4 option:selected").text() + '</i>');
-            $("#q4_score").html($("#q4").val());
-            $("#f_total").html(fscore);
-            $("#q5_answer").html('<i>' + $("#q5 option:selected").text() + '</i>');
-            $("#q5_score").html($("#q5").val());
-            $("#q6_answer").html('<i>' + $("#q6 option:selected").text() + '</i>');
-            $("#q6_score").html($("#q6").val());
-            $("#q7_answer").html('<i>' + $("#q7 option:selected").text() + '</i>');
-            $("#7_score").html($("#q7").val());
-            $("#a_total").html(ascore);
-            $("#q8_answer").html('<i>' + $("#q8 option:selected").text() + '</i>');
-            $("#q8_score").html($("#q8").val());
-            $("#q9_answer").html('<i>' + $("#q9 option:selected").text() + '</i>');
-            $("#q9_score").html($("#q9").val());
-            $("#q10_answer").html('<i>' + $("#q10 option:selected").text() + '</i>');
-            $("#q10_score").html($("#q10").val());
-            $("#i_total").html(iscore);
-            $("#q11_answer").html('<i>' + $("#q11 option:selected").text() + '</i>');
-            $("#q11_score").html($("#q11").val());
-            $("#q12_answer").html('<i>' + $("#q12 option:selected").text() + '</i>');
-            $("#q12_score").html($("#q12").val());
-            $("#r_total").html(rscore);
-        }
-        // Given a score, create the html to display the stars
-        // Score should be a value between 0 and 5
-        function createStars(score) {
-            var blank = '<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>';
-            var filled = '<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
-            var html = "";
-            var i = 0;
-            score = Math.floor(score);
-            while (i < 5) {
-                if (score > i) {
-                    html += filled;
-                } else {
-                    html += blank;
-                }
-                i += 1;
-            }
-            return html;
         }
     </script>
 
@@ -213,93 +190,95 @@
             <!-- Findable -->
             <div class="row">
                 <div class="col-md-2">
+                    <br>
                     <img id="image-f" src="F_100.jpg" alt="F">
-                    <div id="fscore"/></div>
-                    <img id="text-bubble" src="text_ballon_text.jpg">
+                    <div class="bubble">
+                        <a id="F-improve" href="#fhelp" data-toggle="modal" data-target="#F_improve">
+                            <span>
+                                <div id="fscore-improve"></div>
+                                <img id="text-bubble-improve" src="text_ballon_transparant.png"/>
+                            </span>
+                        </a>
+                        <a id="F-complete" href="#fhelp" data-toggle="modal" data-target="#F_complete">
+                            <span>
+                                <div id="fscore-complete"></div>
+                                <img id="text-bubble-complete" src="text_ballon_transparant.png"/>
+                            </span>
+                        </a>
+                    </div>
                 </div>
                 <div class="col-md-10">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapseOne">FINDABLE</a>
+                                FINDABLE
                                 <a href="#fhelp" data-toggle="modal" data-target="#findable_info">
-                                <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
-                                </span>
+                                    <span class="pull-right glyphicon glyphicon-info-sign"></span>
                                 </a>
                             </h4>
                         </div>
                         <div class="panel-body">
                             <form>
                                 <div class="form-group row">
-                                    <label for="q1" class="col-sm-6 col-form-label">
-                                        <a href="#" data-toggle="modal" data-target="#info_q1">
-                                        Does the dataset have any identifiers assigned?
+                                    <label for="fq1" class="col-sm-6 col-form-label">
+                                        Did you provide sufficient metadata (information) about your data for others to find, understand and reuse your data?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_fq1">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="q1">
-                                            <option value="8">Globally Unique, citable and persistent (e.g. DOI, PURL, ARK
-                                                or Handle)
-                                            </option>
-                                            <option value="3">Web address (URL)</option>
-                                            <option value="1">Local identifier</option>
-                                            <option value="0" selected="selected">No identifier</option>
+                                        <select class="form-control" id="fq1" onchange="update_F()">
+                                            <option value="60">Rich metadata with as much information as possible</option>
+                                            <option value="40">Metadata with some additional fields filled in</option>
+                                            <option value="20">Some metadata but only minimal metadata (title, language, data available, creator)</option>
+                                            <option value="0">No metadata</option>
+                                            <option value="0" selected="selected">---</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="q2" class="col-sm-6 col-form-label">
-                                        <a href="#" data-toggle="modal" data-target="#info_q2">
-                                        Is the dataset identifier included in
-                                        all metadata records/files describing the data?
+                                    <label for="fq2" class="col-sm-6 col-form-label">
+                                        Did you use standards such as controlled vocabuaries, ontologies, linked open data to discribe your metadata?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_fq2">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="q2">
-                                            <option value="1">Yes</option>
-                                            <option value="0" selected="selected">No</option>
-                                        </select>
+<!--                                        <select class="form-control" id="q2">-->
+<!--                                            <option value="8">Controlled vocabularies</option>-->
+<!--                                            <option value="8">Ontologies</option>-->
+<!--                                            <option value="8">Linked open data</option>-->
+<!--                                            <option value="0">No</option>-->
+<!--                                            <option value="0" selected="selected">-&#45;&#45;</option>-->
+<!--                                        </select>-->
+                                        <div id="fq2">
+                                            <input type="checkbox" id="fq2.1" value="8" onclick="update_F()"> Controlled vocabularies<br>
+                                            <input type="checkbox" id="fq2.2" value="8" onclick="update_F()"> Ontologies<br>
+                                            <input type="checkbox" id="fq2.3" value="8" onclick="update_F()"> Linked open data<br>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="q3" class="col-sm-6 col-form-label">
-                                        <a href="#" data-toggle="modal" data-target="#info_q3">
-                                        How is the data described with metadata?
+                                    <label for="fq3" class="col-sm-6 col-form-label">
+                                        Did you provide rich additional documentation?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_fq3">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="q3">
-                                            <option value="4">Comprehensively (see suggestion) using a
-                                                recognised formal machine-readable metadata schema.
-                                            </option>
-                                            <option value="3">Comprehensively, but in a text-based, non-standard
-                                                format.
-                                            </option>
-                                            <option value="2">Brief title and description</option>
-                                            <option value="0" selected="selected">The data is not described</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="q4" class="col-sm-6 col-form-label">
-                                        <a href="#" data-toggle="modal" data-target="#info_q4">
-                                        What type of repository or registry is the metadata record in?
-                                        </a>
-                                    </label>
-
-                                    <div class="col-sm-6">
-                                        <select class="form-control" id="q4">
-                                            <option value="4">Data is in one place but discoverable through several registries</option>
-                                            <option value="2">Generalist public repository</option>
-                                            <option value="2">Domain-specific repository</option>
-                                            <option value="2">Local institutional repository</option>
-                                            <option value="0" selected="selected">
-                                                The data is not described in any repository
-                                            </option>
-                                        </select>
+<!--                                        <select class="form-control" id="q3">-->
+<!--                                            <option value="8">Readme file</option>-->
+<!--                                            <option value="8">Versioning</option>-->
+<!--                                            <option value="0">No</option>-->
+<!--                                            <option value="0" selected="selected">-&#45;&#45;</option>-->
+<!--                                        </select>-->
+                                        <div id="fq3">
+                                            <input type="checkbox" id="fq3.1" value="8" onclick="update_F()"> Readme file<br>
+                                            <input type="checkbox" id="fq3.2" value="8" onclick="update_F()"> Versioning<br>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -312,85 +291,121 @@
             <!-- Accessible -->
             <div class="row">
                 <div class="col-md-2">
-                    <img src="A.jpg" alt="A">
+                    <br><br><br><br>
+                    <img id="image-a" src="F_100.jpg" alt="F">
+                    <div class="bubble">
+                        <a id="A-improve" href="#ahelp" data-toggle="modal" data-target="#A_improve">
+                            <span>
+                                <div id="ascore-improve"></div>
+                                <img id="text-bubble-improve" src="text_ballon_transparant.png"/>
+                            </span>
+                        </a>
+                        <a id="A-complete" href="#fhelp" data-toggle="modal" data-target="#A_complete">
+                            <span>
+                                <div id="ascore-complete"></div>
+                                <img id="text-bubble-complete" src="text_ballon_transparant.png"/>
+                            </span>
+                        </a>
+                    </div>
                 </div>
                 <div class="col-md-10">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapseTwo">ACCESSIBLE</a>
-                                <a href="#" data-toggle="modal" data-target="#accessible_info">
-                                <span class="pull-right glyphicon glyphicon-info-sign"  aria-hidden="true">
-                                </span>
+                                ACCESSIBLE
+                                <a href="#ahelp" data-toggle="modal" data-target="#accessible_info">
+                                    <span class="pull-right glyphicon glyphicon-info-sign"></span>
                                 </a>
                             </h4>
                         </div>
                         <div class="panel-body">
                             <form>
                                 <div class="form-group row">
-                                    <label for="q5" class="col-sm-6 col-form-label">
-                                        <a href="#" data-toggle="modal" data-target="#info_q5">
-                                        How accessible is the data?
+                                    <label for="aq1" class="col-sm-6 col-form-label">
+                                        Is the metadata publicly accessible even if the data is no longer available?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_aq1">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="q5">
-                                            <option value="5">Publicly accessible</option>
-                                            <option value="5">
-                                                Fully accessible to persons who meet explicitly stated conditions,
-                                                e.g. ethics approval for sensitive data
-                                            </option>
-                                            <option value="4">A de-identified / modified subset of the data is publicly
-                                                accessible
-                                            </option>
-                                            <option value="3">Embargoed access after a specified date</option>
-                                            <option value="2">Unspecified conditional access e.g. contact the data custodian for access</option>
-                                            <option value="1">Access to metadata only</option>
-                                            <option value="0" selected="selected">No access to data or metadata</option>
+                                        <div id="aq1">
+                                            <label class="radio-inline"><input type="radio" name="aq1" id="aq1.1" value="50" onclick="update_A()"> Yes<br></label>
+                                            <label class="radio-inline"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A()" checked > No<br></label><br>
+                                            <input type="radio" name="aq1" id="aq1.3" value="0" onclick="update_A()"> I don't know, I can't find this information in EASY<br>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label for="aq2" class="col-sm-6 col-form-label">
+                                        Which of the use licenses provided by EASY did you choose in order to comply with the access rights attached ot the data?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_aq2">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
+                                        </a>
+                                    </label>
+
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="aq2" onchange="update_A()">
+                                            <option value="30">Open access (CC0 Waver)</option>
+                                            <option value="10">Restricted access</option>
+                                            <option value="10">Embargo</option>
+                                            <option value="10">I don't know which of these licenses apply to my data</option>
+                                            <option value="0" selected="selected">---</option>
                                         </select>
                                     </div>
                                 </div>
 
 
                                 <div class="form-group row">
-                                    <label for="q6" class="col-sm-6 col-form-label">
-                                        <a href="#" data-toggle="modal" data-target="#info_q6">
-                                        Is the data available online without requiring specialised
-                                        protocols or tools once access has been approved?
+                                    <label for="aq3" class="col-sm-6 col-form-label">
+                                        Did you add global unique/persistent identifiers to your (meta)data such as ORCiD, ISBN, ISNI etc. ?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_aq3">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="q6">
-                                            <option value="4">Standard web service API (e.g. OGC)</option>
-                                            <option value="3">Non-standard web service (e.g.
-                                                OpenAPI/Swagger/informal API)
-                                            </option>
-                                            <option value="2">File download from online location</option>
-                                            <option value="1">By individual arrangement</option>
-                                            <option value="0" selected="selected">No access to data</option>
-                                        </select>
+                                        <div id="aq3">
+                                            <label class="radio-inline"><input type="radio" name="aq3" id="aq3.1" value="10" onclick="update_A()"> Yes<br></label>
+                                            <label class="radio-inline"><input type="radio" name="aq3" id="aq3.2" value="0" onclick="update_A()" checked> No<br></label>
+                                        </div>
                                     </div>
                                 </div>
 
-
                                 <div class="form-group row">
-                                    <label for="q7" class="col-sm-6 col-form-label">
-                                        <a href="#" data-toggle="modal" data-target="#info_q7">
-                                        Will the metadata record be available even if the data is no
-                                        longer available?
-                                            </a>
+                                    <label for="aq4" class="col-sm-6 col-form-label">
+                                        Did you specify in your metadata your institution/organization?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_aq4">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
+                                        </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="q7">
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
-                                            <option value="0" selected="selected">Unsure</option>
-                                        </select>
+                                        <div id="aq4">
+                                            <label class="radio-inline"><input type="radio" name="aq4" id="aq4.1" value="10" onclick="update_A()"> Yes<br></label>
+                                            <label class="radio-inline"><input type="radio" name="aq4" id="aq4.2" value="0" onclick="update_A()" checked> No<br></label>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group row">
+                                    <label for="aq5" class="col-sm-6 col-form-label">
+                                        Does your dataset contain personal data?
+                                        <a href="#fhelp" data-toggle="modal" data-target="#info_aq5">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
+                                        </a>
+                                    </label>
+
+                                    <div class="col-sm-6">
+                                        <div id="aq5">
+                                            <label class="radio-inline"><input type="radio" name="aq5" id="aq5.1" value="0" onclick="update_A()"> Yes<br></label>
+                                            <label class="radio-inline"><input type="radio" name="aq5" id="aq5.2" value="0" onclick="update_A()" checked> No<br></label>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -553,6 +568,94 @@
 -->
 
 <!-- Modal -->
+<div id="F_improve" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Want to improve?</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Haluatko parantaa?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="F_complete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Want to improve?</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Hyvä hyvä!
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="A_improve" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Want to improve?</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    A - Haluatko parantaa?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="A_complete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Want to improve?</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    A - Hyvä hyvä!
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div id="findable_info" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -676,7 +779,7 @@
 </div>
 
 
-<div id="info_q1" class="modal fade" role="dialog">
+<div id="info_fq1" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -710,7 +813,7 @@
     </div>
 </div>
 
-<div id="info_q2" class="modal fade" role="dialog">
+<div id="info_fq2" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -733,7 +836,7 @@
 </div>
 
 
-<div id="info_q3" class="modal fade" role="dialog">
+<div id="info_fq3" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -779,7 +882,7 @@
     </div>
 </div>
 
-<div id="info_q4" class="modal fade" role="dialog">
+<div id="info_fq4" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -816,7 +919,7 @@
 
 
 
-<div id="info_q5" class="modal fade" role="dialog">
+<div id="info_aq1" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -846,7 +949,7 @@
 </div>
 
 
-<div id="info_q6" class="modal fade" role="dialog">
+<div id="info_aq2" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -901,7 +1004,7 @@
 </div>
 
 
-<div id="info_q7" class="modal fade" role="dialog">
+<div id="info_aq3" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -931,7 +1034,7 @@
 
 
 
-<div id="info_q8" class="modal fade" role="dialog">
+<div id="info_aq4" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -989,7 +1092,7 @@
     </div>
 </div>
 
-<div id="info_q9" class="modal fade" role="dialog">
+<div id="info_aq5" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
