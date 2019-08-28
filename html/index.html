@@ -54,6 +54,8 @@
         #iscore-improve, #iscore-complete {padding-top: 25px; padding-left: 10px;}
         #rscore-improve, #rscore-complete {padding-top: 25px; padding-left: 10px;}
 
+        @media print {.pagebreak { page-break-before: always; }}
+
     </style>
 
     <script>
@@ -79,7 +81,10 @@
         function show_score(letter, element, score) {
             var improve = document.getElementById(letter + "-improve")
             var complete = document.getElementById(letter + "-complete")
-            if (score < 100.0){
+            if (score == 0.0){
+                improve.style.display = "none";
+                complete.style.display = "none";
+            } else if (score < 100.0){
                 improve.style.display = "block";
                 complete.style.display = "none";
                 $("#" + element + "-improve").html(score + "% Want to improve?");
@@ -142,6 +147,21 @@
             var rscore = rscore1 + rscore2 + rscore3;
             show_letter("R", "rscore", rscore);
         }
+
+        function print_page() {
+            document.getElementById("F-improve").style.display = "none"
+            document.getElementById("F-complete").style.display = "none"
+            document.getElementById("A-improve").style.display = "none"
+            document.getElementById("A-complete").style.display = "none"
+            document.getElementById("I-improve").style.display = "none"
+            document.getElementById("I-complete").style.display = "none"
+            document.getElementById("R-improve").style.display = "none"
+            document.getElementById("R-complete").style.display = "none"
+            document.getElementById("print-button").style.display = "none"
+            window.print();
+            update();
+            document.getElementById("print-button").style.display = "block"
+        }
     </script>
 
 </head>
@@ -156,6 +176,8 @@
             <div class="row">
                 <div class="col-md-2">
                     <img src="dans.png" alt="DANS">
+                    <br><br><br><br>
+                    <button id="print-button" onclick="print_page()">Print this page</button>
                 </div>
                 <div class="col-md-10">
                     <br>
@@ -180,13 +202,13 @@
                 </div>
             </div>
         </div>
+        <div class="pagebreak"/>
 
         <div class="panel-group">
 
             <!-- Findable -->
             <div class="row">
                 <div class="col-md-2">
-                    <br>
                     <img id="image-f" src="F_100.jpg" alt="F">
                     <div class="bubble">
                         <a id="F-improve" href="#fhelp" data-toggle="modal" data-target="#F_improve">
@@ -242,13 +264,6 @@
                                     </label>
 
                                     <div class="col-sm-6">
-<!--                                        <select class="form-control" id="q2">-->
-<!--                                            <option value="8">Controlled vocabularies</option>-->
-<!--                                            <option value="8">Ontologies</option>-->
-<!--                                            <option value="8">Linked open data</option>-->
-<!--                                            <option value="0">No</option>-->
-<!--                                            <option value="0" selected="selected">-&#45;&#45;</option>-->
-<!--                                        </select>-->
                                         <div id="fq2">
                                             <input type="checkbox" id="fq2.1" value="8" onclick="update_F()"> Controlled vocabularies<br>
                                             <input type="checkbox" id="fq2.2" value="8" onclick="update_F()"> Ontologies<br>
@@ -265,12 +280,6 @@
                                     </label>
 
                                     <div class="col-sm-6">
-<!--                                        <select class="form-control" id="q3">-->
-<!--                                            <option value="8">Readme file</option>-->
-<!--                                            <option value="8">Versioning</option>-->
-<!--                                            <option value="0">No</option>-->
-<!--                                            <option value="0" selected="selected">-&#45;&#45;</option>-->
-<!--                                        </select>-->
                                         <div id="fq3">
                                             <input type="checkbox" id="fq3.1" value="8" onclick="update_F()"> Readme file<br>
                                             <input type="checkbox" id="fq3.2" value="8" onclick="update_F()"> Versioning<br>
@@ -282,6 +291,7 @@
                     </div>
                 </div>
             </div>
+            <div class="pagebreak"/>
 
 
             <!-- Accessible -->
@@ -407,6 +417,7 @@
                     </div>
                 </div>
             </div>
+            <div class="pagebreak"/>
 
             <!-- Interoperable -->
             <div class="row">
@@ -520,6 +531,7 @@
                     </div>
                 </div>
             </div>
+            <div class="pagebreak"/>
 
             <!-- Reusable -->
             <div class="row">
@@ -623,11 +635,12 @@
 </div>
 
 
-<!-- Trigger the modal with a button
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
--->
 
-<!-- Modal -->
+
+<!-- ====================================================================================== -->
+<!-- ======================================= TEXTS  ======================================= -->
+<!-- ====================================================================================== -->
+
 <div id="F_improve" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
