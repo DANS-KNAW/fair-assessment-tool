@@ -74,7 +74,7 @@
         }
 
         function show_letter(letter, element, score) {
-            document.getElementById(("image-" + letter).toLowerCase()).src = "F" + "_" + Math.floor(score / 10) * 10 + ".jpg"
+            document.getElementById(("image-" + letter).toLowerCase()).src = letter + "_" + Math.floor(score / 10) * 10 + ".jpg"
             show_score(letter, element, score);
         }
 
@@ -298,7 +298,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <br><br><br><br>
-                    <img id="image-a" src="F_100.jpg" alt="A">
+                    <img id="image-a" src="A_100.jpg" alt="A">
                     <div class="bubble">
                         <a id="A-improve" href="#ahelp" data-toggle="modal" data-target="#A_improve">
                             <span>
@@ -423,7 +423,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <br><br>
-                    <img id="image-i" src="F_100.jpg" alt="I">
+                    <img id="image-i" src="I_100.jpg" alt="I">
                     <div class="bubble">
                         <a id="I-improve" href="#ahelp" data-toggle="modal" data-target="#I_improve">
                             <span>
@@ -536,7 +536,8 @@
             <!-- Reusable -->
             <div class="row">
                 <div class="col-md-2">
-                    <img id="image-r" src="F_100.jpg" alt="R">
+                    <br>
+                    <img id="image-r" src="R_100.jpg" alt="R">
                     <div class="bubble">
                         <a id="R-improve" href="#ahelp" data-toggle="modal" data-target="#R_improve">
                             <span>
