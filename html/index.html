@@ -66,15 +66,15 @@
         }
 
         function get_value(element) {
-            if (checked(element)) { return parseInt(document.getElementById(element).value); } else { return 0.0;}
+            return checked(element) ? parseInt(document.getElementById(element).value) : 0.0;
         }
 
         function checked(element) {
-            return Boolean(document.getElementById(element).checked == true);
+            return document.getElementById(element).checked ? 1 : 0;
         }
 
         function show_letter(letter, element, score) {
-            document.getElementById(("image-" + letter).toLowerCase()).src = letter + "_" + Math.floor(score / 10) * 10 + ".jpg"
+            document.getElementById(("image-" + letter).toLowerCase()).src = "images/" + letter + "_" + Math.floor(score / 10) * 10 + ".jpg"
             show_score(letter, element, score);
         }
 
@@ -93,6 +93,22 @@
                 complete.style.display = "block";
                 $("#" + element + "-complete").html(score + "% Well done!");
             }
+        }
+
+        function advice_F() {
+            var title = document.getElementById("F-advice-title").textContent;
+            var q_1_sel = document.getElementById("fq1").selectedIndex;
+            var a_1 = document.getElementById("F-advice-1." + q_1_sel).textContent;
+            var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
+            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
+            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
+            write_to_modal(title, contents);
+            $('#modal').modal('show');
+        }
+
+        function write_to_modal(title, contents) {
+            $("#modal-title").html(title);
+            $("#modal-contents").html(contents);
         }
 
         function update() {
@@ -209,9 +225,9 @@
             <!-- Findable -->
             <div class="row">
                 <div class="col-md-2">
-                    <img id="image-f" src="F_100.jpg" alt="F">
+                    <img id="image-f" src="images/F_100.jpg" alt="F">
                     <div class="bubble">
-                        <a id="F-improve" href="#fhelp" data-toggle="modal" data-target="#F_improve">
+                        <a id="F-improve" href="#fhelp" data-toggle="modal" onclick="advice_F()">
                             <span>
                                 <div id="fscore-improve"></div>
                                 <img id="text-bubble-improve" src="text_ballon_transparant.png"/>
@@ -266,8 +282,8 @@
                                     <div class="col-sm-6">
                                         <div id="fq2">
                                             <input type="checkbox" id="fq2.1" value="8" onclick="update_F()"> Controlled vocabularies<br>
-                                            <input type="checkbox" id="fq2.2" value="8" onclick="update_F()"> Ontologies<br>
-                                            <input type="checkbox" id="fq2.3" value="8" onclick="update_F()"> Linked open data<br>
+                                            <input type="checkbox" id="fq2.2" value="8" onclick="update_F()"> Taxonomies<br>
+                                            <input type="checkbox" id="fq2.3" value="8" onclick="update_F()"> Ontologies<br>
                                         </div>
                                     </div>
                                 </div>
@@ -283,6 +299,7 @@
                                         <div id="fq3">
                                             <input type="checkbox" id="fq3.1" value="8" onclick="update_F()"> Readme file<br>
                                             <input type="checkbox" id="fq3.2" value="8" onclick="update_F()"> Versioning<br>
+                                            <input type="checkbox" id="fq3.3" value="8" onclick="update_F()"> Provenance<br>
                                         </div>
                                     </div>
                                 </div>
@@ -298,7 +315,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <br><br><br><br>
-                    <img id="image-a" src="A_100.jpg" alt="A">
+                    <img id="image-a" src="images/A_100.jpg" alt="A">
                     <div class="bubble">
                         <a id="A-improve" href="#ahelp" data-toggle="modal" data-target="#A_improve">
                             <span>
@@ -423,7 +440,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <br><br>
-                    <img id="image-i" src="I_100.jpg" alt="I">
+                    <img id="image-i" src="images/I_100.jpg" alt="I">
                     <div class="bubble">
                         <a id="I-improve" href="#ahelp" data-toggle="modal" data-target="#I_improve">
                             <span>
@@ -537,7 +554,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <br>
-                    <img id="image-r" src="R_100.jpg" alt="R">
+                    <img id="image-r" src="images/R_100.jpg" alt="R">
                     <div class="bubble">
                         <a id="R-improve" href="#ahelp" data-toggle="modal" data-target="#R_improve">
                             <span>
@@ -632,1091 +649,123 @@
         </div>
         <br>
     </div>
+</div>
 
 </div>
 
 
 
+<!-- ======================================= Modal window  ======================================= -->
+
+<div id="modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="modal-title"></h4>
+            </div>
+            <div id="modal-contents" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <!-- ====================================================================================== -->
 <!-- ======================================= TEXTS  ======================================= -->
 <!-- ====================================================================================== -->
 
-<div id="F_improve" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<!-- ======================================= Findability  ======================================= -->
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Want to improve?</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Haluatko parantaa?
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-title">
+    Advice to improve Findability
 </div>
 
-<div id="F_complete" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<div id="F-advice-1.0">
+You filled in all or almost all of the optional fields on the Content Description page. This makes your data findable for other researchers and users. Question 2 concerns the use of standards to describe your data which enables machines to find and interlink your data. </div>
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Want to improve?</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Hyvä hyvä!
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
+<div id="F-advice-1.1">
+You filled in some information on the Content Descripton page. In order to make your dataset more findable for researchers and users, check again if you can fill in more of the optional fields on the page. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be. </div>
 
-    </div>
+<div id="F-advice-1.2">
+On the Content Description page additional fields like Relations to projects, internet pages or researchers, Format types, Languages, Sources on which the dataset is based can be filled in. Adding additional, rich metadata to your dataset will help other researchers to find but also to reuse (see questions under letter R) your data. </div>
+
+<div id="F-advice-1.3">
+Fill in the required fields on the primary information page and go to the Content Description page and check which additional metadata you could add to make your dataset more findable. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be.</div>
+
+<div id="F-advice-1.4">
+Fill in the required fields on the primary information page and go to the Content Description page and check which additional metadata you could add to make your dataset more findable. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be.</div>
+
+<div id="F-advice-2.0-0-0">
+Check whether there are standards in your domain or field that you can use to describe your dataset and use them in the description (metadata). Make sure you use of or map your metadata to standards such as controlled vocabularies, ontologies and taxonomies. Be aware that these can be domain specific, however these are not always available. Always use the standards relevant for your domain.
 </div>
 
-<div id="A_improve" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Want to improve?</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    A - Haluatko parantaa?
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-2.1-0-0">
+Using ontologies and taxonomies will improve the automated findability of your dataset.
+It is good that you use controlled vocabularies to describe your dataset. Be aware of the domain specific controlled vocabularies. To increase the findability you can also use domain specific ontologies and linked open data.
 </div>
 
-<div id="A_complete" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Want to improve?</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    A - Hyvä hyvä!
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-2.1-1-0">
+You did very well by using controlled vocabularies and taxonomies. Be aware of your domain specific vontrolled vocabularies and taxonomies. You can also make use of ontologies in your dataset description to describe and increase the findability. Also ontologies can be discipline and/or domain specific.
 </div>
 
-<div id="I_improve" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Want to improve?</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    I - Haluatko parantaa?
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-2.1-1-1">
+Well done! it seems you did everything to make your dataset findable. As a reminder; be aware of the fact that within your domain there could be specific controlled vocabularies, taxonomies or ontologies.
 </div>
 
-<div id="I_complete" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Want to improve?</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    I - Hyvä hyvä!
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-2.1-0-1">
+Using controlled vocabularies and ontologies will improve the automated findability of your dataset. You can increase the findability of your dataset even more by also makeing use of taxonomies, if available for you specific domain.
 </div>
 
-
-<div id="R_improve" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Want to improve?</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    R - Haluatko parantaa?
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-2.0-1-0">
+Using domain specific controlled vocabularies and/or ontologies will improve the automated findability of your dataset.
 </div>
 
-<div id="R_complete" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Want to improve?</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    R - Hyvä hyvä!
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-2.0-1-1">
+Using taxonomies and ontologies by describing you data, will improve the automated findability of your dataset. You can also add terms from (domain specific) controlled vocabularies in your data description to increase the findabiliy of your dataset
 </div>
 
-<div id="findable_info" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About Findable</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Making data Findable includes assigning a
-                    <a href="https://www.ands.org.au/guides/persistent-identifiers-awareness" target="_blank">
-                    persistent identifier</a> (like a <a href="https://www.ands.org.au/guides/doi" target="_blank">DOI</a>
-                    or <a href="https://www.ands.org.au/guides/identify-my-data" target="_blank">Handle </a>),
-                    having rich <a href="https://www.ands.org.au/working-with-data/metadata" target="_blank">metadata</a>
-                    to describe the data and making sure it is findable through
-                    disciplinary and generalist discovery portals (local and international).
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-2.0-0-1">
+Using domain specific controlled vocabularies and taxonomies will improve the automated findability of your dataset.
 </div>
 
-<div id="accessible_info" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About Accessible</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    <a href="https://www.ands.org.au/working-with-data/publishing-and-reusing-data/publishing"
-                       target="_blank">
-                        To make data accessible</a> may include making the data
-                    <a href="https://www.ands.org.au/working-with-data/articulating-the-value-of-open-data/open-data"
-                       target="_blank">
-                        open</a> using a standardised protocol.
-                    However the data does not necessarily have to be open. There are sometimes good reasons
-                    why data <a href="https://www.ands.org.au/working-with-data/sensitive-data" target="_blank">
-                    cannot be made open</a>, for example privacy concerns, national security or commercial
-                    interests. If it is not open there should be clarity and transparency around the conditions
-                    governing access and
-                    <a href="https://www.ands.org.au/working-with-data/publishing-and-reusing-data/licensing-for-reuse"
-                                            target="_blank">reuse</a>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-3.0-0-0">
+Adding documentation about the datasets, think of a readme file, versioning, or the provenance of the data, will improve the findability of your dataset.
 </div>
 
-<div id="interoperable_info" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About Interoperability</h4>
-            </div>
-            <div class="modal-body">
-
-                To be interoperable (i.e. data that is interpretable by a computer,
-                so that they can be automatically combined with other data) the data will
-                need to use community agreed <a href="https://www.ands.org.au/guides/file-formats" target="_blank">formats</a>,
-                language and <a href="https://www.ands.org.au/guides/vocabularies-and-research-data" target="_blank">
-                vocabularies</a>. The <a href="https://www.ands.org.au/working-with-data/metadata">metadata</a>
-                will also need to use a community agreed standards and vocabularies, and
-                contain links to related information using <a href="https://www.ands.org.au/working-with-data/citation-and-identifiers"
-                    target="_blank">identifiers</a>.
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-3.1-0-0">
+Next to the readme file, consider adding information about the provenance of the data and the versioning.
 </div>
 
-<div id="reusable_info" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About Reusable</h4>
-            </div>
-            <div class="modal-body">
-
-                Reusable data should maintain its initial richness. For example,
-                it should not be abridged for the purpose of explaining the findings
-                in one particular publication. It needs a clear machine-readable
-                <a href="http://www.ands.org.au/working-with-data/publishing-and-reusing-data/licensing-for-reuse"
-                   target="_blank">licence</a>
-                and <a href="https://www.ands.org.au/partners-and-communities/ands-communities/data-provenance-interest-group"
-                       target="_blank">provenance</a> information on how the data was formed. It should also use
-                discipline-specific data and <a href="https://www.ands.org.au/working-with-data/metadata"
-                                                target="_blank"> metadata</a> standards to give it rich contextual
-                information that will allow for accurate interpretation and reuse.
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-3.1-1-0">
+Consider also adding information about the provenance of your data.
 </div>
 
-
-<div id="info_fq1" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About identifiers</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                Identifiers are essential for identifying, finding, retrieving, linking and citing datasets.
-                A Web address (URL) can be used to specify the online location of a resource but over time URLs
-                tend to change which leads to broken links to the data.  To be useful, identifiers need to be
-                persistent and unique. Digital Object Identifiers (DOIs) and other persistent identifiers (PIDs)
-                provide a permanent citable reference to a particular dataset.  The DOI is a permanent fixed
-                reference to the dataset no matter where it is located online and enables citation and citation
-                metrics.
-                </p><p>
-                Services to create a persistent identifier are often offered by your affiliated institution or
-                the repository you are using to describe your data. Talk to your library service for more information.
-                </p><p>
-                Read more: <a href="https://www.ands.org.au/working-with-data/citation-and-identifiers" target="_blank">
-                Persistent Identifiers</a>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-3.1-1-1">
+You added rich and detailed information to your dataset by not only providing a readme file but also giving information about the provenance and the versioning of your data. If seen as an addition to rich and detailed metadata (question F2), it makes your dataset more findable and reusable.
 </div>
 
-<div id="info_fq2" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About identifiers</h4>
-            </div>
-            <div class="modal-body">
-                <p>The identifier (preferably a persistent identifier) needs to be clearly stated in the metadata
-                    record describing the data collection, and also in any associated data files or metadata.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-3.1-0-1">
+Consider also adding information about the versioning.
 </div>
 
-
-<div id="info_fq3" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About metadata descriptions</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Comprehensive metadata records will include descriptive content that facilitates discovery, access
-                    and reuse of the data being described. While there is no 'one size fits all' list,
-                    comprehensive metadata should include:
-                    <ul>
-                        <li>a globally unique persistent identifier e.g. a DOI</li>
-                        <li>a title</li>
-                        <li>related people, i.e. the data creator or custodian</li>
-                        <li>how to access the data and file formats</li>
-                        <li>a description of how the data were created and how to interpret the data
-                        subject or keywords</li>
-                        <li>citation information that clearly indicates how the data should be cited</li>
-                        <li>a machine-readable data licence</li>
-                        <li>provenance and contextual information such as:</li>
-                        <li><ul>
-                            <li>links to related publications, projects, services and software</li>
-                            <li>methodology and processes involved in data production</li>
-                        </ul></li>
-                        <li>spatial and temporal coverage (if relevant)</li>
-                        <li>object-level data description</li>
-                    </ul>
-                    Providing metadata in a standard schema allows it to be read and used by machines as well as humans.
-                <p>
-                    Read more: <a href="https://www.ands.org.au/working-with-data/metadata" target="_blank">
-                    Metadata</a>
-                </p>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-3.0-1-0">
+Next to the versioning, consider adding information about the provenance of the data and a readme file.
 </div>
 
-<div id="info_fq4" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About metadata repositories</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    A rich metadata description alone does not ensure a dataset’s ‘findability’ on the internet;
-                    the dataset needs to be registered or indexed in a searchable resource, such as a generalist
-                    (e.g. <a href="https://figshare.com" target="_blank">Figshare</a>,
-                    <a href="http://datadryad.org" target="_blank">Dryad</a>,
-                    <a href="https://zenodo.org" target="_blank">Zenodo</a>
-                    domain-specific (e.g.
-                    <a href="https://pangaea.de" target="_blank">PANGAEA</a>,
-                    <a href="https://ada.edu.au" target="_blank">ADA</a>,
-                    <a href="https://www.icpsr.umich.edu" target="_blank">ICPSR</a>), or institutional
-                    (e.g. <a href="https://openresearch-repository.anu.edu.au" target="_blank">ANU Research Repository</a> ,
-                      <a href="https://ses.library.usyd.edu.au" target="_blank">Sydney eScholarship Repository</a>,
-                    <a href="https://data.gov.au" target="_blank">data.gov.au</a>) data repository or
-                    registry. Ideally these repositories/registries are indexed by search engines such as Google
-                    and/or Google Scholar.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-3.0-1-1">
+Consider also adding a readme file to your dataset.
 </div>
 
-
-
-<div id="info_aq1" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About data accessibility</h4>
-            </div>
-            <div class="modal-body">
-
-                Not all data that is discoverable can be freely accessed. Often there are embargoes,
-                access controls, and access permissions associated with data due to a variety of issues
-                such as privacy and commercial interests.
-
-                Even with all these issues much <a href="https://www.ands.org.au/working-with-data/sensitive-data"
-                                                  target="_blank"> sensitive data </a>
-                can be shared. Many other issues that
-                could be perceived as blockers to sharing data may be
-                <a href="http://datapub.cdlib.org/closed-data-excuses-excuses" target="_blank">overcome</a>.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
+<div id="F-advice-3.0-0-1">
+Next to the provenance, consider adding a readme file and information about the versioning.
 </div>
 
-
-<div id="info_aq2" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About protocols</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Ideally users would like to retrieve appropriate internet content directly and unhindered once
-                    they have located it. Internet protocols (e.g. http and ftp) define rules and conventions for
-                    communication between devices, and tools and services are available to facilitate this process,
-                    e.g. APIs.
-                </p>
-
-                <p>Protocols</p>
-                <p>
-                <a href="https://www.lifewire.com/hypertext-transfer-protocol-817944" target="_blank">
-                    HTTP</a> (Hypertext Transfer Protocol) is the set of rules for transferring files (text, graphic
-                    images, sound, video, and other multimedia files) on the
-                    <a href="http://searchcrm.techtarget.com/definition/World-Wide-Web" target="_blank">
-                    World Wide Web</a>. As soon as a Web
-                    user opens their Web browser, the user is indirectly making use of HTTP.</p>
-
-                <a href="https://www.lifewire.com/file-transfer-protocol-817943" target="_blank">
-                    FTP</a> (File Transfer Protocol) is a standard Internet
-                <a href="http://searchnetworking.techtarget.com/definition/protocol">protocol</a> for transmitting
-                files between computers on the Internet over TCP/IP connections.
-
-                Read more: <a href="https://www.lifewire.com/definition-of-protocol-network-817949" target="_blank">
-                Web protocols</a>
-
-                <p>
-                    API (Application Programming Interface): When information is made available in any machine
-                    readable format, it becomes possible to make that information directly available to programs
-                    that request that information over the web.  An API is the way this information is made
-                    directly available to other machines.
-                </p><p>
-                View more: <a href="https://youtu.be/s7wmiS2mSXY" target="_blank">What is an API?</a>
-                </p>
-                <p>
-                    OGC - <a href="http://www.opengeospatial.org/ogc" target="_blank">http://www.opengeospatial.org/ogc</a>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<div id="info_aq3" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About metadata availability</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Effort is often required to maintain data resources online which can often lead to it
-                    being neglected especially over long periods of time.  This often leads to broken links
-                    between the metadata and the data.  Having at least a description of the data in the form
-                    of a metadata record means there is a record of the data's existence allowing the possibility
-                    of someone tracking it down.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-
-
-
-<div id="info_aq4" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About file formats</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    When selecting file formats for archiving, the formats should ideally be:
-                    <ul>
-                    <li>Non-proprietary
-                    <li>Unencrypted
-                    <li>Uncompressed
-                    <li>In common usage by the research community
-                    <li>Adherent to an open, documented standard, such as described by the State of California (see
-                        <a href="http://www.leginfo.ca.gov/pub/07-08/bill/asm/ab_1651-1700/ab_1668_bill_20070524_amended_asm_v96.pdf"
-                           target="_blank">AB 1668, 2007</a>)
-                    <ul>
-                    <li>Interoperable among diverse platforms and applications
-                    <li>Fully published and available royalty-free
-                    <li>Fully and independently implementable by multiple software providers on multiple platforms
-                        without any intellectual property restrictions for necessary technology
-                    <li>Developed and maintained by an open standards organization with a well-defined
-                        inclusive process for evolution of the standard.
-                    </ul>
-                    </ul>
-
-                <p style="text-indent: 25px;">
-                From: <a href="https://library.stanford.edu/research/data-management-services/data-best-practices/best-practices-file-formats"
-                   target="_blank">Stanford University Library - Best practices for file formats</a>
-                </p><p>
-                File format examples:
-                <ul>
-                    <li> Structured, open standard, machine-readable format  e.g. (text) PDF/A, HTML, Plain text, (images) TIFF, JPEG 2000, GIF, (audio) MP3, AIFF, WAVE, (video) MOV, MPEG, AVI, (Tabular data) CSV
-                    <li> structured, open standard, non-machine-readable format, e.g. PDF, HTML, JPG
-                    <li> Proprietary format, e.g. doc (Word), .xls (Excel), .ppt (PowerPoint), .sav
-                    </li>
-                </ul>
-
-                Read more:
-                <ul style="list-style-type: none;">
-                    <li><a href="https://www.ands.org.au/__data/assets/pdf_file/0003/731775/File-Formats.pdf" target="_blank">ANDS</a></li>
-                    <li><a href="https://www.europeandataportal.eu/elearning/en/module9/#/id/co-01" target="_blank">
-                     European Data Portal</a></li>
-                </ul>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div id="info_aq5" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About schema standards</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Schema standards are schemas that have gone through a formal validation process by a standards
-                    organisation, such as the International Standards Organisation (ISO) or an equivalent body such
-                    as the Dublin Core Metadata Initiative (DCMI); or, commonly used and consistently applied metadata
-                    schemas that are well documented, endorsed, and maintained can also become ‘de-facto standards’,
-                    e.g. RIF-CS for describing data collections and services used in Research Data Australia.
-                </p>
-
-                    Read more: <a href="http://www.ands.org.au/guides/metadata-working" target="_blank">Metadata schema</a>
-                <p>
-                    Standardised open and universal schemas, e.g,
-                    <a href="http://www.dcc.ac.uk/resources/metadata-standards/datacite-metadata-schema" target="_blank"> DataCite Metadata Schema</a>,
-                    <a href="http://www.dcc.ac.uk/resources/metadata-standards/prov" target="_blank"> PROV</a>,
-                    <a href="http://www.dcc.ac.uk/resources/metadata-standards/dublin-core" target="_blank">Dublin Core</a>
-                </p>
-                    <p>
-                    Domain-specific standards, e.g. .<a href="http://human-phenotype-ontology.github.io/" target="_blank">
-                        HPO - Human Phenotype Ontology</a>,
-                        <a href="https://www.nlm.nih.gov/mesh/" target="_blank">MeSH - Medical Subject Headings </a>,
-                        <a href="http://mcp-profile-docs.readthedocs.io/en/stable/" target="_blank">Marine Community Profile</a>,
-                        <a href="http://www.ddialliance.org/" target="_blank">DDI - Data Documentation Initiative</a>
-
-                    For <a href="http://rd-alliance.github.io/metadata-directory/" target="_blank">more examples of
-                        standards...</a>
-                    </p><p>
-                    Resolvable global identifiers - An identifier is any label used to name something uniquely
-                (whether online or offline).  URLs are an example of an identifier. So are serial numbers, and
-                personal names. A persistent identifier is guaranteed to be managed and kept up to date over a
-                defined time period.
-                </p><p>
-                Read more: <a href="http://www.ands.org.au/guides/persistent-identifiers-awareness" target="_blank">
-                Persistent Identifiers</a>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<div id="info_iq1" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About metadata links</h4>
-            </div>
-            <div class="modal-body">
-                <p>The goal is to create as many meaningful linkages as possible between (meta)data resources to
-                    enrich the contextual knowledge about the data, balanced against the time/energy involved in
-                    making a good data model.
-
-                    <h4>Machine-readable (meta)data</h4>
-
-                    (Meta)data in a format that can be automatically read and processed by a computer, such as
-                    <a href="http://opendatahandbook.org/glossary/en/terms/csv/" target="_blank">CSV</a>,
-                    <a href="http://opendatahandbook.org/glossary/en/terms/json/" target="_blank">JSON</a>,
-                    <a href="http://opendatahandbook.org/glossary/en/terms/xml/" target="_blank">XML</a> etc.
-
-                    For more information: <a href="http://opendatahandbook.org/glossary/en/terms/machine-readable/">
-                    Open Data Handbook</a>
-
-                    <h4>Linked Data</h4>
-                    Linked Data (also known as Linking Data) can be applied to improve the exploitation of the
-                    “Web of data.” The expression refers to the publishing of structured data in a way that typed
-                    links are created between data from different sources to provide a higher level of usability.
-                    By using Linked Data, it is possible to find other, related data. Structured data should meet
-                    four requirements to be called Linked Data:
-                    <ul>
-                    <li>URIs should be assigned to all entities of the dataset.
-                    <li>HTTP URIs are required to ensure that all entities can be referenced and cited by users and
-                        user agents.
-                    <li>Entities should be described using standard formats such as RDF/XML.
-                    <li>Links should be created to other, related entity URIs.</li>
-                    </ul>
-
-                    All data that fulfil these requirements and are released for the public are called
-                    Linked Open Data (LOD).
-                    http://www.lesliesikos.com/semantic-web-machine-readable-structured-data-with-meaningful-annotations/
-                    <p>
-                    Read more under the heading (meta)data include qualified references to other (meta)data in the following resource:
-                    https://www.dtls.nl/fair-data/fair-principles-explained/
-                    <br>
-                    For more information on Linked Data standards -
-                    RDF - https://www.w3.org/RDF/
-                    <br>
-                    Other related linked data standards:
-                    OWL - https://www.w3.org/OWL/ , SKOS - https://www.w3.org/2004/02/skos/ , SPARQL - https://www.w3.org/TR/rdf-sparql-query/
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<div id="info_iq2" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About licenses</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    If data is not licensed no-one else can use it. In Australia, no licence is regarded as the same
-                    as 'all rights reserved', confining any reuse to very limited circumstances. Applying a Creative
-                    Commons licence to your data is a simple way to ensure that your data can be reused. The less
-                    restrictive the licence, the more that can be done with the data.
-                <p>
-                    To make it easy for the Web to know when a work is available under a particular license, a
-                    “machine readable” version of the license provides a summary of the key freedoms and obligations
-                    written into a format that software systems, search engines, and other kinds of technology can
-                    understand.
-
-                <p>
-                    Example from the <a href="https://creativecommons.org/choose/" target="_blank">
-                    Creative Commons License Chooser </a>:
-                </p><p>
-                    What appears in the metadata:
-                </p><p>
-
-                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-                    <img alt="Creative Commons License" style="border-width:0"
-                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
-                </a><br />This work is licensed under a
-                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-                    Creative Commons Attribution 4.0 International License</a>.
-                   </p><p>
-                    Code snippet:
-                </p>
-
- <pre>
-&lt;a rel="license" href="http://creativecommons.org/licenses/by/4.0/"&gt;
-&lt;img alt="Creative Commons License" style="border-width:0"
-src="https://i.creativecommons.org/l/by/4.0/88x31.png"/&gt;
-&lt;/a&gt;&lt;br /&gt;This work is licensed under a
-&lt;a rel="license" href="http://creativecommons.org/licenses/by/4.0/"&gt;
-Creative Commons Attribution 4.0 International License&lt;/a&gt;.
-</pre>
-
-                    Read more:
-                    https://www.ands.org.au/working-with-data/publishing-and-reusing-data/licensing-for-reuse
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div id="info_iq3" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About provenance</h4>
-            </div>
-            <div class="modal-body">
-                <p>Data provenance is used to document where a piece of data comes from and the
-                    process and methodology by which it is produced.  It is important to confirm
-                    the authenticity of data enabling trust, credibility and reproducibility.
-                    This is becoming increasingly important, especially in the eScience community
-                    where research is data intensive and often involves complex data transformations
-                    and procedures.
-                    <a href="https://www.ands.org.au/partners-and-communities/ands-communities/data-provenance-interest-group"
-                            target="_blank">
-                        Read more…</a>
-                    Provenance vocabularies such as <a href="https://www.w3.org/2005/Incubator/prov/XGR-prov-20101214/#Recommendations"
-                            target="_blank">
-                        Provenir Ontology (PROV-O) and others</a>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div id="info_rq1" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">R 1</h4>
-            </div>
-            <div class="modal-body">
-                <p>r111</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<div id="info_rq2" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">R 2</h4>
-            </div>
-            <div class="modal-body">
-                <p>r222</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div id="info_rq3" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">R 3</h4>
-            </div>
-            <div class="modal-body">
-                <p>r333</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-<div id="info_iq4" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About provenance</h4>
-            </div>
-            <div class="modal-body">
-                <p>Data provenance is used to document where a piece of data comes from and the
-                    process and methodology by which it is produced.  It is important to confirm
-                    the authenticity of data enabling trust, credibility and reproducibility.
-                    This is becoming increasingly important, especially in the eScience community
-                    where research is data intensive and often involves complex data transformations
-                    and procedures.
-                    <a href="https://www.ands.org.au/partners-and-communities/ands-communities/data-provenance-interest-group"
-                            target="_blank">
-                        Read more…</a>
-                    Provenance vocabularies such as <a href="https://www.w3.org/2005/Incubator/prov/XGR-prov-20101214/#Recommendations"
-                            target="_blank">
-                        Provenir Ontology (PROV-O) and others</a>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<div id="info_fscore" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About Findable Score</h4>
-            </div>
-            <div class="modal-body">
-                <p><b>The score was derived as follows:</b></p>
-
-                    Does the dataset have any identifiers assigned:
-                    <br>
-                    You answered <span id="q1_answer"></span> which gave you <span id="q1_score"></span> out of a
-                    possible 8 points.
-                    <br/>
-                <p>
-                     Is the dataset identifier included in all mdetadata records:
-                        <br>
-                    You answered <span id="q2_answer"></span> which gave you <span id="q2_score"></span> out of a
-                        possible 1 point.
-                            <br>
-                </p><p>
-                    How is the data described with metadata:
-                            <br>
-You answered <span id="q3_answer"></span> which gave you <span id="q3_score"></span> out of a
-                        possible 4 points.
-
-                                <br>
-            </p><p>
-                   What type of repository or registry is the metadata record in:
-                                <br>
-You answered <span id="q4_answer"></span> which gave you <span id="q4_score"></span> out of a
-                        possible 4 points.
-            </p><p>
-                This gives you <span id="f_total"></span> out of a possible 17 points.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div id="info_ascore" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About Findable Score</h4>
-            </div>
-            <div class="modal-body">
-                <p><b>The score was derived as follows:</b></p>
-<p>
-                How accessible is the data:
-                <br>
-                You answered <span id="q5_answer"></span> which gave you <span id="q5_score"></span> out of a
-                possible 5 points.
-                <br/>
-                </p><p>
-                Is the data available online without requiring specialised protocols or tools once access has
-                been approved:
-                <br>
-                You answered <span id="q6_answer"></span> which gave you <span id="q6_score"></span> out of a
-                possible 4 point.
-                <br>
-            </p><p>
-                Will the metadata record be available even if the data is no longer available:
-                <br>
-                You answered <span id="q7_answer"></span> which gave you <span id="q7_score"></span> out of a
-                possible 1 points.
-                <br>
-            </p>
-                <p>This gives you <span id="a_total"></span> out of a possible 10 points.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<div id="info_iscore" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modßal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About Findable Score</h4>
-            </div>
-            <div class="modal-body">
-                <p><b>The score was derived as follows:</b></p>
-
-                What (file) format(s) is the data available in:
-                <br>
-                You answered <span id="q8_answer"></span> which gave you <span id="q8_score"></span> out of a
-                possible 2 points.
-                <br/>
-                <p>
-                What best describes the types of vocabularies/ontologies/tagging schemas used to define
-                the data elements:
-                <br>
-                You answered <span id="q9_answer"></span> which gave you <span id="q9_score"></span> out of a
-                possible 3 point.
-                <br>
-            </p><p>
-                How is the metadata linked to other data and metadata to provide context around the data:
-                <br>
-                You answered <span id="q10_answer"></span> which gave you <span id="q10_score"></span> out of a
-                possible 3 points.
-
-                <p>This gives you <span id="i_total"></span> out of a possible 8 points.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div id="info_rscore" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About Findable Score</h4>
-            </div>
-            <div class="modal-body">
-                <p><b>The score was derived as follows:</b></p>
-                <p>
-                Does the dataset have any identifiers assigned?
-                <br>
-                You answered <span id="q11_answer"></span> which gave you <span id="q11_score"></span> out of a
-                possible 4 points.
-                <br/>
-                </p><p>
-                Is the dataset identifier included in all mdetadata records:
-                <br>
-                You answered <span id="q12_answer"></span> which gave you <span id="q12_score"></span> out of a
-                possible 2 points.
-                <br>
-            </p>
-                <p>This gives you <span id="r_total"></span> out of a possible 6 points.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 </body>
 </html>
