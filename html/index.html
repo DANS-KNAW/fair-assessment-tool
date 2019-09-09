@@ -28,13 +28,6 @@
             -webkit-user-select: none;
             -ms-user-select: none;
         }
-        .stars {
-            background-image: url("stars.png"); background-repeat: no-repeat; width: 100px; heigth: 25px; line-height:2;
-        }
-        .w3-container:after,.w3-container:before,.w3-panel:after,.w3-panel:before,.w3-row:after,.w3-row:before,.w3-row-padding:after,.w3-row-padding:before,
-        .w3-cell-row:before,.w3-cell-row:after,.w3-clear:after,.w3-clear:before,.w3-bar:before,.w3-bar:after{content:"";display:table;clear:both}
-        .w3-padding{padding:8px 0px!important}
-        .w3-green,.w3-hover-green:hover{color:#fff!important;background-color:#4CAF50!important}
         .w3-border{border:1px solid #ccc!important}
         .panel-heading .glyphicon-info-sign {font-size: 1.3em; color: #FFFFFF;}
         .panel-body .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
@@ -48,11 +41,11 @@
         h1 {color: #02AEDB;}
         .bubble {position: relative;}
         .bubble a:hover {color: #2795c8;}
-        #text-bubble-improve, #text-bubble-complete {position: absolute;top: 0px;left: 0px;}
-        #fscore-improve, #fscore-complete {padding-top: 25px; padding-left: 10px;}
-        #ascore-improve, #ascore-complete {padding-top: 25px; padding-left: 10px;}
-        #iscore-improve, #iscore-complete {padding-top: 25px; padding-left: 10px;}
-        #rscore-improve, #rscore-complete {padding-top: 25px; padding-left: 10px;}
+        #text-bubble-advice {position: absolute;top: 0px;left: 0px;}
+        #fscore {padding-top: 25px; padding-left: 10px;}
+        #ascore {padding-top: 25px; padding-left: 10px;}
+        #iscore {padding-top: 25px; padding-left: 10px;}
+        #rscore {padding-top: 25px; padding-left: 10px;}
 
         @media print {.pagebreak { page-break-before: always; }}
 
@@ -63,6 +56,7 @@
 
         function initialise() {
             update();
+            document.getElementById("texts").style.display = "none"
         }
 
         function get_value(element) {
@@ -79,20 +73,26 @@
         }
 
         function show_score(letter, element, score) {
-            var improve = document.getElementById(letter + "-improve")
-            var complete = document.getElementById(letter + "-complete")
+            var advice = document.getElementById(letter + "-advice")
             if (score == 0.0){
-                improve.style.display = "none";
-                complete.style.display = "none";
-            } else if (score < 100.0){
-                improve.style.display = "block";
-                complete.style.display = "none";
-                $("#" + element + "-improve").html(score + "% Want to improve?");
+                advice.style.display = "none";
             } else {
-                improve.style.display = "none";
-                complete.style.display = "block";
-                $("#" + element + "-complete").html(score + "% Well done!");
+                advice.style.display = "block";
+                tail = score < 100.0 ? "% Want to improve?" : "% Well done!"
+                $("#" + element).html(score + tail);
             }
+        }
+
+        function write_to_modal(title, contents) {
+            $("#modal-title").html(title);
+            $("#modal-contents").html(contents);
+        }
+
+        function show_modal(id_prefix) {
+            var title = document.getElementById(id_prefix + "-title").textContent;
+            var contents = document.getElementById(id_prefix + "-contents").textContent;
+            write_to_modal(title, contents);
+            $('#modal').modal('show');
         }
 
         function advice_F() {
@@ -106,9 +106,37 @@
             $('#modal').modal('show');
         }
 
-        function write_to_modal(title, contents) {
-            $("#modal-title").html(title);
-            $("#modal-contents").html(contents);
+        function advice_A() {
+            var title = document.getElementById("A-advice-title").textContent;
+            var q_1_sel = document.getElementById("fq1").selectedIndex;
+            var a_1 = document.getElementById("F-advice-1." + q_1_sel).textContent;
+            var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
+            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
+            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
+            write_to_modal(title, contents);
+            $('#modal').modal('show');
+        }
+
+        function advice_I() {
+            var title = document.getElementById("I-advice-title").textContent;
+            var q_1_sel = document.getElementById("fq1").selectedIndex;
+            var a_1 = document.getElementById("F-advice-1." + q_1_sel).textContent;
+            var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
+            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
+            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
+            write_to_modal(title, contents);
+            $('#modal').modal('show');
+        }
+
+        function advice_R() {
+            var title = document.getElementById("R-advice-title").textContent;
+            var q_1_sel = document.getElementById("fq1").selectedIndex;
+            var a_1 = document.getElementById("F-advice-1." + q_1_sel).textContent;
+            var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
+            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
+            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
+            write_to_modal(title, contents);
+            $('#modal').modal('show');
         }
 
         function update() {
@@ -227,36 +255,31 @@
                 <div class="col-md-2">
                     <img id="image-f" src="images/F_100.jpg" alt="F">
                     <div class="bubble">
-                        <a id="F-improve" href="#fhelp" data-toggle="modal" onclick="advice_F()">
+                        <a id="F-advice" href="#fhelp" data-toggle="modal" onclick="advice_F()">
                             <span>
-                                <div id="fscore-improve"></div>
-                                <img id="text-bubble-improve" src="text_ballon_transparant.png"/>
+                                <div id="fscore"></div>
+                                <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
                             </span>
                         </a>
-                        <a id="F-complete" href="#fhelp" data-toggle="modal" data-target="#F_complete">
-                            <span>
-                                <div id="fscore-complete"></div>
-                                <img id="text-bubble-complete" src="text_ballon_transparant.png"/>
-                            </span>
-                        </a>
-                    </div>
+                     </div>
                 </div>
                 <div class="col-md-10">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                FINDABLE
-                                <a href="#fhelp" data-toggle="modal" data-target="#findable_info">
-                                    <span class="pull-right glyphicon glyphicon-info-sign"></span>
-                                </a>
+                                <div id="F-i-title">FINDABLE
+                                    <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i')">
+                                        <span class="pull-right glyphicon glyphicon-info-sign"></span>
+                                    </a>
+                                </div>
                             </h4>
                         </div>
                         <div class="panel-body">
                             <form>
                                 <div class="form-group row">
-                                    <label for="fq1" class="col-sm-6 col-form-label">
+                                    <label for="fq1" class="col-sm-6 col-form-label" id="F-i-1-title">
                                         Did you provide sufficient metadata (information) about your data for others to find, understand and reuse your data?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_fq1">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -272,9 +295,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="fq2" class="col-sm-6 col-form-label">
+                                    <label for="fq2" class="col-sm-6 col-form-label" id="F-i-2-title">
                                         Did you use standards such as controlled vocabuaries, ontologies, linked open data to discribe your metadata?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_fq2">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -288,9 +311,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="fq3" class="col-sm-6 col-form-label">
+                                    <label for="fq3" class="col-sm-6 col-form-label" id="F-i-3-title">
                                         Did you provide rich additional documentation?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_fq3">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -317,16 +340,10 @@
                     <br><br><br><br>
                     <img id="image-a" src="images/A_100.jpg" alt="A">
                     <div class="bubble">
-                        <a id="A-improve" href="#ahelp" data-toggle="modal" data-target="#A_improve">
+                        <a id="A-advice" href="#fhelp" data-toggle="modal" onclick="advice_A()">
                             <span>
-                                <div id="ascore-improve"></div>
-                                <img id="text-bubble-improve" src="text_ballon_transparant.png"/>
-                            </span>
-                        </a>
-                        <a id="A-complete" href="#fhelp" data-toggle="modal" data-target="#A_complete">
-                            <span>
-                                <div id="ascore-complete"></div>
-                                <img id="text-bubble-complete" src="text_ballon_transparant.png"/>
+                                <div id="ascore"></div>
+                                <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
                             </span>
                         </a>
                     </div>
@@ -335,18 +352,19 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                ACCESSIBLE
-                                <a href="#ahelp" data-toggle="modal" data-target="#accessible_info">
-                                    <span class="pull-right glyphicon glyphicon-info-sign"></span>
-                                </a>
+                                <div id="A-i-title">ACCESSIBLE
+                                    <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i')">
+                                        <span class="pull-right glyphicon glyphicon-info-sign"></span>
+                                    </a>
+                                </div>
                             </h4>
                         </div>
                         <div class="panel-body">
                             <form>
                                 <div class="form-group row">
-                                    <label for="aq1" class="col-sm-6 col-form-label">
+                                    <label for="aq1" class="col-sm-6 col-form-label" id="A-i-1-title">
                                         Is the metadata publicly accessible even if the data is no longer available?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_aq1">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -362,9 +380,9 @@
 
 
                                 <div class="form-group row">
-                                    <label for="aq2" class="col-sm-6 col-form-label">
+                                    <label for="aq2" class="col-sm-6 col-form-label" id="A-i-2-title">
                                         Which of the use licenses provided by EASY did you choose in order to comply with the access rights attached ot the data?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_aq2">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -382,9 +400,9 @@
 
 
                                 <div class="form-group row">
-                                    <label for="aq3" class="col-sm-6 col-form-label">
+                                    <label for="aq3" class="col-sm-6 col-form-label" id="A-i-3-title">
                                         Did you add global unique/persistent identifiers to your (meta)data such as ORCiD, ISBN, ISNI etc. ?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_aq3">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -398,9 +416,9 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="aq4" class="col-sm-6 col-form-label">
+                                    <label for="aq4" class="col-sm-6 col-form-label" id="A-i-4-title">
                                         Did you specify in your metadata your institution/organization?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_aq4">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-4')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -414,9 +432,9 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="aq5" class="col-sm-6 col-form-label">
+                                    <label for="aq5" class="col-sm-6 col-form-label" id="A-i-5-title">
                                         Does your dataset contain personal data?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_aq5">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-5')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -442,16 +460,10 @@
                     <br><br>
                     <img id="image-i" src="images/I_100.jpg" alt="I">
                     <div class="bubble">
-                        <a id="I-improve" href="#ahelp" data-toggle="modal" data-target="#I_improve">
+                        <a id="I-advice" href="#fhelp" data-toggle="modal" onclick="advice_I()">
                             <span>
-                                <div id="iscore-improve"></div>
-                                <img id="text-bubble-improve" src="text_ballon_transparant.png"/>
-                            </span>
-                        </a>
-                        <a id="I-complete" href="#fhelp" data-toggle="modal" data-target="#I_complete">
-                            <span>
-                                <div id="iscore-complete"></div>
-                                <img id="text-bubble-complete" src="text_ballon_transparant.png"/>
+                                <div id="iscore"></div>
+                                <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
                             </span>
                         </a>
                     </div>
@@ -460,19 +472,20 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                INTEROPERABLE
-                                <a href="#ahelp" data-toggle="modal" data-target="#interoperable_info">
-                                    <span class="pull-right glyphicon glyphicon-info-sign"></span>
-                                </a>
+                                <div id="I-i-title">INTEROPERABLE
+                                    <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i')">
+                                        <span class="pull-right glyphicon glyphicon-info-sign"></span>
+                                    </a>
+                                </div>
                             </h4>
                         </div>
                         <div class="panel-body">
                             <form>
                                 <div class="form-group row">
 
-                                    <label for="iq1" class="col-sm-6 col-form-label">
+                                    <label for="iq1" class="col-sm-6 col-form-label" id="I-i-1-title">
                                         To what extent did you use standardized controlled vocabularies and/or ontologies in describing your dataset?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_iq1">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -489,9 +502,9 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="iq2" class="col-sm-6 col-form-label">
+                                    <label for="iq2" class="col-sm-6 col-form-label" id="I-i-2-title">
                                         Do you link to other (meta)data and is this (meta)data online resolvable?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_iq2">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -508,9 +521,9 @@
 
 
                                 <div class="form-group row">
-                                    <label for="iq3" class="col-sm-6 col-form-label">
+                                    <label for="iq3" class="col-sm-6 col-form-label" id="I-i-3-title">
                                         Did you provide contextual information about your dataset?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_iq3">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -527,9 +540,9 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="iq4" class="col-sm-6 col-form-label">
+                                    <label for="iq4" class="col-sm-6 col-form-label" id="I-i-4-title">
                                         Did you describe scientific links between your dataset and other datasets?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_iq4">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-4')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -556,16 +569,10 @@
                     <br>
                     <img id="image-r" src="images/R_100.jpg" alt="R">
                     <div class="bubble">
-                        <a id="R-improve" href="#ahelp" data-toggle="modal" data-target="#R_improve">
+                        <a id="R-advice" href="#fhelp" data-toggle="modal" onclick="advice_R()">
                             <span>
-                                <div id="rscore-improve"></div>
-                                <img id="text-bubble-improve" src="text_ballon_transparant.png"/>
-                            </span>
-                        </a>
-                        <a id="R-complete" href="#fhelp" data-toggle="modal" data-target="#R_complete">
-                            <span>
-                                <div id="rscore-complete"></div>
-                                <img id="text-bubble-complete" src="text_ballon_transparant.png"/>
+                                <div id="rscore"></div>
+                                <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
                             </span>
                         </a>
                     </div>
@@ -574,18 +581,19 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                REUSABLE
-                                <a href="#rhelp" data-toggle="modal" data-target="#reusable_info">
-                                    <span class="pull-right glyphicon glyphicon-info-sign"></span>
-                                </a>
+                                <div id="R-i-title">REUSABLE
+                                    <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i')">
+                                        <span class="pull-right glyphicon glyphicon-info-sign"></span>
+                                    </a>
+                                </div>
                             </h4>
                         </div>
                         <div class="panel-body">
                             <form>
                                 <div class="form-group row">
-                                    <label for="rq1" class="col-sm-6 col-form-label">
+                                    <label for="rq1" class="col-sm-6 col-form-label" id="R-i-1-title">
                                         Did you provide rich information about provenance of your data?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_rq1">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -603,9 +611,9 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="rq2" class="col-sm-6 col-form-label">
+                                    <label for="rq2" class="col-sm-6 col-form-label" id="R-i-2-title">
                                         Which usage license are you planning to add to your dataset?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_rq2">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -623,9 +631,9 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="rq3" class="col-sm-6 col-form-label">
+                                    <label for="rq3" class="col-sm-6 col-form-label" id="R-i-3-title">
                                         Does your metadata meet domain standards?
-                                        <a href="#fhelp" data-toggle="modal" data-target="#info_rq3">
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
@@ -680,7 +688,32 @@
 <!-- ======================================= TEXTS  ======================================= -->
 <!-- ====================================================================================== -->
 
+<div id="texts">
 <!-- ======================================= Findability  ======================================= -->
+
+<div id="F-i-contents">
+    <p>
+        Making data Findable includes assigning a
+        <a href="https://www.ands.org.au/guides/persistent-identifiers-awareness" target="_blank">
+            persistent identifier</a> (like a <a href="https://www.ands.org.au/guides/doi" target="_blank">DOI</a>
+        or <a href="https://www.ands.org.au/guides/identify-my-data" target="_blank">Handle </a>),
+        having rich <a href="https://www.ands.org.au/working-with-data/metadata" target="_blank">metadata</a>
+        to describe the data and making sure it is findable through
+        disciplinary and generalist discovery portals (local and international).
+    </p>
+</div>
+
+<div id="F-i-1-contents">
+    Explanation about the first question in Findability.
+</div>
+
+<div id="F-i-2-contents">
+    Explanation about the second question in Findability.
+</div>
+
+<div id="F-i-3-contents">
+    Explanation about the third question in Findability.
+</div>
 
 <div id="F-advice-title">
     Advice to improve Findability
@@ -766,6 +799,118 @@ Consider also adding a readme file to your dataset.
 Next to the provenance, consider adding a readme file and information about the versioning.
 </div>
 
+<!-- ======================================= Accessible  ======================================= -->
+
+<div id="A-i-contents">
+    <p>
+        <a href="https://www.ands.org.au/working-with-data/publishing-and-reusing-data/publishing"
+           target="_blank">
+            To make data accessible</a> may include making the data
+        <a href="https://www.ands.org.au/working-with-data/articulating-the-value-of-open-data/open-data"
+           target="_blank">
+            open</a> using a standardised protocol.
+        However the data does not necessarily have to be open. There are sometimes good reasons
+        why data <a href="https://www.ands.org.au/working-with-data/sensitive-data" target="_blank">
+        cannot be made open</a>, for example privacy concerns, national security or commercial
+        interests. If it is not open there should be clarity and transparency around the conditions
+        governing access and
+        <a href="https://www.ands.org.au/working-with-data/publishing-and-reusing-data/licensing-for-reuse"
+           target="_blank">reuse</a>
+    </p>
+</div>
+
+<div id="A-i-1-contents">
+    Explanation about the first question in Accessibility.
+</div>
+
+<div id="A-i-2-contents">
+    Explanation about the second question in Accessibility.
+</div>
+
+<div id="A-i-3-contents">
+    Explanation about the third question in Accessibility.
+</div>
+
+<div id="A-i-4-contents">
+    Explanation about the fourth question in Accessibility.
+</div>
+
+<div id="A-i-5-contents">
+    Explanation about the fifth question in Accessibility.
+</div>
+
+
+<div id="A-advice-title">
+    Advice to improve Accessibility
+</div>
+
+
+<!-- ======================================= Interoperable  ======================================= -->
+
+<div id="I-i-contents">
+    To be interoperable (i.e. data that is interpretable by a computer,
+    so that they can be automatically combined with other data) the data will
+    need to use community agreed <a href="https://www.ands.org.au/guides/file-formats" target="_blank">formats</a>,
+    language and <a href="https://www.ands.org.au/guides/vocabularies-and-research-data" target="_blank">
+    vocabularies</a>. The <a href="https://www.ands.org.au/working-with-data/metadata">metadata</a>
+    will also need to use a community agreed standards and vocabularies, and
+    contain links to related information using <a href="https://www.ands.org.au/working-with-data/citation-and-identifiers"
+                                                  target="_blank">identifiers</a>.
+</div>
+
+<div id="I-i-1-contents">
+    Explanation about the first question in Interoperability.
+</div>
+
+<div id="I-i-2-contents">
+    Explanation about the second question in Interoperability.
+</div>
+
+<div id="I-i-3-contents">
+    Explanation about the third question in Interoperability.
+</div>
+
+<div id="I-i-4-contents">
+    Explanation about the fourth question in Interoperability.
+</div>
+
+<div id="I-advice-title">
+    Advice to improve Interoperability
+</div>
+
+<!-- ======================================= Reusable  ======================================= -->
+
+<div id="R-i-contents">
+    Reusable data should maintain its initial richness. For example,
+    it should not be abridged for the purpose of explaining the findings
+    in one particular publication. It needs a clear machine-readable
+    <a href="http://www.ands.org.au/working-with-data/publishing-and-reusing-data/licensing-for-reuse"
+       target="_blank">licence</a>
+    and <a href="https://www.ands.org.au/partners-and-communities/ands-communities/data-provenance-interest-group"
+           target="_blank">provenance</a> information on how the data was formed. It should also use
+    discipline-specific data and <a href="https://www.ands.org.au/working-with-data/metadata"
+                                    target="_blank"> metadata</a> standards to give it rich contextual
+    information that will allow for accurate interpretation and reuse.
+</div>
+
+<div id="R-i-1-contents">
+    Explanation about the first question in Reusability.
+</div>
+
+<div id="R-i-2-contents">
+    Explanation about the second question in Reusability.
+</div>
+
+<div id="R-i-3-contents">
+    Explanation about the third question in Reusability.
+</div>
+
+<div id="R-advice-title">
+    Advice to improve Reusability
+</div>
+
+<!-- /div texts -->
+</div>
 
 </body>
 </html>
