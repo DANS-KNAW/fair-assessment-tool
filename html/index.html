@@ -31,8 +31,8 @@
         .w3-border{border:1px solid #ccc!important}
         .panel-heading .glyphicon-info-sign {font-size: 1.3em; color: #FFFFFF;}
         .panel-body .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
-        a:link {color: #000000; text-decoration: none;}
-        a:visited {color: #000000;}
+        a:link {color: #2795c8; text-decoration: none;}
+        a:visited {color: #2795c8;}
         a {color: #000000;}
         .panel {background-color: #f5f5f5; border: 0px;}
         .panel-heading {background-color: #2795c8!important; background-image:"";}
@@ -90,7 +90,7 @@
 
         function show_modal(id_prefix) {
             var title = document.getElementById(id_prefix + "-title").textContent;
-            var contents = document.getElementById(id_prefix + "-contents").textContent;
+            var contents = document.getElementById(id_prefix + "-contents").innerHTML;
             write_to_modal(title, contents);
             $('#modal').modal('show');
         }
