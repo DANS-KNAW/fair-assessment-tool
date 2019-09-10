@@ -85,7 +85,7 @@
 
         function write_to_modal(title, contents) {
             $("#modal-title").html(title);
-            $("#modal-contents").html(contents);
+            $("#modal-body").html(contents);
         }
 
         function show_modal(id_prefix) {
@@ -95,6 +95,21 @@
             $('#modal').modal('show');
         }
 
+        function advice(letter) {
+            let {title, contents} = advice_contents(letter)
+            write_to_modal(title, contents);
+            $('#modal').modal('show');
+        }
+
+        function advice_contents(letter) {
+            switch (letter) {
+                case "F": return advice_F();
+                case "A": return advice_A();
+                case "I": return advice_I();
+                case "R": return advice_R();
+            }
+        }
+
         function advice_F() {
             var title = document.getElementById("F-advice-title").textContent;
             var q_1_sel = document.getElementById("fq1").selectedIndex;
@@ -102,8 +117,7 @@
             var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
             var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
             var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
-            write_to_modal(title, contents);
-            $('#modal').modal('show');
+            return {title, contents};
         }
 
         function advice_A() {
@@ -113,8 +127,7 @@
             var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
             var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
             var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
-            write_to_modal(title, contents);
-            $('#modal').modal('show');
+            return {title, contents};
         }
 
         function advice_I() {
@@ -124,8 +137,7 @@
             var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
             var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
             var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
-            write_to_modal(title, contents);
-            $('#modal').modal('show');
+            return {title, contents};
         }
 
         function advice_R() {
@@ -135,8 +147,7 @@
             var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
             var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
             var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
-            write_to_modal(title, contents);
-            $('#modal').modal('show');
+            return {title, contents};
         }
 
         function update() {
@@ -192,20 +203,24 @@
             show_letter("R", "rscore", rscore);
         }
 
-        function print_page() {
-            document.getElementById("F-improve").style.display = "none"
-            document.getElementById("F-complete").style.display = "none"
-            document.getElementById("A-improve").style.display = "none"
-            document.getElementById("A-complete").style.display = "none"
-            document.getElementById("I-improve").style.display = "none"
-            document.getElementById("I-complete").style.display = "none"
-            document.getElementById("R-improve").style.display = "none"
-            document.getElementById("R-complete").style.display = "none"
-            document.getElementById("print-button").style.display = "none"
-            window.print();
-            update();
-            document.getElementById("print-button").style.display = "block"
+        function add_letter_advice(letter) {
+            document.getElementById(letter + "-advice").style.display = "none"
+            let {title, contents} = advice_contents(letter)
+            $("#" + letter + "-print-advice-title").html(title);
+            $("#" + letter + "-print-advice-contents").html(contents);
         }
+
+        function print_page() {
+            var letters = ["F", "A", "I", "R"]
+            letters.forEach(add_letter_advice);
+            document.getElementById("print-button").style.display = "none"
+            document.getElementById("print-advice").style.display = "block"
+            window.print();
+            document.getElementById("print-button").style.display = "block"
+            document.getElementById("print-advice").style.display = "none"
+            update();
+        }
+
     </script>
 
 </head>
@@ -255,7 +270,7 @@
                 <div class="col-md-2">
                     <img id="image-f" src="images/F_100.jpg" alt="F">
                     <div class="bubble">
-                        <a id="F-advice" href="#fhelp" data-toggle="modal" onclick="advice_F()">
+                        <a id="F-advice" href="#fhelp" data-toggle="modal" onclick="advice('F')">
                             <span>
                                 <div id="fscore"></div>
                                 <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
@@ -333,14 +348,13 @@
             </div>
             <div class="pagebreak"/>
 
-
             <!-- Accessible -->
             <div class="row">
                 <div class="col-md-2">
                     <br><br><br><br>
                     <img id="image-a" src="images/A_100.jpg" alt="A">
                     <div class="bubble">
-                        <a id="A-advice" href="#fhelp" data-toggle="modal" onclick="advice_A()">
+                        <a id="A-advice" href="#fhelp" data-toggle="modal" onclick="advice('A')">
                             <span>
                                 <div id="ascore"></div>
                                 <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
@@ -460,7 +474,7 @@
                     <br><br>
                     <img id="image-i" src="images/I_100.jpg" alt="I">
                     <div class="bubble">
-                        <a id="I-advice" href="#fhelp" data-toggle="modal" onclick="advice_I()">
+                        <a id="I-advice" href="#fhelp" data-toggle="modal" onclick="advice('I')">
                             <span>
                                 <div id="iscore"></div>
                                 <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
@@ -569,7 +583,7 @@
                     <br>
                     <img id="image-r" src="images/R_100.jpg" alt="R">
                     <div class="bubble">
-                        <a id="R-advice" href="#fhelp" data-toggle="modal" onclick="advice_R()">
+                        <a id="R-advice" href="#fhelp" data-toggle="modal" onclick="advice('R')">
                             <span>
                                 <div id="rscore"></div>
                                 <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
@@ -654,6 +668,30 @@
                     </div>
                 </div>
             </div>
+            <div id="print-advice">
+                <div class="pagebreak"/>
+                <div>
+                    <br><br>
+                    <h4 id="F-print-advice-title"></h4>
+                    <div id="F-print-advice-contents"></div>
+                </div>
+                <div>
+                    <br><br>
+                    <h4 id="A-print-advice-title"></h4>
+                    <div id="A-print-advice-contents"></div>
+                </div>
+                <div class="pagebreak"/>
+                <div>
+                    <br><br>
+                    <h4 id="I-print-advice-title"></h4>
+                    <div id="I-print-advice-contents"></div>
+                </div>
+                <div>
+                    <br><br>
+                    <h4 id="R-print-advice-title"></h4>
+                    <div id="R-print-advice-contents"></div>
+                </div>
+            </div>
         </div>
         <br>
     </div>
@@ -667,20 +705,16 @@
 
 <div id="modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title" id="modal-title"></h4>
             </div>
-            <div id="modal-contents" class="modal-body">
-            </div>
+            <div class="modal-body" id="modal-body"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -914,4 +948,3 @@ Next to the provenance, consider adding a readme file and information about the 
 
 </body>
 </html>
-
