@@ -167,7 +167,7 @@
         function update_F() {
             var fscore1 = parseInt($("#fq1").val());
             var fscore2 = get_value("fq2.1") + get_value("fq2.2") + get_value("fq2.3");
-            var fscore3 = get_value("fq3.1") + get_value("fq3.2");
+            var fscore3 = get_value("fq3.1") + get_value("fq3.2") + get_value("fq3.3");
             var fscore = fscore1 + fscore2 + fscore3;
 <!--            var percent = Math.round(fscore / 100.0 * 100);-->
             show_letter("F", "fscore", fscore);
@@ -234,7 +234,7 @@
             <!-- Introduction -->
             <div class="row">
                 <div class="col-md-2">
-                    <img src="dans.png" alt="DANS">
+                    <img src="images/dans.png" alt="DANS">
                     <br><br><br><br>
                     <button id="print-button" onclick="print_page()">Print this page</button>
                 </div>
@@ -258,6 +258,7 @@
                     Additionally, each question is hyperlinked, leading users to explanatory information and links to wider resources
                     on related topics.
                     </p>
+                    <br>
                 </div>
             </div>
         </div>
@@ -273,7 +274,7 @@
                         <a id="F-advice" href="#fhelp" data-toggle="modal" onclick="advice('F')">
                             <span>
                                 <div id="fscore"></div>
-                                <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
+                                <img id="text-bubble-advice" src="images/text_ballon_transparant.png"/>
                             </span>
                         </a>
                      </div>
@@ -301,7 +302,7 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="fq1" onchange="update_F()">
-                                            <option value="60">Rich metadata with as much information as possible</option>
+                                            <option value="50">Rich metadata with as much information as possible</option>
                                             <option value="40">Metadata with some additional fields filled in</option>
                                             <option value="20">Some metadata but only minimal metadata (title, language, data available, creator)</option>
                                             <option value="0">No metadata</option>
@@ -337,7 +338,7 @@
                                         <div id="fq3">
                                             <input type="checkbox" id="fq3.1" value="8" onclick="update_F()"> Readme file<br>
                                             <input type="checkbox" id="fq3.2" value="8" onclick="update_F()"> Versioning<br>
-                                            <input type="checkbox" id="fq3.3" value="8" onclick="update_F()"> Provenance<br>
+                                            <input type="checkbox" id="fq3.3" value="10" onclick="update_F()"> Provenance<br>
                                         </div>
                                     </div>
                                 </div>
@@ -357,7 +358,7 @@
                         <a id="A-advice" href="#fhelp" data-toggle="modal" onclick="advice('A')">
                             <span>
                                 <div id="ascore"></div>
-                                <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
+                                <img id="text-bubble-advice" src="images/text_ballon_transparant.png"/>
                             </span>
                         </a>
                     </div>
@@ -477,7 +478,7 @@
                         <a id="I-advice" href="#fhelp" data-toggle="modal" onclick="advice('I')">
                             <span>
                                 <div id="iscore"></div>
-                                <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
+                                <img id="text-bubble-advice" src="images/text_ballon_transparant.png"/>
                             </span>
                         </a>
                     </div>
@@ -586,7 +587,7 @@
                         <a id="R-advice" href="#fhelp" data-toggle="modal" onclick="advice('R')">
                             <span>
                                 <div id="rscore"></div>
-                                <img id="text-bubble-advice" src="text_ballon_transparant.png"/>
+                                <img id="text-bubble-advice" src="images/text_ballon_transparant.png"/>
                             </span>
                         </a>
                     </div>
