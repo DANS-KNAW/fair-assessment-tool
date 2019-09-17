@@ -31,16 +31,19 @@
         .w3-border{border:1px solid #ccc!important}
         .panel-heading .glyphicon-info-sign {font-size: 1.3em; color: #FFFFFF;}
         .panel-body .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
-        a:link {color: #2795c8; text-decoration: none;}
-        a:visited {color: #2795c8;}
-        a {color: #000000;}
         .panel {background-color: #f5f5f5; border: 0px;}
         .panel-heading {background-color: #2795c8!important; background-image:"";}
-        .panel-title {/* background-color: #2795c8!important; */font-size: 13px;}
+        .panel-title {background-color: #2795c8!important; font-size: 13px;}
         .panel-title {color: #FFFFFF;}
+        .modal-header, .modal-footer {margin: 1px;}
+        .modal-body {background-color: #FDFDFD; margin-left: 1px; }
         h1 {color: #02AEDB;}
+        a:link {color: #2795c8; text-decoration: none;}
+        button {color: #21618C;}
+        button:hover {color: #000000; background-color: #f5f5f5 }
+        .bubble a {color: #21618C;}
+        .bubble a:hover {color: #000000;}
         .bubble {position: relative;}
-        .bubble a:hover {color: #2795c8;}
         #text-bubble-advice {position: absolute;top: 0px;left: 0px;}
         #fscore {padding-top: 25px; padding-left: 10px;}
         #ascore {padding-top: 25px; padding-left: 10px;}
@@ -52,11 +55,14 @@
     </style>
 
     <script>
+        var letters = ["F", "A", "I", "R"]
+
         $('document').ready(initialise);
 
         function initialise() {
             update();
             document.getElementById("texts").style.display = "none"
+            letters.forEach( function (letter) {document.getElementById(letter + "-advice").style.display = "none"});
         }
 
         function get_value(element) {
@@ -67,6 +73,10 @@
             return document.getElementById(element).checked ? 1 : 0;
         }
 
+        function uncheck(element) {
+            document.getElementById(element).checked = 0;
+        }
+
         function show_letter(letter, element, score) {
             document.getElementById(("image-" + letter).toLowerCase()).src = "images/" + letter + "_" + Math.floor(score / 10) * 10 + ".jpg"
             show_score(letter, element, score);
@@ -74,13 +84,9 @@
 
         function show_score(letter, element, score) {
             var advice = document.getElementById(letter + "-advice")
-            if (score == 0.0){
-                advice.style.display = "none";
-            } else {
-                advice.style.display = "block";
-                tail = score < 100.0 ? "% Want to improve?" : "% Well done!"
-                $("#" + element).html(score + tail);
-            }
+            advice.style.display = "block";
+            tail = score < 100.0 ? "% Want to improve?" : "% Well done!"
+            $("#" + element).html(score + tail);
         }
 
         function write_to_modal(title, contents) {
@@ -110,46 +116,6 @@
             }
         }
 
-        function advice_F() {
-            var title = document.getElementById("F-advice-title").textContent;
-            var q_1_sel = document.getElementById("fq1").selectedIndex;
-            var a_1 = document.getElementById("F-advice-1." + q_1_sel).textContent;
-            var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
-            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
-            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
-            return {title, contents};
-        }
-
-        function advice_A() {
-            var title = document.getElementById("A-advice-title").textContent;
-            var q_1_sel = document.getElementById("fq1").selectedIndex;
-            var a_1 = document.getElementById("F-advice-1." + q_1_sel).textContent;
-            var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
-            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
-            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
-            return {title, contents};
-        }
-
-        function advice_I() {
-            var title = document.getElementById("I-advice-title").textContent;
-            var q_1_sel = document.getElementById("fq1").selectedIndex;
-            var a_1 = document.getElementById("F-advice-1." + q_1_sel).textContent;
-            var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
-            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
-            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
-            return {title, contents};
-        }
-
-        function advice_R() {
-            var title = document.getElementById("R-advice-title").textContent;
-            var q_1_sel = document.getElementById("fq1").selectedIndex;
-            var a_1 = document.getElementById("F-advice-1." + q_1_sel).textContent;
-            var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent;
-            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
-            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
-            return {title, contents};
-        }
-
         function update() {
             /*
             In all of the following variable names, if there is a prefix of [fair], it stands for
@@ -167,21 +133,43 @@
         function update_F() {
             var fscore1 = parseInt($("#fq1").val());
             var fscore2 = get_value("fq2.1") + get_value("fq2.2") + get_value("fq2.3");
+            if (fscore2 > 0) { uncheck("fq2.4")}
+            fscore2 += get_value("fq2.4")
             var fscore3 = get_value("fq3.1") + get_value("fq3.2") + get_value("fq3.3");
             var fscore = fscore1 + fscore2 + fscore3;
-<!--            var percent = Math.round(fscore / 100.0 * 100);-->
             show_letter("F", "fscore", fscore);
+        }
+
+        function advice_F() {
+            var title = document.getElementById("F-advice-title").textContent;
+            var q_1_sel = document.getElementById("fq1").selectedIndex;
+            var a_1 = document.getElementById("F-advice-1." + q_1_sel).textContent;
+            if (checked("fq2.4"))
+                { var a_2 = document.getElementById("F-advice-2.n-s").textContent; }
+            else
+                { var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent; }
+            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
+            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
+            return {title, contents};
         }
 
         /* ----------------------------- A ----------------------------- */
         function update_A() {
             var ascore1 = get_value("aq1.1") + get_value("aq1.2") + get_value("aq1.3");
-            var ascore2 = parseInt($("#aq2").val());
-            var ascore3 = get_value("aq3.1") + get_value("aq3.2");
-            var ascore4 = get_value("aq4.1") + get_value("aq4.2");
-            var ascore5 = get_value("aq5.1") + get_value("aq5.2");
-            var ascore = ascore1 + ascore2 + ascore3 + ascore4 + ascore5;
+            var ascore2 = get_value("aq2.1") + get_value("aq2.2");
+            var ascore3 = parseInt($("#aq3").val());
+            var ascore = ascore1 + ascore2 + ascore3;
             show_letter("A", "ascore", ascore);
+        }
+
+        function advice_A() {
+            var title = document.getElementById("A-advice-title").textContent;
+            var a_1 = document.getElementById("A-advice-1." + checked("aq1.1") + "-" + checked("aq1.2") + "-" + checked("aq1.3")).textContent;
+            var a_2 = "";
+            var q_3_sel = document.getElementById("aq3").selectedIndex;
+            var a_3 = document.getElementById("A-advice-3." + q_3_sel).innerHTML;
+            var contents = a_1 + "<br><br>" + a_3;
+            return {title, contents};
         }
 
         /* ----------------------------- I ----------------------------- */
@@ -190,19 +178,49 @@
             var iscore2 = parseInt($("#iq2").val());
             var iscore3 = parseInt($("#iq3").val());
             var iscore4 = parseInt($("#iq4").val());
-            var iscore = iscore1 + iscore2 + iscore3 + iscore4;
+            var iscore5 = parseInt($("#iq5").val());
+            var iscore = iscore1 + iscore2 + iscore3 + iscore4 + iscore5;
             show_letter("I", "iscore", iscore);
+        }
+
+        function advice_I() {
+            var title = document.getElementById("I-advice-title").textContent;
+            var q_1_sel = document.getElementById("iq1").selectedIndex;
+            var q_2_sel = document.getElementById("iq2").selectedIndex;
+            var q_3_sel = document.getElementById("iq3").selectedIndex;
+            var q_4_sel = document.getElementById("iq4").selectedIndex;
+            var q_5_sel = document.getElementById("iq5").selectedIndex;
+            var a_1 = document.getElementById("I-advice-1." + q_1_sel).textContent;
+            var a_2 = document.getElementById("I-advice-2." + q_2_sel).innerHTML;
+            var a_3 = document.getElementById("I-advice-3." + q_3_sel).textContent;
+            var a_4 = document.getElementById("I-advice-4." + q_4_sel).textContent;
+            var a_5 = document.getElementById("I-advice-5." + q_5_sel).textContent;
+            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3 + "<br><br>" + a_4 + "<br><br>" + a_5;
+            return {title, contents};
         }
 
         /* ----------------------------- R ----------------------------- */
         function update_R() {
-            var rscore1 = parseInt($("#rq1").val());
+            var rscore1 = get_value("rq1.1") + get_value("rq1.2") + get_value("rq1.3") + get_value("rq1.4") + get_value("rq1.5");
             var rscore2 = parseInt($("#rq2").val());
             var rscore3 = parseInt($("#rq3").val());
             var rscore = rscore1 + rscore2 + rscore3;
             show_letter("R", "rscore", rscore);
         }
 
+        function advice_R() {
+            var title = document.getElementById("R-advice-title").textContent;
+            var a_1a = document.getElementById("R-advice-1a." + checked("rq1.1") + "-" + checked("rq1.2") + "-" + checked("rq1.3")).textContent;
+            var a_1b = document.getElementById("R-advice-1b." + checked("rq1.4") + "-" + checked("rq1.5")).textContent;
+            var q_2_sel = document.getElementById("rq2").selectedIndex;
+            var q_3_sel = document.getElementById("rq3").selectedIndex;
+            var a_2 = document.getElementById("R-advice-2." + q_2_sel).textContent;
+            var a_3 = document.getElementById("R-advice-3." + q_3_sel).textContent;
+            var contents = a_1a + "<br>" + a_1b + "<br><br>" + a_2 + "<br><br>" + a_3;
+            return {title, contents};
+        }
+
+        /* ---------------------------- Print --------------------------- */
         function add_letter_advice(letter) {
             document.getElementById(letter + "-advice").style.display = "none"
             let {title, contents} = advice_contents(letter)
@@ -211,7 +229,6 @@
         }
 
         function print_page() {
-            var letters = ["F", "A", "I", "R"]
             letters.forEach(add_letter_advice);
             document.getElementById("print-button").style.display = "none"
             document.getElementById("print-advice").style.display = "block"
@@ -235,8 +252,8 @@
             <div class="row">
                 <div class="col-md-2">
                     <img src="images/dans.png" alt="DANS">
-                    <br><br><br><br>
-                    <button id="print-button" onclick="print_page()">Print this page</button>
+                    <br><br><br><br>&nbsp;&nbsp;
+                    <button class="hvr-fade" id="print-button" onclick="print_page()">Print results</button>
                 </div>
                 <div class="col-md-10">
                     <br>
@@ -269,6 +286,7 @@
             <!-- Findable -->
             <div class="row">
                 <div class="col-md-2">
+                    <br>
                     <img id="image-f" src="images/F_100.jpg" alt="F">
                     <div class="bubble">
                         <a id="F-advice" href="#fhelp" data-toggle="modal" onclick="advice('F')">
@@ -320,7 +338,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq2">
-                                            <input type="checkbox" id="fq2.1" value="8" onclick="update_F()"> Controlled vocabularies<br>
+                                            <input type="checkbox" id="fq2.1" value="8" onclick="update_F()"> Controlled vocabularies&nbsp;&nbsp;
+                                            <input type="checkbox" id="fq2.4" value="0" onclick="update_F()"> There are no standards  for my discipline<br>
                                             <input type="checkbox" id="fq2.2" value="8" onclick="update_F()"> Taxonomies<br>
                                             <input type="checkbox" id="fq2.3" value="8" onclick="update_F()"> Ontologies<br>
                                         </div>
@@ -352,7 +371,7 @@
             <!-- Accessible -->
             <div class="row">
                 <div class="col-md-2">
-                    <br><br><br><br>
+                    <br>
                     <img id="image-a" src="images/A_100.jpg" alt="A">
                     <div class="bubble">
                         <a id="A-advice" href="#fhelp" data-toggle="modal" onclick="advice('A')">
@@ -386,9 +405,9 @@
 
                                     <div class="col-sm-6">
                                         <div id="aq1">
-                                            <label class="radio-inline"><input type="radio" name="aq1" id="aq1.1" value="50" onclick="update_A()"> Yes<br></label>
+                                            <label class="radio-inline"><input type="radio" name="aq1" id="aq1.1" value="40" onclick="update_A()"> Yes<br></label>
                                             <label class="radio-inline"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A()" checked > No<br></label><br>
-                                            <input type="radio" name="aq1" id="aq1.3" value="0" onclick="update_A()"> I don't know, I can't find this information in EASY<br>
+                                            <input type="radio" name="aq1" id="aq1.3" value="0" onclick="update_A()"> I can't find this information in EASY<br>
                                         </div>
                                     </div>
                                 </div>
@@ -396,69 +415,36 @@
 
                                 <div class="form-group row">
                                     <label for="aq2" class="col-sm-6 col-form-label" id="A-i-2-title">
-                                        Which of the use licenses provided by EASY did you choose in order to comply with the access rights attached ot the data?
+                                        Does your dataset contain personal data?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="aq2" onchange="update_A()">
-                                            <option value="30">Open access (CC0 Waver)</option>
-                                            <option value="10">Restricted access</option>
-                                            <option value="10">Embargo</option>
-                                            <option value="10">I don't know which of these licenses apply to my data</option>
-                                            <option value="0" selected="selected">---</option>
-                                        </select>
+                                        <div id="aq2">
+                                            <label class="radio-inline"><input type="radio" name="aq2" id="aq2.1" value="0" onclick="update_A()"> Yes<br></label>
+                                            <label class="radio-inline"><input type="radio" name="aq2" id="aq2.2" value="0" onclick="update_A()" checked> No<br></label>
+                                        </div>
                                     </div>
                                 </div>
 
-
                                 <div class="form-group row">
                                     <label for="aq3" class="col-sm-6 col-form-label" id="A-i-3-title">
-                                        Did you add global unique/persistent identifiers to your (meta)data such as ORCiD, ISBN, ISNI etc. ?
+                                        Which of the use licenses provided by EASY did you choose in order to comply with the access rights attached ot the data?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <div id="aq3">
-                                            <label class="radio-inline"><input type="radio" name="aq3" id="aq3.1" value="10" onclick="update_A()"> Yes<br></label>
-                                            <label class="radio-inline"><input type="radio" name="aq3" id="aq3.2" value="0" onclick="update_A()" checked> No<br></label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="aq4" class="col-sm-6 col-form-label" id="A-i-4-title">
-                                        Did you specify in your metadata your institution/organization?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-4')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-
-                                    <div class="col-sm-6">
-                                        <div id="aq4">
-                                            <label class="radio-inline"><input type="radio" name="aq4" id="aq4.1" value="10" onclick="update_A()"> Yes<br></label>
-                                            <label class="radio-inline"><input type="radio" name="aq4" id="aq4.2" value="0" onclick="update_A()" checked> No<br></label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="aq5" class="col-sm-6 col-form-label" id="A-i-5-title">
-                                        Does your dataset contain personal data?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-5')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-
-                                    <div class="col-sm-6">
-                                        <div id="aq5">
-                                            <label class="radio-inline"><input type="radio" name="aq5" id="aq5.1" value="0" onclick="update_A()"> Yes<br></label>
-                                            <label class="radio-inline"><input type="radio" name="aq5" id="aq5.2" value="0" onclick="update_A()" checked> No<br></label>
-                                        </div>
+                                        <select class="form-control" id="aq3" onchange="update_A()">
+                                            <option value="60">Open access (CC0 Waver)</option>
+                                            <option value="60">Restricted access</option>
+                                            <option value="60">Embargo</option>
+                                            <option value="0">I don't know which of these licenses apply to my data</option>
+                                            <option value="0" selected="selected">---</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -472,7 +458,7 @@
             <!-- Interoperable -->
             <div class="row">
                 <div class="col-md-2">
-                    <br><br>
+                    <br><br><br><br>
                     <img id="image-i" src="images/I_100.jpg" alt="I">
                     <div class="bubble">
                         <a id="I-advice" href="#fhelp" data-toggle="modal" onclick="advice('I')">
@@ -497,7 +483,6 @@
                         <div class="panel-body">
                             <form>
                                 <div class="form-group row">
-
                                     <label for="iq1" class="col-sm-6 col-form-label" id="I-i-1-title">
                                         To what extent did you use standardized controlled vocabularies and/or ontologies in describing your dataset?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')">
@@ -507,9 +492,9 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="iq1" onchange="update_I()">
-                                            <option value="25">International, generic standardized controlled vocabularies</option>
-                                            <option value="20">I generated project-specific vocabularies</option>
-                                            <option value="15">I made mappings to more commonly used ontologies and vocabularies</option>
+                                            <option value="20">International, generic standardized controlled vocabularies</option>
+                                            <option value="15">I generated project-specific vocabularies</option>
+                                            <option value="10">I made mappings to more commonly used ontologies and vocabularies</option>
                                             <option value="0">No standardized controlled vocabularies/ontologies</option>
                                             <option value="0" selected>---</option>
                                         </select>
@@ -518,7 +503,7 @@
 
                                 <div class="form-group row">
                                     <label for="iq2" class="col-sm-6 col-form-label" id="I-i-2-title">
-                                        Do you link to other (meta)data and is this (meta)data online resolvable?
+                                        Are the data in your dataset stored in preferred formats?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -526,7 +511,26 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="iq2" onchange="update_I()">
-                                            <option value="25">Yes, and these are online accessible</option>
+                                            <option value="20">All of the data are in preferred formats</option>
+                                            <option value="15">Some of the data are in preferred formats</option>
+                                            <option value="0">None of the data are in preferred formats</option>
+                                            <option value="0">I don't know what preferred formats are</option>
+                                            <option value="0" selected>---</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="iq3" class="col-sm-6 col-form-label" id="I-i-3-title">
+                                        Do you link to other (meta)data and is this (meta)data online resolvable?
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-3')">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
+                                        </a>
+                                    </label>
+
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="iq3" onchange="update_I()">
+                                            <option value="20">Yes, and these are online accessible</option>
                                             <option value="15">Yes, not online accessible</option>
                                             <option value="0">No</option>
                                             <option value="0" selected>---</option>
@@ -536,27 +540,8 @@
 
 
                                 <div class="form-group row">
-                                    <label for="iq3" class="col-sm-6 col-form-label" id="I-i-3-title">
-                                        Did you provide contextual information about your dataset?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-3')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-
-                                    <div class="col-sm-6">
-                                        <select class="form-control" id="iq3" onchange="update_I()">
-                                            <option value="25">ORCID</option>
-                                            <option value="20">Reference to publications</option>
-                                            <option value="15">References to other datasets</option>
-                                            <option value="0">No contextual metadata</option>
-                                            <option value="0" selected>---</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label for="iq4" class="col-sm-6 col-form-label" id="I-i-4-title">
-                                        Did you describe scientific links between your dataset and other datasets?
+                                        Did you provide contextual information about your dataset?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-4')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -564,9 +549,28 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="iq4" onchange="update_I()">
-                                            <option value="25">Yes, via PID (such as DOI and/or ORCID)</option>
-                                            <option value="15">Yes on descriptive level</option>
-                                            <option value="0">No</option>
+                                            <option value="20">ORCID</option>
+                                            <option value="15">Reference to publications</option>
+                                            <option value="10">References to other datasets</option>
+                                            <option value="0">No contextual metadata</option>
+                                            <option value="0" selected>---</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="iq5" class="col-sm-6 col-form-label" id="I-i-5-title">
+                                        Did you describe scientific links between your dataset and other datasets?
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-5')">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
+                                        </a>
+                                    </label>
+
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="iq5" onchange="update_I()">
+                                            <option value="20">I added Persistent Identifiers (e.g. DOI, ORCID, URN)</option>
+                                            <option value="15">I added descriptive links</option>
+                                            <option value="0">I didn't add any links</option>
                                             <option value="0" selected>---</option>
                                         </select>
                                     </div>
@@ -614,16 +618,15 @@
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="rq1" onchange="update_R()">
-                                            <option value="30">Origin of data is clear</option>
-                                            <option value="25">For reused data: citations in place</option>
-                                            <option value="20">Workflow description for collecting data(machine readable)</option>
-                                            <option value="15">Processing of the data described</option>
-                                            <option value="10">Information about versioning</option>
-                                            <option value="0" selected>---</option>
-                                        </select>
+                                        <div id="rq1">
+                                            <input type="checkbox" id="rq1.1" value="5" onclick="update_R()"> Origin of data is clear<br>
+                                            <input type="checkbox" id="rq1.2" value="5" onclick="update_R()"> Citations for reused data are in place<br>
+                                            <input type="checkbox" id="rq1.3" value="5" onclick="update_R()"> Workflow description for collecting data (machine readable)<br>
+                                            <input type="checkbox" id="rq1.4" value="5" onclick="update_R()"> Processing of the data <br>
+                                            <input type="checkbox" id="rq1.5" value="5" onclick="update_R()"> Information about versioning of the data
+                                        </div>
                                     </div>
-                                </div>
+                               </div>
 
                                 <div class="form-group row">
                                     <label for="rq2" class="col-sm-6 col-form-label" id="R-i-2-title">
@@ -655,10 +658,13 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="rq3" onchange="update_R()">
-                                            <option value="30">Domain standards in metadata</option>
+                                            <option value="35">Domain standards in metadata</option>
                                             <option value="20">Generic standards</option>
-                                            <option value="10">Some domain standards and some generic standards</option>
-                                            <option value="0">No standards used </option>
+                                            <option value="15">Minimal domain standards and minimal generic standards</option>
+                                            <option value="10">I applied community standards</option>
+                                            <option value="10">I applied community standards but also used generic standards</option>
+                                            <option value="10">I used generic standards</option>
+                                            <option value="0">I didn't use any standards</option>
                                             <option value="0" selected>---</option>
                                         </select>
                                     </div>
@@ -668,6 +674,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="hvr-fade" id="print-button" onclick="print_page()">Print results</button>
             </div>
             <div id="print-advice">
                 <div class="pagebreak"/>
@@ -724,7 +734,7 @@
 <!-- ====================================================================================== -->
 
 <div id="texts">
-<!-- ======================================= Findability  ======================================= -->
+<!-- ======================================= Findable  ======================================= -->
 
 <div id="F-i-contents">
     <p>
@@ -755,91 +765,99 @@
 </div>
 
 <div id="F-advice-1.0">
-You filled in all or almost all of the optional fields on the Content Description page. This makes your data findable for other researchers and users. Question 2 concerns the use of standards to describe your data which enables machines to find and interlink your data. </div>
+    You filled in all or almost all of the optional fields on the Content Description page. This makes your data findable for other researchers and users. Question 2 concerns the use of standards to describe your data which enables machines to find and interlink your data.
+</div>
 
 <div id="F-advice-1.1">
-You filled in some information on the Content Descripton page. In order to make your dataset more findable for researchers and users, check again if you can fill in more of the optional fields on the page. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be. </div>
+    You filled in some information on the Content Descripton page. In order to make your dataset more findable for researchers and users, check again if you can fill in more of the optional fields on the page. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be.
+</div>
 
 <div id="F-advice-1.2">
-On the Content Description page additional fields like Relations to projects, internet pages or researchers, Format types, Languages, Sources on which the dataset is based can be filled in. Adding additional, rich metadata to your dataset will help other researchers to find but also to reuse (see questions under letter R) your data. </div>
+    On the Content Description page additional fields like Relations to projects, internet pages or researchers, Format types, Languages, Sources on which the dataset is based can be filled in. Adding additional, rich metadata to your dataset will help other researchers to find but also to reuse (see questions under letter R) your data.
+</div>
 
 <div id="F-advice-1.3">
-Fill in the required fields on the primary information page and go to the Content Description page and check which additional metadata you could add to make your dataset more findable. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be.</div>
+    Fill in the required fields on the primary information page and go to the Content Description page and check which additional metadata you could add to make your dataset more findable. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be.
+</div>
 
 <div id="F-advice-1.4">
-Fill in the required fields on the primary information page and go to the Content Description page and check which additional metadata you could add to make your dataset more findable. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be.</div>
+    Fill in the required fields on the primary information page and go to the Content Description page and check which additional metadata you could add to make your dataset more findable. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be.
+</div>
 
 <div id="F-advice-2.0-0-0">
-Check whether there are standards in your domain or field that you can use to describe your dataset and use them in the description (metadata). Make sure you use of or map your metadata to standards such as controlled vocabularies, ontologies and taxonomies. Be aware that these can be domain specific, however these are not always available. Always use the standards relevant for your domain.
+    Check whether there are standards in your domain or field that you can use to describe your dataset and use them in the description (metadata). Make sure you use of or map your metadata to standards such as controlled vocabularies, ontologies and taxonomies. Be aware that these can be domain specific, however these are not always available. Always use the standards relevant for your domain.
 </div>
 
 <div id="F-advice-2.1-0-0">
-Using ontologies and taxonomies will improve the automated findability of your dataset.
-It is good that you use controlled vocabularies to describe your dataset. Be aware of the domain specific controlled vocabularies. To increase the findability you can also use domain specific ontologies and linked open data.
+    Using ontologies and taxonomies will improve the automated findability of your dataset.
+    It is good that you use controlled vocabularies to describe your dataset. Be aware of the domain specific controlled vocabularies. To increase the findability you can also use domain specific ontologies and linked open data.
 </div>
 
 <div id="F-advice-2.1-1-0">
-You did very well by using controlled vocabularies and taxonomies. Be aware of your domain specific vontrolled vocabularies and taxonomies. You can also make use of ontologies in your dataset description to describe and increase the findability. Also ontologies can be discipline and/or domain specific.
+    You did very well by using controlled vocabularies and taxonomies. Be aware of your domain specific vontrolled vocabularies and taxonomies. You can also make use of ontologies in your dataset description to describe and increase the findability. Also ontologies can be discipline and/or domain specific.
 </div>
 
 <div id="F-advice-2.1-1-1">
-Well done! it seems you did everything to make your dataset findable. As a reminder; be aware of the fact that within your domain there could be specific controlled vocabularies, taxonomies or ontologies.
+    Well done! it seems you did everything to make your dataset findable. As a reminder; be aware of the fact that within your domain there could be specific controlled vocabularies, taxonomies or ontologies.
 </div>
 
 <div id="F-advice-2.1-0-1">
-Using controlled vocabularies and ontologies will improve the automated findability of your dataset. You can increase the findability of your dataset even more by also makeing use of taxonomies, if available for you specific domain.
+    Using controlled vocabularies and ontologies will improve the automated findability of your dataset. You can increase the findability of your dataset even more by also makeing use of taxonomies, if available for you specific domain.
 </div>
 
 <div id="F-advice-2.0-1-0">
-Using domain specific controlled vocabularies and/or ontologies will improve the automated findability of your dataset.
+    Using domain specific controlled vocabularies and/or ontologies will improve the automated findability of your dataset.
 </div>
 
 <div id="F-advice-2.0-1-1">
-Using taxonomies and ontologies by describing you data, will improve the automated findability of your dataset. You can also add terms from (domain specific) controlled vocabularies in your data description to increase the findabiliy of your dataset
+    Using taxonomies and ontologies by describing you data, will improve the automated findability of your dataset. You can also add terms from (domain specific) controlled vocabularies in your data description to increase the findabiliy of your dataset
 </div>
 
 <div id="F-advice-2.0-0-1">
-Using domain specific controlled vocabularies and taxonomies will improve the automated findability of your dataset.
+    Using domain specific controlled vocabularies and taxonomies will improve the automated findability of your dataset.
+</div>
+
+<div id="F-advice-2.n-s">
+    Check whether there are more generic standards that you could use to describe your data. Some examples for generic standards are 1. The Getty Thesaurus for Geographic Names, 2. ISO 639 for language, 3. ISO 8601 for date fields.
 </div>
 
 <div id="F-advice-3.0-0-0">
-Adding documentation about the datasets, think of a readme file, versioning, or the provenance of the data, will improve the findability of your dataset.
+    Adding documentation about the datasets, think of a readme file, versioning, or the provenance of the data, will improve the findability of your dataset.
 </div>
 
 <div id="F-advice-3.1-0-0">
-Next to the readme file, consider adding information about the provenance of the data and the versioning.
+    Next to the readme file, consider adding information about the provenance of the data and the versioning.
 </div>
 
 <div id="F-advice-3.1-1-0">
-Consider also adding information about the provenance of your data.
+    Consider also adding information about the provenance of your data.
 </div>
 
 <div id="F-advice-3.1-1-1">
-You added rich and detailed information to your dataset by not only providing a readme file but also giving information about the provenance and the versioning of your data. If seen as an addition to rich and detailed metadata (question F2), it makes your dataset more findable and reusable.
+    You added rich and detailed information to your dataset by not only providing a readme file but also giving information about the provenance and the versioning of your data. If seen as an addition to rich and detailed metadata (question F2), it makes your dataset more findable and reusable.
 </div>
 
 <div id="F-advice-3.1-0-1">
-Consider also adding information about the versioning.
+    Consider also adding information about the versioning.
 </div>
 
 <div id="F-advice-3.0-1-0">
-Next to the versioning, consider adding information about the provenance of the data and a readme file.
+    Next to the versioning, consider adding information about the provenance of the data and a readme file.
 </div>
 
 <div id="F-advice-3.0-1-1">
-Consider also adding a readme file to your dataset.
+    Consider also adding a readme file to your dataset.
 </div>
 
 <div id="F-advice-3.0-0-1">
-Next to the provenance, consider adding a readme file and information about the versioning.
+    Next to the provenance, consider adding a readme file and information about the versioning.
 </div>
 
 <!-- ======================================= Accessible  ======================================= -->
 
 <div id="A-i-contents">
     <p>
-        <a href="https://www.ands.org.au/working-with-data/publishing-and-reusing-data/publishing"
-           target="_blank">
+        <a href="https://www.ands.org.au/working-with-data/publishing-and-reusing-data/publishing" target="_blank">
             To make data accessible</a> may include making the data
         <a href="https://www.ands.org.au/working-with-data/articulating-the-value-of-open-data/open-data"
            target="_blank">
@@ -849,8 +867,7 @@ Next to the provenance, consider adding a readme file and information about the 
         cannot be made open</a>, for example privacy concerns, national security or commercial
         interests. If it is not open there should be clarity and transparency around the conditions
         governing access and
-        <a href="https://www.ands.org.au/working-with-data/publishing-and-reusing-data/licensing-for-reuse"
-           target="_blank">reuse</a>
+        <a href="https://www.ands.org.au/working-with-data/publishing-and-reusing-data/licensing-for-reuse" target="_blank">reuse</a>
     </p>
 </div>
 
@@ -866,19 +883,41 @@ Next to the provenance, consider adding a readme file and information about the 
     Explanation about the third question in Accessibility.
 </div>
 
-<div id="A-i-4-contents">
-    Explanation about the fourth question in Accessibility.
-</div>
-
-<div id="A-i-5-contents">
-    Explanation about the fifth question in Accessibility.
-</div>
-
-
 <div id="A-advice-title">
     Advice to improve Accessibility
 </div>
 
+<div id="A-advice-1.1-0-0">
+    Correct; all metadata in EASY is made openly accessible and will be availabe even after the data(set) is no longer available. Please note that by providing more information you can improve access to your dataset after the data are no longer available yourself as well! Adding information on your affiliation at the time of your research, gives re-users a contact point to consult the insitute if they would like to get access.
+</div>
+
+<div id="A-advice-1.0-1-0">
+    Check the source of your information about the availability of metadata in EASY again. All metadata in EASY is made openly accessible and will be availabe even after the data(set) is no longer available. Please note that by providing more information you can improve access to your dataset after the data are no longer available yourself as well! Adding information on your affiliation at the time of your research, gives re-users a contact point to consult the insitute if they would like to get access.
+</div>
+
+<div id="A-advice-1.0-0-1">
+    All metadata in EASY is made openly accessible and will be availabe even after the data(set) is no longer available. Information about metadata in EASY can be found HERE. Please note that by providing more information, you can improve access to your dataset after the data are no longer available yourself as well! Adding information on your affiliation at the time of your research, gives re-users a contact point to consult the insitute if they would like to get access.
+</div>
+
+<div id="A-advice-3.0">
+    You have chosen the right license if your dataset doesn't contain personal data. Personal data is any information that relates to an identified or identifiable living individual. Different pieces of information, which collected together can lead to the identification of a particular person, also constitute personal data. Personal data that has been rendered anonymous in such a way that the individual is not or no longer identifiable is no longer considered personal data. For data to be truly anonymised, the anonymisation must be irreversible.
+</div>
+
+<div id="A-advice-3.1">
+    You have chosen the right license if your data contains personal data which can only be accessed after individual approval. Chosing this usage license however means that your dataset won't be openly accessible. Personal data is any information that relates to an identified or identifiable living individual. Different pieces of information, which collected together can lead to the identification of a particular person, also constitute personal data. Personal data that has been de-identified, encrypted or pseudonymised but can be used to re-identify a person remains personal data and falls within the scope of the GDPR.
+</div>
+
+<div id="A-advice-3.2">
+    You have chosen the right license if your dataset cannot be accessed yet due to unpublished papers or an ongoing project. Be aware: EASY only allows for this option if you have a good reason. EASY allows a maximum number of 24 month to have your dataset under embargo. Your dataset will score low under Accessabilty, as users cannot access it.
+</div>
+
+<div id="A-advice-3.3">
+    Go to <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">legal information</a> and read the information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the European Commission for information about what personal data is: <a href="https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en" target="_blank">data protection</a>.
+</div>
+
+<div id="A-advice-3.4">
+    Go to <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">legal information</a> and read the information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the European Commission for information about what personal data is: <a href="https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en" target="_blank">data protection</a>.
+</div>
 
 <!-- ======================================= Interoperable  ======================================= -->
 
@@ -909,8 +948,107 @@ Next to the provenance, consider adding a readme file and information about the 
     Explanation about the fourth question in Interoperability.
 </div>
 
+<div id="I-i-5-contents">
+    Explanation about the fifth question in Interoperability.
+</div>
+
 <div id="I-advice-title">
     Advice to improve Interoperability
+</div>
+
+<div id="I-advice-1.0">
+    Did you considered using domain specific vocabularies to make your metdata more interoperable? And be aware when using international standards, be aware of qualifying the metadatafields with the language used. A commonly used standard is ISO 639.
+</div>
+
+<div id="I-advice-1.1">
+    It is very good to generate and use project spefcific vocabularies. But be aware to publish this vocabulary online and make sure all terms are resolvable.
+</div>
+
+<div id="I-advice-1.2">
+    Commonly used ontologies and vocabularies will increase the interoperability of your dataset. Don't forget to publish your mapping as well!
+</div>
+
+<div id="I-advice-1.3">
+    To increase the interoperability of your dataset we advice you to update your description with at least generic standardized controlled vocabularies. Also be aware of domain specific controlled vocabularies, taxonomies or ontologies. Updating your metadata with these standards will increase the interoperability of your dataset.
+</div>
+
+<div id="I-advice-1.4">
+    To increase the interoperability of your dataset we advice you to update your description with at least generic standardized controlled vocabularies. Also be aware of domain specific controlled vocabularies, taxonomies or ontologies. Updating your metadata with these standards will increase the interoperability of your dataset.
+</div>
+
+<div id="I-advice-1.5">
+    To increase the interoperability of your dataset we advice you to update your description with at least generic standardized controlled vocabularies. Also be aware of domain specific controlled vocabularies, taxonomies or ontologies. Updating your metadata with these standards will increase the interoperability of your dataset.
+</div>
+
+<div id="I-advice-2.0">
+    Excellent! Using preferred formats will increase the interoperability of your data!
+</div>
+
+<div id="I-advice-2.1">
+    Before you deposit your data, try to convert your data (if possible) to preferred formats to increase the interoperability of your dataset.
+</div>
+
+<div id="I-advice-2.2">
+    To increase te interoperability of your dataset we advice to use preferred formats.
+</div>
+
+<div id="I-advice-2.3">
+    Preferred formats are file formats of which DANS is confident that they will offer the best long-term guarantees in terms of usability, accessibility and sustainability. Depositing research data in preferred formats will always be accepted by DANS. For more information see: <a href="https://dans.knaw.nl/en/about/services/easy/information-about-depositing-data/before-depositing/file-formats?set_language=en" target="_blank">information about depositing data</a>.
+</div>
+
+<div id="I-advice-2.4">
+    To increase te interoperability of your dataset we advice to use preferred formats.
+</div>
+
+<div id="I-advice-3.0">
+    Linking to other metadata will increase the interoperability of your dataset.
+</div>
+
+<div id="I-advice-3.1">
+    However it is very good to link to other (meta)data, unfortunately these are not online accessible. You can add a description to the (meta)data you have linked to to your own dataset.
+</div>
+
+<div id="I-advice-3.2">
+    Linking to other metadata will increase the interoperability of your dataset.
+</div>
+
+<div id="I-advice-3.3">
+    Linking to other metadata will increase the interoperability of your dataset.
+</div>
+
+<div id="I-advice-4.0">
+    It is very useful to add your ORCID to dataset. You can increase the interoperability of your dataset by adding more contextual information such as reference to other datasets and publications. However make sure you refer to these publications via a PID.
+</div>
+
+<div id="I-advice-4.1">
+    It is very useful te refer to other publications, make sure this publications are resolvable via persistent identifier. You can also add an ORCID to your dataset.
+</div>
+
+<div id="I-advice-4.2">
+    Don't forget to update your metadata with your ORCID and you can think of adding links to related publication, make sure you will use a PID for this reference.
+</div>
+
+<div id="I-advice-4.3">
+    Adding contextual information to your dataset will increase the interoperability of your dataset. You can think of adding references to related/own publications and/or datasets and adding your ORCID.
+</div>
+
+<div id="I-advice-4.4">
+    Adding contextual information to your dataset will increase the interoperability of your dataset. You can think of adding references to related/own publications and/or datasets and adding your ORCID.
+</div>
+
+<div id="I-advice-5.0">
+</div>
+
+<div id="I-advice-5.1">
+    It is very useful to add descriptive links to other datasets. To increase the interoperability you can also add persistant identifiers to these links.
+</div>
+
+<div id="I-advice-5.2">
+    By adding links between your dataset and other datasets you can increase the interoperability of your dataset. You can add links via a persistent identifier like a DOI or URN.
+</div>
+
+<div id="I-advice-5.3">
+    By adding links between your dataset and other datasets you can increase the interoperability of your dataset. You can add links via a persistent identifier like a DOI or URN.
 </div>
 
 <!-- ======================================= Reusable  ======================================= -->
@@ -943,6 +1081,107 @@ Next to the provenance, consider adding a readme file and information about the 
 <div id="R-advice-title">
     Advice to improve Reusability
 </div>
+
+<div id="R-advice-1a.0-0-0">
+        R-advise-a 0-0-0
+</div>
+
+<div id="R-advice-1a.1-0-0">
+        R-advise-a 1-0-0
+</div>
+
+<div id="R-advice-1a.1-1-0">
+        R-advise-a 1-1-0
+</div>
+
+<div id="R-advice-1a.1-1-1">
+        R-advise-a 1-1-1
+</div>
+
+<div id="R-advice-1a.1-0-1">
+        R-advise-a 1-0-1
+</div>
+
+<div id="R-advice-1a.0-1-0">
+        R-advise-a 0-1-0
+</div>
+
+<div id="R-advice-1a.0-1-1">
+        R-advise-a 0-1-1
+</div>
+
+<div id="R-advice-1a.0-0-1">
+        R-advise-a 0-0-1
+</div>
+
+<div id="R-advice-1b.0-0">
+        R-advise-b 0-0
+</div>
+
+<div id="R-advice-1b.1-0">
+        R-advise-b 1-0
+</div>
+
+<div id="R-advice-1b.1-1">
+        R-advise-b 1-1
+</div>
+
+<div id="R-advice-1b.0-1">
+        R-advise-b 0-1
+</div>
+
+<div id="R-advice-2.0">
+    By opting for the CC0 Waiver you have made your data as open as possible, contributing to open science and enabling others to re-use your data. Your data will become more findable, and easier to access. CC0 is the recommended and best option to choose in order to stimulate optimal reuse of your dataset. Please note that when you have sensitive/personal data Restricted Access is required.
+</div>
+
+<div id="R-advice-2.1">
+    Restricted Access is the right choice when you deal with sensitive data. However, in all other cases it is recommended to make your data as open access as possible. By doing this you contribute to open science and optimal exposure of your dataset. Make your data as open as possible and as closed as neccessary.
+</div>
+
+<div id="R-advice-2.2">
+    There can be various reasons to make your data publicly accessible after an embargo period, for instance when your article has not been written or published yet. An embargo is not always the right choice however. While choosing the duration of the embargo consider that the more recent your data are the more relevant they are for other researchers. And bear in mind that after the embargo period, it is recommended to make your data as open access as possible and as closed as necessary.
+</div>
+
+<div id="R-advice-2.3">
+    It is recommended to choose one of the more pronounced access categories, since they will give the re-user more specified information on how to access/request access and will increase the findability of the dataset. Other Access means that you make your data available through an other repository. Note that not all repositories are trusted or long-term. Make your data as open access as possible and as closed as necessary.
+</div>
+
+<div id="R-advice-2.4">
+    It is recommended to choose one of the more pronounced access categories, since they will give the re-user more specified information on how to access/request access and will increase the findability of the dataset. Other Access means that you make your data available through an other repository. Note that not all repositories are trusted or long-term. Make your data as open access as possible and as closed as necessary.
+</div>
+
+<div id="R-advice-3.0">
+    Great job! Not only has it become easier to find your data (see the 'F'), your metadata now also meets the requirements for proper and correct reuse. This is an important step for your data to become more FAIR.
+</div>
+
+<div id="R-advice-3.1">
+    You are well under way! Generic metadata standards are widely adopted. Domain standards however are much richer in vocabulary and structure and therefore serve researchers within your discipline. Did you know that you can check if your domain has got metadata standards?
+</div>
+
+<div id="R-advice-3.2">
+    Good to see that your data do meet domain standards to a certain extend. FAIR data should at least contain minimal information standards. Try to look for ways to improve; the more standardized your metadata are, in other words: the more they are organized in a standardized way, the better they are suited for re-use! Always try to keep the user-perspective in eye.
+</div>
+
+<div id="R-advice-3.3">
+    R-advice-3.3
+</div>
+
+<div id="R-advice-3.4">
+    R-advice-3.4
+</div>
+
+<div id="R-advice-3.5">
+    R-advice-3.5
+</div>
+
+<div id="R-advice-3.6">
+    FAIR data should at least contain minimal information standards. Have you checked if your domain has got metadata standards? There are multiple websites that have listed domain standards, please take a look at their websites. The more standardized your metadata are, in other words: the more they are organized in a standardized way, the better they are suited for re-use. Always try to keep the user-perspective in eye.
+</div>
+
+<div id="R-advice-3.7">
+    FAIR data should at least contain minimal information standards. Have you checked if your domain has got metadata standards? There are multiple websites that have listed domain standards, please take a look at their websites. The more standardized your metadata are, in other words: the more they are organized in a standardized way, the better they are suited for re-use. Always try to keep the user-perspective in eye.
+</div>
+
 
 <!-- /div texts -->
 </div>
