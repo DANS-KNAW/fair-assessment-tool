@@ -35,7 +35,7 @@
         .panel-body .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
         .panel {background-color: #f5f5f5; border: 0px;}
         .panel-default>.panel-heading {background-image: none; background-color: #2795c8; }
-        .panel-title {color: #FFFFFF;background-color: #2795c8; font-size: 13px;}
+        .panel-title a {color: #FFFFFF;background-color: #2795c8; font-size: 15px;}
         .modal-header, .modal-footer {margin: 1px;}
         .modal-body {background-color: #FDFDFD; margin-left: 1px; }
         a:link {color: #2795c8; text-decoration: none;}
@@ -49,6 +49,7 @@
         #ascore {padding-top: 25px; padding-left: 10px;}
         #iscore {padding-top: 25px; padding-left: 10px;}
         #rscore {padding-top: 25px; padding-left: 10px;}
+        #disclaimer {padding-left: 80px;}
 
         @media print {.pagebreak { page-break-before: always; }}
 
@@ -257,7 +258,8 @@
                 </div>
                 <div class="col-md-10">
                     <br>
-                    <h1>FAIR data assessment</h1>
+                    <h1>SATIFYD</h1>
+                    <h3>Self-Assessment Tool to Improve the FAIRness of Your Dataset</h3>
                     <br>
                     <p>Welcome to the DANS FAIR Data self-assessment tool. Using this tool you will be able to assess
                         the 'FAIRness' of a dataset and determine how to enhance its FAIRness (where applicable).</p>
@@ -301,7 +303,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <div id="F-i-title">FINDABLE
+                                <div id="F-i-title"><a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i')">FINDABLE</a>
                                     <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i')">
                                         <span class="pull-right glyphicon glyphicon-info-sign"></span>
                                     </a>
@@ -328,6 +330,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                <br>
                                 <div class="form-group row">
                                     <label for="fq2" class="col-sm-6 col-form-label" id="F-i-2-title">
                                         Did you use standards such as controlled vocabuaries, ontologies, linked open data to discribe your metadata?
@@ -338,13 +341,14 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq2">
-                                            <input type="checkbox" id="fq2.1" value="8" onclick="update_F()"> Controlled vocabularies&nbsp;&nbsp;
-                                            <input type="checkbox" id="fq2.4" value="0" onclick="update_F()"> There are no standards  for my discipline<br>
+                                            <input type="checkbox" id="fq2.1" value="8" onclick="update_F()"> Controlled vocabularies<br>
                                             <input type="checkbox" id="fq2.2" value="8" onclick="update_F()"> Taxonomies<br>
                                             <input type="checkbox" id="fq2.3" value="8" onclick="update_F()"> Ontologies<br>
+                                            <input type="checkbox" id="fq2.4" value="0" onclick="update_F()"> There are no standards  for my discipline
                                         </div>
                                     </div>
                                 </div>
+                                <br>
                                 <div class="form-group row">
                                     <label for="fq3" class="col-sm-6 col-form-label" id="F-i-3-title">
                                         Did you provide rich additional documentation?
@@ -386,7 +390,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <div id="A-i-title">ACCESSIBLE
+                                <div id="A-i-title"><a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i')">ACCESSIBLE</a>
                                     <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i')">
                                         <span class="pull-right glyphicon glyphicon-info-sign"></span>
                                     </a>
@@ -411,8 +415,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
+                                <br>
                                 <div class="form-group row">
                                     <label for="aq2" class="col-sm-6 col-form-label" id="A-i-2-title">
                                         Does your dataset contain personal data?
@@ -428,7 +431,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <br>
                                 <div class="form-group row">
                                     <label for="aq3" class="col-sm-6 col-form-label" id="A-i-3-title">
                                         Which of the use licenses provided by EASY did you choose in order to comply with the access rights attached ot the data?
@@ -473,7 +476,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <div id="I-i-title">INTEROPERABLE
+                                <div id="I-i-title"><a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i')">INTEROPERABLE</a>
                                     <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i')">
                                         <span class="pull-right glyphicon glyphicon-info-sign"></span>
                                     </a>
@@ -500,7 +503,7 @@
                                         </select>
                                     </div>
                                 </div>
-
+                                <br>
                                 <div class="form-group row">
                                     <label for="iq2" class="col-sm-6 col-form-label" id="I-i-2-title">
                                         Are the data in your dataset stored in preferred formats?
@@ -519,7 +522,7 @@
                                         </select>
                                     </div>
                                 </div>
-
+                                <br>
                                 <div class="form-group row">
                                     <label for="iq3" class="col-sm-6 col-form-label" id="I-i-3-title">
                                         Do you link to other (meta)data and is this (meta)data online resolvable?
@@ -537,8 +540,7 @@
                                         </select>
                                     </div>
                                 </div>
-
-
+                                <br>
                                 <div class="form-group row">
                                     <label for="iq4" class="col-sm-6 col-form-label" id="I-i-4-title">
                                         Did you provide contextual information about your dataset?
@@ -557,7 +559,7 @@
                                         </select>
                                     </div>
                                 </div>
-
+                                <br>
                                 <div class="form-group row">
                                     <label for="iq5" class="col-sm-6 col-form-label" id="I-i-5-title">
                                         Did you describe scientific links between your dataset and other datasets?
@@ -600,7 +602,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <div id="R-i-title">REUSABLE
+                                <div id="R-i-title"><a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i')">REUSABLE</a>
                                     <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i')">
                                         <span class="pull-right glyphicon glyphicon-info-sign"></span>
                                     </a>
@@ -627,7 +629,7 @@
                                         </div>
                                     </div>
                                </div>
-
+                                <br>
                                 <div class="form-group row">
                                     <label for="rq2" class="col-sm-6 col-form-label" id="R-i-2-title">
                                         Which usage license are you planning to add to your dataset?
@@ -647,7 +649,7 @@
                                     </div>
 
                                 </div>
-
+                                <br>
                                 <div class="form-group row">
                                     <label for="rq3" class="col-sm-6 col-form-label" id="R-i-3-title">
                                         Does your metadata meet domain standards?
@@ -674,6 +676,17 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Disclaimer -->
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9" id="disclaimer">
+                        <br>
+                        SATIFYD was established by Eliane Fankhauser, Jerry de Vries, Nina Westzaan, Vesa Åkerman in 2019.<br>
+                        Its layout is based on the <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR</a> self assessment tool.
+                    </div>
+                </div>
+
             </div>
             <div class="row">
                 <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -705,6 +718,7 @@
             </div>
         </div>
         <br>
+
     </div>
 </div>
 
