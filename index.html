@@ -52,7 +52,8 @@
         #ascore {padding-top: 25px; padding-left: 10px;}
         #iscore {padding-top: 25px; padding-left: 10px;}
         #rscore {padding-top: 25px; padding-left: 10px;}
-        #total-score {color:#2795c8; font-size: 20px; padding-left:40px;}
+        #total-score {color:#2795c8; font-size: 20px; text-align: center;}
+        #disclaimer {text-align: center;}
 
         @media print {.pagebreak { page-break-before: always; }}
 
@@ -655,8 +656,8 @@
 
                 <!-- Total score -->
                 <div class="row">
-                    <div class="col-md-5"></div>
-                    <div class="col-md-7">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
                         <br>
                         <div  id="total-score"></div>
                     </div>
@@ -664,11 +665,11 @@
 
                    <!-- Disclaimer -->
                 <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-8" id="disclaimer">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10" id="disclaimer">
                         <br>
                         SATIFYD was established by Eliane Fankhauser, Jerry de Vries, Nina Westzaan, Vesa Åkerman in 2019.<br>
-                        Its layout is based on the <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR</a> self assessment tool.
+                        Its layout is based on the <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR <i class="fa fa-external-link"></i></a> self assessment tool.
                     </div>
                 </div>
 
@@ -772,7 +773,7 @@
         <li>File formats used in the dataset</li>
     </ul>
 
-    ! Many of the items on this list also relate to the accessibility, interoperability and reusability of the dataset. These aspects will be dealt with in the respective sections of this tool.
+    <i class="fa fa-exclamation-circle"></i> Many of the items on this list also relate to the accessibility, interoperability and reusability of the dataset. These aspects will be dealt with in the respective sections of this tool.
     <br><br>
     —> Click <a href="https://datasupport.researchdata.nl/en/start-the-course/iv-user-phase/archiving-data/metadata/" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about the term metadata.</div>
 <div id="F-i-2-contents">
@@ -805,9 +806,9 @@
     For language the ISO 639 standard is used and for date fields the ISO 8601 standard is used.
     And to specify the format of the dataset you can make use of <a href="https://github.com/DANS-KNAW/easy-split-multi-deposit/blob/master/src/main/assembly/dist/cfg/acceptedMediaTypes.txt" target="_blank">this <i class="fa fa-external-link"></i></a> standardised list.
     <br><br>
-    → Click <a href="https://www.w3.org/standards/semanticweb/data" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about linked data.<br>
-    → Click <a href="https://www.w3.org/standards/semanticweb/" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about the semantic web.<br>
-    → Click <a href="https://www.w3.org/RDF/" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about RDF data structure.
+    <i class="fa fa-long-arrow-right"></i> Click <a href="https://www.w3.org/standards/semanticweb/data" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about linked data.<br>
+    <i class="fa fa-long-arrow-right"></i> Click <a href="https://www.w3.org/standards/semanticweb/" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about the semantic web.<br>
+    <i class="fa fa-long-arrow-right"></i> Click <a href="https://www.w3.org/RDF/" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about RDF data structure.
 </div>
 
 <div id="F-i-3-contents">
@@ -817,9 +818,9 @@
     Information about the provenance and the versioning of your data, moreover, can be added in addition to the readme file.
     If you have covered most of the items on the metadata list (see explanatory text Question 1) you already provide a satisfactory amount of additional information. Nevertheless, it is important to supplement your metadata with more contextual information.
     <br><br>
-    ! This question also relates to the letter R (reusability) of FAIR.
+    <i class="fa fa-exclamation-circle"></i> This question also relates to the letter R (reusability) of FAIR.
     <br><br>
-    → Click <a href="https://help.github.com/en/articles/about-readmes" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about readme flies.
+    <i class="fa fa-long-arrow-right"></i> Click <a href="https://help.github.com/en/articles/about-readmes" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about readme flies.
 </div>
 
 <div id="F-advice-title">
@@ -1021,7 +1022,7 @@
     It makes it possible to easily integrate your data with other data using the same preferred format.
     The use of preferred formats will also help to transform the format to a newer format in the case a preferred format gets outdated.
     <br><br>
-    → Click <a href="https://dans.knaw.nl/en/about/services/easy/information-about-depositing-data/before-depositing/file-formats" target="_blank">here <i class="fa fa-external-link"></i></a> for the list of preferred formats in EASY
+    <i class="fa fa-long-arrow-right"></i> Click <a href="https://dans.knaw.nl/en/about/services/easy/information-about-depositing-data/before-depositing/file-formats" target="_blank">here <i class="fa fa-external-link"></i></a> for the list of preferred formats in EASY
 </div>
 
 <div id="I-i-2-contents">
