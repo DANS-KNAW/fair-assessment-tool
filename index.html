@@ -30,7 +30,7 @@
             -webkit-user-select: none;
             -ms-user-select: none;
         }
-        body, label{font: 14px "Avenir Next", sans-serif;}
+        body, label{font-size: 14px "Avenir Next", sans-serif;}
         h1 {color: #02AEDB;}
         .w3-border{border:1px solid #ccc!important}
         .panel-heading .glyphicon-info-sign {font-size: 1.3em; color: #FFFFFF;}
@@ -52,7 +52,7 @@
         #ascore {padding-top: 25px; padding-left: 10px;}
         #iscore {padding-top: 25px; padding-left: 10px;}
         #rscore {padding-top: 25px; padding-left: 10px;}
-        #disclaimer {padding-left: 80px;}
+        #total-score {color:#2795c8; font-size: 20px; padding-left:40px;}
 
         @media print {.pagebreak { page-break-before: always; }}
 
@@ -60,6 +60,7 @@
 
     <script>
         var letters = ["F", "A", "I", "R"]
+        var fscore, ascore, iscore, rscore = 0;
 
         $('document').ready(initialise);
 
@@ -84,6 +85,7 @@
         function show_letter(letter, element, score) {
             document.getElementById(("image-" + letter).toLowerCase()).src = "images/" + letter + "_" + Math.floor(score / 10) * 10 + ".jpg"
             show_score(letter, element, score);
+            show_total_score();
         }
 
         function show_score(letter, element, score) {
@@ -91,6 +93,14 @@
             advice.style.display = "block";
             tail = score < 100.0 ? "% Want to improve?" : "% Well done!"
             $("#" + element).html(score + tail);
+
+            var l = letter.toLowerCase();
+            if (l =="f") {fscore = score;} else if (l =="a") {ascore = score;} else if (l =="i") {iscore = score;} else if (l =="r") {rscore = score;}
+        }
+
+        function show_total_score() {
+        var total_score = ((fscore + ascore + iscore + rscore) / 4).toFixed(0);
+            $("#total-score").html("Your data is " + total_score + "% FAIR in EASY");
         }
 
         function write_to_modal(title, contents) {
@@ -645,18 +655,17 @@
 
                 <!-- Total score -->
                 <div class="row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-6">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-7">
                         <br>
                         <div  id="total-score"></div>
-                        Your data is x% FAIR in EASY
                     </div>
                 </div>
 
                    <!-- Disclaimer -->
                 <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-9" id="disclaimer">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8" id="disclaimer">
                         <br>
                         SATIFYD was established by Eliane Fankhauser, Jerry de Vries, Nina Westzaan, Vesa Åkerman in 2019.<br>
                         Its layout is based on the <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR</a> self assessment tool.
