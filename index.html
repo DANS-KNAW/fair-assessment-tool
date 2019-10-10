@@ -17,10 +17,12 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
 
+    <!-- FontAwesome via BootstrapCDN -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js">
     </script>
-
 
     <style>
         canvas {
@@ -38,7 +40,8 @@
         .panel-title a {color: #FFFFFF;background-color: #2795c8; font-size: 15px;}
         .modal-header, .modal-footer {margin: 1px;}
         .modal-body {background-color: #FDFDFD; margin-left: 1px; }
-        a:link {color: #2795c8; text-decoration: none;}
+        a {color: #333; text-decoration: none;}
+        a:hover {text-decoration: none;}
         button {color: #21618C;}
         button:hover {color: #000000; background-color: #f5f5f5 }
         .bubble a {color: #21618C;}
@@ -640,7 +643,17 @@
                     </div>
                 </div>
 
-                <!-- Disclaimer -->
+                <!-- Total score -->
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <br>
+                        <div  id="total-score"></div>
+                        Your data is x% FAIR in EASY
+                    </div>
+                </div>
+
+                   <!-- Disclaimer -->
                 <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-9" id="disclaimer">
@@ -715,7 +728,7 @@
 
 <div id="F-i-contents">
     Now that you have finished your research project, you are on the brink of depositing your research data in a trustworthy long-term repository. Findability is one of the four pillars of the
-    <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR Guiding Principles</a>. If you take care of the findability of your data, you will enable search engines to find it and possibly also link it to related sources on the web.
+    <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR Guiding Principles <i class="fa fa-external-link"></i></a>. If you take care of the findability of your data, you will enable search engines to find it and possibly also link it to related sources on the web.
     Moreover, you will improve the exposure of your research and help researchers to find and potentially reuse your data.
     <br><br>
     Findability generally comes down to giving a proper description of your dataset.
@@ -735,7 +748,7 @@
     The following list provides a comprehensive list of items that should be covered when aiming for sufficient metadata:
     <br><br>
     <ul>
-        <li>A globally unique <a href="https://support.orcid.org/hc/en-us/articles/360006971013-What-are-persistent-identifiers-PIDs-" target="_blank">Persistent Identifier</a> (PID) e.g. a DOI (provided by EASY)</li>
+        <li>A globally unique <a href="https://support.orcid.org/hc/en-us/articles/360006971013-What-are-persistent-identifiers-PIDs-" target="_blank">Persistent Identifier <i class="fa fa-external-link"></i></a> (PID) e.g. a DOI (provided by EASY)</li>
         <li>A title</li>
         <li>Related people, i.e. the creator of the dataset</li>
         <li>Other related people who contributed to the dataset</li>
@@ -752,7 +765,7 @@
 
     ! Many of the items on this list also relate to the accessibility, interoperability and reusability of the dataset. These aspects will be dealt with in the respective sections of this tool.
     <br><br>
-    —> Click <a href="https://datasupport.researchdata.nl/en/start-the-course/iv-user-phase/archiving-data/metadata/" target="_blank">here</a> if you want to know more about the term metadata.</div>
+    —> Click <a href="https://datasupport.researchdata.nl/en/start-the-course/iv-user-phase/archiving-data/metadata/" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about the term metadata.</div>
 <div id="F-i-2-contents">
     To make your (meta)data findable we encourage the use of controlled vocabularies, taxonomies and/or ontologies.
     <br><br>
@@ -772,20 +785,20 @@
     This will help to increase the findability of your data.
     <br><br>
     It is true that standardized controlled vocabularies, taxonomies or ontologies are not equally developed in the disciplines. For some disciplines a broad range of standards are available whilst others have none yet.
-    There are, however, general standards, such as the <a href="http://www.getty.edu/research/tools/vocabularies/tgn/" target="_blank">Getty Thesaurus</a> for geographical names, which can be used across disciplines.
+    There are, however, general standards, such as the <a href="http://www.getty.edu/research/tools/vocabularies/tgn/" target="_blank">Getty Thesaurus <i class="fa fa-external-link"></i></a> for geographical names, which can be used across disciplines.
     <br><br>
     In EASY some metadata sections already offer (domain specific) controlled vocabularies. For instance, to describe the subject and the temporal coverage  you can select term from the “Archeologisch Basis Register” (ABR) and the newer version ABRplus.
     These vocabularies are maintained by the Dutch “Rijksdienst voor het Cultureel Erfgoed”
     <br><br>
     For the ones among you who are interested in more technical background information: The EASY/DANS datavault  offers standardised terms for creator and contributor, these are derived
-    from <a href="http://schema.datacite.org/meta/kernel-4.0/include/datacite-contributorType-v4.xsd" target="_blank">DataCite</a>. To specify a Relation the standard specification of
-    <a href="https://www.dublincore.org/specifications/dublin-core/usageguide/qualifiers/" target="_blank">Dublin Core</a> is used.
+    from <a href="http://schema.datacite.org/meta/kernel-4.0/include/datacite-contributorType-v4.xsd" target="_blank">DataCite <i class="fa fa-external-link"></i></a>. To specify a Relation the standard specification of
+    <a href="https://www.dublincore.org/specifications/dublin-core/usageguide/qualifiers/" target="_blank">Dublin Core <i class="fa fa-external-link"></i></a> is used.
     For language the ISO 639 standard is used and for date fields the ISO 8601 standard is used.
-    And to specify the format of the dataset you can make use of <a href="https://github.com/DANS-KNAW/easy-split-multi-deposit/blob/master/src/main/assembly/dist/cfg/acceptedMediaTypes.txt" target="_blank">this</a> standardised list.
+    And to specify the format of the dataset you can make use of <a href="https://github.com/DANS-KNAW/easy-split-multi-deposit/blob/master/src/main/assembly/dist/cfg/acceptedMediaTypes.txt" target="_blank">this <i class="fa fa-external-link"></i></a> standardised list.
     <br><br>
-    → Click <a href="https://www.w3.org/standards/semanticweb/data" target="_blank">here</a> if you want to know more about linked data.<br>
-    → Click <a href="https://www.w3.org/standards/semanticweb/" target="_blank">here</a> if you want to know more about the semantic web.<br>
-    → Click <a href="https://www.w3.org/RDF/" target="_blank">here</a> if you want to know more about RDF data structure.
+    → Click <a href="https://www.w3.org/standards/semanticweb/data" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about linked data.<br>
+    → Click <a href="https://www.w3.org/standards/semanticweb/" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about the semantic web.<br>
+    → Click <a href="https://www.w3.org/RDF/" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about RDF data structure.
 </div>
 
 <div id="F-i-3-contents">
@@ -797,7 +810,7 @@
     <br><br>
     ! This question also relates to the letter R (reusability) of FAIR.
     <br><br>
-    → Click <a href="https://help.github.com/en/articles/about-readmes" target="_blank">here</a> if you want to know more about readme flies.
+    → Click <a href="https://help.github.com/en/articles/about-readmes" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about readme flies.
 </div>
 
 <div id="F-advice-title">
@@ -901,7 +914,7 @@
         The questions that you will find under accessibility concern the accessibility of the metadata over time, meaning that the repository guarantees that the metadata will be available even if the data itself is no longer available, and the usage license chosen for the dataset.
         The latter determines to what extent or under which circumstances the dataset can be accessed. EASY has a number of usage licenses from which to choose, depending on the content of the data.
         In the FAIR Principles, the automated accessibility of metadata and data by machines is also covered under Accessibility.
-        As EASY makes use of the <a href="https://dublincore.org/resources/metadata-basics/" target="_blank">Dublin Core</a> metadata schema and provides a President Identifier (see Findability) for each dataset, the machine actionability of the metadata is covered.
+        As EASY makes use of the <a href="https://dublincore.org/resources/metadata-basics/" target="_blank">Dublin Core <i class="fa fa-external-link"></i></a> metadata schema and provides a President Identifier (see Findability) for each dataset, the machine actionability of the metadata is covered.
         There is no question about this technical aspect in this part.
     </p>
 </div>
@@ -924,7 +937,7 @@
         <li>Open Access (registered users): accessible to registered users in accordance with the General Conditions of Use. Choose this license if your data doesn’t contain personal data but you would like users to identify themselves before downloading your data. </li>
         <li>Restricted Access (request permission): with your prior consent, users can view and download data in accordance with the General Conditions of Use. You can also impose additional conditions. Choose this license if your data contains personal data.</li>
         <li>Restricted Access (archaeology group): accessible to registered archaeologists and archaeology students in accordance with the General Conditions of Use. Choose this license if you are in the field of archeology.</li>
-        <li>Other Access: the data will be accessible through another repository. Choose this license if your data is deposited and available in another repository. Contact DANS <a href="mailto:info@dans.knaw.nl">(info@dans.knaw.nl)</a> if you would like to use this license.</li>
+        <li>Other Access: the data will be accessible through another repository. Choose this license if your data is deposited and available in another repository. Contact DANS <a href="mailto:info@dans.knaw.nl">(info@dans.knaw.nl) <i class="fa fa-mail-forward"></i></a> if you would like to use this license.</li>
     </ul>
 </div>
 
@@ -957,15 +970,15 @@
 </div>
 
 <div id="A-advice-3.3">
-    You have chosen the right license if your data has to be accessed via a link to an external website. If you choose this usage lincense, please contact DANS (info@dans.knaw.nl). "Other access" for datasets is only used in exceptional cases.
+    You have chosen the right license if your data has to be accessed via a link to an external website. If you choose this usage lincense, please contact DANS <a href="mailto:info@dans.knaw.nl">(info@dans.knaw.nl) <i class="fa fa-mail-forward"></i></a>. "Other access" for datasets is only used in exceptional cases.
 </div>
 
 <div id="A-advice-3.4">
-    Go to <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">legal information</a> and read the information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the European Commission for information about what personal data is: <a href="https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en" target="_blank">data protection</a>.
+    Go to <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">legal information <i class="fa fa-external-link"></i></a> and read the information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the European Commission for information about what personal data is: <a href="https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en" target="_blank">data protection <i class="fa fa-external-link"></i></a>.
 </div>
 
 <div id="A-advice-3.5">
-    Go to <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">legal information</a> and read the information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the European Commission for information about what personal data is: <a href="https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en" target="_blank">data protection</a>.
+    Go to <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">legal information <i class="fa fa-external-link"></i></a> and read the information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the European Commission for information about what personal data is: <a href="https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en" target="_blank">data protection <i class="fa fa-external-link"></i></a>.
 </div>
 
 <!-- ======================================= Interoperable  ======================================= -->
@@ -999,7 +1012,7 @@
     It makes it possible to easily integrate your data with other data using the same preferred format.
     The use of preferred formats will also help to transform the format to a newer format in the case a preferred format gets outdated.
     <br><br>
-    → Click <a href="https://dans.knaw.nl/en/about/services/easy/information-about-depositing-data/before-depositing/file-formats" target="_blank">here</a> for the list of preferred formats in EASY
+    → Click <a href="https://dans.knaw.nl/en/about/services/easy/information-about-depositing-data/before-depositing/file-formats" target="_blank">here <i class="fa fa-external-link"></i></a> for the list of preferred formats in EASY
 </div>
 
 <div id="I-i-2-contents">
@@ -1008,13 +1021,13 @@
     to all other (meta)data you have used when you constructed your data. With the help of these links other researchers will know which other datasets
     are needed in order to have the complete set of your data. It is also possible that complementary information is stored somewhere else or in another dataset.
     You need to describe all these scientific links, by properly citing related datasets.
-    If these datasets have a unique and <a href="https://support.orcid.org/hc/en-us/articles/360006971013-What-are-persistent-identifiers-PIDs-" target="_blank">Persistent Identifier</a> use it to link them.
+    If these datasets have a unique and <a href="https://support.orcid.org/hc/en-us/articles/360006971013-What-are-persistent-identifiers-PIDs-" target="_blank">Persistent Identifier <i class="fa fa-external-link"></i></a> use it to link them.
 </div>
 
 <div id="I-i-3-contents">
     Interoperable datasets also mean understandable datasets. Therefore it is essential to add context or contextual knowledge to your dataset by adding meaningful links to relevant resources.
     For instance, you should specify if your dataset builds on any other dataset or whether other, external datasets are needed to complete your dataset.
-    If present, use <a href="https://support.orcid.org/hc/en-us/articles/360006971013-What-are-persistent-identifiers-PIDs-" target="_blank">Persistent Identifiers</a>  (see Findable) when describing the context of your dataset.
+    If present, use <a href="https://support.orcid.org/hc/en-us/articles/360006971013-What-are-persistent-identifiers-PIDs-" target="_blank">Persistent Identifiers <i class="fa fa-external-link"></i></a>  (see Findable) when describing the context of your dataset.
 </div>
 
 <div id="I-advice-title">
@@ -1034,7 +1047,7 @@
 </div>
 
 <div id="I-advice-1.3">
-    Preferred formats are file formats of which DANS is confident that they will offer the best long-term guarantees in terms of usability, accessibility and sustainability. Depositing research data in preferred formats will always be accepted by DANS. For more information see: <a href="https://dans.knaw.nl/en/about/services/easy/information-about-depositing-data/before-depositing/file-formats?set_language=en" target="_blank">information about depositing data</a>.
+    Preferred formats are file formats of which DANS is confident that they will offer the best long-term guarantees in terms of usability, accessibility and sustainability. Depositing research data in preferred formats will always be accepted by DANS. For more information see: <a href="https://dans.knaw.nl/en/about/services/easy/information-about-depositing-data/before-depositing/file-formats?set_language=en" target="_blank">information about depositing data <i class="fa fa-external-link"></i></a>.
 </div>
 
 <div id="I-advice-1.4">
@@ -1116,7 +1129,7 @@
 <div id="R-i-2-contents">
     You already answered this question under Accessible. Nevertheless, we consider it important that choosing the right usage license is highlighted under Reusable,
     too, as it is one of the key elements the may or may not allow other researchers to reuse a dataset. On the EASY page where detailed information is provided about
-    how the data should be deposited (“<a href="https://dans.knaw.nl/en/about/services/easy/information-about-depositing-data/during-depositing" target="_blank">During depositing</a>”),
+    how the data should be deposited (“<a href="https://dans.knaw.nl/en/about/services/easy/information-about-depositing-data/during-depositing" target="_blank">During depositing <i class="fa fa-external-link"></i></a>”),
     there is a list with licenses that you can choose from. Depending on the data and on whether or not the
     data contains personal data (see question 5) you can choose:
     <br><br>
@@ -1130,7 +1143,7 @@
         <li>Restricted Access (archaeology group): accessible to registered archaeologists and archaeology students in accordance with the General Conditions of Use.
             Choose this license if you are in the field of archeology.</li>
         <li>Other Access: the data will be accessible through another repository. Choose this license if your data is deposited and available in another repository.
-            Contact DANS <a href="mailto:info@dans.knaw.nl">(info@dans.knaw.nl)</a> if you would like to use this license.</li>
+            Contact DANS <a href="mailto:info@dans.knaw.nl">(info@dans.knaw.nl) <i class="fa fa-mail-forward"></i></a> if you would like to use this license.</li>
     </ul>
 </div>
 
