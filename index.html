@@ -331,9 +331,9 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="fq1" onchange="update_F()">
-                                            <option value="50">Rich metadata with as much information as possible</option>
-                                            <option value="40">Required metadata fields and some additional fields</option>
-                                            <option value="20">Minimal metadata but only required fields (title, creator, date created, description, audience)</option>
+                                            <option value="34">Rich metadata with as much information as possible</option>
+                                            <option value="22">Required metadata fields and some additional fields</option>
+                                            <option value="11">Minimal metadata but only required fields (title, creator, date created, description, audience)</option>
                                             <option value="0">No metadata</option>
                                             <option value="0" selected="selected">---</option>
                                         </select>
@@ -350,10 +350,10 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq2">
-                                            <input type="checkbox" id="fq2.1" value="8" onclick="update_F()"> Controlled vocabularies<br>
-                                            <input type="checkbox" id="fq2.2" value="8" onclick="update_F()"> Taxonomies<br>
-                                            <input type="checkbox" id="fq2.3" value="8" onclick="update_F()"> Ontologies<br>
-                                            <input type="checkbox" id="fq2.4" value="0" onclick="update_F()"> There are no standards  for my discipline
+                                            <input type="checkbox" id="fq2.1" value="11" onclick="update_F()"> Controlled vocabularies<br>
+                                            <input type="checkbox" id="fq2.2" value="11" onclick="update_F()"> Taxonomies<br>
+                                            <input type="checkbox" id="fq2.3" value="11" onclick="update_F()"> Ontologies<br>
+                                            <input type="checkbox" id="fq2.4" value="5" onclick="update_F()"> There are no standards  for my discipline
                                         </div>
                                     </div>
                                 </div>
@@ -368,9 +368,9 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq3">
-                                            <input type="checkbox" id="fq3.1" value="8" onclick="update_F()"> Readme file<br>
-                                            <input type="checkbox" id="fq3.2" value="8" onclick="update_F()"> Versioning<br>
-                                            <input type="checkbox" id="fq3.3" value="10" onclick="update_F()"> Provenance<br>
+                                            <input type="checkbox" id="fq3.1" value="11" onclick="update_F()"> Readme file<br>
+                                            <input type="checkbox" id="fq3.2" value="11" onclick="update_F()"> Versioning<br>
+                                            <input type="checkbox" id="fq3.3" value="11" onclick="update_F()"> Provenance<br>
                                         </div>
                                     </div>
                                 </div>
@@ -418,9 +418,9 @@
 
                                     <div class="col-sm-6">
                                         <div id="aq1">
-                                            <label class="radio-inline"><input type="radio" name="aq1" id="aq1.1" value="40" onclick="update_A()"> Yes<br></label>
+                                            <label class="radio-inline"><input type="radio" name="aq1" id="aq1.1" value="50" onclick="update_A()"> Yes<br></label>
                                             <label class="radio-inline"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A()" checked > No<br></label><br>
-                                            <input type="radio" name="aq1" id="aq1.3" value="0" onclick="update_A()"> I can't find this information in EASY<br>
+                                            <input type="radio" name="aq1" id="aq1.3" value="5" onclick="update_A()"> I can't find this information in EASY<br>
                                         </div>
                                     </div>
                                 </div>
@@ -451,10 +451,10 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="aq3" onchange="update_A()">
-                                            <option value="60">Open access (CC0 Waver)</option>
-                                            <option value="60">Restricted access</option>
-                                            <option value="60">Embargo</option>
-                                            <option value="60">Other access</option>
+                                            <option value="50">Open access (CC0 Waver)</option>
+                                            <option value="25">Restricted access</option>
+                                            <option value="25">Embargo</option>
+                                            <option value="25">Other access</option>
                                             <option value="0">I don't know which of these licenses apply to my data</option>
                                             <option value="0" selected="selected">---</option>
                                         </select>
@@ -505,8 +505,8 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="iq1" onchange="update_I()">
-                                            <option value="20">All of the data are in preferred formats</option>
-                                            <option value="15">Some of the data are in preferred formats</option>
+                                            <option value="50">All of the data are in preferred formats</option>
+                                            <option value="25">Some of the data are in preferred formats</option>
                                             <option value="0">None of the data are in preferred formats</option>
                                             <option value="0">I don't know what preferred formats are</option>
                                             <option value="0" selected>---</option>
@@ -524,7 +524,7 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="iq2" onchange="update_I()">
-                                            <option value="20">Yes, and these are online accessible</option>
+                                            <option value="25">Yes, and these are online accessible</option>
                                             <option value="15">Yes, and they are not online accessible</option>
                                             <option value="0">No</option>
                                             <option value="0" selected>---</option>
@@ -542,13 +542,13 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="iq3" onchange="update_I()">
-                                            <option value="20">Reference to publications, References to other datasets, Persistent Identifier(s)</option>
-                                            <option value="20">Reference to other datasets, Persistent Identifier(s)</option>
-                                            <option value="20">Reference to publications, Persistent Identifier(s)</option>
-                                            <option value="20">Reference to publications, References to other datasets</option>
-                                            <option value="20">Persistent Identifier(s)</option>
-                                            <option value="15">Reference to other datasets</option>
-                                            <option value="15">Reference to publications</option>
+                                            <option value="25">Reference to publications, References to other datasets, Persistent Identifier(s)</option>
+                                            <option value="17">Reference to other datasets, Persistent Identifier(s)</option>
+                                            <option value="17">Reference to publications, Persistent Identifier(s)</option>
+                                            <option value="17">Reference to publications, References to other datasets</option>
+                                            <option value="8">Persistent Identifier(s)</option>
+                                            <option value="8">Reference to other datasets</option>
+                                            <option value="8">Reference to publications</option>
                                             <option value="0">No contextual metadata</option>
                                             <option value="0" selected>---</option>
                                         </select>
@@ -599,11 +599,11 @@
 
                                     <div class="col-sm-6">
                                         <div id="rq1">
-                                            <input type="checkbox" id="rq1.1" value="5" onclick="update_R()"> Origin of data is clear<br>
-                                            <input type="checkbox" id="rq1.2" value="5" onclick="update_R()"> Citations for reused data are in place<br>
-                                            <input type="checkbox" id="rq1.3" value="5" onclick="update_R()"> Workflow description for collecting data (machine readable)<br>
-                                            <input type="checkbox" id="rq1.4" value="5" onclick="update_R()"> Processing of the data <br>
-                                            <input type="checkbox" id="rq1.5" value="5" onclick="update_R()"> Information about versioning of the data
+                                            <input type="checkbox" id="rq1.1" value="7" onclick="update_R()"> Origin of data is clear<br>
+                                            <input type="checkbox" id="rq1.2" value="7" onclick="update_R()"> Citations for reused data are in place<br>
+                                            <input type="checkbox" id="rq1.3" value="7" onclick="update_R()"> Workflow description for collecting data (machine readable)<br>
+                                            <input type="checkbox" id="rq1.4" value="7" onclick="update_R()"> Processing of the data <br>
+                                            <input type="checkbox" id="rq1.5" value="7" onclick="update_R()"> Information about versioning of the data
                                         </div>
                                     </div>
                                </div>
@@ -618,10 +618,10 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="rq2" onchange="update_R()">
-                                            <option value="40">CC0 Waver (open access)</option>
-                                            <option value="20">Restriced access</option>
-                                            <option value="20">Embargo</option>
-                                            <option value="10">Other access</option>
+                                            <option value="33">CC0 Waver (open access)</option>
+                                            <option value="15">Restriced access</option>
+                                            <option value="15">Embargo</option>
+                                            <option value="15">Other access</option>
                                             <option value="0" selected>---</option>
                                         </select>
                                     </div>
@@ -638,9 +638,9 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="rq3" onchange="update_R()">
-                                            <option value="35">Domain standards in metadata</option>
-                                            <option value="20">Generic standards</option>
-                                            <option value="15">Minimal domain standards and minimal generic standards</option>
+                                            <option value="32">Domain standards in metadata</option>
+                                            <option value="25">Minimal domain standards and minimal generic standards</option>
+                                            <option value="15">Generic standards</option>
                                             <option value="0">No standards used</option>
                                             <option value="0" selected>---</option>
                                         </select>
@@ -1246,12 +1246,12 @@
 </div>
 
 <div id="R-advice-3.1">
-    You are well under way! Generic metadata standards are widely adopted. Domain standards however are much richer in vocabulary and structure and therefore
-    serve researchers within your discipline. Did you know that you can check if your domain has got metadata standards?
+    Good to see that your data do meet domain standards to a certain extend. FAIR data should at least contain minimal information standards. Try to look for ways to improve; the more standardized your metadata are, in other words: the more they are organized in a standardized way, the better they are suited for re-use! Always try to keep the user-perspective in eye.
 </div>
 
 <div id="R-advice-3.2">
-    Good to see that your data do meet domain standards to a certain extend. FAIR data should at least contain minimal information standards. Try to look for ways to improve; the more standardized your metadata are, in other words: the more they are organized in a standardized way, the better they are suited for re-use! Always try to keep the user-perspective in eye.
+    You are well under way! Generic metadata standards are widely adopted. Domain standards however are much richer in vocabulary and structure and therefore
+    serve researchers within your discipline. Did you know that you can check if your domain has got metadata standards?
 </div>
 
 <div id="R-advice-3.3">
