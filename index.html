@@ -56,6 +56,7 @@
         #total-score {color:#2795c8; font-size: 20px; text-align: center;}
         #total-score-percent {color:red;}
         #disclaimer {text-align: center;}
+        #line {border: 0; border-top: 1px solid #ccc; margin: 1em 7em;}
 
         @media print {.pagebreak { page-break-before: always; }}
 
@@ -300,7 +301,7 @@
                 </div>
             </div>
         </div>
-        <div class="pagebreak"/>
+        <div class="pagebreak"></div>
 
         <div class="panel-group">
 
@@ -389,7 +390,7 @@
                     </div>
                 </div>
             </div>
-            <div class="pagebreak"/>
+        <div class="pagebreak"></div>
 
             <!-- Accessible -->
             <div class="row">
@@ -476,7 +477,7 @@
                     </div>
                 </div>
             </div>
-            <div class="pagebreak"/>
+            <div class="pagebreak"></div>
 
             <!-- Interoperable -->
             <div class="row">
@@ -570,7 +571,7 @@
                     </div>
                 </div>
             </div>
-            <div class="pagebreak"/>
+            <div class="pagebreak"></div>
 
             <!-- Reusable -->
             <div class="row">
@@ -682,7 +683,7 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-10" id="disclaimer">
-                            <br>
+                            <div id="line"></div>
                             SATIFYD was established by Eliane Fankhauser, Jerry de Vries, Nina Westzaan, Vesa Åkerman in 2019.<br>
                             Its layout is based on the <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR <i class="fa fa-external-link"></i></a> self assessment tool.
                         </div>
@@ -691,12 +692,12 @@
 
             </div>
 
-            <div class="pagebreak"/>
+            <!-- Advice texts for printing -->
             <div class="row">
-                <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button class="hvr-fade" id="print-button-2" onclick="print_page()">Print results</button>
             </div>
             <div id="print-advice">
+                <div class="pagebreak"></div>
                 <div>
                     <br><br>
                     <h4 id="F-print-advice-title"></h4>
@@ -707,7 +708,7 @@
                     <h4 id="A-print-advice-title"></h4>
                     <div id="A-print-advice-contents"></div>
                 </div>
-                <div class="pagebreak"/>
+                <div class="pagebreak"></div>
                 <div>
                     <br><br>
                     <h4 id="I-print-advice-title"></h4>
@@ -723,8 +724,6 @@
         <br>
 
     </div>
-</div>
-
 </div>
 
 
