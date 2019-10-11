@@ -163,11 +163,11 @@
         function advice_F() {
             var title = document.getElementById("F-advice-title").textContent;
             var q_1_sel = document.getElementById("fq1").selectedIndex;
-            var a_1 = document.getElementById("F-advice-1." + q_1_sel).textContent;
+            var a_1 = document.getElementById("F-advice-1." + q_1_sel).innerHTML;
             if (checked("fq2.4"))
-                { var a_2 = document.getElementById("F-advice-2.n-s").textContent; }
+                { var a_2 = document.getElementById("F-advice-2.n-s").innerHTML; }
             else
-                { var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).textContent; }
+                { var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).innerHTML; }
             var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
             var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
             return {title, contents};
@@ -206,9 +206,9 @@
             var q_1_sel = document.getElementById("iq1").selectedIndex;
             var q_2_sel = document.getElementById("iq2").selectedIndex;
             var q_3_sel = document.getElementById("iq3").selectedIndex;
-            var a_1 = document.getElementById("I-advice-1." + q_1_sel).textContent;
+            var a_1 = document.getElementById("I-advice-1." + q_1_sel).innerHTML;
             var a_2 = document.getElementById("I-advice-2." + q_2_sel).innerHTML;
-            var a_3 = document.getElementById("I-advice-3." + q_3_sel).textContent;
+            var a_3 = document.getElementById("I-advice-3." + q_3_sel).innerHTML;
             var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
             return {title, contents};
         }
@@ -224,13 +224,13 @@
 
         function advice_R() {
             var title = document.getElementById("R-advice-title").textContent;
-            var a_1 = document.getElementById("R-advice-1").textContent;
+            var a_1 = document.getElementById("R-advice-1").innerHTML;
 <!--            var a_1a = document.getElementById("R-advice-1a." + checked("rq1.1") + "-" + checked("rq1.2") + "-" + checked("rq1.3")).textContent;-->
 <!--            var a_1b = document.getElementById("R-advice-1b." + checked("rq1.4") + "-" + checked("rq1.5")).textContent;-->
             var q_2_sel = document.getElementById("rq2").selectedIndex;
             var q_3_sel = document.getElementById("rq3").selectedIndex;
-            var a_2 = document.getElementById("R-advice-2." + q_2_sel).textContent;
-            var a_3 = document.getElementById("R-advice-3." + q_3_sel).textContent;
+            var a_2 = document.getElementById("R-advice-2." + q_2_sel).innerHTML;
+            var a_3 = document.getElementById("R-advice-3." + q_3_sel).innerHTML;
             var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
 <!--            var contents = a_1a + "<br>" + a_1b + "<br><br>" + a_2 + "<br><br>" + a_3;-->
             return {title, contents};
@@ -1255,11 +1255,11 @@
 </div>
 
 <div id="R-advice-2.4">
-    Go <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">here <i class="fa fa-external-link"></i></a> to read information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the European Commission for information about what personal data is: https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en
+    Go <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">here <i class="fa fa-external-link"></i></a> to read information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the <a href="https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en" target="_blank">European Commission <i class="fa fa-external-link"></i></a> for information about what personal data is.
 </div>
 
 <div id="R-advice-2.5">
-    Go <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">here <i class="fa fa-external-link"></i></a> to read information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the European Commission for information about what personal data is: https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en
+    Go <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">here <i class="fa fa-external-link"></i></a> to read information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the <a href="https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en" target="_blank">European Commission <i class="fa fa-external-link"></i></a> for information about what personal data is.
 </div>
 
 <div id="R-advice-3.0">
