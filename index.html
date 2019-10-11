@@ -24,6 +24,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js">
     </script>
 
+    <!-- CSS -->
     <style>
         canvas {
             -moz-user-select: none;
@@ -59,6 +60,7 @@
 
     </style>
 
+    <!-- Javascript -->
     <script>
         var letters = ["F", "A", "I", "R"]
         var fscore, ascore, iscore, rscore = 0;
@@ -68,11 +70,12 @@
         function initialise() {
             update();
             document.getElementById("texts").style.display = "none"
+            document.getElementById("total-score").style.display = "none"
             letters.forEach( function (letter) {document.getElementById(letter + "-advice").style.display = "none"});
         }
 
         function get_value(element) {
-            return checked(element) ? parseInt(document.getElementById(element).value) : 0.0;
+            return checked(element) ? parseFloat(document.getElementById(element).value) : 0.0;
         }
 
         function checked(element) {
@@ -93,15 +96,17 @@
             var advice = document.getElementById(letter + "-advice")
             advice.style.display = "block";
             tail = score < 100.0 ? "% Want to improve?" : "% Well done!"
-            $("#" + element).html(score + tail);
+            $("#" + element).html(Math.round(score) + tail);
 
             var l = letter.toLowerCase();
             if (l =="f") {fscore = score;} else if (l =="a") {ascore = score;} else if (l =="i") {iscore = score;} else if (l =="r") {rscore = score;}
         }
 
         function show_total_score() {
-        var total_score = ((fscore + ascore + iscore + rscore) / 4).toFixed(0);
+            var total_score = Math.round(((fscore + ascore + iscore + rscore) / 4));
             $("#total-score").html("Your data is " + total_score + "% FAIR in EASY");
+            document.getElementById("total-score").style.display = "block"
+
         }
 
         function write_to_modal(title, contents) {
@@ -600,11 +605,11 @@
 
                                     <div class="col-sm-6">
                                         <div id="rq1">
-                                            <input type="checkbox" id="rq1.1" value="7" onclick="update_R()"> Origin of data is clear<br>
-                                            <input type="checkbox" id="rq1.2" value="7" onclick="update_R()"> Citations for reused data are in place<br>
-                                            <input type="checkbox" id="rq1.3" value="7" onclick="update_R()"> Workflow description for collecting data (machine readable)<br>
-                                            <input type="checkbox" id="rq1.4" value="7" onclick="update_R()"> Processing of the data <br>
-                                            <input type="checkbox" id="rq1.5" value="7" onclick="update_R()"> Information about versioning of the data
+                                            <input type="checkbox" id="rq1.1" value="6.6" onclick="update_R()"> Origin of data is clear<br>
+                                            <input type="checkbox" id="rq1.2" value="6.6" onclick="update_R()"> Citations for reused data are in place<br>
+                                            <input type="checkbox" id="rq1.3" value="6.6" onclick="update_R()"> Workflow description for collecting data (machine readable)<br>
+                                            <input type="checkbox" id="rq1.4" value="6.6" onclick="update_R()"> Processing of the data <br>
+                                            <input type="checkbox" id="rq1.5" value="6.6" onclick="update_R()"> Information about versioning of the data
                                         </div>
                                     </div>
                                </div>
@@ -619,7 +624,7 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="rq2" onchange="update_R()">
-                                            <option value="33">CC0 Waver (open access)</option>
+                                            <option value="34">CC0 Waver (open access)</option>
                                             <option value="15">Restriced access</option>
                                             <option value="15">Embargo</option>
                                             <option value="15">Other access</option>
@@ -639,7 +644,7 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="rq3" onchange="update_R()">
-                                            <option value="32">Domain standards in metadata</option>
+                                            <option value="33">Domain standards in metadata</option>
                                             <option value="25">Minimal domain standards and minimal generic standards</option>
                                             <option value="15">Generic standards</option>
                                             <option value="0">No standards used</option>
