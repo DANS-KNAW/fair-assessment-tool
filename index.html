@@ -247,9 +247,13 @@
         function print_page() {
             letters.forEach(add_letter_advice);
             document.getElementById("print-button").style.display = "none"
+            document.getElementById("print-button-2").style.display = "none"
+            document.getElementById("disclaimer").style.display = "none"
             document.getElementById("print-advice").style.display = "block"
             window.print();
             document.getElementById("print-button").style.display = "block"
+            document.getElementById("print-button-2").style.display = "block"
+            document.getElementById("disclaimer").style.display = "block"
             document.getElementById("print-advice").style.display = "none"
             update();
         }
@@ -660,32 +664,36 @@
                     </div>
                 </div>
 
-                <!-- Total score -->
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">
-                        <br>
-                        <div  id="total-score"></div>
+                <!-- Footer -->
+                <div class="row" id="footer">
+                    <!-- Total score -->
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <br>
+                            <div  id="total-score"></div>
+                        </div>
                     </div>
-                </div>
 
-                   <!-- Disclaimer -->
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10" id="disclaimer">
-                        <br>
-                        SATIFYD was established by Eliane Fankhauser, Jerry de Vries, Nina Westzaan, Vesa Åkerman in 2019.<br>
-                        Its layout is based on the <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR <i class="fa fa-external-link"></i></a> self assessment tool.
+                    <!-- Disclaimer -->
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10" id="disclaimer">
+                            <br>
+                            SATIFYD was established by Eliane Fankhauser, Jerry de Vries, Nina Westzaan, Vesa Åkerman in 2019.<br>
+                            Its layout is based on the <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR <i class="fa fa-external-link"></i></a> self assessment tool.
+                        </div>
                     </div>
                 </div>
 
             </div>
+
+            <div class="pagebreak"/>
             <div class="row">
                 <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="hvr-fade" id="print-button" onclick="print_page()">Print results</button>
+                <button class="hvr-fade" id="print-button-2" onclick="print_page()">Print results</button>
             </div>
             <div id="print-advice">
-                <div class="pagebreak"/>
                 <div>
                     <br><br>
                     <h4 id="F-print-advice-title"></h4>
