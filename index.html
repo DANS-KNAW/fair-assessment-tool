@@ -357,7 +357,7 @@
                                     <div class="col-sm-6">
                                         <div id="fq2">
                                             <input type="checkbox" id="fq2.1" value="11" onclick="update_F()"> Controlled vocabularies<br>
-                                            <input type="checkbox" id="fq2.2" value="11" onclick="update_F()"> Taxonomies<br>
+                                            <input type="checkbox" id="fq2.2" value="11" onclick="update_F()"> Taxonomies (thesauri)<br>
                                             <input type="checkbox" id="fq2.3" value="11" onclick="update_F()"> Ontologies<br>
                                             <input type="checkbox" id="fq2.4" value="5" onclick="update_F()"> There are no standards  for my discipline
                                         </div>
@@ -457,7 +457,7 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="aq3" onchange="update_A()">
-                                            <option value="50">Open access (CC0 Waver)</option>
+                                            <option value="50">Open access (CC0)</option>
                                             <option value="25">Restricted access</option>
                                             <option value="25">Embargo</option>
                                             <option value="25">Other access</option>
@@ -531,7 +531,7 @@
                                     <div class="col-sm-6">
                                         <select class="form-control" id="iq2" onchange="update_I()">
                                             <option value="25">Yes, and these are online accessible</option>
-                                            <option value="15">Yes, and they are not online accessible</option>
+                                            <option value="15">Yes, but they are not online accessible</option>
                                             <option value="0">No</option>
                                             <option value="0" selected>---</option>
                                         </select>
@@ -597,7 +597,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="rq1" class="col-sm-6 col-form-label" id="R-i-1-title">
-                                        Did you provide rich information about provenance of your data?
+                                        What kind of information did you provide about the provenance of your data?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -605,18 +605,18 @@
 
                                     <div class="col-sm-6">
                                         <div id="rq1">
-                                            <input type="checkbox" id="rq1.1" value="6.6" onclick="update_R()"> Origin of data is clear<br>
-                                            <input type="checkbox" id="rq1.2" value="6.6" onclick="update_R()"> Citations for reused data are in place<br>
+                                            <input type="checkbox" id="rq1.1" value="6.6" onclick="update_R()"> Origin of data<br>
+                                            <input type="checkbox" id="rq1.2" value="6.6" onclick="update_R()"> Citations for reused data<br>
                                             <input type="checkbox" id="rq1.3" value="6.6" onclick="update_R()"> Workflow description for collecting data (machine readable)<br>
-                                            <input type="checkbox" id="rq1.4" value="6.6" onclick="update_R()"> Processing of the data <br>
-                                            <input type="checkbox" id="rq1.5" value="6.6" onclick="update_R()"> Information about versioning of the data
+                                            <input type="checkbox" id="rq1.4" value="6.6" onclick="update_R()"> Processing history of data <br>
+                                            <input type="checkbox" id="rq1.5" value="6.6" onclick="update_R()"> Version history of data
                                         </div>
                                     </div>
                                </div>
                                 <br>
                                 <div class="form-group row">
                                     <label for="rq2" class="col-sm-6 col-form-label" id="R-i-2-title">
-                                        Which usage license are you planning to add to your dataset?
+                                        Which usage license provided by EASY did choose for your dataset?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -624,10 +624,11 @@
 
                                     <div class="col-sm-6">
                                         <select class="form-control" id="rq2" onchange="update_R()">
-                                            <option value="34">CC0 Waver (open access)</option>
+                                            <option value="34">Open access (CC0)</option>
                                             <option value="15">Restriced access</option>
                                             <option value="15">Embargo</option>
                                             <option value="15">Other access</option>
+                                            <option value="6">I don't know which of these licenses apply to my data</option>
                                             <option value="0" selected>---</option>
                                         </select>
                                     </div>
@@ -636,7 +637,7 @@
                                 <br>
                                 <div class="form-group row">
                                     <label for="rq3" class="col-sm-6 col-form-label" id="R-i-3-title">
-                                        Does your metadata meet domain standards?
+                                        Does your (meta)data meet domain standards?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -852,52 +853,51 @@
 </div>
 
 <div id="F-advice-1.1">
-    You filled in some information on the Content Descripton page. In order to make your dataset more findable for researchers and users, check again if you can fill in more of the optional fields on the page. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be.
+    You filled in some information on the Content Description page. In order to make your dataset more findable for researchers and users, check again if you can fill in more of the optional fields on the page. The more metadata you provide, the more findable (and reusable) your data will be.
 </div>
 
 <div id="F-advice-1.2">
-    On the Content Description page additional fields like Relations to projects, internet pages or researchers, Format types, Languages, Sources on which the dataset is based can be filled in. Adding additional, rich metadata to your dataset will help other researchers to find but also to reuse (see questions under letter R) your data.
+    On the Content Description page, additional fields like Relations to projects, internet pages or researchers, Format types, Languages, Sources on which the dataset is based can be filled in. Adding additional, rich metadata to your dataset will help other researchers to find but also to reuse (see questions under letter R) your data.
 </div>
 
 <div id="F-advice-1.3">
-    Fill in the required fields on the primary information page and go to the Content Description page and check which additional metadata you could add to make your dataset more findable. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be.
+    Fill in the required fields on the primary information page. Then, go to the Content Description page and check which additional metadata you could add to make your dataset more findable. The more metadata you provide, the more findable (and reusable, see question under letter R) your data will be.
 </div>
 
 <div id="F-advice-1.4">
-    Fill in the required fields on the primary information page and go to the Content Description page and check which additional metadata you could add to make your dataset more findable. The more metadata you provide the more findable (and reusable, see question under letter R) your data will be.
+    Fill in the required fields on the primary information page. Then, go to the Content Description page and check which additional metadata you could add to make your dataset more findable. The more metadata you provide, the more findable (and reusable, see question under letter R) your data will be.
 </div>
 
 <div id="F-advice-2.0-0-0">
-    Check whether there are standards in your domain or field that you can use to describe your dataset and use them in the description (metadata). Make sure you use of or map your metadata to standards such as controlled vocabularies, ontologies and taxonomies. Be aware that these can be domain specific, however these are not always available. Always use the standards relevant for your domain.
+    Check whether there are standards in your domain or field or generic standards that you can use to describe your dataset. Use them in the description (metadata). It is possible that there are no standards available in your field. If that is the case, make use of generic standards.
 </div>
 
 <div id="F-advice-2.1-0-0">
-    Using ontologies and taxonomies will improve the automated findability of your dataset.
-    It is good that you use controlled vocabularies to describe your dataset. Be aware of the domain specific controlled vocabularies. To increase the findability you can also use domain specific ontologies and linked open data.
+    Using ontologies and taxonomies will improve the automated findability of your dataset. To increase the findability of your dataset, you can also use domain specific ontologies and linked open data if they are available.
 </div>
 
 <div id="F-advice-2.1-1-0">
-    You did very well by using controlled vocabularies and taxonomies. Be aware of your domain specific vontrolled vocabularies and taxonomies. You can also make use of ontologies in your dataset description to describe and increase the findability. Also ontologies can be discipline and/or domain specific.
+    Be aware that there are generic and domain-specific controlled ontologies, vocabularies and taxonomies.
 </div>
 
 <div id="F-advice-2.1-1-1">
-    Well done! it seems you did everything to make your dataset findable. As a reminder; be aware of the fact that within your domain there could be specific controlled vocabularies, taxonomies or ontologies.
+    You included the most important standards to make your dataset findable. Be aware of the fact that, within your domain, there could be specific controlled vocabularies, taxonomies or ontologies.
 </div>
 
 <div id="F-advice-2.1-0-1">
-    Using controlled vocabularies and ontologies will improve the automated findability of your dataset. You can increase the findability of your dataset even more by also makeing use of taxonomies, if available for you specific domain.
+    Using controlled vocabularies and ontologies will improve the automated findability of your dataset. You can increase the findability of your dataset even more by also making use of taxonomies, if available for you specific domain.
 </div>
 
 <div id="F-advice-2.0-1-0">
-    Using domain specific controlled vocabularies and/or ontologies will improve the automated findability of your dataset.
+    Using domain-specific controlled vocabularies and ontologies will improve the automated findability of your dataset.
 </div>
 
 <div id="F-advice-2.0-1-1">
-    Using taxonomies and ontologies by describing you data, will improve the automated findability of your dataset. You can also add terms from (domain specific) controlled vocabularies in your data description to increase the findabiliy of your dataset
+    Using taxonomies and ontologies to describe you data, will improve the automated findability of your dataset. You can also add terms from (domain-specific) controlled vocabularies to your data description to increase the findability of your dataset.
 </div>
 
 <div id="F-advice-2.0-0-1">
-    Using domain specific controlled vocabularies and taxonomies will improve the automated findability of your dataset.
+    Using domain-specific controlled vocabularies and taxonomies will improve the automated findability of your dataset.
 </div>
 
 <div id="F-advice-2.n-s">
@@ -905,7 +905,7 @@
 </div>
 
 <div id="F-advice-3.0-0-0">
-    Adding documentation about the datasets, think of a readme file, versioning, or the provenance of the data, will improve the findability of your dataset.
+    Add documentation about the datasets will improve the findability of your dataset. Think of a readme file, versioning, or the provenance of the data.
 </div>
 
 <div id="F-advice-3.1-0-0">
@@ -976,23 +976,23 @@
 </div>
 
 <div id="A-advice-1.1-0-0">
-    Correct; all metadata in EASY is made openly accessible and will be availabe even after the data(set) is no longer available. Please note that by providing more information you can improve access to your dataset after the data are no longer available yourself as well! Adding information on your affiliation at the time of your research, gives re-users a contact point to consult the insitute if they would like to get access.
+    All metadata in EASY is made openly accessible and will be available even after the data(set) is no longer available. Adding information to the metadata on your affiliation at the time of your research, provides users with a contact point to consult if they would like to track the availability of your data.
 </div>
 
 <div id="A-advice-1.0-1-0">
-    Check the source of your information about the availability of metadata in EASY again. All metadata in EASY is made openly accessible and will be availabe even after the data(set) is no longer available. Please note that by providing more information you can improve access to your dataset after the data are no longer available yourself as well! Adding information on your affiliation at the time of your research, gives re-users a contact point to consult the insitute if they would like to get access.
+    Check the source of your information about the availability of metadata in EASY again. All metadata in EASY is made openly accessible and will be available even after the data(set) is no longer available. Adding information to the metadata on your affiliation at the time of your research, provides users with a contact point to consult if they would like to track the availability of your data.
 </div>
 
 <div id="A-advice-1.0-0-1">
-    All metadata in EASY is made openly accessible and will be availabe even after the data(set) is no longer available. Information about metadata in EASY can be found HERE. Please note that by providing more information, you can improve access to your dataset after the data are no longer available yourself as well! Adding information on your affiliation at the time of your research, gives re-users a contact point to consult the insitute if they would like to get access.
+    All metadata in EASY is made openly accessible and will be available even after the data(set) is no longer available. Information about metadata in EASY can be found on the DANS page "During Depositing" where the information is given under 4. Adding information to the metadata on your affiliation at the time of your research, provides users with a contact point to consult if they would like to track the availability of your data.
 </div>
 
 <div id="A-advice-3.0">
-    You have chosen the right license if your dataset doesn't contain personal data. Personal data is any information that relates to an identified or identifiable living individual. Different pieces of information, which collected together can lead to the identification of a particular person, also constitute personal data. Personal data that has been rendered anonymous in such a way that the individual is not or no longer identifiable is no longer considered personal data. For data to be truly anonymised, the anonymisation must be irreversible.
+    You have chosen the right license if your dataset doesn't contain personal data. Personal data is any information that relates to an identified or identifiable living individual. Different pieces of information, which together can lead to the identification of a particular person, also constitute personal data. Personal data that has been anonymised in such a way that the individual is not or no longer identifiable is no longer considered personal data. For data to be truly anonymised, the anonymisation must be irreversible.
 </div>
 
 <div id="A-advice-3.1">
-    You have chosen the right license if your data contains personal data which can only be accessed after individual approval. Chosing this usage license however means that your dataset won't be openly accessible. Personal data is any information that relates to an identified or identifiable living individual. Different pieces of information, which collected together can lead to the identification of a particular person, also constitute personal data. Personal data that has been de-identified, encrypted or pseudonymised but can be used to re-identify a person remains personal data and falls within the scope of the GDPR.
+    You have chosen the right license if your data contains personal data. According to EASY policy, data which contains personal, sensitive data can only be deposited with restricted access for users. Personal data is any information that relates to an identified or identifiable living individual. Different pieces of information, which together can lead to the identification of a particular person, also constitute personal data. Personal data that has been de-identified, encrypted or pseudonymised but can be used to re-identify a person remains personal data and falls within the scope of the GDPR.
 </div>
 
 <div id="A-advice-3.2">
@@ -1000,7 +1000,7 @@
 </div>
 
 <div id="A-advice-3.3">
-    You have chosen the right license if your data has to be accessed via a link to an external website. If you choose this usage lincense, please contact DANS <a href="mailto:info@dans.knaw.nl">(info@dans.knaw.nl) <i class="fa fa-mail-forward"></i></a>. "Other access" for datasets is only used in exceptional cases.
+    You have chosen the right license if your dataset cannot be accessed yet due to unpublished papers or an ongoing project. Be aware, EASY only allows for this option if you have a good reason for choosing it. The maximum number of months for the embargo to last is 24. Your dataset will score low under Accessabilty, as users cannot access it.
 </div>
 
 <div id="A-advice-3.4">
@@ -1066,19 +1066,19 @@
 </div>
 
 <div id="I-advice-1.0">
-    Excellent! Using preferred formats will increase the interoperability of your data!
+    Using preferred formats does increase the interoperability of your data!
 </div>
 
 <div id="I-advice-1.1">
-    Before you deposit your data, try to convert your data (if possible) to preferred formats to increase the interoperability of your dataset.
+    Before depositing your data, try to convert your data (if possible) to preferred formats. Not only will this increase the interoperability of your dataset but also the accessibility and reusability.
 </div>
 
 <div id="I-advice-1.2">
-    To increase te interoperability of your dataset we advice to use preferred formats.
+    Before depositing your data, try to convert your data (if possible) to preferred formats. Not only will this increase the interoperability of your dataset but also the accessibility and reusability.
 </div>
 
 <div id="I-advice-1.3">
-    Preferred formats are file formats of which DANS is confident that they will offer the best long-term guarantees in terms of usability, accessibility and sustainability. Depositing research data in preferred formats will always be accepted by DANS. For more information see: <a href="https://dans.knaw.nl/en/about/services/easy/information-about-depositing-data/before-depositing/file-formats?set_language=en" target="_blank">information about depositing data <i class="fa fa-external-link"></i></a>.
+    Preferred formats are file formats of which DANS is confident that they will be stable enough in the long term to ensure accessibility, interoperability and reusability.
 </div>
 
 <div id="I-advice-1.4">
@@ -1086,55 +1086,55 @@
 </div>
 
 <div id="I-advice-2.0">
-    Linking to other metadata will increase the interoperability of your dataset.
+    Linking to other metadata will increase the interoperability of your dataset. If you link to other metadata which is online available, if possible, always make use of a Persistent Identifier (PID) to refer to this metadata.
 </div>
 
 <div id="I-advice-2.1">
-    However it is very good to link to other (meta)data, unfortunately these are not online accessible. You can add a description to the (meta)data you have linked to to your own dataset.
+    It is advisable to link to other (meta)data even though these are not accessible online. You can add a description to the (meta)data you have linked to in your own dataset.
 </div>
 
 <div id="I-advice-2.2">
-    Linking to other metadata will increase the interoperability of your dataset.
+    Linking your dataset with other metadata / datasets will increase the interoperability of your dataset. You can add a link via a Persistent Identifier (PID). Examples for PIDs are DOI, URN, ORCiD.
 </div>
 
 <div id="I-advice-2.3">
-    Linking to other metadata will increase the interoperability of your dataset.
+    Linking your dataset with other metadata / datasets will increase the interoperability of your dataset. You can add a link via a Persistent Identifier (PID). Examples for PIDs are DOI, URN, ORCiD.
 </div>
 
 <div id="I-advice-3.0">
-    Well done, Adding as much contextual information as possible will increase the interoperability of your dataset
+    Adding as much contextual information as possible will increase the interoperability of your dataset
 </div>
 
 <div id="I-advice-3.1">
-    To increase the interoperability of your dataset it is very usefull to add references to other relevant datasets and add your ORCID. In case you have used any other dataset in constructing own dataset, don't forget to add references to these datasets too.
+    To increase the interoperability of your dataset add references to relevant publications and related datasets. Also add Persistent Identifiers such as your ORCiD (persistent digital identifier for people).
 </div>
 
 <div id="I-advice-3.2">
-    To increase the interoperability of your dataset it is very usefull to add references to relevant publications and add your ORCID. In case you have used any other dataset in constructing own dataset, don't forget to add references to these datasets too.
+    To increase the interoperability of your dataset add references to relevant related datasets. Also add Persistent Identifiers such as your ORCiD (persistent digital identifier for people).
 </div>
 
 <div id="I-advice-3.3">
-    It is very good you refer to other publications and datasets. Don't forget to update your contextual information with your ORCID.
+    It is useful to enrich your metadata with your ORCiD (persistent digital identifier for people) and other Persistent Identifiers that relate to your research and your dataset.
 </div>
 
 <div id="I-advice-3.4">
-    It is very usefull to add your ORCID to your dataset. You can increase the interoperability of your dataset by adding more contextual information such as reference to other relevant datasets and publications. However make sure you refer to these publications via a PID.
+    It is useful to enrich your metadata with your ORCiD (persistent digital identifier for people). Also, adding links to related publications, if possible with their Persistent Identifier (PID), will improve the quality of the contextual information. Also refer to other publications. If possible, always make use of a Persistent Identifier (PID) to link to publications.
 </div>
 
 <div id="I-advice-3.5">
-    Don't forget to update your metadata with your ORCID and you can think of adding links to related publication, make sure you will use a PID for this reference.
+    It is useful to enrich your metadata with your ORCiD (persistent digital identifier for people). Also, adding links to related publications, if possible with their Persistent Identifier (PID), will improve the quality of the contextual information.
 </div>
 
 <div id="I-advice-3.6">
-    It is very usefull te refer to other publications, make sure these publications are resolvable via persistent identifier. You can also add an ORCID to your dataset.
+    It is highly recommended to refer to other publications. If possible, always make use of a Persistent Identifier (PID) to link to publications. You can also add ORCiDs (persistent digital identifier for people) to your dataset.
 </div>
 
 <div id="I-advice-3.7">
-    Adding contextual information to your dataset will increase the interoperability of your dataset. You can think of adding references to related/own publications and/or datasets and adding your ORCID.
+    Adding contextual information to your dataset will increase the interoperability of your dataset. You can think of adding references to related / own publications and / or datasets. Moreover, you can add links via Persistent Identifiers (PIDs). Examples for PIDs are DOI, URN, ORCiD.
 </div>
 
 <div id="I-advice-3.8">
-    Adding contextual information to your dataset will increase the interoperability of your dataset. You can think of adding references to related/own publications and/or datasets and adding your ORCID.
+    Adding contextual information to your dataset will increase the interoperability of your dataset. You can think of adding references to related / own publications and / or datasets. Moreover, you can add links via Persistent Identifiers (PIDs). Examples for PIDs are DOI, URN, ORCiD.
 </div>
 
 <!-- ======================================= Reusable  ======================================= -->
@@ -1187,8 +1187,7 @@
 </div>
 
 <div id="R-advice-1">
-    Adding provenance information to your dataset will increase the reusability. The more provenance information the better.
-    The answers to this statement describe all possible forms of provenance. Try to add as many of these to your dataset.
+    Adding provenance information to your dataset will increase the reusability. The more provenance information you provide, the better. Information about provenance includes but is not limited to: Origin of data, citations for reused data, workflow description for collecting data (machine readable), processing and version history of data.
 </div>
 
 <!--<div id="R-advice-1a.0-0-0">-->
@@ -1240,45 +1239,47 @@
 <!--</div>-->
 
 <div id="R-advice-2.0">
-    By opting for the CC0 Waiver you have made your data as open as possible, contributing to open science and enabling others to re-use your data. Your data will become more findable, and easier to access. CC0 is the recommended and best option to choose in order to stimulate optimal reuse of your dataset. Please note that when you have sensitive/personal data Restricted Access is required.
+    You have chosen the right license if your dataset <b>does not</b> contain personal data. Personal data is any information that relates to an identified or identifiable living individual. Different pieces of information, which together can lead to the identification of a particular person, also constitute personal data. Personal data that has been anonymised in such a way that the individual is not or no longer identifiable is no longer considered personal data. For data to be truly anonymised, the anonymisation must be irreversible.
 </div>
 
 <div id="R-advice-2.1">
-    Restricted Access is the right choice when you deal with sensitive data. However, in all other cases it is recommended to make your data as open access as possible. By doing this you contribute to open science and optimal exposure of your dataset. Make your data as open as possible and as closed as neccessary.
+    You have chosen the right license if your data contains personal data. According to EASY policy, data which contains personal, sensitive data can only be deposited with restricted access for users. Personal data is any information that relates to an identified or identifiable living individual. Different pieces of information, which together can lead to the identification of a particular person, also constitute personal data. Personal data that has been de-identified, encrypted or pseudonymised but can be used to re-identify a person remains personal data and falls within the scope of the GDPR.
 </div>
 
 <div id="R-advice-2.2">
-    There can be various reasons to make your data publicly accessible after an embargo period, for instance when your article has not been written or published yet. An embargo is not always the right choice however. While choosing the duration of the embargo consider that the more recent your data are the more relevant they are for other researchers. And bear in mind that after the embargo period, it is recommended to make your data as open access as possible and as closed as necessary.
+    You have chosen the right license if your dataset cannot be accessed yet due to unpublished papers or an ongoing project. Be aware: EASY only allows for this option if you have a good reason. EASY allows a maximum number of 24 month to have your dataset under embargo. Your dataset will score low under Accessabilty, as users cannot access it.
 </div>
 
 <div id="R-advice-2.3">
-    It is recommended to choose one of the more pronounced access categories, since they will give the re-user more specified information on how to access/request access and will increase the findability of the dataset. Other Access means that you make your data available through an other repository. Note that not all repositories are trusted or long-term. Make your data as open access as possible and as closed as necessary.
+    You have chosen the right license if your dataset cannot be accessed yet due to unpublished papers or an ongoing project. Be aware, EASY only allows for this option if you have a good reason for choosing it. The maximum number of months for the embargo to last is 24. Your dataset will score low under Accessabilty, as users cannot access it.
 </div>
 
 <div id="R-advice-2.4">
-    It is recommended to choose one of the more pronounced access categories, since they will give the re-user more specified information on how to access/request access and will increase the findability of the dataset. Other Access means that you make your data available through an other repository. Note that not all repositories are trusted or long-term. Make your data as open access as possible and as closed as necessary.
+    Go <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">here <i class="fa fa-external-link"></i></a> to read information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the European Commission for information about what personal data is: https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en
+</div>
+
+<div id="R-advice-2.5">
+    Go <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/legal-information" target="_blank">here <i class="fa fa-external-link"></i></a> to read information about the different license types. Then assess which of these licenses apply to your type of data. See also the website of the European Commission for information about what personal data is: https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-personal-data_en
 </div>
 
 <div id="R-advice-3.0">
-    Not only has it become easier to find your data (see the 'F'), your metadata now also meets the requirements for proper and correct reuse.
-    This is an important step for your data to become more FAIR.
+    Not only has it become easier to find your data (see unddf 'F'), your metadata now also meets the requirements for proper and correct reuse. This is an important step for your data to become more FAIR.
 </div>
 
 <div id="R-advice-3.1">
-    Good to see that your data do meet domain standards to a certain extend. FAIR data should at least contain minimal information standards. Try to look for ways to improve; the more standardized your metadata are, in other words: the more they are organized in a standardized way, the better they are suited for re-use! Always try to keep the user-perspective in eye.
+    Your data meet domain standards to a certain extent. FAIR data should at least contain minimal information standards. Try to look for ways to improve. The more your data and metadata are organized in a standardized way, the better they are suited for re-use! Always try to keep in mind the user-perspective.
 </div>
 
 <div id="R-advice-3.2">
-    You are well under way! Generic metadata standards are widely adopted. Domain standards however are much richer in vocabulary and structure and therefore
-    serve researchers within your discipline. Did you know that you can check if your domain has got metadata standards?
+    Generic metadata standards are widely adopted. Domain standards, however, are much richer in vocabulary and structure and therefore will help researchers within your discipline to reuse your data. Check whether your domain has specific metadata standards.
 </div>
 
 <div id="R-advice-3.3">
-    FAIR data should at least contain minimal information standards. Have you checked if your domain has got metadata standards? There are multiple websites that have listed domain standards, please take a look at their websites. The more standardized your metadata are, in other words: the more they are organized in a standardized way, the better they are suited for re-use. Always try to keep the user-perspective in eye.
+    FAIR data should at least contain minimal information standards. Did you check whether there are metadata standards available for your domain? The more your metadata and data are organized in a standardized way, the better they are suited for re-use. Always try to keep in mind the user-perspective.
 </div>
 
 <div id="R-advice-3.4">
-    FAIR data should at least contain minimal information standards. Have you checked if your domain has got metadata standards? There are multiple websites that have listed domain standards, please take a look at their websites. The more standardized your metadata are, in other words: the more they are organized in a standardized way, the better they are suited for re-use. Always try to keep the user-perspective in eye.
+    FAIR data should at least contain minimal information standards. Did you check whether there are metadata standards available for your domain? The more your metadata and data are organized in a standardized way, the better they are suited for re-use. Always try to keep in mind the user-perspective.
 </div>
 
 
