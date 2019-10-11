@@ -54,6 +54,7 @@
         #iscore {padding-top: 25px; padding-left: 10px;}
         #rscore {padding-top: 25px; padding-left: 10px;}
         #total-score {color:#2795c8; font-size: 20px; text-align: center;}
+        #total-score-percent {color:red;}
         #disclaimer {text-align: center;}
 
         @media print {.pagebreak { page-break-before: always; }}
@@ -104,9 +105,8 @@
 
         function show_total_score() {
             var total_score = Math.round(((fscore + ascore + iscore + rscore) / 4));
-            $("#total-score").html("Your data is " + total_score + "% FAIR in EASY");
+            $("#total-score-percent").html(" " + total_score + "% ");
             document.getElementById("total-score").style.display = "block"
-
         }
 
         function write_to_modal(title, contents) {
@@ -671,7 +671,10 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-10">
                             <br>
-                            <div  id="total-score"></div>
+                            <div  id="total-score">Your data is
+                                <span id="total-score-percent"></span>
+                                FAIR in EASY
+                            </div>
                         </div>
                     </div>
 
@@ -996,7 +999,7 @@
 </div>
 
 <div id="A-advice-3.0">
-    You have chosen the right license if your dataset doesn't contain personal data. Personal data is any information that relates to an identified or identifiable living individual. Different pieces of information, which together can lead to the identification of a particular person, also constitute personal data. Personal data that has been anonymised in such a way that the individual is not or no longer identifiable is no longer considered personal data. For data to be truly anonymised, the anonymisation must be irreversible.
+    You have chosen the right license if your dataset <b>doesn't</b> contain personal data. Personal data is any information that relates to an identified or identifiable living individual. Different pieces of information, which together can lead to the identification of a particular person, also constitute personal data. Personal data that has been anonymised in such a way that the individual is not or no longer identifiable is no longer considered personal data. For data to be truly anonymised, the anonymisation must be irreversible.
 </div>
 
 <div id="A-advice-3.1">
