@@ -53,9 +53,9 @@
         #ascore {padding-top: 25px; padding-left: 10px;}
         #iscore {padding-top: 25px; padding-left: 10px;}
         #rscore {padding-top: 25px; padding-left: 10px;}
-        #total-score {color:#2795c8; font-size: 20px; text-align: center;}
-        #total-score-percent {color:red;}
-        #disclaimer {text-align: center;}
+        #total-score {font-size: 20px; text-align: center;}
+        #total-score-percent {color:#2795c8;}
+        #acknowledgment {text-align: center;}
         #line {border: 0; border-top: 1px solid #ccc; margin: 1em 7em;}
 
         @media print {.pagebreak { page-break-before: always; }}
@@ -89,7 +89,7 @@
         }
 
         function show_letter(letter, element, score) {
-            document.getElementById(("image-" + letter).toLowerCase()).src = "images/" + letter + "_" + Math.floor(score / 10) * 10 + ".jpg"
+            document.getElementById(("image-" + letter).toLowerCase()).src = "images/" + letter + "_" + Math.floor(Math.round(score) / 10) * 10 + ".jpg"
             show_score(letter, element, score);
             show_total_score();
         }
@@ -97,7 +97,7 @@
         function show_score(letter, element, score) {
             var advice = document.getElementById(letter + "-advice")
             advice.style.display = "block";
-            tail = score < 100.0 ? "% Want to improve?" : "% Well done!"
+            tail = Math.round(score) < 100.0 ? "% Want to improve?" : "% Well done!"
             $("#" + element).html(Math.round(score) + tail);
 
             var l = letter.toLowerCase();
@@ -165,11 +165,8 @@
             var title = document.getElementById("F-advice-title").textContent;
             var q_1_sel = document.getElementById("fq1").selectedIndex;
             var a_1 = document.getElementById("F-advice-1." + q_1_sel).innerHTML;
-            if (checked("fq2.4"))
-                { var a_2 = document.getElementById("F-advice-2.n-s").innerHTML; }
-            else
-                { var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).innerHTML; }
-            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).textContent;
+            var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).innerHTML;
+            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).innerHTML;
             var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
             return {title, contents};
         }
@@ -185,7 +182,7 @@
 
         function advice_A() {
             var title = document.getElementById("A-advice-title").textContent;
-            var a_1 = document.getElementById("A-advice-1." + checked("aq1.1") + "-" + checked("aq1.2") + "-" + checked("aq1.3")).textContent;
+            var a_1 = document.getElementById("A-advice-1." + checked("aq1.1") + "-" + checked("aq1.2") + "-" + checked("aq1.3")).innerHTML;
             var a_2 = "";
             var q_3_sel = document.getElementById("aq3").selectedIndex;
             var a_3 = document.getElementById("A-advice-3." + q_3_sel).innerHTML;
@@ -197,7 +194,8 @@
         function update_I() {
             var iscore1 = parseInt($("#iq1").val());
             var iscore2 = parseInt($("#iq2").val());
-            var iscore3 = parseInt($("#iq3").val());
+            var iscore3 = get_value("iq3.1") + get_value("iq3.2") + get_value("iq3.3");
+            if (iscore3 > 0) { uncheck("iq3.4")}
             var iscore = iscore1 + iscore2 + iscore3;
             show_letter("I", "iscore", iscore);
         }
@@ -206,10 +204,9 @@
             var title = document.getElementById("I-advice-title").textContent;
             var q_1_sel = document.getElementById("iq1").selectedIndex;
             var q_2_sel = document.getElementById("iq2").selectedIndex;
-            var q_3_sel = document.getElementById("iq3").selectedIndex;
             var a_1 = document.getElementById("I-advice-1." + q_1_sel).innerHTML;
             var a_2 = document.getElementById("I-advice-2." + q_2_sel).innerHTML;
-            var a_3 = document.getElementById("I-advice-3." + q_3_sel).innerHTML;
+            var a_3 = document.getElementById("I-advice-3." + checked("iq3.1") + "-" + checked("iq3.2") + "-" + checked("iq3.3")).innerHTML;
             var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
             return {title, contents};
         }
@@ -249,12 +246,12 @@
             letters.forEach(add_letter_advice);
             document.getElementById("print-button").style.display = "none"
             document.getElementById("print-button-2").style.display = "none"
-            document.getElementById("disclaimer").style.display = "none"
+            document.getElementById("acknowledgment").style.display = "none"
             document.getElementById("print-advice").style.display = "block"
             window.print();
             document.getElementById("print-button").style.display = "block"
             document.getElementById("print-button-2").style.display = "block"
-            document.getElementById("disclaimer").style.display = "block"
+            document.getElementById("acknowledgment").style.display = "block"
             document.getElementById("print-advice").style.display = "none"
             update();
         }
@@ -552,20 +549,15 @@
                                     </label>
 
                                     <div class="col-sm-6">
-                                        <select class="form-control" id="iq3" onchange="update_I()">
-                                            <option value="25">Reference to publications, References to other datasets, Persistent Identifier(s)</option>
-                                            <option value="17">Reference to other datasets, Persistent Identifier(s)</option>
-                                            <option value="17">Reference to publications, Persistent Identifier(s)</option>
-                                            <option value="17">Reference to publications, References to other datasets</option>
-                                            <option value="8">Persistent Identifier(s)</option>
-                                            <option value="8">Reference to other datasets</option>
-                                            <option value="8">Reference to publications</option>
-                                            <option value="0">No contextual metadata</option>
-                                            <option value="0" selected>---</option>
-                                        </select>
+                                        <div id="iq3">
+                                            <input type="checkbox" id="iq3.1" value="8.33" onclick="update_I()"> Persistent Identifier(s)<br>
+                                            <input type="checkbox" id="iq3.2" value="8.33" onclick="update_I()"> Reference to other datasets<br>
+                                            <input type="checkbox" id="iq3.3" value="8.33" onclick="update_I()"> Reference to publications<br>
+                                            <input type="checkbox" id="iq3.4" value="0" onclick="update_I()"> No contextual metadata
+                                        </div>
                                     </div>
                                 </div>
-                                <br><br><br>
+                                <br>
                             </form>
                         </div>
                     </div>
@@ -659,7 +651,6 @@
                                     </div>
 
                                 </div>
-                                <br>
                             </form>
                         </div>
                     </div>
@@ -682,7 +673,7 @@
                     <!-- Disclaimer -->
                     <div class="row">
                         <div class="col-md-2"></div>
-                        <div class="col-md-10" id="disclaimer">
+                        <div class="col-md-10" id="acknowledgment">
                             <div id="line"></div>
                             SATIFYD was established by Eliane Fankhauser, Jerry de Vries, Nina Westzaan, Vesa Åkerman in 2019.<br>
                             Its layout is based on the <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR <i class="fa fa-external-link"></i></a> self assessment tool.
@@ -910,10 +901,6 @@
     Using domain-specific controlled vocabularies and taxonomies will improve the automated findability of your dataset.
 </div>
 
-<div id="F-advice-2.n-s">
-    Check whether there are more generic standards that you could use to describe your data. Some examples for generic standards are 1. The Getty Thesaurus for Geographic Names, 2. ISO 639 for language, 3. ISO 8601 for date fields.
-</div>
-
 <div id="F-advice-3.0-0-0">
     Add documentation about the datasets will improve the findability of your dataset. Think of a readme file, versioning, or the provenance of the data.
 </div>
@@ -1111,41 +1098,38 @@
     Linking your dataset with other metadata / datasets will increase the interoperability of your dataset. You can add a link via a Persistent Identifier (PID). Examples for PIDs are DOI, URN, ORCiD.
 </div>
 
-<div id="I-advice-3.0">
-    Adding as much contextual information as possible will increase the interoperability of your dataset
+<div id="I-advice-3.0-0-0">
+    Adding contextual information to your dataset will increase the interoperability of your dataset. You can think of adding references to related / own publications and / or datasets. Moreover, you can add links via Persistent Identifiers (PIDs). Examples for PIDs are DOI, URN, ORCiD.
 </div>
 
-<div id="I-advice-3.1">
-    To increase the interoperability of your dataset add references to relevant publications and related datasets. Also add Persistent Identifiers such as your ORCiD (persistent digital identifier for people).
-</div>
-
-<div id="I-advice-3.2">
-    To increase the interoperability of your dataset add references to relevant related datasets. Also add Persistent Identifiers such as your ORCiD (persistent digital identifier for people).
-</div>
-
-<div id="I-advice-3.3">
-    It is useful to enrich your metadata with your ORCiD (persistent digital identifier for people) and other Persistent Identifiers that relate to your research and your dataset.
-</div>
-
-<div id="I-advice-3.4">
+<div id="I-advice-3.1-0-0">
     It is useful to enrich your metadata with your ORCiD (persistent digital identifier for people). Also, adding links to related publications, if possible with their Persistent Identifier (PID), will improve the quality of the contextual information. Also refer to other publications. If possible, always make use of a Persistent Identifier (PID) to link to publications.
 </div>
 
-<div id="I-advice-3.5">
+<div id="I-advice-3.1-1-0">
+    To increase the interoperability of your dataset add references to relevant publications and related datasets. Also add Persistent Identifiers such as your ORCiD (persistent digital identifier for people).
+</div>
+
+<div id="I-advice-3.1-1-1">
+    Adding as much contextual information as possible will increase the interoperability of your dataset
+</div>
+
+<div id="I-advice-3.1-0-1">
+    To increase the interoperability of your dataset add references to relevant related datasets. Also add Persistent Identifiers such as your ORCiD (persistent digital identifier for people).
+</div>
+
+<div id="I-advice-3.0-1-0">
     It is useful to enrich your metadata with your ORCiD (persistent digital identifier for people). Also, adding links to related publications, if possible with their Persistent Identifier (PID), will improve the quality of the contextual information.
 </div>
 
-<div id="I-advice-3.6">
+<div id="I-advice-3.0-1-1">
+    It is useful to enrich your metadata with your ORCiD (persistent digital identifier for people) and other Persistent Identifiers that relate to your research and your dataset.
+</div>
+
+<div id="I-advice-3.0-0-1">
     It is highly recommended to refer to other publications. If possible, always make use of a Persistent Identifier (PID) to link to publications. You can also add ORCiDs (persistent digital identifier for people) to your dataset.
 </div>
 
-<div id="I-advice-3.7">
-    Adding contextual information to your dataset will increase the interoperability of your dataset. You can think of adding references to related / own publications and / or datasets. Moreover, you can add links via Persistent Identifiers (PIDs). Examples for PIDs are DOI, URN, ORCiD.
-</div>
-
-<div id="I-advice-3.8">
-    Adding contextual information to your dataset will increase the interoperability of your dataset. You can think of adding references to related / own publications and / or datasets. Moreover, you can add links via Persistent Identifiers (PIDs). Examples for PIDs are DOI, URN, ORCiD.
-</div>
 
 <!-- ======================================= Reusable  ======================================= -->
 
