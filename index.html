@@ -41,6 +41,7 @@
         .panel-title a {color: #FFFFFF;background-color: #2795c8; font-size: 15px;}
         .modal-header, .modal-footer {margin: 1px;}
         .modal-body {background-color: #FDFDFD; margin-left: 1px; }
+        .fa-external-link {color: #2795c8;}
         a {color: #333; text-decoration: none;}
         a:hover {text-decoration: none;}
         button {color: #21618C;}
@@ -53,8 +54,8 @@
         #ascore {padding-top: 25px; padding-left: 10px;}
         #iscore {padding-top: 25px; padding-left: 10px;}
         #rscore {padding-top: 25px; padding-left: 10px;}
-        #total-score {font-size: 50px; text-align: center;}
-        #total-score-percent {color:#2795c8;}
+        #total-score {background-color: #f5f5f5; font-size: 40px; text-align: center; margin-left: 50px; margin-right: 50px; border: 1px; border-style: solid; border-color: #2795c8;}
+        #total-score-percent {color: #2795c8;}
         #acknowledgment {text-align: center;}
         #line {border: 0; border-top: 1px solid #ccc; margin: 1em 7em;}
 
@@ -331,7 +332,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="fq1" class="col-sm-6 col-form-label" id="F-i-1-title">
-                                        Did you provide sufficient metadata (information) about your data for others to find, understand and reuse your data?
+                                        1. Did you provide sufficient metadata (information) about your data for others to find, understand and reuse your data?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -350,7 +351,7 @@
                                 <br>
                                 <div class="form-group row">
                                     <label for="fq2" class="col-sm-6 col-form-label" id="F-i-2-title">
-                                        Did you use standards such as controlled vocabularies, taxonomies (thesauri) or ontologies to describe your dataset?
+                                        2. Did you use standards such as controlled vocabularies, taxonomies (thesauri) or ontologies to describe your dataset?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -368,7 +369,7 @@
                                 <br>
                                 <div class="form-group row">
                                     <label for="fq3" class="col-sm-6 col-form-label" id="F-i-3-title">
-                                        Did you provide rich and detailed additional documentation?
+                                        3. Did you provide rich and detailed additional documentation?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -418,7 +419,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="aq1" class="col-sm-6 col-form-label" id="A-i-1-title">
-                                        Is the metadata publicly accessible even if the data is no longer available?
+                                        4. Is the metadata publicly accessible even if the data is no longer available?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -435,7 +436,7 @@
                                 <br>
                                 <div class="form-group row">
                                     <label for="aq2" class="col-sm-6 col-form-label" id="A-i-2-title">
-                                        Does your dataset contain personal data?
+                                        5. Does your dataset contain personal data?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -451,7 +452,7 @@
                                 <br>
                                 <div class="form-group row">
                                     <label for="aq3" class="col-sm-6 col-form-label" id="A-i-3-title">
-                                        Which of the usage licenses provided by EASY did you choose in order to comply with the access rights attached ot the data?
+                                        6. Which of the usage licenses provided by EASY did you choose in order to comply with the access rights attached ot the data?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -505,7 +506,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="iq1" class="col-sm-6 col-form-label" id="I-i-1-title">
-                                        Are the data in your dataset stored in preferred formats?
+                                        7. Are the data in your dataset stored in preferred formats?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -524,7 +525,7 @@
                                 <br>
                                 <div class="form-group row">
                                     <label for="iq2" class="col-sm-6 col-form-label" id="I-i-2-title">
-                                        Do you link to other (meta)data and is this (meta)data online resolvable?
+                                        8. Do you link to other (meta)data and is this (meta)data online resolvable?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -542,7 +543,7 @@
                                 <br>
                                 <div class="form-group row">
                                     <label for="iq3" class="col-sm-6 col-form-label" id="I-i-3-title">
-                                        Did you provide contextual information about your dataset?
+                                        9. Did you provide contextual information about your dataset?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -594,7 +595,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="rq1" class="col-sm-6 col-form-label" id="R-i-1-title">
-                                        What kind of information did you provide about the provenance of your data?
+                                        10. What kind of information did you provide about the provenance of your data?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -613,7 +614,7 @@
                                 <br>
                                 <div class="form-group row">
                                     <label for="rq2" class="col-sm-6 col-form-label" id="R-i-2-title">
-                                        Which usage license provided by EASY did choose for your dataset?
+                                        11. Which usage license provided by EASY did choose for your dataset?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -634,7 +635,7 @@
                                 <br>
                                 <div class="form-group row">
                                     <label for="rq3" class="col-sm-6 col-form-label" id="R-i-3-title">
-                                        Does your (meta)data meet domain standards?
+                                        12. Does your (meta)data meet domain standards?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -663,9 +664,9 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-10">
                             <br>
-                            <div  id="total-score">Your data is
+                            <div  id="total-score">If deposited in EASY, your dataset is
                                 <span id="total-score-percent"></span>
-                                FAIR in EASY
+                                FAIR
                             </div>
                         </div>
                     </div>
