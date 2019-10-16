@@ -32,7 +32,7 @@
             -ms-user-select: none;
         }
         body, label{font: 14px "Avenir Next", sans-serif;}
-        h1 {color: #02AEDB;}
+        h1 {color: #2795c8;}
         .w3-border{border:1px solid #ccc!important}
         .panel-heading .glyphicon-info-sign {font-size: 1.3em; color: #FFFFFF;}
         .panel-body .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
@@ -42,9 +42,10 @@
         .modal-header, .modal-footer {margin: 1px;}
         .modal-body {background-color: #FDFDFD; margin-left: 1px; }
         .fa-external-link {color: #2795c8;}
+        .fa-print {font-size: 60px; color: #2795c8;}
         a {color: #333; text-decoration: none;}
         a:hover {text-decoration: none;}
-        button {color: #21618C;}
+        button {color: #21618C; border: 0px;}
         button:hover {color: #000000; background-color: #f5f5f5 }
         .bubble a {color: #21618C;}
         .bubble a:hover {color: #000000;}
@@ -271,8 +272,13 @@
             <div class="row">
                 <div class="col-md-2">
                     <img src="images/dans.png" alt="DANS">
-                    <br><br><br><br>&nbsp;&nbsp;
-                    <button class="hvr-fade" id="print-button" onclick="print_page()">Print results</button>
+                    <br><br><br><br><br><br><br>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <button class="hvr-fade" id="print-button" onclick="print_page()"><i class="fa fa-print"></i></button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-10">
                     <br>
@@ -673,9 +679,15 @@
 
                     <!-- Disclaimer -->
                     <div class="row">
-                        <div class="col-md-2"></div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-8">
+                                    <button class="hvr-fade" id="print-button-2" onclick="print_page()"><i class="fa fa-print"></i></button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-10" id="acknowledgment">
-                            <br><br>
                             <div id="line"></div>
                             SATIFYD was established by Eliane Fankhauser, Jerry de Vries, Nina Westzaan, Vesa Åkerman in 2019.<br>
                             Its layout is based on the <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR <i class="fa fa-external-link"></i></a> self assessment tool.
@@ -686,9 +698,6 @@
             </div>
 
             <!-- Advice texts for printing -->
-            <div class="row">
-                <button class="hvr-fade" id="print-button-2" onclick="print_page()">Print results</button>
-            </div>
             <div id="print-advice">
                 <div class="pagebreak"></div>
                 <div>
