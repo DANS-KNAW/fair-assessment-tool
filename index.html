@@ -34,7 +34,10 @@
             -ms-user-select: none;
         }
         body, label{font: 14px "Avenir Next", sans-serif;}
-        h1 {color: #2795c8;}
+        a {color: #333; text-decoration: none;}
+        a:hover {text-decoration: none;}
+        button {color: #21618C; border: 0px;}
+        button:hover {color: #000000; background-color: #f5f5f5 }
         .w3-border{border:1px solid #ccc!important}
         .panel-heading .glyphicon-info-sign {font-size: 1.3em; color: #FFFFFF;}
         .panel-body .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
@@ -45,14 +48,11 @@
         .modal-body {background-color: #FDFDFD; margin-left: 1px; }
         .fa-external-link {color: #2795c8;}
         .fa-print {font-size: 60px; color: #2795c8;}
-        a {color: #333; text-decoration: none;}
-        a:hover {text-decoration: none;}
-        button {color: #21618C; border: 0px;}
-        button:hover {color: #000000; background-color: #f5f5f5 }
         .bubble a {color: #21618C;}
         .bubble a:hover {color: #000000;}
         .bubble {position: relative;}
         .error {color: red;}
+        #main-title {font-size: 40px; color: #2795c8;}
         #text-bubble-advice {position: absolute;top: 0px;left: 0px;}
         #fscore {padding-top: 25px; padding-left: 10px;}
         #ascore {padding-top: 25px; padding-left: 10px;}
@@ -160,16 +160,16 @@
             var fscore1 = parseInt($("#fq1").val());
             var fscore2 = get_value("fq2.1") + get_value("fq2.2") + get_value("fq2.3");
             if (fscore2 > 0) { uncheck("fq2.4")}
-            fscore2 += get_value("fq2.4")
             var fscore3 = get_value("fq3.1") + get_value("fq3.2") + get_value("fq3.3");
-            var fscore = fscore1 + fscore2 + fscore3;
-            if (fscore1 == 0 && (fscore2 > 0 || fscore3 > 0)) {
+            var f_1_sel = document.getElementById("fq1").selectedIndex;
+            if (f_1_sel == 3 && (fscore2 > 0 || fscore3 > 0)) {
                 if (fscore2 > 0) { fscore2 = 0; uncheck("fq2.1"); uncheck("fq2.2"); uncheck("fq2.3") };
                 if (fscore3 > 0) { fscore3 = 0; uncheck("fq3.1"); uncheck("fq3.2"); uncheck("fq3.3") };
                 show_modal('F-i-contradiction')
-             } else {
-                show_letter("F", "fscore", fscore)
-            }
+             }
+            fscore2 += get_value("fq2.4")
+            var fscore = fscore1 + fscore2 + fscore3;
+            show_letter("F", "fscore", fscore)
         }
 
         function advice_F() {
@@ -282,12 +282,21 @@
 <div class="container">
     <div class="fair">
 
+        <!-- Logo -->
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="images/dans.png" alt="DANS">
+            </div>
+        </div>
+
         <div class="intro">
             <!-- Introduction -->
             <div class="row">
                 <div class="col-md-2">
-                    <img src="images/dans.png" alt="DANS">
-                    <br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br>
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-10">
@@ -296,8 +305,7 @@
                     </div>
                 </div>
                 <div class="col-md-10">
-                    <br>
-                    <h1>SATIFYD</h1>
+                    <div id="main-title">SATIFYD</div>
                     <h3>Self-Assessment Tool to Improve the FAIRness of Your Dataset</h3>
                     <br>
                     <p>Welcome to the DANS FAIR Data self-assessment tool. Using this tool you will be able to assess
@@ -692,7 +700,7 @@
                         </div>
                     </div>
 
-                    <!-- Disclaimer -->
+                    <!-- Acknowledgment -->
                     <div class="row">
                         <div class="col-md-2">
                             <div class="row">
@@ -703,7 +711,8 @@
                             </div>
                         </div>
                         <div class="col-md-10" id="acknowledgment">
-                            <div id="line"></div>
+                            <br><br><br><br>
+                           <div id="line"></div>
                             SATIFYD was established by Eliane Fankhauser, Jerry de Vries, Nina Westzaan, Vesa Åkerman in 2019.<br>
                             Its layout is based on the <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR <i class="fa fa-external-link"></i></a> self assessment tool.
                         </div>
