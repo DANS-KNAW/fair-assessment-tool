@@ -62,7 +62,6 @@
         #total-score-percent {color: #2795c8;}
         #acknowledgment {text-align: center;}
         #line {border: 0; border-top: 1px solid #ccc; margin: 1em 7em;}
-
         @media print {.pagebreak { page-break-before: always; }}
 
     </style>
@@ -240,14 +239,11 @@
         function advice_R() {
             var title = document.getElementById("R-advice-title").textContent;
             var a_1 = document.getElementById("R-advice-1").innerHTML;
-<!--            var a_1a = document.getElementById("R-advice-1a." + checked("rq1.1") + "-" + checked("rq1.2") + "-" + checked("rq1.3")).textContent;-->
-<!--            var a_1b = document.getElementById("R-advice-1b." + checked("rq1.4") + "-" + checked("rq1.5")).textContent;-->
             var q_2_sel = document.getElementById("rq2").selectedIndex;
             var q_3_sel = document.getElementById("rq3").selectedIndex;
             var a_2 = document.getElementById("R-advice-2." + q_2_sel).innerHTML;
             var a_3 = document.getElementById("R-advice-3." + q_3_sel).innerHTML;
             var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;
-<!--            var contents = a_1a + "<br>" + a_1b + "<br><br>" + a_2 + "<br><br>" + a_3;-->
             return {title, contents};
         }
 
@@ -1236,54 +1232,6 @@
 <div id="R-advice-1">
     Adding provenance information to your dataset will increase the reusability. The more provenance information you provide, the better. Information about provenance includes but is not limited to: Origin of data, citations for reused data, workflow description for collecting data (machine readable), processing and version history of data.
 </div>
-
-<!--<div id="R-advice-1a.0-0-0">-->
-<!--        R-advise-a 0-0-0-->
-<!--</div>-->
-
-<!--<div id="R-advice-1a.1-0-0">-->
-<!--        R-advise-a 1-0-0-->
-<!--</div>-->
-
-<!--<div id="R-advice-1a.1-1-0">-->
-<!--        R-advise-a 1-1-0-->
-<!--</div>-->
-
-<!--<div id="R-advice-1a.1-1-1">-->
-<!--        R-advise-a 1-1-1-->
-<!--</div>-->
-
-<!--<div id="R-advice-1a.1-0-1">-->
-<!--        R-advise-a 1-0-1-->
-<!--</div>-->
-
-<!--<div id="R-advice-1a.0-1-0">-->
-<!--        R-advise-a 0-1-0-->
-<!--</div>-->
-
-<!--<div id="R-advice-1a.0-1-1">-->
-<!--        R-advise-a 0-1-1-->
-<!--</div>-->
-
-<!--<div id="R-advice-1a.0-0-1">-->
-<!--        R-advise-a 0-0-1-->
-<!--</div>-->
-
-<!--<div id="R-advice-1b.0-0">-->
-<!--        R-advise-b 0-0-->
-<!--</div>-->
-
-<!--<div id="R-advice-1b.1-0">-->
-<!--        R-advise-b 1-0-->
-<!--</div>-->
-
-<!--<div id="R-advice-1b.1-1">-->
-<!--        R-advise-b 1-1-->
-<!--</div>-->
-
-<!--<div id="R-advice-1b.0-1">-->
-<!--        R-advise-b 0-1-->
-<!--</div>-->
 
 <div id="R-advice-2.0">
     You have chosen the right license if your dataset <b>does not</b> contain personal data. Personal data is any information that relates to an identified or identifiable living individual. Different pieces of information, which together can lead to the identification of a particular person, also constitute personal data. Personal data that has been anonymised in such a way that the individual is not or no longer identifiable is no longer considered personal data. For data to be truly anonymised, the anonymisation must be irreversible.
