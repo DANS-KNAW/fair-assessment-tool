@@ -46,7 +46,7 @@
         .panel-title a {color: #FFFFFF;background-color: #2795c8; font-size: 15px;}
         .modal-header, .modal-footer {margin: 1px;}
         .modal-body {background-color: #FDFDFD; margin-left: 1px; }
-        .fa-external-link, .fa-envelope-o {color: #2795c8;}
+        .fa-external-link, .fa-envelope-o, .fa-long-arrow-left {color: #2795c8;}
         .fa-print {font-size: 60px; color: #2795c8;}
         .bubble a {color: #21618C;}
         .bubble a:hover {color: #000000;}
@@ -60,8 +60,6 @@
         #rscore {padding-top: 25px; padding-left: 10px;}
         #total-score {font-size: 40px; text-align: center; margin-left: 50px; margin-right: 50px;}
         #total-score-percent {color: #2795c8;}
-        #acknowledgment {text-align: center;}
-        #line {border: 0; border-top: 1px solid #ccc; margin: 1em 7em;}
         @media print {.pagebreak { page-break-before: always; }}
 
     </style>
@@ -305,22 +303,22 @@
                     <h3>Self-Assessment Tool to Improve the FAIRness of Your Dataset</h3>
                     <br>
                     <p>
-                        Welcome to the DANS FAIR self assessment tool SATIFYD. This tool is developed for users who would like to deposit their datasets in EASY.
-                        It is designed for manual assessment by the user <b>prior to deposit</b>. Questions which typically concern machine readability are those about (meta)data standards
-                        such as controlled vocabularies, ontologies and taxonomies. Other than that, the 12 questions, divided into three questions per letter, are based on the
-                        <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR data principles<i class="fa fa-external-link"></i></a>. It was refrained from adding questions to this tool about those aspects of the FAIR principles which are already covered by EASY as a trustworthy,
-                        <a href="https://www.coretrustseal.org/" target="_blank">CoreTrustSeal certified<i class="fa fa-external-link"></i></a> repository (e.g. whether or not the dataset will have a Persistent Identifier assigned).
+                        Welcome to SATIFYD: the DANS Self-Assessment Tool to Improve the FAIRness of Your Dataset.
+                        This tool will show you how FAIR (Findable, Accessible, Interoperable, Reusable) your dataset is and will provide you with tips to score (even) higher on FAIRness.
+                        Ideally, you use this tool prior to the deposit in EASY.
                     </p>
                     <p>
-                        The four letters and their corresponding questions have explanatory texts which can be accessed by clicking on the “i” symbol.
-                        Once the users starts to fill in questions, the score per letter appears underneath each letter; the letter is filled up with blue color according to the percentage.
-                        Upon clicking on the percentage and “want to improve?”, a pop-up window shows tips on how to improve the FAIRness of the dataset for Findability, Accessibility,
-                        Interoperability and Reusability. Some of the questions are posed more than once (e.g. on metadata and data standards or usage licences), as it was felt that the topics
-                        were of special importance for the FAIRness of datasets and as such relevant in more than one letter. An overall score is provided at the end of the page.
+                        The 12 questions touch upon the <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR data principles<i class="fa fa-external-link"></i></a> but do not strictly follow them. While answering the questions, the score per letter will be displayed underneath each letter.
+                        The more ‘blue’ the letters get, the more FAIR your dataset is. An overall score is provided at the end of the page.
                     </p>
                     <p>
-                        Last but not least, it is true that the degree to which a dataset can be made FAIR differs between the disciplines. Some have more standards available than others.
-                        In order to do justice to this difference, options to indicate that standards are not available have been added to the tool.
+                        Some questions are posed more than once (e.g. on metadata and data standards or usage licences), because the topics are relevant in more than one letter.
+                    </p>
+                    <p>
+                        Want to know more? Please click <a data-toggle="modal" onclick="show_modal('introduction')">here&nbsp;<i class="fa fa-long-arrow-left"></i></a>
+                    </p>
+                    <p>
+                        If you have any questions, please let us know by sending an <a href="mailto:info@dans.knaw.nl">e-mail&nbsp;<i class="fa fa-envelope-o"></i></a>
                     </p>
                     <br>
                 </div>
@@ -698,25 +696,6 @@
                         </div>
                     </div>
 
-                    <!-- Acknowledgment -->
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="row">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-8">
-                                    <button class="hvr-fade" id="print-button-2" onclick="print_page()"><i class="fa fa-print"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-10" id="acknowledgment">
-                            <br><br><br><br>
-                           <div id="line"></div>
-                            SATIFYD was established by Eliane Fankhauser, Jerry de Vries, Nina Westzaan, Vesa Åkerman in 2019.<br>
-                            Its layout is based on the <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR <i class="fa fa-external-link"></i></a> self assessment tool.
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <!-- Advice texts for printing -->
@@ -775,6 +754,45 @@
 
 <div id="texts">
 <!-- ======================================= Findable  ======================================= -->
+
+<div id="introduction-title">
+    INTRODUCTION
+</div>
+
+<div id="introduction-contents">
+    SATIFYD stands for: Self-Assessment Tool to Improve the FAIRness of Your Dataset. It is designed for manual assessment by the user, prior to the deposit of a dataset.
+    <br><br>
+    <b>12 questions</b>
+    <br><br>
+    The 12 questions of the tool are divided into three questions per letter, are based on the <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR data principles<i class="fa fa-external-link"></i></a>.
+    Those aspects of the FAIR principles which are already covered by EASY (e.g. whether or not the dataset will have a Persistent Identifier assigned), are left out this tool.
+    Questions which typically concern machine readability are those about (meta)data standards such as controlled vocabularies, ontologies and taxonomies.
+    Some questions are posed more than once (e.g. on metadata and data standards or usage licences), because the topics are relevant in more than one letter.
+    Explanatory texts can be found with each question, by clicking on the “i” symbol.
+    <br><br>
+    <b>Scores</b>
+    <br><br>
+    After answering the questions, the letters are filled with blue color according to the percentage. An overall score is provided at the end of the page.
+    The degree to which a dataset can be made FAIR is different for each discipline. Some have more standards available than others. In order to do justice to this difference,
+    options to indicate that standards are not available have been added to the tool. Tips to improve the FAIRness of the dataset can be found at each letter, by clicking on ‘Want to improve?’.
+    <br><br>
+    <b>Background</b>
+    <br><br>
+    A prototype of a FAIR data assessment tool was established and first published in the summer of 2017 (see <a href="http://blog.ukdataservice.ac.uk/fair-data-assessment-tool/" target="_blank">blog<i class="fa fa-external-link"></i></a> by Emily Thomas).
+    The tool gives a 5-star rating for the Findability, Accessibility, Interoperability and Reusability of a dataset as well as a score of its overall FAIRness.
+    After having received feedback from a broad range of users, it became clear that a step towards a full version of the FAIRdat tool meant to reformulate questions,
+    provide more overview and reconsider the level of FAIR assessment (repository, dataset, files).
+    <br><br>
+    In 2018, a simple checklist to ‘roughly’ evaluate the FAIRness of datasets was created to give researchers with little experience in sharing their research resources an idea of what
+    FAIR data sharing means. The questions are kept simple, the corresponding paragraphs containing explanations of terms and concepts short and concise. The checklist titled “FAIR enough?
+    Checklist to evaluate FAIRness of data(sets)” which was first presented during the EOSC Stakeholder Forum in Vienna in November 2018, is accessible <a href="https://docs.google.com/forms/d/e/1FAIpQLSf7t1Z9IOBoj5GgWqik8KnhtH3B819Ch6lD5KuAz7yn0I0Opw/viewform" target="_blank">here<i class="fa fa-external-link"></i></a>.
+    <br><br>
+    <b>Credits</b>
+    <br><br>
+    SATIFYD was established by DANS: Eliane Fankhauser, Jerry de Vries, Nina Westzaan, Vesa Åkerman in 2019. Its layout is based on and inspired by the
+    <a href="https://ardc.edu.au/resources/working-with-data/fair-data/fair-self-assessment-tool" target="_blank">ARDC FAIR self assessment tool<i class="fa fa-external-link"></i></a>.
+    The initial idea and a first prototype were established by Peter Doorn, Eleftheria Tsoupra and Emily Thomas at DANS in 2017-2018.
+</div>
 
 <div id="F-i-contents">
     Now that you have finished your research project, you are on the brink of depositing your research data in a trustworthy long-term repository.
