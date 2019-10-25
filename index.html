@@ -47,7 +47,7 @@
         .modal-header, .modal-footer {margin: 1px;}
         .modal-body {background-color: #FDFDFD; margin-left: 1px; }
         .fa-external-link, .fa-envelope-o, .fa-long-arrow-left {color: #2795c8;}
-        .fa-print {font-size: 60px; color: #2795c8;}
+        .fa-print {font-size: 50px; color: #2795c8;}
         .bubble a {color: #21618C;}
         .bubble a:hover {color: #000000;}
         .bubble {position: relative;}
@@ -58,7 +58,7 @@
         #ascore {padding-top: 25px; padding-left: 10px;}
         #iscore {padding-top: 25px; padding-left: 10px;}
         #rscore {padding-top: 25px; padding-left: 10px;}
-        #total-score {font-size: 40px; text-align: center; margin-left: 50px; margin-right: 50px;}
+        #total-score {font-size: 38px; text-align: center; margin-left: 50px; margin-right: 50px;}
         #total-score-percent {color: #2795c8;}
         @media print {.pagebreak { page-break-before: always; }}
 
@@ -256,13 +256,9 @@
         function print_page() {
             letters.forEach(add_letter_advice);
             document.getElementById("print-button").style.display = "none"
-            document.getElementById("print-button-2").style.display = "none"
-            document.getElementById("acknowledgment").style.display = "none"
             document.getElementById("print-advice").style.display = "block"
             window.print();
             document.getElementById("print-button").style.display = "block"
-            document.getElementById("print-button-2").style.display = "block"
-            document.getElementById("acknowledgment").style.display = "block"
             document.getElementById("print-advice").style.display = "none"
             update();
         }
@@ -289,15 +285,7 @@
         <div class="intro">
             <!-- Introduction -->
             <div class="row">
-                <div class="col-md-2">
-                    <br><br><br><br><br><br><br><br>
-                    <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-10">
-                            <button class="hvr-fade" id="print-button" onclick="print_page()"><i class="fa fa-print"></i></button>
-                        </div>
-                    </div>
-                </div>
+                <div class="col-md-2"></div>
                 <div class="col-md-10">
                     <div id="main-title">SATIFYD</div>
                     <h3>Self-Assessment Tool to Improve the FAIRness of Your Dataset</h3>
@@ -315,7 +303,7 @@
                         Some questions are posed more than once (e.g. on metadata and data standards or usage licences), because the topics are relevant in more than one letter.
                     </p>
                     <p>
-                        Want to know more? Please click <a data-toggle="modal" onclick="show_modal('introduction')">here&nbsp;<i class="fa fa-long-arrow-left"></i></a>
+                        Want to know more? Please click <a href="#fhelp" data-toggle="modal" onclick="show_modal('introduction')"><i>here</i>&nbsp;<i class="fa fa-long-arrow-left"></i></a>
                     </p>
                     <p>
                         If you have any questions, please let us know by sending an <a href="mailto:info@dans.knaw.nl">e-mail&nbsp;<i class="fa fa-envelope-o"></i></a>
@@ -688,13 +676,22 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-10">
-                            <br>
-                            <div  id="total-score">Your data is
-                                <span id="total-score-percent"></span>
-                                FAIR in EASY
+                            <div class="row">
+                                <br>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    <button class="hvr-fade" id="print-button" onclick="print_page()"><i class="fa fa-print"></i></button>
+                                </div>
+                                <div class="col-md-8">
+                                    <div  id="total-score">Your data is
+                                        <span id="total-score-percent"></span>
+                                        FAIR in EASY
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
             </div>
 
@@ -841,9 +838,9 @@
     thesauri, ontologies. On the dataset level you should provide a project description and a dataset description. For example, add a codebook to make your data understandable
     for other researchers, add provenance information and a data/workflow process description. If you want to get to know more about standards, see the second question under Findable.
     <br><br>
-    —> Click <a href="https://datasupport.researchdata.nl/en/start-the-course/iv-user-phase/archiving-data/metadata/" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about the term metadata.
+    <i class="fa fa-long-arrow-right"></i> Click <a href="https://datasupport.researchdata.nl/en/start-the-course/iv-user-phase/archiving-data/metadata/" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about the term metadata.
     <br>
-    —> Click <a href="https://www.himss.org/library/interoperability-standards/what-is-interoperability" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about the term interoperability.
+    <i class="fa fa-long-arrow-right"></i> Click <a href="https://www.himss.org/library/interoperability-standards/what-is-interoperability" target="_blank">here <i class="fa fa-external-link"></i></a> if you want to know more about the term interoperability.
 </div>
 
 <div id="F-i-2-contents">
