@@ -326,6 +326,50 @@
                 </div>
             </div>
         </div>
+
+        <div class="context">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <h3>About you:</h3>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p>Which domain do you work in? </p>
+                        </div>
+                        <div class="col-md-9">
+                            <div id="cq1">
+                                <input type="checkbox" id="cq1.1" value="1" onclick="update_F()"> Data computing and digital research infrastructures<br>
+                                <input type="checkbox" id="cq1.2" value="1" onclick="update_F()"> Energy<br>
+                                <input type="checkbox" id="cq1.3" value="1" onclick="update_F()"> Environment<br>
+                                <input type="checkbox" id="cq1.4" value="1" onclick="update_F()"> Health and food<br>
+                                <input type="checkbox" id="cq1.5" value="1" onclick="update_F()"> Physical science and engineering<br>
+                                <input type="checkbox" id="cq1.6" value="1" onclick="update_F()"> Social and cultural innovation<br>
+                                <input type="checkbox" id="cq1.7" value="1" onclick="update_F()"> Other<br>
+                           </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p>Which of the following describes your role? Please select all that apply. </p>
+                        </div>
+                        <div class="col-md-9">
+                            <div id="cq2">
+                                <input type="checkbox" id="cq2.1" value="1" onclick="update_F()"> Researcher<br>
+                                <input type="checkbox" id="cq2.2" value="1" onclick="update_F()"> Policy maker or senior manager<br>
+                                <input type="checkbox" id="cq2.3" value="1" onclick="update_F()"> Research support or liaison<br>
+                                <input type="checkbox" id="cq2.4" value="1" onclick="update_F()"> User support/outreach provider<br>
+                                <input type="checkbox" id="cq2.5" value="1" onclick="update_F()"> Data steward or research data librarian<br>
+                                <input type="checkbox" id="cq2.6" value="1" onclick="update_F()"> Repository or scientific database provider<br>
+                                <input type="checkbox" id="cq2.7" value="1" onclick="update_F()"> Other<br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+
         <div class="pagebreak"></div>
 
         <div class="panel-group">
@@ -414,7 +458,7 @@
                     </div>
                 </div>
             </div>
-        <div class="pagebreak"></div>
+            <div class="pagebreak"></div>
 
             <!-- Accessible -->
             <div class="row">
@@ -679,60 +723,76 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Footer -->
-                <div class="row" id="footer">
-                    <!-- Total score -->
-                    <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-10">
-                            <div class="row">
-                                <br>
-                                <div class="col-md-1"></div>
-                                <div class="col-md-1">
-                                    <button class="hvr-fade" id="print-button" onclick="print_page()"><i class="fa fa-print"></i></button>
-                                </div>
-                                <div class="col-md-8">
-                                    <div  id="total-score">Your data is
-                                        <span id="total-score-percent"></span>
-                                        FAIR in EASY
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Advice texts for printing -->
-            <div id="print-advice">
-                <div class="pagebreak"></div>
-                <div>
-                    <br><br>
-                    <h4 id="F-print-advice-title"></h4>
-                    <div id="F-print-advice-contents"></div>
-                </div>
-                <div>
-                    <br><br>
-                    <h4 id="A-print-advice-title"></h4>
-                    <div id="A-print-advice-contents"></div>
-                </div>
-                <div class="pagebreak"></div>
-                <div>
-                    <br><br>
-                    <h4 id="I-print-advice-title"></h4>
-                    <div id="I-print-advice-contents"></div>
-                </div>
-                <div>
-                    <br><br>
-                    <h4 id="R-print-advice-title"></h4>
-                    <div id="R-print-advice-contents"></div>
-                </div>
             </div>
         </div>
         <br>
 
+        <!-- Feedback -->
+        <div id="feedback">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <label for="feedback_purpose">For which purpose did you take this FAIR assessment?</label>
+                    <textarea id="feedback_purpose" rows="4" cols="140"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <label for="feedback_general">Do you have any general feedback on this FAIR assessment?</label>
+                    <textarea id="feedback_general" rows="4" cols="140"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer">
+            <!-- Total score -->
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <br>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-1">
+                            <button class="hvr-fade" id="print-button" onclick="print_page()"><i class="fa fa-print"></i></button>
+                        </div>
+                        <div class="col-md-8">
+                            <div  id="total-score">Your data is
+                                <span id="total-score-percent"></span>
+                                FAIR in EASY
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advice texts for printing -->
+        <div id="print-advice">
+            <div class="pagebreak"></div>
+            <div>
+                <br><br>
+                <h4 id="F-print-advice-title"></h4>
+                <div id="F-print-advice-contents"></div>
+            </div>
+            <div>
+                <br><br>
+                <h4 id="A-print-advice-title"></h4>
+                <div id="A-print-advice-contents"></div>
+            </div>
+            <div class="pagebreak"></div>
+            <div>
+                <br><br>
+                <h4 id="I-print-advice-title"></h4>
+                <div id="I-print-advice-contents"></div>
+            </div>
+            <div>
+                <br><br>
+                <h4 id="R-print-advice-title"></h4>
+                <div id="R-print-advice-contents"></div>
+            </div>
+        </div>
     </div>
 </div>
 
