@@ -83,14 +83,14 @@
     <script>
         var letters = ["F", "A", "I", "R"]
         var fields = new Map([
-            <!-- For each letter an array where the first item marks the first question, the second item the second question, etc. -->
+            <!-- For each letter (or 'about you' questions) an array where the first item marks the first question, the second item the second question, etc. -->
             <!-- The value of the item is the number of possible answers to the respective question -->
+            ['Y', [7, 7]],
             ['F', [2, 2, 3, 2, 3]],
             ['A', [2, 5, 2, 2, 2]],
             ['I', [3, 2]],
             ['R', [3, 4, 3, 2]]
         ])
-
         var fscore, ascore, iscore, rscore = 0;
 
         $('document').ready(initialise);
@@ -111,18 +111,19 @@
             return document.getElementById(element).checked ? 1 : 0;
         }
 
-        function validate_input() {
+        function valid_input() {
             let text = "";
             for (let [letter, questions] of fields) {
                 for(let i = 0; i < questions.length; i++) {
                     let number_of_answers = questions[i];
-                    let answers = 0;
+                    let answered = false;
                     for (let j = 0; j < number_of_answers; j++) {
                         <!-- question is e.g. "fq1.2" -->
                         let question = letter.toLowerCase() + "q" + (i + 1).toString() + "." + (j + 1).toString();
-                        answers += checked(question);
+                        if (checked(question))
+                            answered = true;
                     }
-                    if (answers == 0) {
+                    if (!answered) {
                         <!-- question_key is e.g. "F-i-1-title" -->
                         question_key = letter + "-i-" + (i + 1).toString() + "-title";
                         text +=  document.getElementById(question_key).textContent + "<br><br>";
@@ -131,8 +132,27 @@
             }
             if (!(text === "")) {
                 write_to_modal("Following questions are not yet answered:", text);
-                $('#modal').modal('show');
+                return false;
             }
+            return true;
+        }
+
+        function get_answers() {
+            let text = "";
+            for (let [letter, questions] of fields) {
+                for(let i = 0; i < questions.length; i++) {
+                    text += letter + (i + 1).toString() + "- ";
+                    let number_of_answers = questions[i];
+                    for (let j = 0; j < number_of_answers; j++) {
+                        <!-- question is e.g. "fq1.2" -->
+                        let question = letter.toLowerCase() + "q" + (i + 1).toString() + "." + (j + 1).toString();
+                        let answer = "l" + question;
+                        if (checked(question))
+                            text +=  document.getElementById(answer).textContent + "<br>";
+                    }
+                }
+            }
+            return text;
         }
 
         function uncheck(element) {
@@ -164,19 +184,18 @@
         function write_to_modal(title, contents) {
             $("#modal-title").html(title);
             $("#modal-body").html(contents);
+            $('#modal').modal('show');
         }
 
         function show_modal(id_prefix) {
             var title = document.getElementById(id_prefix + "-title").textContent;
             var contents = document.getElementById(id_prefix + "-contents").innerHTML;
             write_to_modal(title, contents);
-            $('#modal').modal('show');
         }
 
         function advice(letter) {
             let {title, contents} = advice_contents(letter)
             write_to_modal(title, contents);
-            $('#modal').modal('show');
         }
 
         function advice_contents(letter) {
@@ -313,7 +332,9 @@
         }
 
         function submit_page() {
-            validate_input();
+            if (valid_input()) {
+                write_to_modal("SUBMISSION", get_answers());
+            }
         }
 
     </script>
@@ -372,35 +393,35 @@
                 <div class="col-md-10">
                     <h3>About you:</h3>
                     <div class="row">
-                        <div class="col-md-3">
+                       <div class="col-md-3" id="Y-i-1-title">
                             <p>Which domain do you work in? </p>
                         </div>
                         <div class="col-md-9">
-                            <div id="cq1">
-                                <input type="checkbox" id="cq1.1" value="1" onclick="update_F()"> Data computing and digital research infrastructures<br>
-                                <input type="checkbox" id="cq1.2" value="1" onclick="update_F()"> Energy<br>
-                                <input type="checkbox" id="cq1.3" value="1" onclick="update_F()"> Environment<br>
-                                <input type="checkbox" id="cq1.4" value="1" onclick="update_F()"> Health and food<br>
-                                <input type="checkbox" id="cq1.5" value="1" onclick="update_F()"> Physical science and engineering<br>
-                                <input type="checkbox" id="cq1.6" value="1" onclick="update_F()"> Social and cultural innovation<br>
-                                <input type="checkbox" id="cq1.7" value="1" onclick="update_F()"> Other<br>
+                            <div id="yq1">
+                                <label id="lyq1.1"><input type="checkbox" id="yq1.1"> Data computing and digital research infrastructures</label><br>
+                                <label id="lyq1.2"><input type="checkbox" id="yq1.2"> Energy</label><br>
+                                <label id="lyq1.3"><input type="checkbox" id="yq1.3"> Environment</label><br>
+                                <label id="lyq1.4"><input type="checkbox" id="yq1.4"> Health and food</label><br>
+                                <label id="lyq1.5"><input type="checkbox" id="yq1.5"> Physical science and engineering</label><br>
+                                <label id="lyq1.6"><input type="checkbox" id="yq1.6"> Social and cultural innovation</label><br>
+                                <label id="lyq1.7"><input type="checkbox" id="yq1.7"> Other</label>
                             </div>
                         </div>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3" id="Y-i-2-title">
                             <p>Which of the following describes your role? Please select all that apply. </p>
                         </div>
                         <div class="col-md-9">
-                            <div id="cq2">
-                                <input type="checkbox" id="cq2.1" value="1" onclick="update_F()"> Researcher<br>
-                                <input type="checkbox" id="cq2.2" value="1" onclick="update_F()"> Policy maker or senior manager<br>
-                                <input type="checkbox" id="cq2.3" value="1" onclick="update_F()"> Research support or liaison<br>
-                                <input type="checkbox" id="cq2.4" value="1" onclick="update_F()"> User support/outreach provider<br>
-                                <input type="checkbox" id="cq2.5" value="1" onclick="update_F()"> Data steward or research data librarian<br>
-                                <input type="checkbox" id="cq2.6" value="1" onclick="update_F()"> Repository or scientific database provider<br>
-                                <input type="checkbox" id="cq2.7" value="1" onclick="update_F()"> Other<br>
+                            <div id="yq2">
+                                <label id="lyq2.1"><input type="checkbox" id="yq2.1"> Researcher</label><br>
+                                <label id="lyq2.2"><input type="checkbox" id="yq2.2"> Policy maker or senior manager</label><br>
+                                <label id="lyq2.3"><input type="checkbox" id="yq2.3"> Research support or liaison</label><br>
+                                <label id="lyq2.4"><input type="checkbox" id="yq2.4"> User support/outreach provider</label><br>
+                                <label id="lyq2.5"><input type="checkbox" id="yq2.5"> Data steward or research data librarian</label><br>
+                                <label id="lyq2.6"><input type="checkbox" id="yq2.6"> Repository or scientific database provide</label><br>
+                                <label id="lyq2.7"><input type="checkbox" id="yq2.7"> Other</label>
                             </div>
                         </div>
                     </div>
@@ -450,8 +471,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq1">
-                                            <label class="radio-inline"><input type="radio" name="fq1" id="fq1.1" value="0" onclick="update_F()"> Yes</label><br>
-                                            <label class="radio-inline"><input type="radio" name="fq1" id="fq1.2" value="0" onclick="update_F()"> No</label>
+                                            <label class="radio-inline" id="lfq1.1"><input type="radio" name="fq1" id="fq1.1" value="0" onclick="update_F()"> Yes</label><br>
+                                            <label class="radio-inline" id="lfq1.2"><input type="radio" name="fq1" id="fq1.2" value="0" onclick="update_F()"> No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -465,8 +486,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq2">
-                                            <label class="radio-inline"><input type="radio" name="fq2" id="fq2.1" value="0" onclick="update_F()"> Yes</label><br>
-                                            <label class="radio-inline"><input type="radio" name="fq2" id="fq2.2" value="0" onclick="update_F()" > No</label>
+                                            <label class="radio-inline" id="lfq2.1"><input type="radio" name="fq2" id="fq2.1" value="0" onclick="update_F()"> Yes</label><br>
+                                            <label class="radio-inline" id="lfq2.2"><input type="radio" name="fq2" id="fq2.2" value="0" onclick="update_F()" > No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -480,9 +501,9 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq3">
-                                            <label class="radio-inline"><input type="radio" name="fq3" id="fq3.1" value="0" onclick="update_F()"> Completely provided</label><br>
-                                            <label class="radio-inline"><input type="radio" name="fq3" id="fq3.2" value="0" onclick="update_F()"> Partially provided</label><br>
-                                            <label class="radio-inline"><input type="radio" name="fq3" id="fq3.3" value="0" onclick="update_F()"> Not provided</label>
+                                            <label class="radio-inline" id="lfq3.1"><input type="radio" name="fq3" id="fq3.1" value="0" onclick="update_F()"> Completely provided</label><br>
+                                            <label class="radio-inline" id="lfq3.2"><input type="radio" name="fq3" id="fq3.2" value="0" onclick="update_F()"> Partially provided</label><br>
+                                            <label class="radio-inline" id="lfq3.3"><input type="radio" name="fq3" id="fq3.3" value="0" onclick="update_F()"> Not provided</label>
                                         </div>
                                     </div>
                                 </div>
@@ -496,8 +517,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq4">
-                                            <label class="radio-inline"><input type="radio" name="fq4" id="fq4.1" value="0" onclick="update_F()"> Yes</label><br>
-                                            <label class="radio-inline"><input type="radio" name="fq4" id="fq4.2" value="0" onclick="update_F()"> No</label>
+                                            <label class="radio-inline" id="lfq4.1"><input type="radio" name="fq4" id="fq4.1" value="0" onclick="update_F()"> Yes</label><br>
+                                            <label class="radio-inline" id="lfq4.2"><input type="radio" name="fq4" id="fq4.2" value="0" onclick="update_F()"> No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -511,9 +532,9 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq5">
-                                            <label><input type="checkbox" id="fq5.1" value="8.33" onclick="update_F()"> Metadata is offered as structured data on the data page for use<br>&nbsp;&nbsp;&nbsp;&nbsp;by a web search engine</label><br>
-                                            <label><input type="checkbox" id="fq5.2" value="8.33" onclick="update_F()"> Metadata is offered through a metadata registry, e.g., general-<br>&nbsp;&nbsp;&nbsp;&nbsp;purpose, domain/discipline specific or institutional registries</label><br>
-                                            <label><input type="checkbox" id="fq5.3" value="8.33" onclick="update_F()"> Metadata is not offered</label><br>
+                                            <label id="lfq5.1"><input type="checkbox" id="fq5.1" value="8.33" onclick="update_F()"> Metadata is offered as structured data on the data page for use<br>&nbsp;&nbsp;&nbsp;&nbsp;by a web search engine</label><br>
+                                            <label id="lfq5.2"><input type="checkbox" id="fq5.2" value="8.33" onclick="update_F()"> Metadata is offered through a metadata registry, e.g., general-<br>&nbsp;&nbsp;&nbsp;&nbsp;purpose, domain/discipline specific or institutional registries</label><br>
+                                            <label id="lfq5.3"><input type="checkbox" id="fq5.3" value="8.33" onclick="update_F()"> Metadata is not offered</label><br>
                                         </div>
                                     </div>
                                 </div>
@@ -561,8 +582,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="aq1">
-                                            <label class="radio-inline"><input type="radio" name="aq1" id="aq1.1" value="50" onclick="update_A()"> Yes</label><br>
-                                            <label class="radio-inline"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A()" > No</label>
+                                            <label class="radio-inline" id="laq1.1"><input type="radio" name="aq1" id="aq1.1" value="50" onclick="update_A()"> Yes</label><br>
+                                            <label class="radio-inline" id="laq1.2"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A()" > No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -576,11 +597,11 @@
 
                                     <div class="col-sm-6">
                                         <div id="aq2">
-                                            <label class="radio-inline"><input type="radio" name="aq2" id="aq2.1" value="0" onclick="update_A()"> Public access</label><br>
-                                            <label class="radio-inline"><input type="radio" name="aq2" id="aq2.2" value="0" onclick="update_A()"> Embargoed access</label><br>
-                                            <label class="radio-inline"><input type="radio" name="aq2" id="aq2.3" value="0" onclick="update_A()"> Restricted access</label><br>
-                                            <label class="radio-inline"><input type="radio" name="aq2" id="aq2.4" value="0" onclick="update_A()"> Metadata only access</label><br>
-                                            <label class="radio-inline"><input type="radio" name="aq2" id="aq2.5" value="0" onclick="update_A()" > None of the above</label>
+                                            <label class="radio-inline" id="laq2.1"><input type="radio" name="aq2" id="aq2.1" value="0" onclick="update_A()"> Public access</label><br>
+                                            <label class="radio-inline" id="laq2.2"><input type="radio" name="aq2" id="aq2.2" value="0" onclick="update_A()"> Embargoed access</label><br>
+                                            <label class="radio-inline" id="laq2.3"><input type="radio" name="aq2" id="aq2.3" value="0" onclick="update_A()"> Restricted access</label><br>
+                                            <label class="radio-inline" id="laq2.4"><input type="radio" name="aq2" id="aq2.4" value="0" onclick="update_A()"> Metadata only access</label><br>
+                                            <label class="radio-inline" id="laq2.5"><input type="radio" name="aq2" id="aq2.5" value="0" onclick="update_A()" > None of the above</label>
                                         </div>
                                     </div>
                                 </div>
@@ -594,8 +615,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="aq3">
-                                            <label class="radio-inline"><input type="radio" name="aq3" id="aq3.1" value="50" onclick="update_A()"> Yes</label><br>
-                                            <label class="radio-inline"><input type="radio" name="aq3" id="aq3.2" value="0" onclick="update_A()" > No</label>
+                                            <label class="radio-inline" id="laq3.1"><input type="radio" name="aq3" id="aq3.1" value="50" onclick="update_A()"> Yes</label><br>
+                                            <label class="radio-inline" id="laq3.2"><input type="radio" name="aq3" id="aq3.2" value="0" onclick="update_A()" > No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -609,8 +630,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="aq4">
-                                            <label class="radio-inline"><input type="radio" name="aq4" id="aq4.1" value="50" onclick="update_A()"> Yes</label><br>
-                                            <label class="radio-inline"><input type="radio" name="aq4" id="aq4.2" value="0" onclick="update_A()" > No</label>
+                                            <label class="radio-inline" id="laq4.1"><input type="radio" name="aq4" id="aq4.1" value="50" onclick="update_A()"> Yes</label><br>
+                                            <label class="radio-inline" id="laq4.2"><input type="radio" name="aq4" id="aq4.2" value="0" onclick="update_A()" > No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -624,8 +645,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="aq5">
-                                            <label class="radio-inline"><input type="radio" name="aq5" id="aq5.1" value="50" onclick="update_A()"> Yes</label><br>
-                                            <label class="radio-inline"><input type="radio" name="aq5" id="aq5.2" value="0" onclick="update_A()" > No</label>
+                                            <label class="radio-inline" id="laq5.1"><input type="radio" name="aq5" id="aq5.1" value="50" onclick="update_A()"> Yes</label><br>
+                                            <label class="radio-inline" id="laq5.2"><input type="radio" name="aq5" id="aq5.2" value="0" onclick="update_A()" > No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -672,9 +693,9 @@
 
                                     <div class="col-sm-6">
                                         <div id="iq1">
-                                            <label><input type="checkbox" id="iq1.1" value="8.33" onclick="update_I()"> Yes, semantic vocabularies embedded in the metadata</label><br>
-                                            <label><input type="checkbox" id="iq1.2" value="8.33" onclick="update_I()"> Yes, metadata is published as linked data using semantic<br>&nbsp;&nbsp;&nbsp;&nbsp;vocabularies</label><br>
-                                            <label><input type="checkbox" id="iq1.3" value="8.33" onclick="update_I()"> No</label>
+                                            <label id="liq1.1"><input type="checkbox" id="iq1.1" value="8.33" onclick="update_I()"> Yes, semantic vocabularies embedded in the metadata</label><br>
+                                            <label id="liq1.2"><input type="checkbox" id="iq1.2" value="8.33" onclick="update_I()"> Yes, metadata is published as linked data using semantic<br>&nbsp;&nbsp;&nbsp;&nbsp;vocabularies</label><br>
+                                            <label id="liq1.3"><input type="checkbox" id="iq1.3" value="8.33" onclick="update_I()"> No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -688,8 +709,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="iq2">
-                                            <label class="radio-inline"><input type="radio" name="iq2" id="iq2.1" value="50" onclick="update_A()"> Yes</label><br>
-                                            <label class="radio-inline"><input type="radio" name="iq2" id="iq2.2" value="0" onclick="update_A()" > No</label>
+                                            <label class="radio-inline" id="liq2.1"><input type="radio" name="iq2" id="iq2.1" value="50" onclick="update_A()"> Yes</label><br>
+                                            <label class="radio-inline" id="liq2.2"><input type="radio" name="iq2" id="iq2.2" value="0" onclick="update_A()" > No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -738,9 +759,9 @@
 
                                     <div class="col-sm-6">
                                         <div id="rq1">
-                                            <label class="radio-inline"><input type="radio" name="rq1" id="rq1.1" value="0" onclick="update_R()"> Yes</label><br>
-                                            <label class="radio-inline"><input type="radio" name="rq1" id="rq1.2" value="0" onclick="update_R()"> No</label><br>
-                                            <label class="radio-inline"><input type="radio" name="rq1" id="rq1.3" value="0" onclick="update_R()"> Standard unknown/unavailable</label>
+                                            <label class="radio-inline" id="lrq1.1"><input type="radio" name="rq1" id="rq1.1" value="0" onclick="update_R()"> Yes</label><br>
+                                            <label class="radio-inline" id="lrq1.2"><input type="radio" name="rq1" id="rq1.2" value="0" onclick="update_R()"> No</label><br>
+                                            <label class="radio-inline" id="lrq1.3"><input type="radio" name="rq1" id="rq1.3" value="0" onclick="update_R()"> Standard unknown/unavailable</label>
                                         </div>
                                     </div>
                                 </div>
@@ -755,10 +776,10 @@
 
                                     <div class="col-sm-6">
                                         <div id="rq2">
-                                            <label class="radio-inline"><input type="radio" name="rq2" id="rq2.1" value="0" onclick="update_R()"> Fully conformed</label><br>
-                                            <label class="radio-inline"><input type="radio" name="rq2" id="rq2.2" value="0" onclick="update_R()"> Somewhat conformed</label><br>
-                                            <label class="radio-inline"><input type="radio" name="rq2" id="rq2.3" value="0" onclick="update_R()"> Not conformed</label><br>
-                                            <label class="radio-inline"><input type="radio" name="rq2" id="rq2.4" value="0" onclick="update_R()"> Content description not specified</label>
+                                            <label class="radio-inline" id="lrq2.1"><input type="radio" name="rq2" id="rq2.1" value="0" onclick="update_R()"> Fully conformed</label><br>
+                                            <label class="radio-inline" id="lrq2.2"><input type="radio" name="rq2" id="rq2.2" value="0" onclick="update_R()"> Somewhat conformed</label><br>
+                                            <label class="radio-inline" id="lrq2.3"><input type="radio" name="rq2" id="rq2.3" value="0" onclick="update_R()"> Not conformed</label><br>
+                                            <label class="radio-inline" id="lrq2.4"><input type="radio" name="rq2" id="rq2.4" value="0" onclick="update_R()"> Content description not specified</label>
                                         </div>
                                     </div>
 
@@ -774,9 +795,9 @@
 
                                     <div class="col-sm-6">
                                         <div id="rq3">
-                                            <label class="radio-inline"><input type="radio" name="rq3" id="rq3.1" value="0" onclick="update_R()"> Yes</label><br>
-                                            <label class="radio-inline"><input type="radio" name="rq3" id="rq3.2" value="0" onclick="update_R()"> No</label><br>
-                                            <label class="radio-inline"><input type="radio" name="rq3" id="rq3.3" value="0" onclick="update_R()"> Not applicable</label>
+                                            <label class="radio-inline" id="lrq3.1"><input type="radio" name="rq3" id="rq3.1" value="0" onclick="update_R()"> Yes</label><br>
+                                            <label class="radio-inline" id="lrq3.2"><input type="radio" name="rq3" id="rq3.2" value="0" onclick="update_R()"> No</label><br>
+                                            <label class="radio-inline" id="lrq3.3"><input type="radio" name="rq3" id="rq3.3" value="0" onclick="update_R()"> Not applicable</label>
                                         </div>
                                     </div>
                                 </div>
@@ -790,8 +811,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="rq4">
-                                            <label class="radio-inline"><input type="radio" name="rq4" id="rq4.1" value="0" onclick="update_R()"> Yes</label><br>
-                                            <label class="radio-inline"><input type="radio" name="rq4" id="rq4.2" value="0" onclick="update_R()"> No</label>
+                                            <label class="radio-inline" id="lrq4.1"><input type="radio" name="rq4" id="rq4.1" value="0" onclick="update_R()"> Yes</label><br>
+                                            <label class="radio-inline" id="lrq4.2"><input type="radio" name="rq4" id="rq4.2" value="0" onclick="update_R()"> No</label>
                                         </div>
                                     </div>
 
