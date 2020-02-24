@@ -8,8 +8,7 @@
     <title>FAIR self-assessment tool</title>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <!-- Bootstrap via CDN -->
     <link rel="stylesheet"
@@ -23,8 +22,15 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js">
-    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-analytics.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
 
     <!-- CSS -->
     <style>
@@ -80,6 +86,44 @@
     </style>
 
     <!-- Javascript -->
+    <script>
+          var ORGANIZATION = 'DANS';
+
+          // Your web app's Firebase configuration
+          var firebaseConfig = {
+            apiKey: "AIzaSyAleoAwccon_mJ7rHxGXZeU97D28e8zZXA",
+            authDomain: "satifyd-koe-2.firebaseapp.com",
+            databaseURL: "https://satifyd-koe-2.firebaseio.com",
+            projectId: "satifyd-koe-2",
+            storageBucket: "satifyd-koe-2.appspot.com",
+            messagingSenderId: "403508005466",
+            appId: "1:403508005466:web:2033d6b60694489f6ba663",
+            measurementId: "G-4W2GJTQ6Z9"
+          };
+
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+
+          firebase.auth().signInAnonymously().then(
+             function() {
+                console.log('Logged in as Anonymous!')
+             })
+             .catch(function(error) {
+               var errorCode = error.code;
+               var errorMessage = error.message;
+               console.log(errorCode);
+               console.log(errorMessage);
+             }
+          );
+
+        function writeToSheet(answers) {
+            var organizationRef = firebase.database().ref('/assessment tool answers/' + ORGANIZATION);
+            let m = JSON.parse(answers);
+            organizationRef.push(m)
+        }
+
+    </script>
+
     <script>
         var letters = ["F", "A", "I", "R"]
         var fields = new Map([
@@ -138,21 +182,33 @@
         }
 
         function get_answers() {
-            let text = "";
+            let m = new Map();
+            var today = new Date();
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            m.set("date", date)
             for (let [letter, questions] of fields) {
                 for(let i = 0; i < questions.length; i++) {
-                    text += letter + (i + 1).toString() + "- ";
+                    let answers = "";
+                    <!-- question is e.g. "fq1" -->
+                    let question = letter.toLowerCase() + "q" + (i + 1).toString();
                     let number_of_answers = questions[i];
                     for (let j = 0; j < number_of_answers; j++) {
-                        <!-- question is e.g. "fq1.2" -->
-                        let question = letter.toLowerCase() + "q" + (i + 1).toString() + "." + (j + 1).toString();
-                        let answer = "l" + question;
-                        if (checked(question))
-                            text +=  document.getElementById(answer).textContent + "<br>";
+                        <!-- choice is e.g. "fq1.2" -->
+                        let choice = question + "." + (j + 1).toString();
+                        let answer = "l" + choice;
+                        if (checked(choice))
+                            answers +=  document.getElementById(answer).textContent + ",";
                     }
+                    m.set(question, answers);
                 }
             }
-            return text;
+            return JSON.stringify(Object.fromEntries(m));
+        }
+
+        function submit_page() {
+            let answers = get_answers();
+            write_to_modal("SUBMISSION", answers);
+<!--            writeToSheet(answers);-->
         }
 
         function uncheck(element) {
@@ -172,7 +228,7 @@
             $("#" + element).html(Math.round(score) + tail);
 
             var l = letter.toLowerCase();
-            if (l =="f") {fscore = score;} else if (l =="a") {ascore = score;} else if (l =="i") {iscore = score;} else if (l =="r") {rscore = score;}
+            if (l == "f") {fscore = score;} else if (l == "a") {ascore = score;} else if (l == "i") {iscore = score;} else if (l == "r") {rscore = score;}
         }
 
         function show_total_score() {
@@ -329,12 +385,6 @@
             document.getElementById("print-button").style.display = "block"
             document.getElementById("print-advice").style.display = "none"
             update();
-        }
-
-        function submit_page() {
-            if (valid_input()) {
-                write_to_modal("SUBMISSION", get_answers());
-            }
         }
 
     </script>
