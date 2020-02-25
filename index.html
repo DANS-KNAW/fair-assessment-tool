@@ -177,9 +177,9 @@
         ])
         var fscore, ascore, iscore, rscore = 0;
 
-        $('document').ready(initialise);
-
         /* -------------------- Initialize -------------------- */
+
+        $('document').ready(initialise);
 
         function initialise() {
             update();
@@ -188,6 +188,10 @@
             letters.forEach( function (letter) {document.getElementById(letter + "-advice").style.display = "none"});
             if(!window.print) {document.getElementById("print-button").style.display = "none"}
         }
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
 
         /* ----------- Get, check and uncheck values ----------- */
 
@@ -954,24 +958,24 @@
                 <div class="col-md-10">
                     <div class="row">
                         <br>
-                        <div class="col-md-3"></div>
-                        <div class="col-md-1">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
                             <div>
-                                <button id="submit-button" onclick="submit_page()"><i class="fa fa-paper-plane"> submit</i></button>
+                                <button id="submit-button" onclick="submit_page()" data-toggle="tooltip" data-placement="bottom" title="Submit your answers to the database.  No personal data will be stored."><i class="fa fa-paper-plane"> submit</i></button>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div  id="total-score">Your data is
                                 <span id="total-score-percent"></span>
                                 FAIR in EASY
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button class="hvr-fade" id="print-button" onclick="print_page()"><i class="fa fa-print"></i></button>
+                            <button class="hvr-fade" id="print-button" onclick="print_page()" data-toggle="tooltip" data-placement="bottom" title="Print your answers."><i class="fa fa-print"></i></button>
                         </div>
                         <div class="col-md-2">
                             <div>
-                                <button id="download-button" onclick="read_database()"><i class="fa fa-download" aria-hidden="true"></i></button>
+                                <button id="download-button" onclick="read_database()" data-toggle="tooltip" data-placement="bottom" title="Download answers in database."><i class="fa fa-download" aria-hidden="true"></i></button>
                             </div>
                         </div>
                         </i>
