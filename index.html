@@ -21,9 +21,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
-    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-analytics.js"></script>
-    <!-- Add Firebase products that you want to use -->
+    <!-- Firebase products -->
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
 
@@ -39,6 +37,7 @@
         a:hover {text-decoration: none;}
         button {color: #21618C; border: 0px;}
         button:hover {color: #000000; background-color: #f5f5f5 }
+        input {horizontal-align: 30px;}
         .w3-border{border:1px solid #ccc!important}
         .panel-heading .glyphicon-info-sign {font-size: 1.3em; color: #FFFFFF;}
         .panel-body .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
@@ -50,19 +49,19 @@
         .fa-external-link, .fa-envelope-o, .fa-long-arrow-left {color: #2795c8;}
         .fa-print, .fa-download {font-size: 50px; color: #2795c8;}
         .fa-paper-plane {font-size: 40px; color: #2795c8;}
-        .bubble a {color: #21618C;}
-        .bubble a:hover {color: #000000;}
-        .bubble {position: relative;}
-        .error {color: red;}
+<!--        .bubble a {color: #21618C;}-->
+<!--        .bubble a:hover {color: #000000;}-->
+<!--        .bubble {position: relative;}-->
+<!--        .error {color: red;}-->
         #main-title {font-size: 40px; color: #2795c8;}
-        #text-bubble-advice {position: absolute;top: 0px;left: 0px;}
-        #print-button {margin-left: 40px;}
-        #fscore {padding-top: 26px; padding-left: 10px; font-size: 13px;}
-        #ascore {padding-top: 26px; padding-left: 10px; font-size: 13px;}
-        #iscore {padding-top: 26px; padding-left: 10px; font-size: 13px;}
-        #rscore {padding-top: 26px; padding-left: 10px; font-size: 13px;}
-        #total-score-percent {color: #2795c8;}
-        #total-score {font-size: 20px; text-align: center; margin-left: 0px; margin-right: 0px;}
+<!--        #text-bubble-advice {position: absolute;top: 0px;left: 0px;}-->
+<!--        #print-button {margin-left: 40px;}-->
+<!--        #fscore {padding-top: 26px; padding-left: 10px; font-size: 13px;}-->
+<!--        #ascore {padding-top: 26px; padding-left: 10px; font-size: 13px;}-->
+<!--        #iscore {padding-top: 26px; padding-left: 10px; font-size: 13px;}-->
+<!--        #rscore {padding-top: 26px; padding-left: 10px; font-size: 13px;}-->
+<!--        #total-score-percent {color: #2795c8;}-->
+<!--        #total-score {font-size: 20px; text-align: center; margin-left: 0px; margin-right: 0px;}-->
         #image-f, #image-a, #image-i, #image-r {padding-top: 10px;}
         @media (min-width: 768px) {
             div.col-md-2 {padding-left: 2px;}
@@ -76,7 +75,6 @@
             #total-score {font-size: 38px; text-align: center; margin-left: 50px; margin-right: 50px;}
         }
         @media print {.pagebreak { page-break-before: always; }}
-        input {horizontal-align: 30px;}
 
     </style>
 
@@ -89,14 +87,14 @@
 
         /* ---------------- Initialize database ---------------- */
         var firebaseConfig = {
-            apiKey: "AIzaSyAleoAwccon_mJ7rHxGXZeU97D28e8zZXA",
-            authDomain: "satifyd-koe-2.firebaseapp.com",
-            databaseURL: "https://satifyd-koe-2.firebaseio.com",
-            projectId: "satifyd-koe-2",
-            storageBucket: "satifyd-koe-2.appspot.com",
-            messagingSenderId: "403508005466",
-            appId: "1:403508005466:web:2033d6b60694489f6ba663",
-            measurementId: "G-4W2GJTQ6Z9"
+            apiKey: "AIzaSyDsr2V2uWRlzXxDQHGR8zHT4G3qYZf0ONI",
+            authDomain: "fairisfairassessmenttool.firebaseapp.com",
+            databaseURL: "https://fairisfairassessmenttool.firebaseio.com",
+            projectId: "fairisfairassessmenttool",
+            storageBucket: "fairisfairassessmenttool.appspot.com",
+            messagingSenderId: "470559628312",
+            appId: "1:470559628312:web:71d3dd6864613dcda7f76d",
+            measurementId: "G-KCVM33DGND"
         };
 
         // Initialize Firebase
@@ -107,23 +105,29 @@
                 console.log('Logged in as Anonymous!')
              })
              .catch(function(error) {
-               var errorCode = error.code;
-               var errorMessage = error.message;
-               console.log(errorCode);
-               console.log(errorMessage);
+                write_to_modal("SIGN IN", error.message + "  " +  error.code);
              }
         );
 
         /* ---------------- Write to database ---------------- */
+
         function submit_page() {
-            let answers = get_answers();
-            writeToSheet(answers);
+            if (valid_input()) {
+                let answers = get_answers();
+                writeToSheet(answers);
+            }
         }
 
         function writeToSheet(answers) {
             var organizationRef = firebase.database().ref('/assessment tool answers/' + ORGANIZATION);
             let m = JSON.parse(answers);
-            organizationRef.push(m)
+            organizationRef.push(m, function(error) {
+                if (error) {
+                    write_to_modal("SUBMISSION", error.message);
+                } else {
+                    write_to_modal("SUBMISSION", "Answers were succesfully submitted into the database");
+                }
+            })
         }
 
         /* ---------------- Download database ---------------- */
@@ -278,18 +282,6 @@
         function update_F() {
             var fscore5 = get_value("fq5.1") + get_value("fq5.2");
             if (fscore5 > 0) { uncheck("fq5.3")}
-<!--            var fscore1 = parseInt($("#fq1").val());-->
-<!--            var fscore2 = get_value("fq2.1") + get_value("fq2.2") + get_value("fq2.3");-->
-<!--            if (fscore2 > 0) { uncheck("fq2.4")}-->
-<!--            var fscore3 = get_value("fq3.1") + get_value("fq3.2") + get_value("fq3.3");-->
-<!--            var f_1_sel = document.getElementById("fq1").selectedIndex;-->
-<!--            if (f_1_sel == 3 && (fscore2 > 0 || fscore3 > 0)) {-->
-<!--                if (fscore2 > 0) { fscore2 = 0; uncheck("fq2.1"); uncheck("fq2.2"); uncheck("fq2.3") };-->
-<!--                if (fscore3 > 0) { fscore3 = 0; uncheck("fq3.1"); uncheck("fq3.2"); uncheck("fq3.3") };-->
-<!--                show_modal('F-i-contradiction')-->
-<!--             }-->
-<!--            fscore2 += get_value("fq2.4")-->
-<!--            var fscore = fscore1 + fscore2 + fscore3;-->
 <!--            show_letter("F", "fscore", fscore)-->
         }
 
@@ -305,16 +297,14 @@
 
         /* ----------------------- A ----------------------- */
         function update_A() {
-<!--            var ascore1 = get_value("aq1.1") + get_value("aq1.2") + get_value("aq1.3");-->
-<!--            var ascore2 = get_value("aq2.1") + get_value("aq2.2");-->
-<!--            var ascore3 = parseInt($("#aq3").val());-->
-<!--            var q_3_sel = document.getElementById("aq3").selectedIndex;-->
-<!--            if (checked("aq2.1") && q_3_sel == 0) {-->
-<!--                show_modal('A-i-contradiction');-->
-<!--                ascore3 = 0;-->
-<!--                document.getElementById("aq3").selectedIndex = 5;-->
-<!--            }-->
-<!--            var ascore = ascore1 + ascore2 + ascore3;-->
+            if (!checked("aq2.2")) {
+                uncheck("aq3.1");
+                uncheck("aq3.2");
+            }
+            if (!checked("aq2.3")) {
+                uncheck("aq4.1");
+                uncheck("aq4.2");
+            }
 <!--            show_letter("A", "ascore", ascore);-->
         }
 
@@ -332,11 +322,6 @@
         function update_I() {
             var iscore1 = get_value("iq1.1") + get_value("iq1.2");
             if (iscore1 > 0) { uncheck("iq1.3")}
-<!--            var iscore1 = parseInt($("#iq1").val());-->
-<!--            var iscore2 = parseInt($("#iq2").val());-->
-<!--            var iscore3 = get_value("iq3.1") + get_value("iq3.2") + get_value("iq3.3");-->
-<!--            if (iscore3 > 0) { uncheck("iq3.4")}-->
-<!--            var iscore = iscore1 + iscore2 + iscore3;-->
 <!--            show_letter("I", "iscore", iscore);-->
         }
 
@@ -353,10 +338,6 @@
 
         /* ----------------------- R ----------------------- */
         function update_R() {
-<!--            var rscore1 = get_value("rq1.1") + get_value("rq1.2") + get_value("rq1.3") + get_value("rq1.4") + get_value("rq1.5");-->
-<!--            var rscore2 = parseInt($("#rq2").val());-->
-<!--            var rscore3 = parseInt($("#rq3").val());-->
-<!--            var rscore = rscore1 + rscore2 + rscore3;-->
 <!--            show_letter("R", "rscore", rscore);-->
         }
 
@@ -373,6 +354,16 @@
 
         /* ---------------------------- Print --------------------------- */
 
+        function print_page() {
+<!--            letters.forEach(add_letter_advice);-->
+            document.getElementById("icons").style.display = "none"
+            document.getElementById("print-advice").style.display = "none"
+            window.print();
+            document.getElementById("icons").style.display = "block"
+            document.getElementById("print-advice").style.display = "block"
+            update();
+        }
+
         function add_letter_advice(letter) {
             document.getElementById(letter + "-advice").style.display = "none"
             let {title, contents} = advice_contents(letter)
@@ -380,17 +371,7 @@
             $("#" + letter + "-print-advice-contents").html(contents);
         }
 
-        function print_page() {
-            letters.forEach(add_letter_advice);
-            document.getElementById("print-button").style.display = "none"
-            document.getElementById("print-advice").style.display = "block"
-            window.print();
-            document.getElementById("print-button").style.display = "block"
-            document.getElementById("print-advice").style.display = "none"
-            update();
-        }
-
-        /* ------------------ Validate and retrieve answers --------------- */
+        /* ------------------ Validate answers --------------- */
 
         function valid_input() {
             let text = "";
@@ -398,13 +379,15 @@
                 for(let i = 0; i < questions.length; i++) {
                     let number_of_answers = questions[i];
                     let answered = false;
+                    <!-- question is e.g. "fq1" -->
+                    let question = letter.toLowerCase() + "q" + (i + 1).toString();
                     for (let j = 0; j < number_of_answers; j++) {
-                        <!-- question is e.g. "fq1.2" -->
-                        let question = letter.toLowerCase() + "q" + (i + 1).toString() + "." + (j + 1).toString();
-                        if (checked(question))
+                        <!-- choice is e.g. "fq1.2" -->
+                        let choice = question + "." + (j + 1).toString();
+                        if (checked(choice))
                             answered = true;
                     }
-                    if (!answered) {
+                    if (!answered && !excluded(question)) {
                         <!-- question_key is e.g. "F-i-1-title" -->
                         question_key = letter + "-i-" + (i + 1).toString() + "-title";
                         text +=  document.getElementById(question_key).textContent + "<br><br>";
@@ -417,6 +400,21 @@
             }
             return true;
         }
+
+        function excluded(question) {
+            <!-- questions about embargoed access and/or restricted access excluded from validation? -->
+            return question == "aq3" && !embargoed_access() || question == "aq4" && !restricted_access();
+        }
+
+        function embargoed_access() {
+            return checked("aq2.2")
+        }
+
+        function restricted_access() {
+            return checked("aq2.3")
+        }
+
+        /* ------------------ Retrieve answers --------------- */
 
         function get_answers() {
             let m = new Map();
@@ -435,7 +433,7 @@
                         let choice = question + "." + (j + 1).toString();
                         let answer = "l" + choice;
                         if (checked(choice)) {
-                            answers +=  (first ? "" : " - ") + document.getElementById(answer).textContent.replace(/,/g, " ").trim();;
+                            answers +=  (first ? "" : " AND ") + document.getElementById(answer).textContent.replace(/,/g, " ").trim();
                             first = false;
                         }
                     }
@@ -478,9 +476,9 @@
                         <p>
                             Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
                         </p>
-                    <p>
-                        Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur
-                    </p>
+                        <p>
+                            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur
+                        </p>
                     <br>
                 </div>
             </div>
@@ -949,12 +947,12 @@
                 <br>
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
-                    <div class="row">
+                    <div class="row" id="icons">
                         <br>
                         <div class="col-md-1"></div>
                         <div class="col-md-3">
                             <div>
-                                <button id="submit-button" onclick="submit_page()" data-toggle="tooltip" data-placement="bottom" title="Submit your answers to the database.  No personal data will be stored."><i class="fa fa-paper-plane"> submit</i></button>
+                                <button id="submit-button" onclick="submit_page()" data-toggle="tooltip" data-placement="bottom" title="Submit your answers into the database.  No personal data will be stored."><i class="fa fa-paper-plane"> submit</i></button>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -964,7 +962,7 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button class="hvr-fade" id="print-button" onclick="print_page()" data-toggle="tooltip" data-placement="bottom" title="Print your answers."><i class="fa fa-print"></i></button>
+                            <button id="print-button" onclick="print_page()" data-toggle="tooltip" data-placement="bottom" title="Print your answers."><i class="fa fa-print"></i></button>
                         </div>
                         <div class="col-md-2">
                             <div>
