@@ -179,6 +179,13 @@
             ['I', [3, 2]],
             ['R', [3, 4, 3, 2]]
         ])
+        var abbreviations = new Map([
+            <!-- Abbreviations of some answers to make downloaded data more readeable -->
+            ['fq5.1', 'Structured data'],
+            ['fq5.2', 'Metadata registry'],
+            ['iq1.1', 'Embedded'],
+            ['iq1.2', 'Linked data'],
+        ])
         var fscore, ascore, iscore, rscore = 0;
 
         /* -------------------- Initialize -------------------- */
@@ -431,18 +438,26 @@
                     for (let j = 0; j < number_of_answers; j++) {
                         <!-- choice is e.g. "fq1.2" -->
                         let choice = question + "." + (j + 1).toString();
-                        let answer = "l" + choice;
                         if (checked(choice)) {
-                            answers +=  (first ? "" : " AND ") + document.getElementById(answer).textContent.replace(/,/g, " ").trim();
+                            answers +=  (first ? "" : " AND ") + get_answer(choice);
                             first = false;
                         }
                     }
                     m.set(question, answers);
                 }
             }
-            m.set("fb_purpose", document.getElementById("fb_purpose").value.replace(/,/g, " ").trim())
-            m.set("fb_general", document.getElementById("fb_general").value.replace(/,/g, " ").trim())
+            m.set("fb_purpose", document.getElementById("fb_purpose").value.replace(/(\n)+/g, " ").trim())
+            m.set("fb_general", document.getElementById("fb_general").value.replace(/(\n)+/g, " ").trim())
             return JSON.stringify(Object.fromEntries(m));
+        }
+
+        function get_answer(choice) {
+            if (abbreviations.has(choice)) {
+                return abbreviations.get(choice)
+            } else {
+                let answer = "l" + choice;
+                return document.getElementById(answer).textContent.replace(/,/g, " ").trim().substr(0, 50);
+            }
         }
 
     </script>
