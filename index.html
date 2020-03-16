@@ -80,7 +80,7 @@
 
     <!-- Javascript -->
 
-    <!-- Firebase scripts -->
+    <!-- Database scripts -->
     <script>
         var ORGANIZATION = 'DANS';
         var DOWNLOAD_FILE_NAME = 'assessment_answers.csv';
@@ -100,21 +100,18 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
-        firebase.auth().signInAnonymously().then(
-             function() {
-                console.log('Logged in as Anonymous!')
-             })
-             .catch(function(error) {
-                write_to_modal("SIGN IN", error.message + "  " +  error.code);
-             }
-        );
-
         /* ---------------- Write to database ---------------- */
 
         function submit_page() {
             if (valid_input()) {
-                let answers = get_answers();
-                writeToSheet(answers);
+                firebase.auth().signInAnonymously()
+                .then(function() {
+                    let answers = get_answers();
+                    writeToSheet(answers);
+                })
+                .catch(function(error) {
+                    write_to_modal("SIGN IN", error.message + "  " +  error.code);
+                });
             }
         }
 
@@ -148,7 +145,18 @@
                                     );
                     });
                 });
-                downloadAnswers(answers);
+
+                let email = prompt("Your email\n (download is accessible only to people who have an account) ", "");
+                if (email) {
+                    let password = prompt("password", "");
+                    firebase.auth().signInWithEmailAndPassword(email, password)
+                    .then(function() {
+                        downloadAnswers(answers);
+                     })
+                     .catch(function(error) {
+                        write_to_modal("SIGN IN", error.message + "  " +  error.code);
+                    });
+                }
             });
         }
 
@@ -179,8 +187,8 @@
             ['I', [3, 2]],
             ['R', [3, 4, 3, 2]]
         ])
-        var abbreviations = new Map([
-            <!-- Abbreviations of some answers to make downloaded data more readeable -->
+        var short_answers = new Map([
+            <!-- Shortened answers to make downloaded data more readeable -->
             ['fq5.1', 'Structured data'],
             ['fq5.2', 'Metadata registry'],
             ['iq1.1', 'Embedded'],
@@ -458,8 +466,8 @@
         }
 
         function get_answer(choice) {
-            if (abbreviations.has(choice)) {
-                return abbreviations.get(choice)
+            if (short_answers.has(choice)) {
+                return short_answers.get(choice)
             } else {
                 let answer = "l" + choice;
                 return document.getElementById(answer).textContent.replace(/,/g, " ").trim().substr(0, 50);
@@ -1023,8 +1031,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!-- ======================================= Modal window  ======================================= -->
 
