@@ -108,6 +108,7 @@
                 .then(function() {
                     let answers = get_answers();
                     writeToSheet(answers);
+                    firebase.auth().signOut();
                 })
                 .catch(function(error) {
                     write_to_modal("SIGN IN", error.message + "  " +  error.code);
@@ -129,6 +130,21 @@
 
         /* ---------------- Download database ---------------- */
         function read_database() {
+            let email = prompt("Your email\n (download is accessible only to people who have an account) ", "");
+            if (email) {
+                let password = prompt("password", "");
+                firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(function() {
+                    download();
+                    firebase.auth().signOut();
+                 })
+                 .catch(function(error) {
+                    write_to_modal("SIGN IN", error.message + "  " +  error.code);
+                });
+            }
+        }
+
+        function download() {
             var answers = [];
             var ref = firebase.database().ref("assessment tool answers/");
             ref.on("value", function(snapshot) {
@@ -145,18 +161,7 @@
                                     );
                     });
                 });
-
-                let email = prompt("Your email\n (download is accessible only to people who have an account) ", "");
-                if (email) {
-                    let password = prompt("password", "");
-                    firebase.auth().signInWithEmailAndPassword(email, password)
-                    .then(function() {
-                        downloadAnswers(answers);
-                     })
-                     .catch(function(error) {
-                        write_to_modal("SIGN IN", error.message + "  " +  error.code);
-                    });
-                }
+                downloadAnswers(answers);
             });
         }
 
