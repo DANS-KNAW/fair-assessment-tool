@@ -287,18 +287,9 @@
 
         function print_page() {
             document.getElementById("icons").style.display = "none"
-            document.getElementById("print-advice").style.display = "none"
             window.print();
             document.getElementById("icons").style.display = "block"
-            document.getElementById("print-advice").style.display = "block"
             update();
-        }
-
-        function add_letter_advice(letter) {
-            document.getElementById(letter + "-advice").style.display = "none"
-            let {title, contents} = advice_contents(letter)
-            $("#" + letter + "-print-advice-title").html(title);
-            $("#" + letter + "-print-advice-contents").html(contents);
         }
 
         /* ------------------ Validate answers --------------- */
@@ -892,21 +883,15 @@
                     <div class="row" id="icons">
                         <br>
                         <div class="col-md-1"></div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div>
                                 <button id="submit-button" onclick="submit_page()" data-toggle="tooltip" data-placement="bottom" title="Submit your answers into the database.  No personal data will be stored."><i class="fa fa-paper-plane"> submit</i></button>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div  id="total-score">Your data is
-                                <span id="total-score-percent"></span>
-                                FAIR in EASY
-                            </div>
-                        </div>
-                        <div class="col-md-2">
                             <button id="print-button" onclick="print_page()" data-toggle="tooltip" data-placement="bottom" title="Print your answers."><i class="fa fa-print"></i></button>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div>
                                 <button id="download-button" onclick="read_database()" data-toggle="tooltip" data-placement="bottom" title="Download answers in database."><i class="fa fa-download" aria-hidden="true"></i></button>
                             </div>
@@ -915,36 +900,10 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Advice texts for printing -->
-            <div id="print-advice">
-                <div class="pagebreak"></div>
-                <div>
-                    <br><br>
-                    <h4 id="F-print-advice-title"></h4>
-                    <div id="F-print-advice-contents"></div>
-                </div>
-                <div>
-                    <br><br>
-                    <h4 id="A-print-advice-title"></h4>
-                    <div id="A-print-advice-contents"></div>
-                </div>
-                <div class="pagebreak"></div>
-                <div>
-                    <br><br>
-                    <h4 id="I-print-advice-title"></h4>
-                    <div id="I-print-advice-contents"></div>
-                </div>
-                <div>
-                    <br><br>
-                    <h4 id="R-print-advice-title"></h4>
-                    <div id="R-print-advice-contents"></div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
-
+<br><br><br><br>
 <!-- ======================================= Modal window  ======================================= -->
 
 <div id="modal" class="modal fade" role="dialog">
