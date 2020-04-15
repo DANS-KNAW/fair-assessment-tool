@@ -49,19 +49,7 @@
         .fa-external-link, .fa-envelope-o, .fa-long-arrow-left {color: #2795c8;}
         .fa-print, .fa-download {font-size: 50px; color: #2795c8;}
         .fa-paper-plane {font-size: 40px; color: #2795c8;}
-<!--        .bubble a {color: #21618C;}-->
-<!--        .bubble a:hover {color: #000000;}-->
-<!--        .bubble {position: relative;}-->
-<!--        .error {color: red;}-->
         #main-title {font-size: 40px; color: #2795c8;}
-<!--        #text-bubble-advice {position: absolute;top: 0px;left: 0px;}-->
-<!--        #print-button {margin-left: 40px;}-->
-<!--        #fscore {padding-top: 26px; padding-left: 10px; font-size: 13px;}-->
-<!--        #ascore {padding-top: 26px; padding-left: 10px; font-size: 13px;}-->
-<!--        #iscore {padding-top: 26px; padding-left: 10px; font-size: 13px;}-->
-<!--        #rscore {padding-top: 26px; padding-left: 10px; font-size: 13px;}-->
-<!--        #total-score-percent {color: #2795c8;}-->
-<!--        #total-score {font-size: 20px; text-align: center; margin-left: 0px; margin-right: 0px;}-->
         #image-f, #image-a, #image-i, #image-r {padding-top: 10px;}
         @media (min-width: 768px) {
             div.col-md-2 {padding-left: 2px;}
@@ -229,44 +217,6 @@
             document.getElementById(element).checked = 0;
         }
 
-        /* ----------- Show letters, scores and advice ------------ */
-
-        function show_letter(letter, element, score) {
-            document.getElementById(("image-" + letter).toLowerCase()).src = "images/" + letter + "_" + Math.floor(Math.round(score) / 10) * 10 + ".jpg"
-            show_score(letter, element, score);
-            show_total_score();
-        }
-
-        function show_score(letter, element, score) {
-            var advice = document.getElementById(letter + "-advice")
-            advice.style.display = "block";
-            tail = Math.round(score) < 100.0 ? "% Want to improve?" : "% Well done!"
-            $("#" + element).html(Math.round(score) + tail);
-
-            var l = letter.toLowerCase();
-            if (l == "f") {fscore = score;} else if (l == "a") {ascore = score;} else if (l == "i") {iscore = score;} else if (l == "r") {rscore = score;}
-        }
-
-        function show_total_score() {
-            var total_score = Math.round(((fscore + ascore + iscore + rscore) / 4));
-            $("#total-score-percent").html(" " + total_score + "% ");
-            document.getElementById("total-score").style.display = "block"
-        }
-
-        function advice(letter) {
-            let {title, contents} = advice_contents(letter)
-            write_to_modal(title, contents);
-        }
-
-        function advice_contents(letter) {
-            switch (letter) {
-                case "F": return advice_F();
-                case "A": return advice_A();
-                case "I": return advice_I();
-                case "R": return advice_R();
-            }
-        }
-
         /* ----------- Show text in modal window ------------ */
 
         function show_modal(id_prefix) {
@@ -290,34 +240,17 @@
             to the score for 'Findable'.
             q refers to a question, for example, '#fq1' is a reference to question 1 for Findable.
             */
-            update_F();
             update_A();
-            update_I();
-            update_R();
         }
 
         /* ----------------------- F ----------------------- */
         function update_F() {
-            var fscore5 = get_value("fq5.1") + get_value("fq5.2");
-            if (fscore5 > 0) { uncheck("fq5.3")}
-<!--            show_letter("F", "fscore", fscore)-->
         }
-
-<!--        function advice_F() {-->
-<!--            var title = document.getElementById("F-advice-title").textContent;-->
-<!--            var q_1_sel = document.getElementById("fq1").selectedIndex;-->
-<!--            var a_1 = document.getElementById("F-advice-1." + q_1_sel).innerHTML;-->
-<!--            var a_2 = document.getElementById("F-advice-2." + checked("fq2.1") + "-" + checked("fq2.2") + "-" + checked("fq2.3")).innerHTML;-->
-<!--            var a_3 = document.getElementById("F-advice-3." + checked("fq3.1") + "-" + checked("fq3.2") + "-" + checked("fq3.3")).innerHTML;-->
-<!--            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;-->
-<!--            return {title, contents};-->
-<!--        }-->
 
         /* ----------------------- A ----------------------- */
         function update_A() {
             if (!get_value("aq1.1")) {
                 uncheck("aq2.1"); uncheck("aq2.2"); uncheck("aq2.3"); uncheck("aq2.4"); uncheck("aq2.5");
-
             }
             if (!checked("aq2.2")) {
                 uncheck("aq3.1"); uncheck("aq3.2");
@@ -325,57 +258,19 @@
             if (!checked("aq2.3")) {
                 uncheck("aq4.1"); uncheck("aq4.2");
             }
-<!--            show_letter("A", "ascore", ascore);-->
         }
-
-<!--        function advice_A() {-->
-<!--            var title = document.getElementById("A-advice-title").textContent;-->
-<!--            var a_1 = document.getElementById("A-advice-1." + checked("aq1.1") + "-" + checked("aq1.2") + "-" + checked("aq1.3")).innerHTML;-->
-<!--            var a_2 = "";-->
-<!--            var q_3_sel = document.getElementById("aq3").selectedIndex;-->
-<!--            var a_3 = document.getElementById("A-advice-3." + q_3_sel).innerHTML;-->
-<!--            var contents = a_1 + "<br><br>" + a_3;-->
-<!--            return {title, contents};-->
-<!--        }-->
 
         /* ------------------------ I ----------------------- */
         function update_I() {
-            var iscore1 = get_value("iq1.1") + get_value("iq1.2");
-            if (iscore1 > 0) { uncheck("iq1.3")}
-<!--            show_letter("I", "iscore", iscore);-->
         }
-
-<!--        function advice_I() {-->
-<!--            var title = document.getElementById("I-advice-title").textContent;-->
-<!--            var q_1_sel = document.getElementById("iq1").selectedIndex;-->
-<!--            var q_2_sel = document.getElementById("iq2").selectedIndex;-->
-<!--            var a_1 = document.getElementById("I-advice-1." + q_1_sel).innerHTML;-->
-<!--            var a_2 = document.getElementById("I-advice-2." + q_2_sel).innerHTML;-->
-<!--            var a_3 = document.getElementById("I-advice-3." + checked("iq3.1") + "-" + checked("iq3.2") + "-" + checked("iq3.3")).innerHTML;-->
-<!--            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;-->
-<!--            return {title, contents};-->
-<!--        }-->
 
         /* ----------------------- R ----------------------- */
         function update_R() {
-<!--            show_letter("R", "rscore", rscore);-->
         }
-
-<!--        function advice_R() {-->
-<!--            var title = document.getElementById("R-advice-title").textContent;-->
-<!--            var a_1 = document.getElementById("R-advice-1").innerHTML;-->
-<!--            var q_2_sel = document.getElementById("rq2").selectedIndex;-->
-<!--            var q_3_sel = document.getElementById("rq3").selectedIndex;-->
-<!--            var a_2 = document.getElementById("R-advice-2." + q_2_sel).innerHTML;-->
-<!--            var a_3 = document.getElementById("R-advice-3." + q_3_sel).innerHTML;-->
-<!--            var contents = a_1 + "<br><br>" + a_2 + "<br><br>" + a_3;-->
-<!--            return {title, contents};-->
-<!--        }-->
 
         /* ---------------------------- Print --------------------------- */
 
         function print_page() {
-<!--            letters.forEach(add_letter_advice);-->
             document.getElementById("icons").style.display = "none"
             document.getElementById("print-advice").style.display = "none"
             window.print();
