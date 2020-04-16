@@ -185,7 +185,6 @@
             ['iq1.1', 'Embedded'],
             ['iq1.2', 'Linked data'],
         ])
-        var fscore, ascore, iscore, rscore = 0;
 
         /* -------------------- Initialize -------------------- */
 
@@ -194,8 +193,6 @@
         function initialise() {
             update();
             document.getElementById("texts").style.display = "none"
-            document.getElementById("total-score").style.display = "none"
-            letters.forEach( function (letter) {document.getElementById(letter + "-advice").style.display = "none"});
             if(!window.print) {document.getElementById("print-button").style.display = "none"}
         }
 
@@ -245,9 +242,8 @@
         function update() {
             /*
             In all of the following variable names, if there is a prefix of [fair], it stands for
-            Findable, Accessible, Interoperable and Reusable respectively.  For example, fscore refers
-            to the score for 'Findable'.
-            q refers to a question, for example, '#fq1' is a reference to question 1 for Findable.
+            Findable, Accessible, Interoperable and Reusable respectively. Letter q refers to a question,
+            and letter a to an answer. For example, '#aq1' is a reference to question 1 for Accessible.
             */
             update_A();
         }
