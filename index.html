@@ -50,6 +50,7 @@
         .fa-external-link, .fa-envelope-o, .fa-long-arrow-left {color: #2795c8;}
         .fa-print, .fa-download {font-size: 50px; color: #2795c8;}
         .fa-paper-plane {font-size: 40px; color: #2795c8;}
+        .work-category {color: #606060;}
         #main-title {font-size: 40px; color: #2795c8;}
         #intro-small {font-size: 12px;}
         #intro-team {font-style: italic; color: #2795c8;}
@@ -175,11 +176,11 @@
         var fields = new Map([
             <!-- For each letter (or 'about you' questions) an array where the first item marks the first question, the second item the second question, etc. -->
             <!-- The value of the item is the number of possible answers to the respective question -->
-            ['Y', [7, 7]],
+            ['Y', [14, 6, 9]],
             ['F', [2, 2, 3, 2, 3]],
-            ['A', [2, 5, 2, 2, 2]],
+            ['A', [5, 2, 2, 2]],
             ['I', [3, 2]],
-            ['R', [3, 4, 3, 2]]
+            ['R', [2, 3, 2, 3, 3, 3]]
         ])
         var short_answers = new Map([
             <!-- Shortened answers to make downloaded data more readeable -->
@@ -249,7 +250,10 @@
             Findable, Accessible, Interoperable and Reusable respectively. Letter q refers to a question,
             and letter a to an answer. For example, '#aq1' is a reference to question 1 for Accessible.
             */
+            update_F();
             update_A();
+            update_I();
+            update_R();
         }
 
         /* ----------------------- F ----------------------- */
@@ -258,20 +262,15 @@
 
         /* ----------------------- A ----------------------- */
         function update_A() {
-            if (!get_value("aq1.1")) {
-                disable(["aq2.1", "aq2.2", "aq2.3", "aq2.4", "aq2.5"]);
+            if (!checked("aq1.2")) {
+                disable(["aq2.1", "aq2.2"]);
             } else {
-                enable(["aq2.1", "aq2.2", "aq2.3", "aq2.4", "aq2.5"]);
+                enable(["aq2.1", "aq2.2"]);
             }
-            if (!checked("aq2.2")) {
+            if (!checked("aq1.3")) {
                 disable(["aq3.1", "aq3.2"]);
-            } else {
-                enable(["aq3.1", "aq3.2"]);
-            }
-            if (!checked("aq2.3")) {
-                disable(["aq4.1", "aq4.2"]);
             }else {
-                enable(["aq4.1", "aq4.2"]);
+                enable(["aq3.1", "aq3.2"]);
             }
         }
 
@@ -281,6 +280,11 @@
 
         /* ----------------------- R ----------------------- */
         function update_R() {
+            if (!checked("rq1.1")) {
+                disable(["rq2.1", "rq2.2", "rq2.3"]);
+            } else {
+                enable(["rq2.1", "rq2.2", "rq2.3"]);
+            }
         }
 
         /* ---------------------------- Print --------------------------- */
@@ -323,20 +327,20 @@
         }
 
         function excluded(question) {
-            <!-- questions about access level / embargoed access / restricted access excluded from validation? -->
-            return question == "aq2" && !access_level() || question == "aq3" && !embargoed_access() || question == "aq4" && !restricted_access();
-        }
-
-        function access_level() {
-            return get_value("aq1.1")
+            <!-- questions embargoed access / restricted access excluded from validation? -->
+            return question == "aq2" && !embargoed_access() || question == "aq3" && !restricted_access() || question == "rq2" && !content_descriptions();
         }
 
         function embargoed_access() {
-            return checked("aq2.2")
+            return checked("aq1.2")
         }
 
         function restricted_access() {
-            return checked("aq2.3")
+            return checked("aq1.3")
+        }
+
+        function content_descriptions() {
+            return checked("rq1.1")
         }
 
         /* ------------------ Retrieve answers --------------- */
@@ -402,7 +406,7 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
-                    <div id="main-title">FairRate</div>
+                    <div id="main-title">FairAware</div>
                     <div id="introduction-text"></div>
                     <br>
                 </div>
@@ -420,17 +424,29 @@
                         </div>
                         <div class="col-md-9">
                             <div id="yq1">
-                                <label id="lyq1.1"><input type="checkbox" id="yq1.1"> Data computing and digital research infrastructures</label><br>
-                                <label id="lyq1.2"><input type="checkbox" id="yq1.2"> Energy</label><br>
-                                <label id="lyq1.3"><input type="checkbox" id="yq1.3"> Environment</label><br>
-                                <label id="lyq1.4"><input type="checkbox" id="yq1.4"> Health and food</label><br>
-                                <label id="lyq1.5"><input type="checkbox" id="yq1.5"> Physical science and engineering</label><br>
-                                <label id="lyq1.6"><input type="checkbox" id="yq1.6"> Social and cultural innovation</label><br>
-                                <label id="lyq1.7"><input type="checkbox" id="yq1.7"> Other</label>
+                                <span class="work-category">Humanities and Social Sciences</span><br>
+                                <label id="lyq1.1"><input type="checkbox" id="yq1.1"> Arts and Humanities</label><br>
+                                <label id="lyq1.2"><input type="checkbox" id="yq1.2"> Social and Behavioural sciences</label><br>
+                                <span class="work-category">Life Sciences</span><br>
+                                <label id="lyq1.3"><input type="checkbox" id="yq1.3"> Biology</label><br>
+                                <label id="lyq1.4"><input type="checkbox" id="yq1.4"> Medicine</label><br>
+                                <label id="lyq1.5"><input type="checkbox" id="yq1.5"> Agriculture, Forestry, Veterinary Medicine</label><br>
+                                <span class="work-category">Engineering Sciences</span><br>
+                                <label id="lyq1.6"><input type="checkbox" id="yq1.6"> Computer Science, Electrical and System Engineering</label><br>
+                                <label id="lyq1.7"><input type="checkbox" id="yq1.7"> Construction and Architecture</label><br>
+                                <label id="lyq1.8"><input type="checkbox" id="yq1.8"> Mechanical and Industrial Engineering</label><br>
+                                <label id="lyq1.9"><input type="checkbox" id="yq1.9"> Thermal/Process Engineering</label><br>
+                                <label id="lyq1.10"><input type="checkbox" id="yq1.10"> Materials Sciences</label><br>
+                                <span class="work-category">Natural Sciences</span><br>
+                                <label id="lyq1.11"><input type="checkbox" id="yq1.11"> Mathematics</label><br>
+                                <label id="lyq1.12"><input type="checkbox" id="yq1.12"> Physics and astronomy</label><br>
+                                <label id="lyq1.13"><input type="checkbox" id="yq1.13"> Chemistry</label><br>
+                                <label id="lyq1.14"><input type="checkbox" id="yq1.14"> Geosciences</label><br>
                             </div>
                         </div>
                     </div>
                     <br>
+
                     <div class="row">
                         <div class="col-md-3" id="Y-i-2-title">
                             <p>Which of the following describes your role? Please select all that apply. </p>
@@ -438,15 +454,35 @@
                         <div class="col-md-9">
                             <div id="yq2">
                                 <label id="lyq2.1"><input type="checkbox" id="yq2.1"> Researcher</label><br>
-                                <label id="lyq2.2"><input type="checkbox" id="yq2.2"> Policy maker or senior manager</label><br>
-                                <label id="lyq2.3"><input type="checkbox" id="yq2.3"> Research support or liaison</label><br>
-                                <label id="lyq2.4"><input type="checkbox" id="yq2.4"> User support/outreach provider</label><br>
-                                <label id="lyq2.5"><input type="checkbox" id="yq2.5"> Data steward or research data librarian</label><br>
-                                <label id="lyq2.6"><input type="checkbox" id="yq2.6"> Repository or scientific database provide</label><br>
-                                <label id="lyq2.7"><input type="checkbox" id="yq2.7"> Other</label>
+                                <label id="lyq2.2"><input type="checkbox" id="yq2.2"> Policy maker</label><br>
+                                <label id="lyq2.3"><input type="checkbox" id="yq2.3"> Research support</label><br>
+                                <label id="lyq2.4"><input type="checkbox" id="yq2.4"> Data steward or curator</label><br>
+                                <label id="lyq2.5"><input type="checkbox" id="yq2.5"> Data manager</label><br>
+                                <label id="lyq2.6"><input type="checkbox" id="yq2.6"> Other</label><br>
                             </div>
                         </div>
                     </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-3" id="Y-i-3-title">
+                            <p>Which of the following types of organisations best describes your employer? Please select all that apply.</p>
+                        </div>
+                        <div class="col-md-9">
+                            <div id="yq3">
+                                <label id="lyq3.1"><input type="checkbox" id="yq3.1"> Research Infrastructure</label><br>
+                                <label id="lyq3.2"><input type="checkbox" id="yq3.2"> Repository or scientific data provider</label><br>
+                                <label id="lyq3.3"><input type="checkbox" id="yq3.3"> University</label><br>
+                                <label id="lyq3.4"><input type="checkbox" id="yq3.4"> Research Organisation</label><br>
+                                <label id="lyq3.5"><input type="checkbox" id="yq3.5"> Data manager</label><br>
+                                <label id="lyq3.6"><input type="checkbox" id="yq3.6"> Government</label><br>
+                                <label id="lyq3.7"><input type="checkbox" id="yq3.7"> Funder</label><br>
+                                <label id="lyq3.8"><input type="checkbox" id="yq3.8"> Industry</label><br>
+                                <label id="lyq3.9"><input type="checkbox" id="yq3.9"> Other</label><br>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -503,7 +539,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="fq3" class="col-sm-6 col-form-label" id="F-i-3-title">
-                                        Are metadata elements provided to support data discovery and citation (e.g., creator, title, data identifier, publisher, publication date/year, summary/keywords describing the data)?
+                                        Are metadata elements provided to support data citation and discovery (creator, title, publisher, publication date, summary and keywords describing the data)?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -542,9 +578,9 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq5">
-                                            <label id="lfq5.1"><input type="checkbox" id="fq5.1" value="8.33" onclick="update_F()"> Metadata is offered as structured data on the data page for use<br>&nbsp;&nbsp;&nbsp;&nbsp;by a web search engine</label><br>
-                                            <label id="lfq5.2"><input type="checkbox" id="fq5.2" value="8.33" onclick="update_F()"> Metadata is offered through a metadata registry, e.g., general-<br>&nbsp;&nbsp;&nbsp;&nbsp;purpose, domain/discipline specific or institutional registries</label><br>
-                                            <label id="lfq5.3"><input type="checkbox" id="fq5.3" value="8.33" onclick="update_F()"> Metadata is not offered</label><br>
+                                            <label id="lfq5.1"><input type="checkbox" id="fq5.1" value="8.33" onclick="update_F()"> Metadata are  offered as structured data on the data page<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for use by a web search engine</label><br>
+                                            <label id="lfq5.2"><input type="checkbox" id="fq5.2" value="8.33" onclick="update_F()"> Metadata are offered through a web service or <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine harvestable</label><br>
+                                            <label id="lfq5.3"><input type="checkbox" id="fq5.3" value="8.33" onclick="update_F()"> Metadata are not offered</label><br>
                                         </div>
                                     </div>
                                 </div>
@@ -572,7 +608,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="aq1" class="col-sm-6 col-form-label" id="A-i-1-title">
-                                        Does the metadata include a statement on the level of access to the data?
+                                        Select the access level of the data and specify if the metadata includes the access level, and its related access information
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -580,14 +616,17 @@
 
                                     <div class="col-sm-6">
                                         <div id="aq1">
-                                            <label class="radio-inline" id="laq1.1"><input type="radio" name="aq1" id="aq1.1" value="50" onclick="update_A()"> Yes</label><br>
-                                            <label class="radio-inline" id="laq1.2"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A()" > No</label>
+                                            <label class="radio-inline" id="laq1.1"><input type="radio" name="aq1" id="aq1.1" value="0" onclick="update_A()"> Public access</label><br>
+                                            <label class="radio-inline" id="laq1.2"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A()"> Embargoed access</label><br>
+                                            <label class="radio-inline" id="laq1.3"><input type="radio" name="aq1" id="aq1.3" value="0" onclick="update_A()"> Restricted access</label><br>
+                                            <label class="radio-inline" id="laq1.4"><input type="radio" name="aq1" id="aq1.4" value="0" onclick="update_A()"> Closed access (metadata only)</label><br>
+                                            <label class="radio-inline" id="laq1.5"><input type="radio" name="aq1" id="aq1.5" value="0" onclick="update_A()" > No option to select an access level</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="aq2" class="col-sm-6 col-form-label" id="A-i-2-title">
-                                        If yes, select the level of access to the data
+                                        If the data is embargoed, does the metadata include the date the data will be released publically?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -595,17 +634,14 @@
 
                                     <div class="col-sm-6">
                                         <div id="aq2">
-                                            <label class="radio-inline" id="laq2.1"><input type="radio" name="aq2" id="aq2.1" value="0" onclick="update_A()"> Public access</label><br>
-                                            <label class="radio-inline" id="laq2.2"><input type="radio" name="aq2" id="aq2.2" value="0" onclick="update_A()"> Embargoed access</label><br>
-                                            <label class="radio-inline" id="laq2.3"><input type="radio" name="aq2" id="aq2.3" value="0" onclick="update_A()"> Restricted access</label><br>
-                                            <label class="radio-inline" id="laq2.4"><input type="radio" name="aq2" id="aq2.4" value="0" onclick="update_A()"> Metadata only access</label><br>
-                                            <label class="radio-inline" id="laq2.5"><input type="radio" name="aq2" id="aq2.5" value="0" onclick="update_A()" > None of the above</label>
+                                            <label class="radio-inline" id="laq2.1"><input type="radio" name="aq2" id="aq2.1" value="50" onclick="update_A()"> Yes</label><br>
+                                            <label class="radio-inline" id="laq2.2"><input type="radio" name="aq2" id="aq2.2" value="0" onclick="update_A()" > No</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="aq3" class="col-sm-6 col-form-label" id="A-i-3-title">
-                                        If the data is embargoed, does the metadata include the date the data will be released publically?
+                                        If access to the data is restricted, does the metadata include access conditions, e.g., point of contact or instructions to access the data?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -620,7 +656,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="aq4" class="col-sm-6 col-form-label" id="A-i-4-title">
-                                        If access to the data is restricted, does the metadata include access conditions, e.g., point of contact or instructions to access the data?
+                                        Will you  deposit your data in a repository which ensures that the metadata remains available once the dataset becomes unavailable?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-4')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -630,21 +666,6 @@
                                         <div id="aq4">
                                             <label class="radio-inline" id="laq4.1"><input type="radio" name="aq4" id="aq4.1" value="50" onclick="update_A()"> Yes</label><br>
                                             <label class="radio-inline" id="laq4.2"><input type="radio" name="aq4" id="aq4.2" value="0" onclick="update_A()" > No</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="aq5" class="col-sm-6 col-form-label" id="A-i-5-title">
-                                        Is there a statement indicating that the metadata remains available once the dataset becomes unavailable?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-5')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-
-                                    <div class="col-sm-6">
-                                        <div id="aq5">
-                                            <label class="radio-inline" id="laq5.1"><input type="radio" name="aq5" id="aq5.1" value="50" onclick="update_A()"> Yes</label><br>
-                                            <label class="radio-inline" id="laq5.2"><input type="radio" name="aq5" id="aq5.2" value="0" onclick="update_A()" > No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -671,7 +692,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="iq1" class="col-sm-6 col-form-label" id="I-i-1-title">
-                                        Does the metadata use any semantic vocabularies (e.g. ontologies, thesauri, taxonomies)?
+                                        Are semantic vocabularies (e.g., ontologies, thesauri, taxonomies) used in the metadata?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -679,15 +700,15 @@
 
                                     <div class="col-sm-6">
                                         <div id="iq1">
-                                            <label id="liq1.1"><input type="checkbox" id="iq1.1" value="8.33" onclick="update_I()"> Yes, semantic vocabularies embedded in the metadata</label><br>
-                                            <label id="liq1.2"><input type="checkbox" id="iq1.2" value="8.33" onclick="update_I()"> Yes, metadata is published as linked data using semantic<br>&nbsp;&nbsp;&nbsp;&nbsp;vocabularies</label><br>
+                                            <label id="liq1.1"><input type="checkbox" id="iq1.1" value="8.33" onclick="update_I()"> Yes, metadata is available as Linked Data</label><br>
+                                            <label id="liq1.2"><input type="checkbox" id="iq1.2" value="8.33" onclick="update_I()"> Yes, semantic vocabularies embedded in the metadata page<br>&nbsp;&nbsp;&nbsp;&nbsp;vocabularies</label><br>
                                             <label id="liq1.3"><input type="checkbox" id="iq1.3" value="8.33" onclick="update_I()"> No</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="iq2" class="col-sm-6 col-form-label" id="I-i-2-title">
-                                        Does the metadata include qualified references (links) between the data and its related entities?
+                                        Does the metadata include meaningful links between the data and its related entities?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -725,7 +746,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="rq1" class="col-sm-6 col-form-label" id="R-i-1-title">
-                                        Does the metadata meet a community-endorsed standard?
+                                        Are  content descriptions specified in the metadata?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -734,15 +755,13 @@
                                     <div class="col-sm-6">
                                         <div id="rq1">
                                             <label class="radio-inline" id="lrq1.1"><input type="radio" name="rq1" id="rq1.1" value="0" onclick="update_R()"> Yes</label><br>
-                                            <label class="radio-inline" id="lrq1.2"><input type="radio" name="rq1" id="rq1.2" value="0" onclick="update_R()"> No</label><br>
-                                            <label class="radio-inline" id="lrq1.3"><input type="radio" name="rq1" id="rq1.3" value="0" onclick="update_R()"> Standard unknown/unavailable</label>
+                                            <label class="radio-inline" id="lrq1.2"><input type="radio" name="rq1" id="rq1.2" value="0" onclick="update_R()"> No</label>
                                         </div>
                                     </div>
                                 </div>
-                                <br>
                                 <div class="form-group row">
                                     <label for="rq2" class="col-sm-6 col-form-label" id="R-i-2-title">
-                                        Do the content descriptions specified in the metadata conform with the data?
+                                        If yes, do they conform with the data?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -750,15 +769,13 @@
 
                                     <div class="col-sm-6">
                                         <div id="rq2">
-                                            <label class="radio-inline" id="lrq2.1"><input type="radio" name="rq2" id="rq2.1" value="0" onclick="update_R()"> Fully conformed</label><br>
-                                            <label class="radio-inline" id="lrq2.2"><input type="radio" name="rq2" id="rq2.2" value="0" onclick="update_R()"> Somewhat conformed</label><br>
-                                            <label class="radio-inline" id="lrq2.3"><input type="radio" name="rq2" id="rq2.3" value="0" onclick="update_R()"> Not conformed</label><br>
-                                            <label class="radio-inline" id="lrq2.4"><input type="radio" name="rq2" id="rq2.4" value="0" onclick="update_R()"> Content description not specified</label>
+                                            <label class="radio-inline" id="lrq2.1"><input type="radio" name="rq2" id="rq2.1" value="0" onclick="update_R()"> Fully conforming </label><br>
+                                            <label class="radio-inline" id="lrq2.2"><input type="radio" name="rq2" id="rq2.2" value="0" onclick="update_R()"> Somewhat conforming</label><br>
+                                            <label class="radio-inline" id="lrq2.3"><input type="radio" name="rq2" id="rq2.3" value="0" onclick="update_R()"> Not conforming</label>
                                         </div>
                                     </div>
 
                                 </div>
-                                <br>
                                 <div class="form-group row">
                                     <label for="rq3" class="col-sm-6 col-form-label" id="R-i-3-title">
                                         Does the metadata include licence information under which the data can be reused?
@@ -770,14 +787,13 @@
                                     <div class="col-sm-6">
                                         <div id="rq3">
                                             <label class="radio-inline" id="lrq3.1"><input type="radio" name="rq3" id="rq3.1" value="0" onclick="update_R()"> Yes</label><br>
-                                            <label class="radio-inline" id="lrq3.2"><input type="radio" name="rq3" id="rq3.2" value="0" onclick="update_R()"> No</label><br>
-                                            <label class="radio-inline" id="lrq3.3"><input type="radio" name="rq3" id="rq3.3" value="0" onclick="update_R()"> Not applicable</label>
+                                            <label class="radio-inline" id="lrq3.2"><input type="radio" name="rq3" id="rq3.2" value="0" onclick="update_R()"> No</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="rq4" class="col-sm-6 col-form-label" id="R-i-4-title">
-                                        Is the data available in a standard file format?
+                                        Is provenance information on collection or generation of data  (sources, date, contributors, version) included in the metadata?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-4')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -785,11 +801,43 @@
 
                                     <div class="col-sm-6">
                                         <div id="rq4">
-                                            <label class="radio-inline" id="lrq4.1"><input type="radio" name="rq4" id="rq4.1" value="0" onclick="update_R()"> Yes</label><br>
-                                            <label class="radio-inline" id="lrq4.2"><input type="radio" name="rq4" id="rq4.2" value="0" onclick="update_R()"> No</label>
+                                            <label class="radio-inline" id="lrq4.1"><input type="radio" name="rq4" id="rq4.1" value="0" onclick="update_R()"> Completely provided</label><br>
+                                            <label class="radio-inline" id="lrq4.2"><input type="radio" name="rq4" id="rq4.2" value="0" onclick="update_R()"> Partially provided</label><br>
+                                            <label class="radio-inline" id="lrq4.3"><input type="radio" name="rq4" id="rq4.3" value="0" onclick="update_R()"> Not provided</label>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="rq5" class="col-sm-6 col-form-label" id="R-i-5-title">
+                                        Does the metadata follow the specifications of a community-endorsed standard?
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-5')">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
+                                        </a>
+                                    </label>
 
+                                    <div class="col-sm-6">
+                                        <div id="rq5">
+                                            <label class="radio-inline" id="lrq5.1"><input type="radio" name="rq5" id="rq5.1" value="0" onclick="update_R()"> Yes</label><br>
+                                            <label class="radio-inline" id="lrq5.2"><input type="radio" name="rq5" id="rq5.2" value="0" onclick="update_R()"> No</label><br>
+                                            <label class="radio-inline" id="lrq5.3"><input type="radio" name="rq5" id="rq5.3" value="0" onclick="update_R()"> Standard unknown/unavailable</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="rq6" class="col-sm-6 col-form-label" id="R-i-6-title">
+                                        Are the data available in a preferred file format?
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-6')">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
+                                        </a>
+                                    </label>
+
+                                    <div class="col-sm-6">
+                                        <div id="rq6">
+                                            <label class="radio-inline" id="lrq6.1"><input type="radio" name="rq6" id="rq6.1" value="0" onclick="update_R()"> Yes</label><br>
+                                            <label class="radio-inline" id="lrq6.2"><input type="radio" name="rq6" id="rq6.2" value="0" onclick="update_R()"> No</label><br>
+                                            <label class="radio-inline" id="lrq6.3"><input type="radio" name="rq6" id="rq6.3" value="0" onclick="update_R()"> Format unknown</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -874,21 +922,18 @@
     <!-- ================================= Introduction  ================================== -->
 
     <div id="introduction">
-        <p>As part of FAIRsFAIR project, we have recently developed an online self-assessment tool SATIFYD, raising awareness about the FAIRness of your data set.
+        <p>FAIR-Aware is an online self-assessment tool developed by the FAIRsFAIR project to raise awareness of users about the FAIRness of dataset.
             FAIRness refers to <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR<i class="fa fa-external-link"></i></a>,
             a set of guiding principles to make your data Findable, Accessible, Interoperable, and Reusable.</p>
-        <p>To help us make SATIFYD the best assessment tool it can be, we need your feedback. The purpose of our survey is to ensure SATIFYD meets the needs
-            and expectations of the future users’ community and to raise their awareness and understanding of the FAIR data principles.
-            Your valuable feedback and insights will help us make improvements to the final version of SATIFYD before its official launch in xxx.</p>
-        <p>The survey consists of 21 questions covering background information, metrics used and general feedback on the usability of the assessment tool.
-            To complete this survey you will need less than 30 minutes. Please complete the survey before …. and let us help you achieve maximum impact
-            from your research.</p>
+        <p>The self-assessment consists of 21 questions covering context, metrics, used and general feedback on the usability of the assessment tool.
+            You may need approximately 30 minutes to complete the assessment.
+            Tip: Next to each of the metrics, you will find more information about the metrics.</p>
+        <p>To help us make FAIR-Aware the best assessment tool possible, we need your feedback to ensure it meets the needs and expectations of future users.
+            Your valuable feedback and insights will help us make improvements to the final version of FAIR-Aware before its official launch.</p>
         <p>We extremely value your feedback and look forward to hearing from you.</p>
         <p id="intro-team">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The FAIRsFAIR Team (DANS, DCC, UniHB)</p>
         <div id="intro-small">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Anonymised and aggregated survey data will be stored in a certified data repository and be made available for use by third parties.<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more information on how we will use your data, please read the Privacy Statement.</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find out more about <a href="https://satifyd.dans.knaw.nl/" target="_blank">SATIFYD<i class="fa fa-external-link"></i></a> here. If you have any questions, drop us an <a href="mailto:info@dans.knaw.nl">e-mail.&nbsp;<i class="fa fa-envelope-o"></i></a></p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find out more about FAIRsFAIR <a href="https://www.fairsfair.eu/" target="_blank">here<i class="fa fa-external-link"></i></a>. If you have any questions, drop us an <a href="mailto:info@fairsfair.eu">e-mail.&nbsp;<i class="fa fa-envelope-o"></i></a></p>
         </div>
     </div>
 
