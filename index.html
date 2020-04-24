@@ -181,7 +181,8 @@
             ['F', [2, 2, 3, 2, 3]],
             ['A', [5, 2, 2, 2]],
             ['I', [3, 2]],
-            ['R', [2, 3, 2, 3, 3, 3]]
+            ['R', [2, 3, 2, 3, 3, 3]],
+            ['Q', [14, 0, 0, 5]]
         ])
         var short_answers = new Map([
             <!-- Shortened answers to make downloaded data more readeable -->
@@ -331,7 +332,7 @@
 
         function excluded(question) {
             <!-- questions embargoed access / restricted access excluded from validation? -->
-            return question == "aq2" && !embargoed_access() || question == "aq3" && !restricted_access() || question == "rq2" && !content_descriptions();
+            return question == "aq2" && !embargoed_access() || question == "aq3" && !restricted_access() || question == "rq2" && !content_descriptions() || answer_not_required(question);
         }
 
         function embargoed_access() {
@@ -344,6 +345,10 @@
 
         function content_descriptions() {
             return checked("rq1.1")
+        }
+
+        function answer_not_required(question) {
+            return question == "qq1" || question == "qq2" ||question == "qq3"
         }
 
         /* ------------------ Retrieve answers --------------- */
@@ -396,11 +401,15 @@
 
         <!-- Logo -->
         <div class="row">
-            <div class="col-md-8"></div>
-            <div class="col-md-4">
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
                 <br>
+                <a href="https://www.fairsfair.eu/" target="_blank"><img src="images/fairisfair.png" alt="DANS"></a>
+            </div>
+            <div class="col-md-4">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="https://dans.knaw.nl/" target="_blank"><img src="images/dans.png" alt="DANS"></a>
+                <a href="https://dans.knaw.nl/" target="_blank"><img src="images/dans.jpg" alt="DANS"></a>
+                <br><br>
             </div>
         </div>
 
@@ -850,20 +859,125 @@
         </div>
         <br>
 
-        <!-- Feedback -->
+        <!-- Feedback Questions -->
         <div id="feedback">
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
-                    <label for="fb_purpose">For which purpose did you take this FAIR assessment?</label>
-                    <textarea id="fb_purpose" rows="4" cols="139"></textarea>
+            <div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+                        <div id="Q-i-1-title">
+                            <p>Are any of the metrics in this assessment not relevant to your domain in general or to your tested dataset more specifically?</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <label id="lqq1.1"><input type="checkbox" id="qq1.1"> F1: Globally unique identifier</label><br>
+                            </div>
+                            <div class="col-md-7">
+                                <label id="lqq1.2"><input type="checkbox" id="qq1.2"> I1: Semantic vocabularies in metadata</label><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <label id="lqq1.3"><input type="checkbox" id="qq1.3"> F2: Persistent identifier</label><br>
+                            </div>
+                            <div class="col-md-7">
+                                <label id="lqq1.4"><input type="checkbox" id="qq1.4"> I2: Metadata include links</label><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <label id="lqq1.5"><input type="checkbox" id="qq1.5"> F3: Metadata for citation and discovery</label><br>
+                            </div>
+                            <div class="col-md-7"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <label id="lqq1.6"><input type="checkbox" id="qq1.6"> F4: Metadata include data identifier</label><br>
+                            </div>
+                            <div class="col-md-7">
+                                <label id="lqq1.7"><input type="checkbox" id="qq1.7"> R1: Content descriptions in metadata</label><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <label id="lqq1.8"><input type="checkbox" id="qq1.8"> F5: metadata can be harvested</label><br>
+                            </div>
+                            <div class="col-md-7">
+                                <label id="lqq1.9"><input type="checkbox" id="qq1.9"> R2: Metadata includes licence</label><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-7">
+                                <label id="lqq1.10"><input type="checkbox" id="qq1.10"> R3: Metadata includes provenance</label><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <label id="lqq1.11"><input type="checkbox" id="qq1.11"> A1: Level of access to the data</label><br>
+                            </div>
+                            <div class="col-md-7">
+                                <label id="lqq1.12"><input type="checkbox" id="qq1.12"> R4: Community-endorsed metadata</label><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
+                                <label id="lqq1.13"><input type="checkbox" id="qq1.13"> A2: Persistence of metadata</label><br>
+                            </div>
+                            <div class="col-md-7">
+                                <label id="lqq1.14"><input type="checkbox" id="qq1.14"> R5: Data in prefered format</label><br>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
-                    <label for="fb_general">Do you have any general feedback on this FAIR assessment?</label>
-                    <textarea id="fb_general" rows="4" cols="139"></textarea>
+                    <div id="Q-i-2-title">
+                        <p>Are there any metrics relevant to your discipline and/or needed for reusability of your dataset that are missing from this assessment?
+                        <br>If yes, please describe them below.</p>
+                    </div>
+                    <textarea id="qq2" rows="4" cols="139"></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div id="Q-i-3-title">
+                        <p>Please submit any general feedback on this FAIR assessment tool
+                        <br>(e.g. metrics that might need rephrasing or more guidance text, answer options that are ambiguous, usability of the tool, etc.)</p>
+                    </div>
+                    <textarea id="qq3" rows="4" cols="139"></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div id="Q-i-4-title">
+                        <p>Undertaking this assessment helped raise my awareness and my understanding of the FAIR data Principles.</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11" id="qq4">
+                            <label class="radio-inline" id="lqq4.1"><input type="radio" name="qq4" id="qq4.1" value="0" onclick="update_F()"> 1 Strongly Agree</label>
+                            <label class="radio-inline" id="lqq4.2"><input type="radio" name="qq4" id="qq4.2" value="0" onclick="update_F()"> 2 Agree</label>
+                            <label class="radio-inline" id="lqq4.3"><input type="radio" name="qq4" id="qq4.3" value="0" onclick="update_F()"> 3 Neutral</label>
+                            <label class="radio-inline" id="lqq4.4"><input type="radio" name="qq4" id="qq4.4" value="0" onclick="update_F()"> 4 Disagree</label>
+                            <label class="radio-inline" id="lqq4.5"><input type="radio" name="qq4" id="qq4.5" value="0" onclick="update_F()"> 5 Strongly Disagree</label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -965,9 +1079,13 @@
     <div id="F-i-3-contents">
         <p>Metadata is descriptive information about a data object. Since the metadata required depends on users and their applications,
             this metric focuses on core metadata, which is the minimum descriptive information required to enable data citation and discovery.</p>
-        <p>We determine the required metadata based on common data citation guidelines, (e.g., DataCite, ESIP, and IASSIST),
-            and metadata recommendations for data discovery, (e.g., EOSC Datasets Minimum Information (EDMI), DataCite Metadata Schema,
-            and W3C Recommendation Data on the Web Best Practices).</p>
+        <p>We determine the required metadata based on common data citation guidelines,
+            (e.g., <a href="https://datacite.org/" target="_blank">DataCite<i class="fa fa-external-link"></i></a>,
+            <a href="https://www.esipfed.org/" target="_blank">ESIP<i class="fa fa-external-link"></i></a>, and
+            <a href="https://iassistdata.org/" target="_blank">IASSIST<i class="fa fa-external-link"></i></a>), and metadata recommendations for data discovery, (e.g.,
+            <a href="https://eoscpilot.eu/edmi-metadata-guidelines" target="_blank">EOSC Datasets Minimum Information (EDMI)<i class="fa fa-external-link"></i></a>,
+            <a href="https://schema.datacite.org/" target="_blank">DataCite Metadata Schema<i class="fa fa-external-link"></i></a>, and
+            <a href="https://www.w3.org/TR/dwbp/" target="_blank">W3C Recommendation Data on the Web Best Practices<i class="fa fa-external-link"></i></a>).</p>
         <p>This question focuses on domain-agnostic core metadata. Domain or discipline-specific metadata specifications are covered under question R1.</p>
     </div>
 
