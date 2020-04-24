@@ -48,8 +48,9 @@
         .modal-header, .modal-footer {margin: 1px;}
         .modal-body {background-color: #FDFDFD; margin-left: 1px; }
         .fa-external-link, .fa-envelope-o, .fa-long-arrow-left {color: #2795c8;}
-        .fa-print, .fa-download {font-size: 50px; color: #2795c8;}
+        .fa-print {font-size: 50px; color: #2795c8;}
         .fa-paper-plane {font-size: 40px; color: #2795c8;}
+        .fa-download {font-size: 10px; color: #2795c8;}
         .work-category {color: #606060;}
         #main-title {font-size: 40px; color: #2795c8;}
         #intro-small {font-size: 12px;}
@@ -291,8 +292,10 @@
 
         function print_page() {
             document.getElementById("icons").style.display = "none"
+            document.getElementById("for-administrators").style.display = "none"
             window.print();
             document.getElementById("icons").style.display = "block"
+            document.getElementById("for-administrators").style.display = "block"
             update();
         }
 
@@ -874,28 +877,28 @@
                 <div class="col-md-10">
                     <div class="row" id="icons">
                         <br>
-                        <div class="col-md-1"></div>
-                        <div class="col-md-4">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
                             <div>
                                 <button id="submit-button" onclick="submit_page()" data-toggle="tooltip" data-placement="bottom" title="Submit your answers into the database.  No personal data will be stored."><i class="fa fa-paper-plane"> submit</i></button>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <button id="print-button" onclick="print_page()" data-toggle="tooltip" data-placement="bottom" title="Print your answers."><i class="fa fa-print"></i></button>
                         </div>
-                        <div class="col-md-3">
-                            <div>
-                                <button id="download-button" onclick="read_database()" data-toggle="tooltip" data-placement="bottom" title="Download answers in database."><i class="fa fa-download" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        </i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div id="for-administrators">
+        <br><br><br><br><br><br><br><br>
+        <button id="download-button" onclick="read_database()" data-toggle="tooltip" data-placement="bottom" title="Download answers in database."><i class="fa fa-download" aria-hidden="true"></i></button>
+        <br><br><br>
+    </div>
 </div>
-<br><br><br><br>
+
+
 <!-- ======================================= Modal window  ======================================= -->
 
 <div id="modal" class="modal fade" role="dialog">
