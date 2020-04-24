@@ -732,7 +732,7 @@
             <!-- Reusable -->
             <div class="row">
                 <div class="col-md-2">
-                    <br><br>
+                    <br><br><br>
                     <img id="image-r" src="images/R_100.jpg" alt="R">
                 </div>
                 <div class="col-md-10">
@@ -825,7 +825,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="rq6" class="col-sm-6 col-form-label" id="R-i-6-title">
-                                        Are the data available in a preferred file format?
+                                        Is the data available in a preferred file format?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-6')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -941,123 +941,147 @@
     <!-- ======================================= Findable  ======================================= -->
 
     <div id="F-i-1-contents">
-        <p>The data is assigned with a globally unique identifier such that it can be referenced unambiguously on the Web.
-            In other words, the identifier should be associated with only one dataset at any time.</p>
-        <p>Examples of unique identifiers of data are Uniform Resource Identifier (URI),
-            Digital Object Identifier (DOI), the Handle System, identifiers.org, w3id.org and Archival Resource Key (ARK).</p>
-        <p>We make a distinction between persistence (FsF-F1-02D)
-            and uniqueness of an identifier. An HTTP URL is globally unique, but is not persistent, whereas a DOI is both globally unique and persistent.</p>
+        <p>A data object may be assigned with a globally unique identifier such that it can be referenced unambiguously by humans or machines.
+            Globally unique means an identifier should be associated with only one resource at any time.
+            Examples of unique identifiers of data are Uniform Resource Locator (URL), Digital Object Identifier (DOI),
+            the Handle System, identifiers.org, w3id.org and Archival Resource Key (ARK).</p>
+        <p>Identifiers are assigned by a data repository (or other service providers) when you make data or metadata available through their services.
+            In return, they will ensure the identifier continues to point to the same data or metadata, according to the specified access terms and conditions.</p>
     </div>
 
     <div id="F-i-2-contents">
-        <p>The data is assigned with a persistent identifier to ensure the resolvability of the identifier in the long term. The identifier may be resolved to its digital object (e.g., a data file or a web service that returns the data), or to a data proxy (e.g., an online page that contains metadata, including the link to access the data).</p>
+        <p>We make a distinction between the uniqueness and persistence over time of an identifier.
+            An HTTP URL (the address of a given unique resource on the web) is globally unique, but is not persistent,
+            whereas a DOI is both globally unique and persistent.</p>
+        <p>A persistent identifier should be maintained and governed such that it remains stable and resolvable for the long term.
+            For example, the DOI system guarantees the persistence of its identifiers through its social (policy) and technical infrastructures.
+            The persistent identifier of a data object may be resolved to a data file, a web service response that contains data values),
+            or to a proxy (e.g. an online page that contains metadata, including the link to access the actual data).</p>
     </div>
 
     <div id="F-i-3-contents">
-        <p>Metadata is descriptive information of data. Since the metadata required depends on users and their applications, this metric focuses on core metadata,
-            which are the minimum metadata required for data citation and discoverability.</p>
-        <p>We determine the required metadata based on the existing data citation guidelines, e.g., DataCite, ESIP, and IASSIST, and metadata recommendations for data discovery, e.g., DataCite Metadata Schema and RDA Metadata Interest Group.</p>
-        <p>This metric focuses on domain-agnostic core metadata; we address domain or discipline-specific metadata through the metric FsF-R1-01M.</p>
+        <p>Metadata is descriptive information about a data object. Since the metadata required depends on users and their applications,
+            this metric focuses on core metadata, which is the minimum descriptive information required to enable data citation and discovery.</p>
+        <p>We determine the required metadata based on common data citation guidelines, (e.g., DataCite, ESIP, and IASSIST),
+            and metadata recommendations for data discovery, (e.g., EOSC Datasets Minimum Information (EDMI), DataCite Metadata Schema,
+            and W3C Recommendation Data on the Web Best Practices).</p>
+        <p>This question focuses on domain-agnostic core metadata. Domain or discipline-specific metadata specifications are covered under question R1.</p>
     </div>
 
     <div id="F-i-4-contents">
-        <p>The metadata includes the identifier of the data such that users can access the data through the metadata.</p>
+        <p>The metadata should include an identifier of the data (covered under F1 and F2) such that users can discover and access the data through the metadata.</p>
     </div>
 
-
     <div id="F-i-5-contents">
-        <p>This metric refers to various ways through which the metadata of data is exposed or offered in a machine-readable format.
-            For example, metadata may be offered through a general or domain/discipline specific metadata registry.
-            It may be embedded as structured data (e.g., schema.org implementation)  on a data page for use by web search engines such as Google and Bing.</p>
+        <p>This question refers to various ways through which the metadata of data are exposed or offered in a standard and machine-readable format.
+            Answering this question will require an understanding of the capabilities offered by the data repository used to host the data.</p>
+        <p>For example, if data is hosted by a generic or domain/discipline specific repository, the repository may expose its metadata
+            to allow harvesting through a specific protocol (e.g., via OAI-PMH) and/or a web service.</p>
+        <p>Metadata may also be embedded as structured data (e.g., schema.org implementation) on a data page for use by web search engines such as Google and Bing.
+            You can, for instance, use the <a href="https://datasetsearch.research.google.com/" target="_blank">Google Dataset Search<i class="fa fa-external-link"></i></a>
+            to check if data hosted by the repository of your choice are indexed.</p>
     </div>
 
     <!-- ======================================= Accessible  ======================================= -->
 
     <div id="A-i-1-contents">
-        <p>
-            This metric determines if the metadata includes the level of access to the data such as public, embargoed, restricted, or closed (metadata only) access.
-        </p>
-        <p>
-            This metric is related to the data usage licence metric (FsF-R1.1-01M).
-        </p>
+        <p>This question determines if the metadata includes the level of access to the data such as public, embargoed, restricted, or closed access.</p>
+        <p>It is recommended that data should be as open as possible and as closed as necessary. Datasets should be public domain and openly accessible
+            without restrictions when possible.</p>
+        <p>Closed access refers to data that is not made publicly available and for which only metadata is publicly available. </p>
     </div>
 
     <div id="A-i-2-contents">
-        <p>
-            Public data are openly accessible, e.g., through FTP/HTTP-based direct download.
-        </p>
-        <p>
-            Embargoed access refers to data that will become openly available after a specific date.
-            For example, a data author may release their data after having published their findings from the data.
-        </p>
+        <p>Embargoed access refers to data that will be made publicly accessible at a specific date which should be specified in the metadata.
+            For example, a data author may release their data after having published their findings from the data.</p>
     </div>
 
     <div id="A-i-3-contents">
-        <p>
-            For embargoed access, the date the data will be made publicly available should be specified in the metadata.
-        </p>
+        <p>Restricted access refers to data that can be accessed under certain conditions (e.g. because of commercial, sensitive, or
+            other confidentiality reasons or the data are only accessible via a subscription or a fee). Restricted data may be available to
+            a particular group of users or after permission is granted. For restricted data, the metadata should include the conditions of
+            access to the data (e.g., point of contact or instructions to access the data).</p>
     </div>
 
 
     <div id="A-i-4-contents">
-        <p>
-            For restricted data, the metadata should include the conditions of access to the data (e.g., point of contact or instructions to access the data).
-        </p>
-        <p>
-            Access to restricted data is limited, e.g. because of commercial, sensitive, or other confidentiality reasons or the data are only accessible via
-            a subscription or a fee. Restricted data may be available to a particular group of users or after permission is granted.
-        </p>
-    </div>
-
-    <div id="A-i-5-contents">
-        <p>Metadata should be preserved even when the data they represent are no longer available or lost.</p>
+        <p>This question determines if the metadata will be preserved even when the data they represent are no longer available or lost.
+            Similar to question F5, answering this question will require an understanding of the capabilities offered,
+            data management plan (DMP) and policies implemented by the data repository.</p>
+        <p>Continued access to metadata depends on a data repository’s preservation practice which is usually documented in the
+            repository’s service policies or statements. Typically, a trustworthy data repository offering DOIs and implementing
+            a PID Policy will guarantee that metadata will remain accessible even when data are no longer available for any reason
+            (e.g., by providing a tombstone page).</p>
     </div>
 
     <!-- ======================================= Interoperable  ======================================= -->
 
     <div id="I-i-1-contents">
-        <p>To make metadata more understandable to humans and machines, they are described with semantic vocabularies.</p>
-        <p>Ontology, thesaurus, taxonomy are kinds of semantic vocabularies, and they come with different degrees of expressiveness, structure, and inferential power.</p>
-        <p>Metadata may use semantic vocabularies in various ways. For example, semantic vocabularies may be embedded as controlled vocabularies in the metadata
-            or the metadata web page (e.g., microformats and RDFa).</p>
-        <p>Metadata may also be published as linked data using semantic vocabularies.</p>
+        <p>To make metadata more understandable to humans and machines, they are described with semantic vocabularies. Ontology, thesaurus,
+            and taxonomy are kinds of semantic vocabularies, and they come with different degrees of expressiveness, structure, and inferential power.
+            Metadata may use semantic vocabularies in various ways. For example, semantic vocabularies may be embedded in the metadata page
+            (e.g., Microdata, RDFa or JSON-LD). Metadata may also be published as Linked Data using semantic vocabularies.</p>
     </div>
 
     <div id="I-i-2-contents">
-        <p>Linking data to its related entities will increase its FAIRness, and the linking information should be captured as part of the metadata.</p>
-        <p>A rich research graph (e.g., PID graph) can be formed by aggregating the entities connections from different data providers.
-        A data object may be linked to its prior version, other datasets in the same data collection, related publications, source (instrument),
-            data creators or collectors and organization (e.g., funder and hosting institution).</p>
-        <p>Qualified references refer to the meaningful links between data
-            and its related entities expressed through relation types. It is also essential to test if the URL of the related entities are active.</p>
+        <p>Linking data to its related entities will increase its potential for reuse. The linking information should be captured as part of the metadata.
+            A data object may be linked to its prior version, other relevant datasets, related publications, source (such as an instrument),
+            data creators or collectors and organization (e.g., funder and hosting institution). Links between data and its related entities
+            should be meaningful and expressed through relation types (e.g., the DataCite Metadata Schema specifies relation types between
+            research objects through the fields RelatedIdentifier and RelationType).</p>
     </div>
 
     <!-- ======================================= Reusable  ======================================= -->
 
     <div id="R-i-1-contents">
-        <p>In addition to core metadata required to support data citation and discovery (FsF-F2-01M), metadata to support data reusability should be made available
-            following community metadata standards.</p>
-        <p>Community metadata standards may exhibit different levels of readiness.
-        Some communities have well-established metadata standards, e.g., geospatial (19115), biodiversity (DarwinCore, ABCD, EML), social science (DDI).
-            In contrast, others, including new domains, may have limited or standards that are under development, e.g., engineering and linguistics.</p>
+        <p>This question evaluates if the content descriptions are specified in the metadata and if they conform with the actual data.
+            Examples of content descriptions are  resource type (e.g., dataset or collection), variable(s) measured, method, data format, and size.</p>
     </div>
 
     <div id="R-i-2-contents">
-        <p>This metric  evaluates if the content descriptions specified in the metadata conform with the actual data.
-            Examples of content descriptions are variables measured, methods, structure, MIME type, and size.</p>
+        <p>This question evaluates if the content descriptions are specified in the metadata and if they conform with the actual data.
+            Examples of content descriptions are  resource type (e.g., dataset or collection), variable(s) measured, method, data format, and size.</p>
     </div>
 
     <div id="R-i-3-contents">
-        <p>In general, all data should be licensed because otherwise, users cannot easily reuse them in a legally sound way.
-            This includes standard (e.g., Creative Commons) or bespoke licenses, and rights statement which indicate the conditions under which data can be reused.</p>
-        <p>It is highly recommended to use a standard, machine-readable license such that it can be interpreted by machines and humans.
-            In order to inform users about what rights they have to use a dataset, the license information should be specified as part of the dataset’s metadata.</p>
+        <p>This question evaluates if data is licensed because otherwise users cannot reuse it in a clear legal context.
+            We encourage the application of licenses for all kinds of data whether public, restricted or for specific users.
+            Without an explicit license, users do not have a clear idea of what can be done with your data.</p>
+        <p>Licenses can be of standard type (e.g., Creative Commons) or bespoke licenses, and rights statements which indicate
+            the conditions under which data can be reused.</p>
+        <p>It is highly recommended to use a standard, machine-readable license such that it can be interpreted by machines and humans. In order to
+            inform users about what rights they have to use a dataset, the license information should be specified as part of the dataset’s metadata.</p>
     </div>
 
     <div id="R-i-4-contents">
-        <p>File formats refer to methods for encoding digital information.
-            For example, CSV for tabular data, NetCDF for multidimensional data and GeoTIFF for raster imagery.</p>
-        <p>Data should be made available in a standard file format that is accepted by the research community to enable data sharing and reuse.</p>
+        <p>It is essential to provide provenance information of your data to enable its use and reuse. Data provenance (also known as lineage) represents its history, including people, entities, and processes involved in the data creation. It depends on the data type (e.g., measurement, observation, derived data, or data product) and research domains. For that reason, it is difficult to capture a set of finite provenance records adequate to all domains. Based on existing work, we suggest that the following provenance properties of data generation or collection should be supplied as part of the metadata (this is not an exhaustive list).</p>
+        <ul>
+            <li>Sources of data generation or collection, e.g., method or instrument</li>
+            <li>Data creation or collection date</li>
+            <li>Contributor involved</li>
+            <li>Data versioning information
+        </ul>
+    </div>
+
+    <div id="R-i-5-contents">
+        <p>In addition to core metadata required to support data citation and discovery covered under question F3,
+            metadata to support data reusability should be made available following community-endorsed metadata standards.</p>
+        <p>Community metadata standards may exhibit different levels of readiness. Some communities have well-established metadata standards
+            (e.g., geospatial: ISO19115, biodiversity: DarwinCore, ABCD, EML, social science: DDI, astronomy: International Virtual Observatory
+            Alliance Technical Specifications). In contrast, others, including new domains, may have limited standards or standards that are
+            under development (e.g., engineering and linguistics).</p>
+        <p>The use of community-endorsed metadata standards is usually encouraged and supported by domain and discipline-specific repositories.</p>
+    </div>
+
+    <div id="R-i-6-contents">
+        <p>File formats refer to methods for encoding digital information. For example, CSV for tabular data, NetCDF for multidimensional data
+            and GeoTIFF for raster imagery.</p>
+        <p>Data should be made available in a preferred file format that is accepted by the research community to enable data sharing and reuse.</p>
+        <p>Preferred formats are formats that are widely used and supported by the most commonly used software and tools. Preferred formats not only
+            give a higher certainty that your data can be read in the future, but they will also help to increase the reusability and interoperability.
+            Using preferred formats enables data to be loaded directly into the software and tools used for data analysis. It makes it possible to
+            easily integrate your data with other data using the same preferred format. The use of preferred formats will also help to transform
+            the format to a newer one, in case a preferred format gets outdated.</p>
     </div>
 
     <!-- /div texts -->
