@@ -122,7 +122,7 @@
 
         /* ---------------- Download database ---------------- */
         function read_database() {
-            let email = prompt("Your email\n (download is accessible only to people who have an account) ", "");
+            let email = prompt("Your email\n (download is restricted to administrators) ", "");
             if (email) {
                 let password = prompt("password", "");
                 firebase.auth().signInWithEmailAndPassword(email, password)
