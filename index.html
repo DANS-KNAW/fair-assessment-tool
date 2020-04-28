@@ -308,9 +308,11 @@
         /* ---------------------------- Print --------------------------- */
 
         function print_page() {
+            document.getElementById("logos").style.display = "none"
             document.getElementById("icons").style.display = "none"
             document.getElementById("for-administrators").style.display = "none"
             window.print();
+            document.getElementById("logos").style.display = "block"
             document.getElementById("icons").style.display = "block"
             document.getElementById("for-administrators").style.display = "block"
             update();
@@ -418,7 +420,7 @@
     <div class="fair">
 
         <!-- Logo -->
-        <div class="row">
+        <div class="row" id="logos">
             <div class="col-md-2"></div>
             <div class="col-md-6">
                 <br>
@@ -874,6 +876,7 @@
                     </div>
                 </div>
             </div>
+            <div class="pagebreak"></div>
         </div>
         <br>
 
@@ -892,67 +895,67 @@
                                 <label id="lqq1.1"><input type="checkbox" id="qq1.1"> F1: Globally unique identifier</label><br>
                             </div>
                             <div class="col-md-7">
-                                <label id="lqq1.2"><input type="checkbox" id="qq1.2"> I1: Semantic vocabularies in metadata</label><br>
+                                <label id="lqq1.2"><input type="checkbox" id="qq1.2"> F2: Persistent identifier</label><br>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
-                                <label id="lqq1.3"><input type="checkbox" id="qq1.3"> F2: Persistent identifier</label><br>
+                                <label id="lqq1.3"><input type="checkbox" id="qq1.3"> F3: Metadata for citation and discovery</label><br>
                             </div>
                             <div class="col-md-7">
-                                <label id="lqq1.4"><input type="checkbox" id="qq1.4"> I2: Metadata include links</label><br>
+                                <label id="lqq1.4"><input type="checkbox" id="qq1.4"> F4: Metadata include data identifier</label><br>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
-                                <label id="lqq1.5"><input type="checkbox" id="qq1.5"> F3: Metadata for citation and discovery</label><br>
+                                <label id="lqq1.5"><input type="checkbox" id="qq1.5"> F5: metadata can be harvested</label><br><br>
                             </div>
                             <div class="col-md-7"></div>
                         </div>
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
-                                <label id="lqq1.6"><input type="checkbox" id="qq1.6"> F4: Metadata include data identifier</label><br>
+                                <label id="lqq1.6"><input type="checkbox" id="qq1.6"> A1: Level of access to the data</label><br>
                             </div>
                             <div class="col-md-7">
-                                <label id="lqq1.7"><input type="checkbox" id="qq1.7"> R1: Content descriptions in metadata</label><br>
+                                <label id="lqq1.7"><input type="checkbox" id="qq1.7"> A2: Persistence of metadata</label><br><br>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
-                                <label id="lqq1.8"><input type="checkbox" id="qq1.8"> F5: metadata can be harvested</label><br>
+                                <label id="lqq1.8"><input type="checkbox" id="qq1.8"> I1: Semantic vocabularies in metadata</label><br>
                             </div>
                             <div class="col-md-7">
-                                <label id="lqq1.9"><input type="checkbox" id="qq1.9"> R2: Metadata includes licence</label><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-4"></div>
-                            <div class="col-md-7">
-                                <label id="lqq1.10"><input type="checkbox" id="qq1.10"> R3: Metadata includes provenance</label><br>
+                                <label id="lqq1.9"><input type="checkbox" id="qq1.9"> I2: Metadata include linksR2: Metadata includes licence</label><br><br>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
-                                <label id="lqq1.11"><input type="checkbox" id="qq1.11"> A1: Level of access to the data</label><br>
+                                <label id="lqq1.10"><input type="checkbox" id="qq1.10"> R1: Content descriptions in metadata</label><br>
                             </div>
                             <div class="col-md-7">
-                                <label id="lqq1.12"><input type="checkbox" id="qq1.12"> R4: Community-endorsed metadata</label><br>
+                                <label id="lqq1.11"><input type="checkbox" id="qq1.11"> R2: Metadata includes licence</label><br>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
-                                <label id="lqq1.13"><input type="checkbox" id="qq1.13"> A2: Persistence of metadata</label><br>
+                                <label id="lqq1.12"><input type="checkbox" id="qq1.12"> R3: Metadata includes provenance</label><br>
                             </div>
                             <div class="col-md-7">
+                                <label id="lqq1.13"><input type="checkbox" id="qq1.13"> R4: Community-endorsed metadata</label><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4">
                                 <label id="lqq1.14"><input type="checkbox" id="qq1.14"> R5: Data in prefered format</label><br>
                             </div>
+                            <div class="col-md-7"></div>
                         </div>
                     </div>
                 </div>
