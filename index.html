@@ -143,12 +143,12 @@
                     organizationSnapshot.forEach(function(childSnapshot) {
                         var a = childSnapshot.val();
                         answers.push(organizationSnapshot.key + "," + a.date + "," +
-                                        a.yq1 + "," + a.yq2 + "," +
+                                        a.yq1 + "," + a.yq2 + "," + a.yq3 + "," +
                                         a.fq1 + "," + a.fq2 + "," + a.fq3 + "," + a.fq4 + "," + a.fq5 + "," +
-                                        a.aq1 + "," + a.aq2 + "," + a.aq3 + "," + a.aq4 + "," + a.aq5 + "," +
+                                        a.aq1 + "," + a.aq2 + "," + a.aq3 + "," + a.aq4 + "," +
                                         a.iq1 + "," + a.iq2 + "," +
-                                        a.rq1 + "," + a.rq2 + "," + a.rq3 + "," + a.rq4 + "," +
-                                        a.fb_purpose + "," + a.fb_general
+                                        a.rq1 + "," + a.rq2 + "," + a.rq3 + "," + a.rq4 + "," + a.rq5 + "," + a.rq6 + "," +
+                                        a.qq1 + "," + a.qq2 + "," + a.qq3 + "," + a.qq4
                                     );
                     });
                 });
@@ -157,7 +157,7 @@
         }
 
         function downloadAnswers(answers) {
-            var csv = 'Organization, Date, Domain, Role, FQ1, FQ2, FQ3, FQ4, FQ5, AQ1, AQ2, AQ3, AQ4, AQ5, IQ1, IQ2, RQ1, RQ2, RQ3, RQ4, Feedback purpose, Feedback general\n';
+            var csv = 'Host, Date, Domain, Role, Organization, FQ1, FQ2, FQ3, FQ4, FQ5, AQ1, AQ2, AQ3, AQ4, IQ1, IQ2, RQ1, RQ2, RQ3, RQ4, RQ5, RQ6, Not relevant, Missing metrics, General feedback, Awareness raised\n';
             answers.forEach(function(row) {
                 csv += row + "\n";
             })
@@ -187,9 +187,13 @@
         var short_answers = new Map([
             <!-- Shortened answers to make downloaded data more readeable -->
             ['fq5.1', 'Structured data'],
-            ['fq5.2', 'Metadata registry'],
-            ['iq1.1', 'Embedded'],
-            ['iq1.2', 'Linked data'],
+            ['fq5.2', 'Web service'],
+            ['fq5.3', 'Not offered'],
+            ['aq1.4', 'Closed access'],
+            ['aq1.5', 'None'],
+            ['iq1.1', 'Linked data'],
+            ['iq1.2', 'Embedded'],
+            ['rq5.3', 'Standard unknown'],
         ])
 
         /* -------------------- Initialize -------------------- */
@@ -260,6 +264,12 @@
 
         /* ----------------------- F ----------------------- */
         function update_F() {
+            if (checked("fq5.1") || checked("fq5.2")) {
+                disable(["fq5.3"]);
+            }
+             else {
+                enable(["fq5.3"]);
+            }
         }
 
         /* ----------------------- A ----------------------- */
@@ -278,6 +288,12 @@
 
         /* ------------------------ I ----------------------- */
         function update_I() {
+            if (checked("iq1.1") || checked("iq1.2")) {
+                disable(["iq1.3"]);
+            }
+             else {
+                enable(["iq1.3"]);
+            }
         }
 
         /* ----------------------- R ----------------------- */
@@ -376,8 +392,10 @@
                     m.set(question, answers);
                 }
             }
-            m.set("fb_purpose", document.getElementById("fb_purpose").value.replace(/(\n)+/g, " ").trim())
-            m.set("fb_general", document.getElementById("fb_general").value.replace(/(\n)+/g, " ").trim())
+            <!-- set free text fields -->
+            m.set("qq2", document.getElementById("qq2").value.replace(/(\n)+/g, " ").trim())
+            m.set("qq3", document.getElementById("qq3").value.replace(/(\n)+/g, " ").trim())
+
             return JSON.stringify(Object.fromEntries(m));
         }
 
@@ -971,11 +989,11 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-11" id="qq4">
-                            <label class="radio-inline" id="lqq4.1"><input type="radio" name="qq4" id="qq4.1" value="0" onclick="update_F()"> 1 Strongly Agree</label>
-                            <label class="radio-inline" id="lqq4.2"><input type="radio" name="qq4" id="qq4.2" value="0" onclick="update_F()"> 2 Agree</label>
-                            <label class="radio-inline" id="lqq4.3"><input type="radio" name="qq4" id="qq4.3" value="0" onclick="update_F()"> 3 Neutral</label>
-                            <label class="radio-inline" id="lqq4.4"><input type="radio" name="qq4" id="qq4.4" value="0" onclick="update_F()"> 4 Disagree</label>
-                            <label class="radio-inline" id="lqq4.5"><input type="radio" name="qq4" id="qq4.5" value="0" onclick="update_F()"> 5 Strongly Disagree</label>
+                            <label class="radio-inline" id="lqq4.1"><input type="radio" name="qq4" id="qq4.1" value="0" onclick="update_F()"> Strongly Agree</label>
+                            <label class="radio-inline" id="lqq4.2"><input type="radio" name="qq4" id="qq4.2" value="0" onclick="update_F()"> Agree</label>
+                            <label class="radio-inline" id="lqq4.3"><input type="radio" name="qq4" id="qq4.3" value="0" onclick="update_F()"> Neutral</label>
+                            <label class="radio-inline" id="lqq4.4"><input type="radio" name="qq4" id="qq4.4" value="0" onclick="update_F()"> Disagree</label>
+                            <label class="radio-inline" id="lqq4.5"><input type="radio" name="qq4" id="qq4.5" value="0" onclick="update_F()"> Strongly Disagree</label>
                         </div>
                     </div>
                 </div>
@@ -1007,7 +1025,7 @@
     </div>
     <div id="for-administrators">
         <br><br><br><br><br><br><br><br>
-        <button id="download-button" onclick="read_database()" data-toggle="tooltip" data-placement="bottom" title="Download answers in database."><i class="fa fa-download" aria-hidden="true"></i></button>
+        <button id="download-button" onclick="read_database()" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-download" aria-hidden="true"></i></button>
         <br><br><br>
     </div>
 </div>
@@ -1048,7 +1066,7 @@
         <p>To help us make FAIR-Aware the best assessment tool possible, we need your feedback to ensure it meets the needs and expectations of future users.
             Your valuable feedback and insights will help us make improvements to the final version of FAIR-Aware before its official launch.</p>
         <p>We extremely value your feedback and look forward to hearing from you.</p>
-        <p id="intro-team">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The FAIRsFAIR Team (DANS, DCC, UniHB)</p>
+        <p id="intro-team">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The FAIRsFAIR Team (DANS, DCC, PANGAEA)</p>
         <div id="intro-small">
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find out more about FAIRsFAIR <a href="https://www.fairsfair.eu/" target="_blank">here<i class="fa fa-external-link"></i></a>. If you have any questions, drop us an <a href="mailto:info@fairsfair.eu">e-mail.&nbsp;<i class="fa fa-envelope-o"></i></a></p>
         </div>
