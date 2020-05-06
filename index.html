@@ -53,8 +53,6 @@
         .fa-download {font-size: 10px; color: #2795c8;}
         .work-category {color: #606060;}
         #main-title {font-size: 40px; color: #2795c8;}
-        #intro-small {font-size: 12px;}
-        #intro-team {font-style: italic; color: #2795c8;}
         #image-f, #image-a, #image-i, #image-r {padding-top: 10px;}
         @media (min-width: 768px) {
             div.col-md-2 {padding-left: 2px;}
@@ -115,7 +113,7 @@
                 if (error) {
                     write_to_modal("SUBMISSION", error.message);
                 } else {
-                    write_to_modal("SUBMISSION", "Answers were succesfully submitted into the database");
+                    write_to_modal("SUBMISSION", "Answers were succesfully submitted into the database." + "<br><br>" + "Thank you for your participation!");
                 }
             })
         }
@@ -424,7 +422,7 @@
             <div class="col-md-2"></div>
             <div class="col-md-6">
                 <br>
-                <a href="https://www.fairsfair.eu/" target="_blank"><img src="images/fairisfair.png" alt="DANS"></a>
+                <a href="https://www.fairsfair.eu/" target="_blank"><img src="images/fairisfair.png" alt="FairSFair"></a>
             </div>
             <div class="col-md-4">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -438,7 +436,7 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
-                    <div id="main-title">FairAware</div>
+                    <div id="main-title">FAIR-Aware</div>
                     <div id="introduction-text"></div>
                     <br>
                 </div>
@@ -518,7 +516,7 @@
                 </div>
             </div>
         </div>
-        <br><br>
+        <br>
 
         <div class="pagebreak"></div>
 
@@ -531,6 +529,7 @@
                     <img id="image-f" src="images/F_100.jpg" alt="F">
                 </div>
                 <div class="col-md-10">
+                    <h3>Metrics:</h3>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -610,9 +609,9 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq5">
-                                            <label id="lfq5.1"><input type="checkbox" id="fq5.1" value="8.33" onclick="update_F()"> Metadata are  offered as structured data on the data page<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for use by a web search engine</label><br>
-                                            <label id="lfq5.2"><input type="checkbox" id="fq5.2" value="8.33" onclick="update_F()"> Metadata are offered through a web service or <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine harvestable</label><br>
-                                            <label id="lfq5.3"><input type="checkbox" id="fq5.3" value="8.33" onclick="update_F()"> Metadata are not offered</label><br>
+                                            <label id="lfq5.1"><input type="checkbox" id="fq5.1" value="8.33" onclick="update_F()"> Metadata is  offered as structured data on the data page<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for use by a web search engine</label><br>
+                                            <label id="lfq5.2"><input type="checkbox" id="fq5.2" value="8.33" onclick="update_F()"> Metadata is offered through a web service or <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine harvestable</label><br>
+                                            <label id="lfq5.3"><input type="checkbox" id="fq5.3" value="8.33" onclick="update_F()"> Metadata is not offered</label><br>
                                         </div>
                                     </div>
                                 </div>
@@ -733,7 +732,7 @@
                                     <div class="col-sm-6">
                                         <div id="iq1">
                                             <label id="liq1.1"><input type="checkbox" id="iq1.1" value="8.33" onclick="update_I()"> Yes, metadata is available as Linked Data</label><br>
-                                            <label id="liq1.2"><input type="checkbox" id="iq1.2" value="8.33" onclick="update_I()"> Yes, semantic vocabularies embedded in the metadata page<br>&nbsp;&nbsp;&nbsp;&nbsp;vocabularies</label><br>
+                                            <label id="liq1.2"><input type="checkbox" id="iq1.2" value="8.33" onclick="update_I()"> Yes, semantic vocabularies are embedded in the metadata page<br>&nbsp;&nbsp;&nbsp;&nbsp;vocabularies</label><br>
                                             <label id="liq1.3"><input type="checkbox" id="iq1.3" value="8.33" onclick="update_I()"> No</label>
                                         </div>
                                     </div>
@@ -878,7 +877,6 @@
             </div>
             <div class="pagebreak"></div>
         </div>
-        <br>
 
         <!-- Feedback Questions -->
         <div id="feedback">
@@ -886,6 +884,7 @@
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-10">
+                        <h3>General feedback:</h3>
                         <div id="Q-i-1-title">
                             <p>Are any of the metrics in this assessment not relevant to your domain in general or to your tested dataset more specifically?</p>
                         </div>
@@ -904,13 +903,13 @@
                                 <label id="lqq1.3"><input type="checkbox" id="qq1.3"> F3: Metadata for citation and discovery</label><br>
                             </div>
                             <div class="col-md-7">
-                                <label id="lqq1.4"><input type="checkbox" id="qq1.4"> F4: Metadata include data identifier</label><br>
+                                <label id="lqq1.4"><input type="checkbox" id="qq1.4"> F4: Metadata includes a data identifier</label><br>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-1"></div>
                             <div class="col-md-4">
-                                <label id="lqq1.5"><input type="checkbox" id="qq1.5"> F5: metadata can be harvested</label><br><br>
+                                <label id="lqq1.5"><input type="checkbox" id="qq1.5"> F5: Metadata can be harvested</label><br><br>
                             </div>
                             <div class="col-md-7"></div>
                         </div>
@@ -929,7 +928,7 @@
                                 <label id="lqq1.8"><input type="checkbox" id="qq1.8"> I1: Semantic vocabularies in metadata</label><br>
                             </div>
                             <div class="col-md-7">
-                                <label id="lqq1.9"><input type="checkbox" id="qq1.9"> I2: Metadata include linksR2: Metadata includes licence</label><br><br>
+                                <label id="lqq1.9"><input type="checkbox" id="qq1.9"> I2: Metadata includes links</label><br><br>
                             </div>
                         </div>
                         <div class="row">
@@ -1060,19 +1059,17 @@
     <!-- ================================= Introduction  ================================== -->
 
     <div id="introduction">
-        <p>FAIR-Aware is an online self-assessment tool developed by the FAIRsFAIR project to raise awareness of users about the FAIRness of dataset.
+        <p>FAIR-Aware is an online self-assessment tool developed by the FAIRsFAIR project to raise awareness among users about the FAIRness of a dataset.
             FAIRness refers to <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR<i class="fa fa-external-link"></i></a>,
             a set of guiding principles to make your data Findable, Accessible, Interoperable, and Reusable.</p>
-        <p>The self-assessment consists of 21 questions covering context, metrics, used and general feedback on the usability of the assessment tool.
+        <p>The self-assessment consists of 24 questions covering context, metrics, used and general feedback on the usability of the assessment tool.
             You may need approximately 30 minutes to complete the assessment.
-            Tip: Next to each of the metrics, you will find more information about the metrics.</p>
+            Tip: Next to each of the metrics, you will find more information about them.</p>
         <p>To help us make FAIR-Aware the best assessment tool possible, we need your feedback to ensure it meets the needs and expectations of future users.
             Your valuable feedback and insights will help us make improvements to the final version of FAIR-Aware before its official launch.</p>
         <p>We extremely value your feedback and look forward to hearing from you.</p>
-        <p id="intro-team">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The FAIRsFAIR Team (DANS, DCC, PANGAEA)</p>
-        <div id="intro-small">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find out more about FAIRsFAIR <a href="https://www.fairsfair.eu/" target="_blank">here<i class="fa fa-external-link"></i></a>. If you have any questions, drop us an <a href="mailto:info@fairsfair.eu">e-mail.&nbsp;<i class="fa fa-envelope-o"></i></a></p>
-        </div>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The FAIRsFAIR Team (DANS, DCC, PANGAEA)</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find out more about FAIRsFAIR <a href="https://www.fairsfair.eu/" target="_blank">here<i class="fa fa-external-link"></i></a>. If you have any questions, drop us an <a href="mailto:info@fairsfair.eu">e-mail.&nbsp;<i class="fa fa-envelope-o"></i></a></p>
     </div>
 
 
@@ -1115,7 +1112,7 @@
     </div>
 
     <div id="F-i-5-contents">
-        <p>This question refers to various ways through which the metadata of data are exposed or offered in a standard and machine-readable format.
+        <p>This question refers to various ways through which the metadata of data is exposed or offered in a standard and machine-readable format.
             Answering this question will require an understanding of the capabilities offered by the data repository used to host the data.</p>
         <p>For example, if data is hosted by a generic or domain/discipline specific repository, the repository may expose its metadata
             to allow harvesting through a specific protocol (e.g., via OAI-PMH) and/or a web service.</p>
@@ -1140,26 +1137,26 @@
 
     <div id="A-i-3-contents">
         <p>Restricted access refers to data that can be accessed under certain conditions (e.g. because of commercial, sensitive, or
-            other confidentiality reasons or the data are only accessible via a subscription or a fee). Restricted data may be available to
+            other confidentiality reasons or the data is only accessible via a subscription or a fee). Restricted data may be available to
             a particular group of users or after permission is granted. For restricted data, the metadata should include the conditions of
             access to the data (e.g., point of contact or instructions to access the data).</p>
     </div>
 
 
     <div id="A-i-4-contents">
-        <p>This question determines if the metadata will be preserved even when the data they represent are no longer available or lost.
+        <p>This question determines if the metadata will be preserved even when the data they represent is no longer available or lost.
             Similar to question F5, answering this question will require an understanding of the capabilities offered,
             data management plan (DMP) and policies implemented by the data repository.</p>
         <p>Continued access to metadata depends on a data repository’s preservation practice which is usually documented in the
             repository’s service policies or statements. Typically, a trustworthy data repository offering DOIs and implementing
-            a PID Policy will guarantee that metadata will remain accessible even when data are no longer available for any reason
+            a PID Policy will guarantee that metadata will remain accessible even when data is no longer available for any reason
             (e.g., by providing a tombstone page).</p>
     </div>
 
     <!-- ======================================= Interoperable  ======================================= -->
 
     <div id="I-i-1-contents">
-        <p>To make metadata more understandable to humans and machines, they are described with semantic vocabularies. Ontology, thesaurus,
+        <p>To make metadata more understandable to humans and machines, it is described with semantic vocabularies. Ontology, thesaurus,
             and taxonomy are kinds of semantic vocabularies, and they come with different degrees of expressiveness, structure, and inferential power.
             Metadata may use semantic vocabularies in various ways. For example, semantic vocabularies may be embedded in the metadata page
             (e.g., Microdata, RDFa or JSON-LD). Metadata may also be published as Linked Data using semantic vocabularies.</p>
