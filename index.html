@@ -24,10 +24,12 @@
     <!-- Firebase products -->
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
-    <!-- local firebase configuration -->
+    <!-- Firebase configuration -->
     <script src="jscript/fbconfig.js"></script>
 
-    <!-- CSS -->
+    <!-- ======================================== -->
+    <!-- ================== CSS ================= -->
+    <!-- ======================================== -->
     <style>
         canvas {
             -moz-user-select: none;
@@ -71,15 +73,14 @@
 
     </style>
 
-    <!-- Javascript -->
-
-    <!-- Database scripts -->
+    <!-- ===================================================== -->
+    <!-- ================== DATABASE SCRIPTS ================= -->
+    <!-- ===================================================== -->
     <script>
         var HOST = 'DANS';
         var DOWNLOAD_FILE_NAME = 'assessment_answers.csv';
 
         /* ---------------- Initialize database ---------------- */
-        // Initialize Firebase (firebaseConfig from javascript file)
         firebase.initializeApp(firebaseConfig);
 
         /* ---------------- Write to database ---------------- */
@@ -160,12 +161,17 @@
 
     </script>
 
-    <!-- assessment scripts -->
+    <!-- ======================================================= -->
+    <!-- ================== ASSESSMENT SCRIPTS ================= -->
+    <!-- ======================================================= -->
     <script>
         var letters = ["F", "A", "I", "R"]
         var fields = new Map([
-            <!-- For each letter (or 'about you' questions) an array where the first item marks the first question, the second item the second question, etc. -->
-            <!-- The value of the item is the number of possible answers to the respective question -->
+            <!-- For each letter (or 'about you'/'feedback' question) an array where  -->
+            <!-- the first item marks the first question, the second item the second question, etc. -->
+            <!-- The value of the item is the number of possible answers to the respective question. -->
+            <!-- For questions where the answer is given in free text, the value is 0. -->
+            <!-- Notice: It is important to update this Map when questions are removed or added! -->
             ['Y', [14, 6, 9]],
             ['F', [2, 2, 3, 2, 3]],
             ['A', [5, 2, 2, 2]],
@@ -408,7 +414,7 @@
 <div class="container">
     <div class="fair">
 
-        <!-- Logo -->
+        <!-- === LOGO === -->
         <div class="row" id="logos">
             <div class="col-md-2"></div>
             <div class="col-md-6">
@@ -423,7 +429,7 @@
         </div>
 
         <div class="intro">
-            <!-- Introduction -->
+            <!-- === INTRODUCTION === -->
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
@@ -434,6 +440,9 @@
             </div>
         </div>
 
+        <!-- =========================== -->
+        <!-- ======== ABOUT YOU ======== -->
+        <!-- =========================== -->
         <div class="context">
             <div class="row">
                 <div class="col-md-2"></div>
@@ -541,7 +550,9 @@
 
         <div class="panel-group">
 
-            <!-- Findable -->
+            <!-- ========================== -->
+            <!-- ======== FINDABLE ======== -->
+            <!-- ========================== -->
             <div class="row">
                 <div class="col-md-2">
                     <br><br><br>
@@ -641,7 +652,9 @@
             </div>
             <div class="pagebreak"></div>
 
-            <!-- Accessible -->
+            <!-- ============================ -->
+            <!-- ======== ACCESSIBLE ======== -->
+            <!-- ============================ -->
             <div class="row">
                 <div class="col-md-2">
                     <br><br><br>
@@ -726,7 +739,9 @@
             </div>
             <div class="pagebreak"></div>
 
-            <!-- Interoperable -->
+            <!-- =============================== -->
+            <!-- ======== INTEROPERABLE ======== -->
+            <!-- =============================== -->
             <div class="row">
                 <div class="col-md-2">
                     <img id="image-i" src="images/I_100.jpg" alt="I">
@@ -779,7 +794,9 @@
             </div>
             <div class="pagebreak"></div>
 
-            <!-- Reusable -->
+            <!-- ========================== -->
+            <!-- ======== REUSABLE ======== -->
+            <!-- ========================== -->
             <div class="row">
                 <div class="col-md-2">
                     <br><br><br>
@@ -897,7 +914,9 @@
             <div class="pagebreak"></div>
         </div>
 
-        <!-- Feedback Questions -->
+        <!-- =========================== -->
+        <!-- ======== FEEDBACK  ======== -->
+        <!-- =========================== -->
         <div id="feedback">
             <div>
                 <div class="row">
@@ -1021,7 +1040,9 @@
             </div>
         </div>
 
-        <!-- Footer -->
+        <!-- ========================= -->
+        <!-- ======== FOOTER  ======== -->
+        <!-- ========================= -->
         <div id="footer">
             <!-- Total score -->
             <div class="row">
@@ -1052,8 +1073,9 @@
 </div>
 
 
-<!-- ======================================= Modal window  ======================================= -->
-
+<!-- ====================================================================================== -->
+<!-- =================================== MODAL WINDOW  ==================================== -->
+<!-- ====================================================================================== -->
 <div id="modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -1242,7 +1264,6 @@
             the format to a newer one, in case a preferred format gets outdated.</p>
     </div>
 
-    <!-- /div texts -->
 </div>
 </body>
 </html>
