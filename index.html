@@ -24,6 +24,8 @@
     <!-- Firebase products -->
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
+    <!-- local firebase configuration -->
+    <script src="jscript/fbconfig.js"></script>
 
     <!-- CSS -->
     <style>
@@ -73,22 +75,11 @@
 
     <!-- Database scripts -->
     <script>
-        var ORGANIZATION = 'DANS';
+        var HOST = 'DANS';
         var DOWNLOAD_FILE_NAME = 'assessment_answers.csv';
 
         /* ---------------- Initialize database ---------------- */
-        var firebaseConfig = {
-            apiKey: "AIzaSyDsr2V2uWRlzXxDQHGR8zHT4G3qYZf0ONI",
-            authDomain: "fairisfairassessmenttool.firebaseapp.com",
-            databaseURL: "https://fairisfairassessmenttool.firebaseio.com",
-            projectId: "fairisfairassessmenttool",
-            storageBucket: "fairisfairassessmenttool.appspot.com",
-            messagingSenderId: "470559628312",
-            appId: "1:470559628312:web:71d3dd6864613dcda7f76d",
-            measurementId: "G-KCVM33DGND"
-        };
-
-        // Initialize Firebase
+        // Initialize Firebase (firebaseConfig from javascript file)
         firebase.initializeApp(firebaseConfig);
 
         /* ---------------- Write to database ---------------- */
@@ -107,9 +98,9 @@
         }
 
         function writeToSheet(answers) {
-            var organizationRef = firebase.database().ref('/assessment tool answers/' + ORGANIZATION);
+            var hostRef = firebase.database().ref('/assessment tool answers/' + HOST);
             let m = JSON.parse(answers);
-            organizationRef.push(m, function(error) {
+            hostRef.push(m, function(error) {
                 if (error) {
                     write_to_modal("SUBMISSION", error.message);
                 } else {
