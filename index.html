@@ -177,19 +177,17 @@
             ['Y', [14, 6, 9]],
             ['F', [2, 2, 3, 2, 3]],
             ['A', [5, 2, 2, 2]],
-            ['I', [3, 2]],
+            ['I', [2, 2]],
             ['R', [2, 3, 2, 3, 3, 3]],
             ['Q', [14, 0, 0, 5]]
         ])
         var short_answers = new Map([
-            <!-- Shortened answers to make downloaded data more readeable -->
+            <!-- Shortened answers to make downloaded data more readable -->
             ['fq5.1', 'Structured data'],
             ['fq5.2', 'Web service'],
             ['fq5.3', 'Not offered'],
             ['aq1.4', 'Closed access'],
             ['aq1.5', 'None'],
-            ['iq1.1', 'Linked data'],
-            ['iq1.2', 'Embedded'],
             ['rq5.3', 'Standard unknown'],
         ])
 
@@ -285,12 +283,6 @@
 
         /* ------------------------ I ----------------------- */
         function update_I() {
-            if (checked("iq1.1") || checked("iq1.2")) {
-                disable(["iq1.3"]);
-            }
-             else {
-                enable(["iq1.3"]);
-            }
         }
 
         /* ----------------------- R ----------------------- */
@@ -766,9 +758,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="iq1">
-                                            <label id="liq1.1"><input type="checkbox" id="iq1.1" value="8.33" onclick="update_I()"> Yes, metadata is available as Linked Data</label><br>
-                                            <label id="liq1.2"><input type="checkbox" id="iq1.2" value="8.33" onclick="update_I()"> Yes, semantic vocabularies are embedded in the metadata page<br>&nbsp;&nbsp;&nbsp;&nbsp;vocabularies</label><br>
-                                            <label id="liq1.3"><input type="checkbox" id="iq1.3" value="8.33" onclick="update_I()"> No</label>
+                                            <label class="radio-inline" id="liq1.1"><input type="radio" name="iq1" id="iq1.1" value="50" onclick="update_I()"> Yes</label><br>
+                                            <label class="radio-inline" id="liq1.2"><input type="radio" name="iq1" id="iq1.2" value="0" onclick="update_I()" > No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -782,12 +773,12 @@
 
                                     <div class="col-sm-6">
                                         <div id="iq2">
-                                            <label class="radio-inline" id="liq2.1"><input type="radio" name="iq2" id="iq2.1" value="50" onclick="update_A()"> Yes</label><br>
-                                            <label class="radio-inline" id="liq2.2"><input type="radio" name="iq2" id="iq2.2" value="0" onclick="update_A()" > No</label>
+                                            <label class="radio-inline" id="liq2.1"><input type="radio" name="iq2" id="iq2.1" value="50" onclick="update_I()"> Yes</label><br>
+                                            <label class="radio-inline" id="liq2.2"><input type="radio" name="iq2" id="iq2.2" value="0" onclick="update_I()" > No</label>
                                         </div>
                                     </div>
                                 </div>
-                                <br><br><br><br>
+                                <br><br><br><br><br>
                             </form>
                         </div>
                     </div>
@@ -838,7 +829,7 @@
                                     <div class="col-sm-6">
                                         <div id="rq2">
                                             <label class="radio-inline" id="lrq2.1"><input type="radio" name="rq2" id="rq2.1" value="0" onclick="update_R()"> Fully conforming </label><br>
-                                            <label class="radio-inline" id="lrq2.2"><input type="radio" name="rq2" id="rq2.2" value="0" onclick="update_R()"> Somewhat conforming</label><br>
+                                            <label class="radio-inline" id="lrq2.2"><input type="radio" name="rq2" id="rq2.2" value="0" onclick="update_R()"> Partially conforming</label><br>
                                             <label class="radio-inline" id="lrq2.3"><input type="radio" name="rq2" id="rq2.3" value="0" onclick="update_R()"> Not conforming</label>
                                         </div>
                                     </div>
@@ -1003,7 +994,7 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
                     <div id="Q-i-2-title">
-                        <p>Are there any metrics relevant to your discipline and/or needed for reusability of your dataset that are missing from this assessment?
+                        <p>Are there any metrics relevant to your discipline and/or needed for enabling reusability of your dataset that are missing from this assessment?
                         <br>If yes, please describe them below.</p>
                     </div>
                     <textarea id="qq2" rows="4" cols="139"></textarea>
