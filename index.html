@@ -556,7 +556,7 @@
             <!-- ========================== -->
             <div class="row">
                 <div class="col-md-2">
-                    <br><br><br>
+                    <br><br><br><br><br><br>
                     <img id="image-f" src="images/F_100.jpg" alt="F">
                 </div>
                 <div class="col-md-10">
@@ -658,7 +658,7 @@
             <!-- ============================ -->
             <div class="row">
                 <div class="col-md-2">
-                    <br><br><br>
+                    <br><br>
                     <img id="image-a" src="images/A_100.jpg" alt="A">
                 </div>
                 <div class="col-md-10">
@@ -1104,7 +1104,7 @@
         <p>FAIR-Aware is an online self-assessment tool developed by the FAIRsFAIR project to raise awareness among users about the FAIRness of a dataset.
             FAIRness refers to <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR<i class="fa fa-external-link"></i></a>,
             a set of guiding principles to make your data Findable, Accessible, Interoperable, and Reusable.</p>
-        <p>The self-assessment consists of 24 questions covering context, metrics, used and general feedback on the usability of the assessment tool.
+        <p>The self-assessment consists of 24 questions covering context, metrics and general feedback on the usability of the assessment tool.
             You may need approximately 30 minutes to complete the assessment.
             Tip: Next to each of the metrics, you will find more information about them.</p>
         <p>To help us make FAIR-Aware the best assessment tool possible, we need your feedback to ensure it meets the needs and expectations of future users.
@@ -1146,11 +1146,12 @@
             <a href="https://eoscpilot.eu/edmi-metadata-guidelines" target="_blank">EOSC Datasets Minimum Information (EDMI)<i class="fa fa-external-link"></i></a>,
             <a href="https://schema.datacite.org/" target="_blank">DataCite Metadata Schema<i class="fa fa-external-link"></i></a>, and
             <a href="https://www.w3.org/TR/dwbp/" target="_blank">W3C Recommendation Data on the Web Best Practices<i class="fa fa-external-link"></i></a>).</p>
-        <p>This question focuses on domain-agnostic core metadata. Domain or discipline-specific metadata specifications are covered under question R1.</p>
+        <p>This question focuses on domain-agnostic core metadata. Domain or discipline-specific metadata specifications are covered under
+            the specific assessment question about metadata following the specification of a community endorsed standard.</p>
     </div>
 
     <div id="F-i-4-contents">
-        <p>The metadata should include an identifier of the data (covered under F1 and F2) such that users can discover and access the data through the metadata.</p>
+        <p>The metadata should include an identifier of the data such that users can discover and access the data through the metadata.</p>
     </div>
 
     <div id="F-i-5-contents">
@@ -1187,7 +1188,7 @@
 
     <div id="A-i-4-contents">
         <p>This question determines if the metadata will be preserved even when the data they represent is no longer available or lost.
-            Similar to question F5, answering this question will require an understanding of the capabilities offered,
+            This question will require an understanding of the capabilities offered,
             data management plan (DMP) and policies implemented by the data repository.</p>
         <p>Continued access to metadata depends on a data repository’s preservation practice which is usually documented in the
             repository’s service policies or statements. Typically, a trustworthy data repository offering DOIs and implementing
@@ -1198,10 +1199,10 @@
     <!-- ======================================= Interoperable  ======================================= -->
 
     <div id="I-i-1-contents">
-        <p>To make metadata more understandable to humans and machines, it is described with semantic vocabularies. Ontology, thesaurus,
-            and taxonomy are kinds of semantic vocabularies, and they come with different degrees of expressiveness, structure, and inferential power.
+        <p>To make metadata more understandable to humans and machines, they need to be described with semantic vocabularies. Ontologies, thesauri,
+            and taxonomies are kinds of semantic vocabularies, and they come with different degrees of expressiveness, structure, and inferential power.
             Metadata may use semantic vocabularies in various ways. For example, semantic vocabularies may be embedded in the metadata page
-            (e.g., Microdata, RDFa or JSON-LD). Metadata may also be published as Linked Data using semantic vocabularies.</p>
+            (e.g., Microdata, RDFa or JSON-LD). If semantic vocabularies are embeded in the metadata, a repository may be able to publish the metadata as Linked Data.</p>
     </div>
 
     <div id="I-i-2-contents">
@@ -1245,7 +1246,7 @@
     </div>
 
     <div id="R-i-5-contents">
-        <p>In addition to core metadata required to support data citation and discovery covered under question F3,
+        <p>In addition to core metadata required to support data citation and discovery,
             metadata to support data reusability should be made available following community-endorsed metadata standards.</p>
         <p>Community metadata standards may exhibit different levels of readiness. Some communities have well-established metadata standards
             (e.g., geospatial: ISO19115, biodiversity: DarwinCore, ABCD, EML, social science: DDI, astronomy: International Virtual Observatory
