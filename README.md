@@ -1,2 +1,2 @@
-FAIRAware – A self-assessment tool to raise awareness of users on data FAIRness.
+FAIR-Aware – A self-assessment tool to raise awareness of users on data FAIRness.
 
