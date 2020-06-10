@@ -104,8 +104,8 @@
             </div>
         </div>
 
+        <!-- === INTRODUCTION === -->
         <div class="intro">
-            <!-- === INTRODUCTION === -->
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
@@ -227,7 +227,7 @@
             <!-- ========================== -->
             <div class="row">
                 <div class="col-md-2">
-                    <br><br><br><br><br><br>
+                    <br>
                     <img id="image-f" src="images/F_100.jpg" alt="F">
                 </div>
                 <div class="col-md-10">
@@ -242,7 +242,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="fq1" class="col-sm-6 col-form-label" id="F-i-1-title">
-                                        Does the data have a universally unique identifier assigned?
+                                        Are you aware that datasets should be assigned a globally unique and persistent identifier?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -257,7 +257,8 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="fq2" class="col-sm-6 col-form-label" id="F-i-2-title">
-                                        Does the data have a persistent identifier assigned?
+                                        Are you aware that discovery metadata elements should be provided with datasets and include the dataset’s
+                                        <span data-toggle="tooltip" title="A globally unique and persistent identifier"> PID?</span>
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -272,7 +273,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="fq3" class="col-sm-6 col-form-label" id="F-i-3-title">
-                                        Are metadata elements provided to support data citation and discovery (creator, title, publisher, publication date, summary and keywords describing the data)?
+                                        Are you aware that metadata describing your datasets should be made available online using a standard protocol to be accessed by humans and machines ?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -280,40 +281,8 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq3">
-                                            <label class="radio-inline" id="lfq3.1"><input type="radio" name="fq3" id="fq3.1" value="0" onclick="update_F()"> Completely provided</label><br>
-                                            <label class="radio-inline" id="lfq3.2"><input type="radio" name="fq3" id="fq3.2" value="0" onclick="update_F()"> Partially provided</label><br>
-                                            <label class="radio-inline" id="lfq3.3"><input type="radio" name="fq3" id="fq3.3" value="0" onclick="update_F()"> Not provided</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="fq4" class="col-sm-6 col-form-label" id="F-i-4-title">
-                                        Does the metadata include the data identifier?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-4')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-
-                                    <div class="col-sm-6">
-                                        <div id="fq4">
-                                            <label class="radio-inline" id="lfq4.1"><input type="radio" name="fq4" id="fq4.1" value="0" onclick="update_F()"> Yes</label><br>
-                                            <label class="radio-inline" id="lfq4.2"><input type="radio" name="fq4" id="fq4.2" value="0" onclick="update_F()"> No</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="fq5" class="col-sm-6 col-form-label" id="F-i-5-title">
-                                        Is the metadata offered in such a way that it can be harvested?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-5')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-
-                                    <div class="col-sm-6">
-                                        <div id="fq5">
-                                            <label id="lfq5.1"><input type="checkbox" id="fq5.1" value="8.33" onclick="update_F()"> Metadata is  offered as structured data on the data page<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for use by a web search engine</label><br>
-                                            <label id="lfq5.2"><input type="checkbox" id="fq5.2" value="8.33" onclick="update_F()"> Metadata is offered through a web service or <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;machine harvestable</label><br>
-                                            <label id="lfq5.3"><input type="checkbox" id="fq5.3" value="8.33" onclick="update_F()"> Metadata is not offered</label><br>
+                                            <label class="radio-inline" id="lfq3.1"><input type="radio" name="fq3" id="fq3.1" value="0" onclick="update_F()"> Yes</label><br>
+                                            <label class="radio-inline" id="lfq3.2"><input type="radio" name="fq3" id="fq3.2" value="0" onclick="update_F()"> No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -322,14 +291,12 @@
                     </div>
                 </div>
             </div>
-            <div class="pagebreak"></div>
 
             <!-- ============================ -->
             <!-- ======== ACCESSIBLE ======== -->
             <!-- ============================ -->
             <div class="row">
                 <div class="col-md-2">
-                    <br><br>
                     <img id="image-a" src="images/A_100.jpg" alt="A">
                 </div>
                 <div class="col-md-10">
@@ -343,7 +310,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="aq1" class="col-sm-6 col-form-label" id="A-i-1-title">
-                                        Select the access level of the data and specify if the metadata includes the access level, and its related access information
+                                        Are you aware that the access level of the data and its related conditions of access (if required) should be determined and specified in the metadata?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -351,17 +318,14 @@
 
                                     <div class="col-sm-6">
                                         <div id="aq1">
-                                            <label class="radio-inline" id="laq1.1"><input type="radio" name="aq1" id="aq1.1" value="0" onclick="update_A()"> Public access</label><br>
-                                            <label class="radio-inline" id="laq1.2"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A()"> Embargoed access</label><br>
-                                            <label class="radio-inline" id="laq1.3"><input type="radio" name="aq1" id="aq1.3" value="0" onclick="update_A()"> Restricted access</label><br>
-                                            <label class="radio-inline" id="laq1.4"><input type="radio" name="aq1" id="aq1.4" value="0" onclick="update_A()"> Closed access (metadata only)</label><br>
-                                            <label class="radio-inline" id="laq1.5"><input type="radio" name="aq1" id="aq1.5" value="0" onclick="update_A()" > No option to select an access level</label>
+                                            <label class="radio-inline" id="laq1.1"><input type="radio" name="aq1" id="aq1.1" value="0" onclick="update_A()"> Yes</label><br>
+                                            <label class="radio-inline" id="laq1.2"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A()"> No</label><br>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="aq2" class="col-sm-6 col-form-label" id="A-i-2-title">
-                                        If the data is embargoed, does the metadata include the date the data will be released publically?
+                                        Are you aware that metadata should remain available over time, even if the data is no longer accessible?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -376,11 +340,10 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="aq3" class="col-sm-6 col-form-label" id="A-i-3-title">
-                                        If access to the data is restricted, does the metadata include
+                                        Are you aware that the metadata describing your datasets should use  semantic vocabularies (for e.g., ontologies, thesauri, taxonomies)?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
-                                        access conditions, e.g., point of contact or instructions to access the data?
                                     </label>
 
                                     <div class="col-sm-6">
@@ -390,22 +353,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="aq4" class="col-sm-6 col-form-label" id="A-i-4-title">
-                                        Will you  deposit your data in a repository which ensures that the
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-4')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                        metadata remains available once the dataset becomes unavailable?
-                                    </label>
-
-                                    <div class="col-sm-6">
-                                        <div id="aq4">
-                                            <label class="radio-inline" id="laq4.1"><input type="radio" name="aq4" id="aq4.1" value="50" onclick="update_A()"> Yes</label><br>
-                                            <label class="radio-inline" id="laq4.2"><input type="radio" name="aq4" id="aq4.2" value="0" onclick="update_A()" > No</label>
-                                        </div>
-                                    </div>
-                                </div>
+                                <br>
                             </form>
                         </div>
                     </div>
@@ -431,7 +379,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="iq1" class="col-sm-6 col-form-label" id="I-i-1-title">
-                                        Are semantic vocabularies (e.g., ontologies, thesauri, taxonomies) used in the metadata?
+                                        Are you aware that metadata should include meaningful links between the data and its related entities, when available?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -444,35 +392,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="iq2" class="col-sm-6 col-form-label" id="I-i-2-title">
-                                        Does the metadata include meaningful links between the data and its related entities?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-2')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-
-                                    <div class="col-sm-6">
-                                        <div id="iq2">
-                                            <label class="radio-inline" id="liq2.1"><input type="radio" name="iq2" id="iq2.1" value="50" onclick="update_I()"> Yes</label><br>
-                                            <label class="radio-inline" id="liq2.2"><input type="radio" name="iq2" id="iq2.2" value="0" onclick="update_I()" > No</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br><br><br><br><br>
+                                <br><br><br><br><br><br><br><br>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="pagebreak"></div>
 
             <!-- ========================== -->
             <!-- ======== REUSABLE ======== -->
             <!-- ========================== -->
             <div class="row">
                 <div class="col-md-2">
-                    <br><br><br>
+                    <br>
                     <img id="image-r" src="images/R_100.jpg" alt="R">
                 </div>
                 <div class="col-md-10">
@@ -486,7 +418,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="rq1" class="col-sm-6 col-form-label" id="R-i-1-title">
-                                        Are  content descriptions specified in the metadata?
+                                        Are you aware that content descriptions should be specified in the metadata and that they should conform with the data?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -501,7 +433,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="rq2" class="col-sm-6 col-form-label" id="R-i-2-title">
-                                        If yes, do they conform with the data?
+                                        Are you aware that metadata should include licence information under which the data can be reused?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -509,16 +441,15 @@
 
                                     <div class="col-sm-6">
                                         <div id="rq2">
-                                            <label class="radio-inline" id="lrq2.1"><input type="radio" name="rq2" id="rq2.1" value="0" onclick="update_R()"> Fully conforming </label><br>
-                                            <label class="radio-inline" id="lrq2.2"><input type="radio" name="rq2" id="rq2.2" value="0" onclick="update_R()"> Partially conforming</label><br>
-                                            <label class="radio-inline" id="lrq2.3"><input type="radio" name="rq2" id="rq2.3" value="0" onclick="update_R()"> Not conforming</label>
+                                            <label class="radio-inline" id="lrq2.1"><input type="radio" name="rq2" id="rq2.1" value="0" onclick="update_R()"> Yes</label><br>
+                                            <label class="radio-inline" id="lrq2.2"><input type="radio" name="rq2" id="rq2.2" value="0" onclick="update_R()"> No</label><br>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="form-group row">
                                     <label for="rq3" class="col-sm-6 col-form-label" id="R-i-3-title">
-                                        Does the metadata include licence information under which the data can be reused?
+                                        Are you aware that provenance information on collection and/or generation of data should be included in the metadata?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -533,7 +464,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="rq4" class="col-sm-6 col-form-label" id="R-i-4-title">
-                                        Is provenance information on collection or generation of data  (sources, date, contributors, version) included in the metadata?
+                                        Are you aware that metadata should follow the specifications of your community-endorsed standard?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-4')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -541,15 +472,14 @@
 
                                     <div class="col-sm-6">
                                         <div id="rq4">
-                                            <label class="radio-inline" id="lrq4.1"><input type="radio" name="rq4" id="rq4.1" value="0" onclick="update_R()"> Completely provided</label><br>
-                                            <label class="radio-inline" id="lrq4.2"><input type="radio" name="rq4" id="rq4.2" value="0" onclick="update_R()"> Partially provided</label><br>
-                                            <label class="radio-inline" id="lrq4.3"><input type="radio" name="rq4" id="rq4.3" value="0" onclick="update_R()"> Not provided</label>
+                                            <label class="radio-inline" id="lrq4.1"><input type="radio" name="rq4" id="rq4.1" value="0" onclick="update_R()"> Yes</label><br>
+                                            <label class="radio-inline" id="lrq4.2"><input type="radio" name="rq4" id="rq4.2" value="0" onclick="update_R()"> No</label><br>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="rq5" class="col-sm-6 col-form-label" id="R-i-5-title">
-                                        Does the metadata follow the specifications of a community-endorsed standard?
+                                        Are you aware that data should be provided in a preferred file format?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-5')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -559,23 +489,6 @@
                                         <div id="rq5">
                                             <label class="radio-inline" id="lrq5.1"><input type="radio" name="rq5" id="rq5.1" value="0" onclick="update_R()"> Yes</label><br>
                                             <label class="radio-inline" id="lrq5.2"><input type="radio" name="rq5" id="rq5.2" value="0" onclick="update_R()"> No</label><br>
-                                            <label class="radio-inline" id="lrq5.3"><input type="radio" name="rq5" id="rq5.3" value="0" onclick="update_R()"> Standard unknown/unavailable</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="rq6" class="col-sm-6 col-form-label" id="R-i-6-title">
-                                        Is the data available in a preferred file format?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-6')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-
-                                    <div class="col-sm-6">
-                                        <div id="rq6">
-                                            <label class="radio-inline" id="lrq6.1"><input type="radio" name="rq6" id="rq6.1" value="0" onclick="update_R()"> Yes</label><br>
-                                            <label class="radio-inline" id="lrq6.2"><input type="radio" name="rq6" id="rq6.2" value="0" onclick="update_R()"> No</label><br>
-                                            <label class="radio-inline" id="lrq6.3"><input type="radio" name="rq6" id="rq6.3" value="0" onclick="update_R()"> Format unknown</label>
                                         </div>
                                     </div>
                                 </div>
@@ -710,6 +623,17 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- ======== ADVICE TEXTS FOR PRINTING  ======== -->
+        <!-- ============================================ -->
+        <div id="print-advice">
+            <div class="pagebreak"></div>
+            <div>
+                <h4>ADVICE</h4><br>
+                <div id="print-advice-contents"></div>
             </div>
         </div>
 
@@ -860,6 +784,18 @@
             to check if data hosted by the repository of your choice are indexed.</p>
     </div>
 
+    <div id="F-i-1-advice">
+        <p>abc</p>
+    </div>
+
+    <div id="F-i-2-advice">
+        <p>abc</p>
+    </div>
+
+    <div id="F-i-3-advice">
+        <p>abc</p>
+    </div>
+
     <!-- ======================================= Accessible  ======================================= -->
 
     <div id="A-i-1-contents">
@@ -892,6 +828,18 @@
             (e.g., by providing a tombstone page).</p>
     </div>
 
+    <div id="A-i-1-advice">
+        <p>abc</p>
+    </div>
+
+    <div id="A-i-2-advice">
+        <p>abc</p>
+    </div>
+
+    <div id="A-i-3-advice">
+        <p>abc</p>
+    </div>
+
     <!-- ======================================= Interoperable  ======================================= -->
 
     <div id="I-i-1-contents">
@@ -907,6 +855,10 @@
             data creators or collectors and organization (e.g., funder and hosting institution). Links between data and its related entities
             should be meaningful and expressed through relation types (e.g., the DataCite Metadata Schema specifies relation types between
             research objects through the fields RelatedIdentifier and RelationType).</p>
+    </div>
+
+    <div id="I-i-1-advice">
+        <p>abc</p>
     </div>
 
     <!-- ======================================= Reusable  ======================================= -->
@@ -960,6 +912,26 @@
             Using preferred formats enables data to be loaded directly into the software and tools used for data analysis. It makes it possible to
             easily integrate your data with other data using the same preferred format. The use of preferred formats will also help to transform
             the format to a newer one, in case a preferred format gets outdated.</p>
+    </div>
+
+    <div id="R-i-1-advice">
+        <p>abc</p>
+    </div>
+
+    <div id="R-i-2-advice">
+        <p>abc</p>
+    </div>
+
+    <div id="R-i-3-advice">
+        <p>abc</p>
+    </div>
+
+    <div id="R-i-4-advice">
+        <p>abc</p>
+    </div>
+
+    <div id="R-i-5-advice">
+        <p>abc</p>
     </div>
 
 </div>
