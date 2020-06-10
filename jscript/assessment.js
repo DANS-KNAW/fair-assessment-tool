@@ -10,20 +10,11 @@
             <!-- For questions where the answer is given in free text, the value is 0. -->
             <!-- Notice: It is important to update this Map when questions are removed or added! -->
             ['Y', [14, 6, 9]],
-            ['F', [2, 2, 3, 2, 3]],
-            ['A', [5, 2, 2, 2]],
-            ['I', [2, 2]],
-            ['R', [2, 3, 2, 3, 3, 3]],
+            ['F', [2, 2, 2]],
+            ['A', [2, 2, 2]],
+            ['I', [2]],
+            ['R', [2, 2, 2, 2, 2]],
             ['Q', [14, 0, 0, 5]]
-        ])
-        var short_answers = new Map([
-            <!-- Shortened answers to make downloaded data more readable -->
-            ['fq5.1', 'Structured data'],
-            ['fq5.2', 'Web service'],
-            ['fq5.3', 'Not offered'],
-            ['aq1.4', 'Closed access'],
-            ['aq1.5', 'None'],
-            ['rq5.3', 'Standard unknown'],
         ])
 
         /* -------------------- Initialize -------------------- */
@@ -33,6 +24,7 @@
         function initialise() {
             update();
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
+            document.getElementById("print-advice").style.display = "none"
             document.getElementById("texts").style.display = "none"
             if(!window.print) {document.getElementById("print-button").style.display = "none"}
         }
@@ -94,26 +86,10 @@
 
         /* ----------------------- F ----------------------- */
         function update_F() {
-            if (checked("fq5.1") || checked("fq5.2")) {
-                disable(["fq5.3"]);
-            }
-             else {
-                enable(["fq5.3"]);
-            }
         }
 
         /* ----------------------- A ----------------------- */
         function update_A() {
-            if (!checked("aq1.2")) {
-                disable(["aq2.1", "aq2.2"]);
-            } else {
-                enable(["aq2.1", "aq2.2"]);
-            }
-            if (!checked("aq1.3")) {
-                disable(["aq3.1", "aq3.2"]);
-            }else {
-                enable(["aq3.1", "aq3.2"]);
-            }
         }
 
         /* ------------------------ I ----------------------- */
@@ -122,11 +98,6 @@
 
         /* ----------------------- R ----------------------- */
         function update_R() {
-            if (!checked("rq1.1")) {
-                disable(["rq2.1", "rq2.2", "rq2.3"]);
-            } else {
-                enable(["rq2.1", "rq2.2", "rq2.3"]);
-            }
         }
 
         /* ---------------------------- Print --------------------------- */
@@ -134,12 +105,28 @@
         function print_page() {
             document.getElementById("logos").style.display = "none"
             document.getElementById("icons").style.display = "none"
+            document.getElementById("footer").style.display = "none"
             document.getElementById("for-administrators").style.display = "none"
+//            if (add_advice_texts().length != 0) {document.getElementById("print-advice").style.display = "block"};
             window.print();
             document.getElementById("logos").style.display = "block"
             document.getElementById("icons").style.display = "block"
+            document.getElementById("footer").style.display = "block"
             document.getElementById("for-administrators").style.display = "block"
+            document.getElementById("print-advice").style.display = "none"
             update();
+        }
+
+        function add_advice_texts() {
+            let advices = "";
+            let negative = get_negative_answers();
+            for(let question_key of negative) {
+                let question = document.getElementById(question_key + "-title").textContent.bold();
+                let advice = document.getElementById(question_key + "-advice").innerHTML;
+                advices += question + "\n" + advice;
+            }
+            if (advices.length != 0) {$("#print-advice-contents").html(advices);}
+            return advices;
         }
 
         /* ------------------ Validate answers --------------- */
@@ -173,30 +160,15 @@
         }
 
         function excluded(question) {
-            <!-- questions embargoed access / restricted access excluded from validation? -->
-            return question == "aq2" && !embargoed_access() || question == "aq3" && !restricted_access() || question == "rq2" && !content_descriptions() || answer_not_required(question);
-        }
-
-        function embargoed_access() {
-            return checked("aq1.2")
-        }
-
-        function restricted_access() {
-            return checked("aq1.3")
-        }
-
-        function content_descriptions() {
-            return checked("rq1.1")
-        }
-
-        function answer_not_required(question) {
-            return question == "qq1" || question == "qq2" ||question == "qq3"
+            <!-- questions excluded from validation -->
+            return question == "qq1" || question == "qq2" ||question == "qq3";
         }
 
         /* ------------------ Retrieve answers --------------- */
 
         function get_answers() {
             let m = new Map();
+            neg = new Map();
             var today = new Date();
             var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
             m.set("date", date)
@@ -225,11 +197,27 @@
             return JSON.stringify(Object.fromEntries(m));
         }
 
-        function get_answer(choice) {
-            if (short_answers.has(choice)) {
-                return short_answers.get(choice)
-            } else {
-                let answer = "l" + choice;
-                return document.getElementById(answer).textContent.replace(/,/g, " ").trim().substr(0, 50);
+        function get_negative_answers() {
+            let neg = []
+            for (let [letter, questions] of fields) {
+                for(let i = 0; i < questions.length; i++) {
+                    let question = letter.toLowerCase() + "q" + (i + 1).toString();
+                    let number_of_answers = questions[i];
+                    for (let j = 0; j < number_of_answers; j++) {
+                        let choice = question + "." + (j + 1).toString();
+                        if (checked(choice)) {
+                            if (get_answer(choice) == "No") {
+                                question_key = letter + "-i-" + (i + 1).toString();
+                                neg.push(question_key)
+                            }
+                        }
+                    }
+                }
             }
+            return neg;
+        }
+
+        function get_answer(choice) {
+            let answer = "l" + choice;
+            return document.getElementById(answer).textContent.replace(/,/g, " ").trim().substr(0, 50);
         }
