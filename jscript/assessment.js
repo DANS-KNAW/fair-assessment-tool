@@ -9,7 +9,7 @@
             <!-- The value of the item is the number of possible answers to the respective question. -->
             <!-- For questions where the answer is given in free text, the value is 0. -->
             <!-- Notice: It is important to update this Map when questions are removed or added! -->
-            ['Y', [14, 6, 9]],
+            ['Y', [209, 6, 9]],
             ['F', [2, 2, 2]],
             ['A', [2, 2, 2]],
             ['I', [2]],
@@ -27,11 +27,32 @@
             document.getElementById("print-advice").style.display = "none"
             document.getElementById("texts").style.display = "none"
             if(!window.print) {document.getElementById("print-button").style.display = "none"}
+            $('.dropdown-submenu a.dropdown-title').on("click", function(d){
+                $(this).next('ul').toggle();
+                d.stopPropagation();
+                d.preventDefault();
+            });
         }
 
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
+
+        /* ----------- Include another html file ----------- */
+
+        function includeHTML(id) {
+            var x;
+            var elmnt = document.getElementById(id)
+            var file = elmnt.getAttribute("html-file");
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", file, true);
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    elmnt.innerHTML = this.responseText;
+                }
+            }
+            xhttp.send();
+        }
 
         /* ----------- Get, check, disable and enable elements/values ----------- */
 

@@ -8,17 +8,15 @@
     <title>FAIR-Aware</title>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap via CDN -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <!-- Optional theme -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
     <!-- FontAwesome via BootstrapCDN -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
     <!-- Firebase products -->
@@ -63,6 +61,8 @@
         .fa-paper-plane {font-size: 40px; color: #2795c8;}
         .fa-download {font-size: 10px; color: #2795c8;}
         .work-category {color: #606060;}
+        .dropdown-submenu {position: relative;}
+        .dropdown-submenu .dropdown-menu {top: 0; left: 100%; margin-top: -1px;}
         #main-title {font-size: 40px; color: #2795c8;}
         #image-f, #image-a, #image-i, #image-r {padding-top: 10px;}
         @media (min-width: 768px) {
@@ -124,44 +124,19 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
                     <h3>About you:</h3>
+
                     <div class="row">
                        <div class="col-md-3" id="Y-i-1-title">
                             <p>Which domain do you work in? </p>
                        </div>
-                        <div class="col-md-9">
-                            <div id="yq1">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <span class="work-category">Humanities and Social Sciences</span><br>
-                                        <label id="lyq1.1"><input type="checkbox" id="yq1.1"> Arts and Humanities</label><br>
-                                        <label id="lyq1.2"><input type="checkbox" id="yq1.2"> Social and Behavioural sciences</label><br><br>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <span class="work-category">Life Sciences</span><br>
-                                        <label id="lyq1.3"><input type="checkbox" id="yq1.3"> Biology</label><br>
-                                        <label id="lyq1.4"><input type="checkbox" id="yq1.4"> Medicine</label><br>
-                                        <label id="lyq1.5"><input type="checkbox" id="yq1.5"> Agriculture, Forestry, Veterinary Medicine</label><br><br>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <span class="work-category">Engineering Sciences</span><br>
-                                        <label id="lyq1.6"><input type="checkbox" id="yq1.6"> Construction and Architecture</label><br>
-                                        <label id="lyq1.7"><input type="checkbox" id="yq1.7"> Mechanical and Industrial Engineering</label><br>
-                                        <label id="lyq1.8"><input type="checkbox" id="yq1.8"> Thermal/Process Engineering</label><br>
-                                        <label id="lyq1.9"><input type="checkbox" id="yq1.9"> Materials Sciences</label><br>
-                                        <label id="lyq1.10"><input type="checkbox" id="yq1.10"> Computer Science, Electrical and<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System Engineering</label><br>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <span class="work-category">Natural Sciences</span><br>
-                                        <label id="lyq1.11"><input type="checkbox" id="yq1.11"> Mathematics</label><br>
-                                        <label id="lyq1.12"><input type="checkbox" id="yq1.12"> Physics and astronomy</label><br>
-                                        <label id="lyq1.13"><input type="checkbox" id="yq1.13"> Chemistry</label><br>
-                                        <label id="lyq1.14"><input type="checkbox" id="yq1.14"> Geosciences</label><br>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       <div class="col-md-9">
+                           <div id="yq1">
+                               <div class="row">
+                                   <div id="domain" html-file="domain.html"></div>
+                                   <script>includeHTML("domain");</script>
+                               </div>
+                           </div>
+                       </div>
                     </div>
                     <br>
 
