@@ -123,7 +123,7 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
-                    <h3>About you:</h3>
+                    <h3>About you</h3>
 
                     <div class="row">
                        <div class="col-md-3" id="Y-i-1-title">
@@ -202,11 +202,11 @@
             <!-- ========================== -->
             <div class="row">
                 <div class="col-md-2">
-                    <br>
+                    <br><br><br>
                     <img id="image-f" src="images/F_100.jpg" alt="F">
                 </div>
                 <div class="col-md-10">
-                    <h3>Metrics:</h3>
+                    <h3>FAIR questions</h3>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -217,7 +217,7 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="fq1" class="col-sm-6 col-form-label" id="F-i-1-title">
-                                        Are you aware that datasets should be assigned a globally unique and persistent identifier?
+                                        Are you aware that a dataset should be assigned a globally unique and persistent identifier when deposited with a data repository?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -226,13 +226,15 @@
                                     <div class="col-sm-6">
                                         <div id="fq1">
                                             <label class="radio-inline" id="lfq1.1"><input type="radio" name="fq1" id="fq1.1" value="0" onclick="update_F()"> Yes</label><br>
-                                            <label class="radio-inline" id="lfq1.2"><input type="radio" name="fq1" id="fq1.2" value="0" onclick="update_F()"> No</label>
+                                            <label class="radio-inline" id="lfq1.2"><input type="radio" name="fq1" id="fq1.2" value="0" onclick="update_F()"> No</label><br>
+                                            <label class="radio-inline" id="lfq1.3"><input type="radio" name="fq1" id="fq1.3" value="0" onclick="update_F()"> Not sure</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="fq2" class="col-sm-6 col-form-label" id="F-i-2-title">
-                                        Are you aware that discovery metadata elements should be provided with datasets and include the dataset’s
+                                        Are you aware that when you deposit a dataset with a repository, you will need to provide some details (known as discovery metadata)
+                                        in order to make the data findable, understandable and reusable to others?
                                         <span data-toggle="tooltip" title="A globally unique and persistent identifier"> PID?</span>
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-2')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
@@ -242,13 +244,14 @@
                                     <div class="col-sm-6">
                                         <div id="fq2">
                                             <label class="radio-inline" id="lfq2.1"><input type="radio" name="fq2" id="fq2.1" value="0" onclick="update_F()"> Yes</label><br>
-                                            <label class="radio-inline" id="lfq2.2"><input type="radio" name="fq2" id="fq2.2" value="0" onclick="update_F()" > No</label>
+                                            <label class="radio-inline" id="lfq2.2"><input type="radio" name="fq2" id="fq2.2" value="0" onclick="update_F()" > No</label><br>
+                                            <label class="radio-inline" id="lfq2.3"><input type="radio" name="fq2" id="fq2.3" value="0" onclick="update_F()" > Not sure</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="fq3" class="col-sm-6 col-form-label" id="F-i-3-title">
-                                        Are you aware that metadata describing your datasets should be made available online using a standard protocol to be accessed by humans and machines ?
+                                        Are you aware that the repository providing access to your dataset should make the metadata describing your datasets available in a format readable by machines as well as humans?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -257,7 +260,8 @@
                                     <div class="col-sm-6">
                                         <div id="fq3">
                                             <label class="radio-inline" id="lfq3.1"><input type="radio" name="fq3" id="fq3.1" value="0" onclick="update_F()"> Yes</label><br>
-                                            <label class="radio-inline" id="lfq3.2"><input type="radio" name="fq3" id="fq3.2" value="0" onclick="update_F()"> No</label>
+                                            <label class="radio-inline" id="lfq3.2"><input type="radio" name="fq3" id="fq3.2" value="0" onclick="update_F()"> No</label><br>
+                                            <label class="radio-inline" id="lfq3.3"><input type="radio" name="fq3" id="fq3.3" value="0" onclick="update_F()"> Not sure</label>
                                         </div>
                                     </div>
                                 </div>
@@ -285,7 +289,8 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="aq1" class="col-sm-6 col-form-label" id="A-i-1-title">
-                                        Are you aware that the access level of the data and its related conditions of access (if required) should be determined and specified in the metadata?
+                                        Are you aware that access to your dataset may need to be regulated and that your metadata description should
+                                        make clear who can access the data as well as any possible related conditions?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -295,6 +300,7 @@
                                         <div id="aq1">
                                             <label class="radio-inline" id="laq1.1"><input type="radio" name="aq1" id="aq1.1" value="0" onclick="update_A()"> Yes</label><br>
                                             <label class="radio-inline" id="laq1.2"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A()"> No</label><br>
+                                            <label class="radio-inline" id="laq1.3"><input type="radio" name="aq1" id="aq1.3" value="0" onclick="update_A()"> Not sure</label>
                                         </div>
                                     </div>
                                 </div>
@@ -308,27 +314,13 @@
 
                                     <div class="col-sm-6">
                                         <div id="aq2">
-                                            <label class="radio-inline" id="laq2.1"><input type="radio" name="aq2" id="aq2.1" value="50" onclick="update_A()"> Yes</label><br>
-                                            <label class="radio-inline" id="laq2.2"><input type="radio" name="aq2" id="aq2.2" value="0" onclick="update_A()" > No</label>
+                                            <label class="radio-inline" id="laq2.1"><input type="radio" name="aq2" id="aq2.1" value="0" onclick="update_A()"> Yes</label><br>
+                                            <label class="radio-inline" id="laq2.2"><input type="radio" name="aq2" id="aq2.2" value="0" onclick="update_A()" > No</label><br>
+                                            <label class="radio-inline" id="laq2.3"><input type="radio" name="aq2" id="aq2.3" value="0" onclick="update_A()" > Not sure</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="aq3" class="col-sm-6 col-form-label" id="A-i-3-title">
-                                        Are you aware that the metadata describing your datasets should use  semantic vocabularies (for e.g., ontologies, thesauri, taxonomies)?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-3')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-
-                                    <div class="col-sm-6">
-                                        <div id="aq3">
-                                            <label class="radio-inline" id="laq3.1"><input type="radio" name="aq3" id="aq3.1" value="50" onclick="update_A()"> Yes</label><br>
-                                            <label class="radio-inline" id="laq3.2"><input type="radio" name="aq3" id="aq3.2" value="0" onclick="update_A()" > No</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
+                                <br><br><br><br>
                             </form>
                         </div>
                     </div>
@@ -352,9 +344,10 @@
                         </div>
                         <div class="panel-body">
                             <form>
-                                <div class="form-group row">
+                               <div class="form-group row">
                                     <label for="iq1" class="col-sm-6 col-form-label" id="I-i-1-title">
-                                        Are you aware that metadata should include meaningful links between the data and its related entities, when available?
+                                        Are you aware that the metadata describing your datasets should use  controlled vocabularies (for example ontologies, thesauri, taxonomies)
+                                        and expressed in a way to support the Semantic Web?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -362,12 +355,29 @@
 
                                     <div class="col-sm-6">
                                         <div id="iq1">
-                                            <label class="radio-inline" id="liq1.1"><input type="radio" name="iq1" id="iq1.1" value="50" onclick="update_I()"> Yes</label><br>
-                                            <label class="radio-inline" id="liq1.2"><input type="radio" name="iq1" id="iq1.2" value="0" onclick="update_I()" > No</label>
+                                            <label class="radio-inline" id="liq1.1"><input type="radio" name="iq1" id="iq1.1" value="0" onclick="update_I()"> Yes</label><br>
+                                            <label class="radio-inline" id="liq1.2"><input type="radio" name="iq1" id="iq1.2" value="0" onclick="update_I()" > No</label><br>
+                                            <label class="radio-inline" id="liq1.3"><input type="radio" name="iq1" id="iq1.3" value="0" onclick="update_I()" > Not sure</label>
                                         </div>
                                     </div>
                                 </div>
-                                <br><br><br><br><br><br><br><br>
+                                <div class="form-group row">
+                                    <label for="iq2" class="col-sm-6 col-form-label" id="I-i-2-title">
+                                        Are you aware that metadata should include meaningful links between the research data and any related research outputs when available?
+                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-2')">
+                                            <span class="glyphicon glyphicon-info-sign" ></span>
+                                        </a>
+                                    </label>
+
+                                    <div class="col-sm-6">
+                                        <div id="iq2">
+                                            <label class="radio-inline" id="liq2.1"><input type="radio" name="iq2" id="iq2.1" value="0" onclick="update_I()"> Yes</label><br>
+                                            <label class="radio-inline" id="liq2.2"><input type="radio" name="iq2" id="iq2.2" value="0" onclick="update_I()" > No</label><br>
+                                            <label class="radio-inline" id="liq2.3"><input type="radio" name="iq2" id="iq2.3" value="0" onclick="update_I()" > Not sure</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br><br><br>
                             </form>
                         </div>
                     </div>
@@ -393,7 +403,8 @@
                             <form>
                                 <div class="form-group row">
                                     <label for="rq1" class="col-sm-6 col-form-label" id="R-i-1-title">
-                                        Are you aware that content descriptions should be specified in the metadata and that they should conform with the data?
+                                        Are you aware that content descriptions should be specified in the metadata and that they should accurately
+                                        cover both the content and the context of the dataset?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -402,7 +413,8 @@
                                     <div class="col-sm-6">
                                         <div id="rq1">
                                             <label class="radio-inline" id="lrq1.1"><input type="radio" name="rq1" id="rq1.1" value="0" onclick="update_R()"> Yes</label><br>
-                                            <label class="radio-inline" id="lrq1.2"><input type="radio" name="rq1" id="rq1.2" value="0" onclick="update_R()"> No</label>
+                                            <label class="radio-inline" id="lrq1.2"><input type="radio" name="rq1" id="rq1.2" value="0" onclick="update_R()"> No</label><br>
+                                            <label class="radio-inline" id="lrq1.3"><input type="radio" name="rq1" id="rq1.3" value="0" onclick="update_R()"> Not sure</label>
                                         </div>
                                     </div>
                                 </div>
@@ -418,13 +430,14 @@
                                         <div id="rq2">
                                             <label class="radio-inline" id="lrq2.1"><input type="radio" name="rq2" id="rq2.1" value="0" onclick="update_R()"> Yes</label><br>
                                             <label class="radio-inline" id="lrq2.2"><input type="radio" name="rq2" id="rq2.2" value="0" onclick="update_R()"> No</label><br>
+                                            <label class="radio-inline" id="lrq2.3"><input type="radio" name="rq2" id="rq2.3" value="0" onclick="update_R()"> Not sure</label>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="form-group row">
                                     <label for="rq3" class="col-sm-6 col-form-label" id="R-i-3-title">
-                                        Are you aware that provenance information on collection and/or generation of data should be included in the metadata?
+                                        Are you aware that provenance information about the collection and/or generation of data should be included in the metadata?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-3')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -433,13 +446,14 @@
                                     <div class="col-sm-6">
                                         <div id="rq3">
                                             <label class="radio-inline" id="lrq3.1"><input type="radio" name="rq3" id="rq3.1" value="0" onclick="update_R()"> Yes</label><br>
-                                            <label class="radio-inline" id="lrq3.2"><input type="radio" name="rq3" id="rq3.2" value="0" onclick="update_R()"> No</label>
+                                            <label class="radio-inline" id="lrq3.2"><input type="radio" name="rq3" id="rq3.2" value="0" onclick="update_R()"> No</label><br>
+                                            <label class="radio-inline" id="lrq3.3"><input type="radio" name="rq3" id="rq3.3" value="0" onclick="update_R()"> Not sure</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="rq4" class="col-sm-6 col-form-label" id="R-i-4-title">
-                                        Are you aware that metadata should follow the specifications of your community-endorsed standard?
+                                        Are you aware that the metadata description for your data should follow the specifications of a community-endorsed standard?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-4')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -449,12 +463,14 @@
                                         <div id="rq4">
                                             <label class="radio-inline" id="lrq4.1"><input type="radio" name="rq4" id="rq4.1" value="0" onclick="update_R()"> Yes</label><br>
                                             <label class="radio-inline" id="lrq4.2"><input type="radio" name="rq4" id="rq4.2" value="0" onclick="update_R()"> No</label><br>
+                                            <label class="radio-inline" id="lrq4.3"><input type="radio" name="rq4" id="rq4.3" value="0" onclick="update_R()"> Not sure</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="rq5" class="col-sm-6 col-form-label" id="R-i-5-title">
-                                        Are you aware that data should be provided in a preferred file format?
+                                        Are you aware that data should be deposited preferably in a file format that is open
+                                        – to support reuse – and supported by the repository for long-term preservation?
                                         <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-5')">
                                             <span class="glyphicon glyphicon-info-sign" ></span>
                                         </a>
@@ -464,6 +480,7 @@
                                         <div id="rq5">
                                             <label class="radio-inline" id="lrq5.1"><input type="radio" name="rq5" id="rq5.1" value="0" onclick="update_R()"> Yes</label><br>
                                             <label class="radio-inline" id="lrq5.2"><input type="radio" name="rq5" id="rq5.2" value="0" onclick="update_R()"> No</label><br>
+                                            <label class="radio-inline" id="lrq5.3"><input type="radio" name="rq5" id="rq5.3" value="0" onclick="update_R()"> Not sure</label>
                                         </div>
                                     </div>
                                 </div>
@@ -483,7 +500,7 @@
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-10">
-                        <h3>General feedback:</h3>
+                        <h3>General feedback</h3>
                         <div id="Q-i-1-title">
                             <p>Are any of the metrics in this assessment not relevant to your domain in general or to your tested dataset more specifically?</p>
                         </div>
@@ -696,19 +713,22 @@
     <!-- ================================= Introduction  ================================== -->
 
     <div id="introduction">
-        <p>FAIR-Aware is an online self-assessment tool developed by the FAIRsFAIR project to raise awareness among users about the FAIRness of a dataset.
-            FAIRness refers to <a href="https://www.go-fair.org/fair-principles/" target="_blank">FAIR<i class="fa fa-external-link"></i></a>,
-            a set of guiding principles to make your data Findable, Accessible, Interoperable, and Reusable.</p>
-        <p>The self-assessment consists of 24 questions covering context, metrics and general feedback on the usability of the assessment tool.
-            You may need approximately 30 minutes to complete the assessment.
-            Tip: Next to each of the metrics, you will find more information about them.</p>
-        <p>To help us make FAIR-Aware the best assessment tool possible, we need your feedback to ensure it meets the needs and expectations of future users.
-            Your valuable feedback and insights will help us make improvements to the final version of FAIR-Aware before its official launch.</p>
-        <p>We extremely value your feedback and look forward to hearing from you.</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The FAIRsFAIR Team (DANS, DCC, PANGAEA)</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find out more about FAIRsFAIR <a href="https://www.fairsfair.eu/" target="_blank">here<i class="fa fa-external-link"></i></a>. If you have any questions, drop us an <a href="mailto:info@fairsfair.eu">e-mail.&nbsp;<i class="fa fa-envelope-o"></i></a></p>
+        <p>FAIR-Aware is an online self-assessment tool developed by the FAIRsFAIR project to help you assess your current level of
+            awareness in relation to making your datasets findable, accessible, interoperable and reusable (FAIR) prior to deposit
+            in a data repository for long-term preservation. This tool guides users through the assessment process and aims to raise
+            your overall awareness of the <a href="https://www.force11.org/group/fairgroup/fairprinciples" target="_blank">FAIR Principles<i class="fa fa-external-link"></i></a>
+            and to understand how making data FAIR increases the potential value and impact of your data.</p>
+        <p>This tool is not meant to give you a score for the FAIRness of a specific dataset. You should however have a target
+            dataset in mind to be able to answer the questions and complete the assessment.</p>
+        <p>The self-assessment tool consists of 19 questions with related guidance and examples.
+            The majority of the questions will help you assess your current levels of awareness about what actions are needed to make data FAIR.
+            There are also a small number of questions to help us better understand the users of the tool,
+            and to help us make FAIR-Aware as user-friendly as  possible. You will need approximately 30 minutes to complete the assessment.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The FAIRsFAIR Team (DANS, DCC, UniHB)</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find out more about FAIRsFAIR on
+            <a href="https://www.fairsfair.eu/" target="_blank">the project’s website<i class="fa fa-external-link"></i></a>.
+            If you have any questions, drop us an <a href="mailto:info@fairsfair.eu">e-mail.&nbsp;<i class="fa fa-envelope-o"></i></a></p>
     </div>
-
 
     <!-- ======================================= Findable  ======================================= -->
 

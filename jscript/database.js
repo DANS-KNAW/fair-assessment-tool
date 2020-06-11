@@ -63,8 +63,8 @@
                         answers.push(organizationSnapshot.key + "," + a.date + "," +
                                         a.yq1 + "," + a.yq2 + "," + a.yq3 + "," +
                                         a.fq1 + "," + a.fq2 + "," + a.fq3 + "," +
-                                        a.aq1 + "," + a.aq2 + "," + a.aq3 + "," +
-                                        a.iq1 + "," +
+                                        a.aq1 + "," + a.aq2 + "," +
+                                        a.iq1 + "," + a.iq2 + "," +
                                         a.rq1 + "," + a.rq2 + "," + a.rq3 + "," + a.rq4 + "," + a.rq5 + "," +
                                         a.qq1 + "," + a.qq2 + "," + a.qq3 + "," + a.qq4
                                     );
@@ -75,7 +75,7 @@
         }
 
         function downloadAnswers(answers) {
-            var csv = 'Host, Date, Domain, Role, Organization, FQ1, FQ2, FQ3, AQ1, AQ2, AQ3, IQ1, RQ1, RQ2, RQ3, RQ4, RQ5, Not relevant, Missing metrics, General feedback, Awareness raised\n';
+            var csv = 'Host, Date, Domain, Role, Organization, FQ1, FQ2, FQ3, AQ1, AQ2, IQ1, IQ2, RQ1, RQ2, RQ3, RQ4, RQ5, Not relevant, Missing metrics, General feedback, Awareness raised\n';
             answers.forEach(function(row) {
                 csv += row + "\n";
             })

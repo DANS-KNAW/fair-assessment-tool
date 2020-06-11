@@ -10,10 +10,10 @@
             <!-- For questions where the answer is given in free text, the value is 0. -->
             <!-- Notice: It is important to update this Map when questions are removed or added! -->
             ['Y', [209, 6, 9]],
-            ['F', [2, 2, 2]],
-            ['A', [2, 2, 2]],
-            ['I', [2]],
-            ['R', [2, 2, 2, 2, 2]],
+            ['F', [3, 3, 3]],
+            ['A', [3, 3]],
+            ['I', [3, 3]],
+            ['R', [3, 3, 3, 3, 3]],
             ['Q', [14, 0, 0, 5]]
         ])
 
@@ -41,7 +41,6 @@
         /* ----------- Include another html file ----------- */
 
         function includeHTML(id) {
-            var x;
             var elmnt = document.getElementById(id)
             var file = elmnt.getAttribute("html-file");
             var xhttp = new XMLHttpRequest();
@@ -163,8 +162,9 @@
                     for (let j = 0; j < number_of_answers; j++) {
                         <!-- choice is e.g. "fq1.2" -->
                         let choice = question + "." + (j + 1).toString();
-                        if (checked(choice))
+                        if (checked(choice)) {
                             answered = true;
+                        }
                     }
                     if (!answered && !excluded(question)) {
                         <!-- question_key is e.g. "F-i-1-title" -->
