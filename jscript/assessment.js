@@ -122,11 +122,11 @@
         function update_I() {
         }
 
-        /* ----------------------- R ----------------------- */
+        /* ----------------------- R ------------------------ */
         function update_R() {
         }
 
-        /* ---------------------------- Print --------------------------- */
+        /* ----------------------- Print --------------------- */
 
         function print_page() {
             document.getElementById("logos").style.display = "none"
@@ -270,5 +270,17 @@
             } else {
                 let answer = "l" + choice;
                 return document.getElementById(answer).textContent.replace(/,/g, " ").trim().substr(0, 50);
+            }
+        }
+
+        function show_domains() {
+            let domains = get_answers_for_a_question("yq1", get_number_of_domain_answers())
+            $("#show-domains").html(domains);
+        }
+
+        function get_number_of_domain_answers() {
+            for (let [letter, questions] of fields) {
+                if (letter == "Y")
+                    return questions[0]
             }
         }
