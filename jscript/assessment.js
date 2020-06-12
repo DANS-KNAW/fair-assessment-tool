@@ -16,6 +16,12 @@
             ['R', [3, 3, 3, 3, 3]],
             ['Q', [12, 0, 0, 5]]
         ])
+        var short_answers = new Map([
+            <!-- Shortened answers to make downloaded data more readable -->
+            ['yq2.3', 'Research support'],
+            ['yq3.5', 'eInfrastructure'],
+        ])
+
 
         /* -------------------- Initialize -------------------- */
 
@@ -211,20 +217,10 @@
             m.set("date", date)
             for (let [letter, questions] of fields) {
                 for(let i = 0; i < questions.length; i++) {
-                    let answers = "";
                     <!-- question is e.g. "fq1" -->
                     let question = letter.toLowerCase() + "q" + (i + 1).toString();
                     let number_of_answers = questions[i];
-                    var first = true;
-                    for (let j = 0; j < number_of_answers; j++) {
-                        <!-- choice is e.g. "fq1.2" -->
-                        let choice = question + "." + (j + 1).toString();
-                        if (checked(choice)) {
-                            answers +=  (first ? "" : " AND ") + get_answer(choice);
-                            first = false;
-                        }
-                    }
-                    m.set(question, answers);
+                    m.set(question, get_answers_for_a_question(question, number_of_answers));
                 }
             }
             <!-- set free text fields -->
@@ -232,6 +228,20 @@
             m.set("qq3", document.getElementById("qq3").value.replace(/(\n)+/g, " ").trim())
 
             return JSON.stringify(Object.fromEntries(m));
+        }
+
+        function get_answers_for_a_question(question, number_of_answers) {
+            let answers = "";
+            let first = true;
+            for (let j = 0; j < number_of_answers; j++) {
+                <!-- choice is e.g. "fq1.2" -->
+                let choice = question + "." + (j + 1).toString();
+                if (checked(choice)) {
+                    answers +=  (first ? "" : " AND ") + get_answer(choice);
+                    first = false;
+                }
+            }
+            return answers;
         }
 
         function get_negative_answers() {
@@ -255,6 +265,10 @@
         }
 
         function get_answer(choice) {
-            let answer = "l" + choice;
-            return document.getElementById(answer).textContent.replace(/,/g, " ").trim().substr(0, 50);
+            if (short_answers.has(choice)) {
+                return short_answers.get(choice)
+            } else {
+                let answer = "l" + choice;
+                return document.getElementById(answer).textContent.replace(/,/g, " ").trim().substr(0, 50);
+            }
         }
