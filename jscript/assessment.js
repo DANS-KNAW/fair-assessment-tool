@@ -86,8 +86,19 @@
 
         function show_modal(id_prefix) {
             var title = document.getElementById(id_prefix + "-title").textContent;
+            var more = document.getElementById(id_prefix + "-more");
+            var additional = document.getElementById(id_prefix + "-additional");
+            if (more && additional) {
+                more.style.display = "block";
+                additional.style.display = "none";
+            }
             var contents = document.getElementById(id_prefix + "-contents").innerHTML;
             write_to_modal(title, contents);
+        }
+
+        function show_additional_text(question) {
+            document.getElementById(question + "-more").style.display = "none";
+            document.getElementById(question + "-additional").style.display = "block";
         }
 
         function write_to_modal(title, contents) {
