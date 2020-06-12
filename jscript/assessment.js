@@ -169,7 +169,7 @@
                     if (!answered && !excluded(question)) {
                         <!-- question_key is e.g. "F-i-1-title" -->
                         question_key = letter + "-i-" + (i + 1).toString() + "-title";
-                        text +=  document.getElementById(question_key).textContent + "<br><br>";
+                        text +=  not_answered_question(letter, question_key) + "<br><br>";
                     }
                 }
             }
@@ -183,6 +183,22 @@
         function excluded(question) {
             <!-- questions excluded from validation -->
             return question == "qq1" || question == "qq2" ||question == "qq3";
+        }
+
+        function not_answered_question(letter, key) {
+            return letter_text(letter) + document.getElementById(question_key).textContent;
+        }
+
+        function letter_text(letter) {
+            switch(letter) {
+              case "Y": return "About you: ";
+              case "F": return "Findable: ";
+              case "A": return "Accessible: ";
+              case "I": return "Interoperable: ";
+              case "R": return "Reusable: ";
+              case "Q": return "Feedback: ";
+              default: return "";
+            }
         }
 
         /* ------------------ Retrieve answers --------------- */
