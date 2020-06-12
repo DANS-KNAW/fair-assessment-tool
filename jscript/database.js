@@ -30,8 +30,9 @@
                     write_to_modal("SUBMISSION", error.message);
                 } else {
                     let submitted = "Answers were succesfully submitted into the database." + "<br><br>"
-                    let advice = get_negative_answers().length > 0 ?
-                        "When you print the assessment, you will find some advice concerning the questions that you answered with 'No'." + "<br><br>" : "";
+                    let advice = ""
+//                    let advice = get_negative_answers().length > 0 ?
+//                        "When you print the assessment, you will find some advice concerning the questions that you answered with 'No'." + "<br><br>" : "";
                     let thanks = "Thank you for your participation!";
                     write_to_modal("SUBMISSION", submitted + advice + thanks);
                 }
