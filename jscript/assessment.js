@@ -9,7 +9,7 @@
             <!-- The value of the item is the number of possible answers to the respective question. -->
             <!-- For questions where the answer is given in free text, the value is 0. -->
             <!-- Notice: It is important to update this Map when questions are removed or added! -->
-            ['Y', [209, 6, 9]],
+            ['Y', [48, 6, 9]],
             ['F', [3, 3, 3]],
             ['A', [3, 3]],
             ['I', [3, 3]],
