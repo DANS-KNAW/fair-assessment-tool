@@ -145,12 +145,20 @@
             document.getElementById("icons").style.display = "none"
             document.getElementById("footer").style.display = "none"
             document.getElementById("for-administrators").style.display = "none"
+            document.getElementById("image-f").style.display = "none"
+            document.getElementById("image-a").style.display = "none"
+            document.getElementById("image-i").style.display = "none"
+            document.getElementById("image-r").style.display = "none"
 //            if (add_advice_texts().length != 0) {document.getElementById("print-advice").style.display = "block"};
             window.print();
             document.getElementById("logos").style.display = "block"
             document.getElementById("icons").style.display = "block"
             document.getElementById("footer").style.display = "block"
             document.getElementById("for-administrators").style.display = "block"
+            document.getElementById("image-f").style.display = "block"
+            document.getElementById("image-a").style.display = "block"
+            document.getElementById("image-i").style.display = "block"
+            document.getElementById("image-r").style.display = "block"
             document.getElementById("print-advice").style.display = "none"
             update();
         }
