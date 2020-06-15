@@ -31,6 +31,7 @@
             update();
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
             document.getElementById("print-advice").style.display = "none"
+            document.getElementById("introduction").style.display = "none"
             document.getElementById("texts").style.display = "none"
             if(!window.print) {document.getElementById("print-button").style.display = "none"}
             $('.dropdown-submenu a.dropdown-title').on("click", function(d){
