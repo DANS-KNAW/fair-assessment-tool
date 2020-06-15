@@ -1,0 +1,50 @@
+<!-- ======================================== -->
+<!-- ================== CSS ================= -->
+<!-- ======================================== -->
+<style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    body, label{font: 14px "Avenir Next", sans-serif;color: #000000;}
+    a {color: #333; text-decoration: none;}
+    a:visited {text-decoration: none;}
+    a:hover {text-decoration: none;}
+    button {color: #21618C; border: 0px;}
+    button:hover {color: #000000; background-color: #f5f5f5 }
+    input {horizontal-align: 30px;}
+    .w3-border{border:1px solid #ccc!important}
+    .panel-heading .glyphicon-info-sign {font-size: 1.3em; color: #FFFFFF;}
+    .panel-body .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
+    .panel {background-color: #f5f5f5; border: 0px;}
+    .panel-default>.panel-heading {background-image: none; background-color: #2795c8; }
+    .panel-title {color: #FFFFFF;background-color: #2795c8; font-size: 15px;}
+    .modal-header, .modal-footer {margin: 1px;}
+    .modal-body {background-color: #FDFDFD; margin-left: 1px; }
+    .footer {background-color: #f5f5f5; padding-top: 20px; }
+    .fa-external-link, .fa-envelope-o, .fa-long-arrow-left {color: #2795c8;}
+    .fa-print {font-size: 50px; color: #2795c8;}
+    .fa-paper-plane {font-size: 40px; color: #2795c8;}
+    .fa-download {font-size: 10px; color: #2795c8;}
+    .work-category {color: #606060;}
+    .dropdown-submenu {position: relative;}
+    .dropdown-submenu .dropdown-menu {top: 0; left: 100%; margin-top: -1px;}
+    .dropdown-submenu:hover { background-color: #BCBCBC; }
+    #main-title {font-size: 40px; color: #2795c8;}
+    #image-f, #image-a, #image-i, #image-r {padding-top: 10px;}
+    @media (min-width: 768px) {
+        div.col-md-2 {padding-left: 2px;}
+        div.col-md-10 {padding-left: 2px;}
+        #image-f, #image-a, #image-i, #image-r {padding-top: 80px;}
+        #total-score {font-size: 30px; text-align: center; margin-left: 30px; margin-right: 30px;}
+    }
+    @media (min-width: 1025px) {
+        div.col-md-2 {padding-left: 10px;}
+        div.col-md-10 {padding-left: 10px;}
+        #total-score {font-size: 38px; text-align: center; margin-left: 50px; margin-right: 50px;}
+    }
+    @media print {.pagebreak { page-break-before: always; }}
+
+</style>
+
