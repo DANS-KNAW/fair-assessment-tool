@@ -10,10 +10,10 @@
             <!-- For questions where the answer is given in free text, the value is 0. -->
             <!-- Notice: It is important to update this Map when questions are removed or added! -->
             ['Y', [48, 6, 9]],
-            ['F', [3, 3, 3]],
-            ['A', [3, 3]],
-            ['I', [3, 3]],
-            ['R', [3, 3, 3, 3, 3]],
+            ['F', [2, 2, 2]],
+            ['A', [2, 2]],
+            ['I', [2, 2]],
+            ['R', [2, 2, 2, 2, 2]],
             ['Q', [12, 0, 0, 5]]
         ])
         var short_answers = new Map([
@@ -280,7 +280,7 @@
                 return short_answers.get(choice)
             } else {
                 let answer = "l" + choice;
-                return document.getElementById(answer).textContent.replace(/,/g, " ").trim().substr(0, 50);
+                return document.getElementById(answer).textContent.replace(/,/g, " ").trim();
             }
         }
 
