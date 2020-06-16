@@ -34,11 +34,6 @@
             document.getElementById("introduction").style.display = "none"
             document.getElementById("texts").style.display = "none"
             if(!window.print) {document.getElementById("print-button").style.display = "none"}
-            $('.dropdown-submenu a.dropdown-title').on("click", function(d){
-                $(this).next('ul').toggle();
-                d.stopPropagation();
-                d.preventDefault();
-            });
         }
 
         $(function () {
@@ -58,6 +53,16 @@
                 }
             }
             xhttp.send();
+        }
+
+        /* ----------- Toggle domains dropdown menu ----------- */
+
+        function domain_toggle() {
+            $('.dropdown-submenu a.dropdown-title').on("click", function(d){
+                $(this).next('ul').toggle();
+                d.stopPropagation();
+                d.preventDefault();
+            });
         }
 
         /* ----------- Get, check, disable and enable elements/values ----------- */
