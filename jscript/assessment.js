@@ -59,6 +59,7 @@
 
         function domain_toggle() {
             $('.dropdown-submenu a.dropdown-title').on("click", function(d){
+                $(this).parent().siblings().children().filter('ul').hide();
                 $(this).next('ul').toggle();
                 d.stopPropagation();
                 d.preventDefault();
