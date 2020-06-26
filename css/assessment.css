@@ -8,7 +8,7 @@
         -ms-user-select: none;
     }
     body, label{font: 14px "Avenir Next", sans-serif;color: #000000;}
-    a {color: #333; text-decoration: none;}
+    a {cursor: pointer; color: #333; text-decoration: none;}
     a:visited {text-decoration: none;}
     a:hover {text-decoration: none;}
     button {color: #21618C; border: 0px;}

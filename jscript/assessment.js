@@ -108,6 +108,10 @@
             document.getElementById(question + "-additional").style.display = "block";
         }
 
+        function show_advice_for_negative_answers() {
+            write_to_modal("Advice", add_advice_texts());
+        }
+
         function write_to_modal(title, contents) {
             $("#modal-title").html(title);
             $("#modal-body").html(contents);

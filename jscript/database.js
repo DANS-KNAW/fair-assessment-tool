@@ -32,7 +32,9 @@
                     let submitted = "Answers were succesfully submitted into the database." + "<br><br>"
                     let advice = ""
 //                    let advice = get_negative_answers().length > 0 ?
-//                        "When you print the assessment, you will find some advice concerning the questions that you answered with 'No'." + "<br><br>" : "";
+//                        "You had answered some questions with 'No'. If you want to see advice concerning these questions, please click " +
+//                        "<a data-toggle='modal' onclick='show_advice_for_negative_answers()' style='color:blue' style='cursor:pointer'> here</a>. " +
+//                        "When you print the assessment, you will also see this advice." + "<br><br>" : "";
                     let thanks = "Thank you for your participation!";
                     write_to_modal("SUBMISSION", submitted + advice + thanks);
                 }
@@ -76,7 +78,7 @@
         }
 
         function downloadAnswers(answers) {
-            var csv = 'Host, Date, Domain, Role, Organization, FQ1, FQ2, FQ3, AQ1, AQ2, IQ1, IQ2, RQ1, RQ2, RQ3, RQ4, RQ5, Not relevant, Missing metrics, General feedback, Awareness raised\n';
+            var csv = 'Host, Date, Domain, Role, Organization, FQ1, FQ2, FQ3, AQ1, AQ2, IQ1, IQ2, RQ1, RQ2, RQ3, RQ4, RQ5, Not understandable, Missing metrics, General feedback, Awareness raised\n';
             answers.forEach(function(row) {
                 csv += row + "\n";
             })
