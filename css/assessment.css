@@ -33,18 +33,28 @@
     .dropdown-submenu:hover { background-color: #BCBCBC; }
     #main-title {font-size: 40px; color: #2795c8;}
     #image-f, #image-a, #image-i, #image-r {padding-top: 10px;}
+
+    @media (max-width: 768px) {
+        div.col-md-2 {padding-left: 10px;}
+        div.col-md-10 {padding-left: 10px;}
+        .fa-print {font-size: 20px;}
+        .fa-paper-plane {font-size: 20px;}
+        .fa-download {font-size: 2px;}
+        #image-f, #image-a, #image-i, #image-r {padding-top: 20px;}
+    }
     @media (min-width: 768px) {
-        div.col-md-2 {padding-left: 2px;}
-        div.col-md-10 {padding-left: 2px;}
+        div.col-md-2 {padding-left: 10px;}
+        div.col-md-10 {padding-left: 10px;}
+        .fa-print {font-size: 40px;}
+        .fa-paper-plane {font-size: 30px;}
         #image-f, #image-a, #image-i, #image-r {padding-top: 80px;}
-        #total-score {font-size: 30px; text-align: center; margin-left: 30px; margin-right: 30px;}
     }
     @media (min-width: 1025px) {
         div.col-md-2 {padding-left: 10px;}
         div.col-md-10 {padding-left: 10px;}
-        #total-score {font-size: 38px; text-align: center; margin-left: 50px; margin-right: 50px;}
+        .fa-print {font-size: 40px;}
+        .fa-paper-plane {font-size: 30px;}
     }
     @media print {.pagebreak { page-break-before: always; }}
 
 </style>
-
