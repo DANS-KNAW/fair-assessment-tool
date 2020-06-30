@@ -254,8 +254,8 @@
                 }
             }
             <!-- set free text fields -->
-            m.set("qq2", document.getElementById("qq2").value.replace(/(\n)+/g, " ").trim())
-            m.set("qq3", document.getElementById("qq3").value.replace(/(\n)+/g, " ").trim())
+            m.set("qq2", document.getElementById("qq2").value.replace(/(\n)+/g, " ").replace(/,/g, " ").replace(/;/g, " ").trim())
+            m.set("qq3", document.getElementById("qq3").value.replace(/(\n)+/g, " ").replace(/,/g, " ").replace(/;/g, " ").trim())
 
             return JSON.stringify(Object.fromEntries(m));
         }
