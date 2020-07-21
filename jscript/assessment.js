@@ -30,6 +30,7 @@
         function initialise() {
             update();
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
+            hide_intention_questions();
             document.getElementById("print-advice").style.display = "none"
             document.getElementById("introduction").style.display = "none"
             document.getElementById("texts").style.display = "none"
@@ -39,6 +40,18 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
+
+        function hide_intention_questions() {
+            for (let [letter, questions] of fields) {
+                if (letters.includes(letter)) {
+                    for(let i = 0; i < questions.length; i++) {
+                        <!-- question is e.g. "fq1" -->
+                        let question = letter.toLowerCase() + "q" + (i + 1).toString();
+                        document.getElementById(question + "-i").style.display = "none"
+                    }
+                }
+            }
+        }
 
         /* ----------- Include another html file ----------- */
 
@@ -74,6 +87,10 @@
 
         function checked(element) {
             return document.getElementById(element).checked ? 1 : 0;
+        }
+
+        function answer_is_no(element) {
+            return document.getElementById(element).value == 0;
         }
 
         function disable(elements) {
@@ -133,19 +150,34 @@
         }
 
         /* ----------------------- F ----------------------- */
-        function update_F() {
+        function update_F(question) {
+            show_intention_question(question)
         }
 
         /* ----------------------- A ----------------------- */
-        function update_A() {
+        function update_A(question) {
+            show_intention_question(question)
         }
 
         /* ------------------------ I ----------------------- */
-        function update_I() {
+        function update_I(question) {
+            show_intention_question(question)
         }
 
         /* ----------------------- R ------------------------ */
-        function update_R() {
+        function update_R(question) {
+            show_intention_question(question)
+        }
+
+        function show_intention_question(question) {
+            if (question != null) {
+                if (checked(question + ".1")) {
+                    document.getElementById(question + "-i").style.display = "none";
+                }
+                 else {
+                    document.getElementById(question + "-i").style.display = "block";
+                }
+            }
         }
 
         /* ----------------------- Print --------------------- */
@@ -193,6 +225,7 @@
                 for(let i = 0; i < questions.length; i++) {
                     let number_of_answers = questions[i];
                     let answered = false;
+                    let intention_questions_answered = 0;
                     <!-- question is e.g. "fq1" -->
                     let question = letter.toLowerCase() + "q" + (i + 1).toString();
                     for (let j = 0; j < number_of_answers; j++) {
@@ -200,12 +233,20 @@
                         let choice = question + "." + (j + 1).toString();
                         if (checked(choice)) {
                             answered = true;
+                            if (letters.includes(letter) && answer_is_no(choice)) {
+                                intention_questions_answered = intention_questions_answer(question)
+                            }
                         }
                     }
                     if (!answered && !excluded(question)) {
                         <!-- question_key is e.g. "F-i-1-title" -->
                         question_key = letter + "-i-" + (i + 1).toString() + "-title";
                         text +=  not_answered_question(letter, question_key) + "<br><br>";
+                    }
+                    if (answered && intention_questions_answered < 0) {
+                        <!-- question_key is e.g. "F-i-1-title" -->
+                        question_key = letter + "-i-" + (i + 1).toString() + "-title";
+                        text +=  not_answered_question(letter, question_key) + " - Intention to comply<br><br>";
                     }
                 }
             }
@@ -223,6 +264,16 @@
 
         function not_answered_question(letter, key) {
             return letter_text(letter) + document.getElementById(question_key).textContent;
+        }
+
+        function intention_questions_answer(question) {
+            let intention_questions = document.getElementsByName(question + "-i");
+            for (let i = 0; i < 5; i++) {
+                if (intention_questions[i].checked) {
+                    return intention_questions[i].value;
+                }
+            }
+            return -1;
         }
 
         function letter_text(letter) {
@@ -251,6 +302,9 @@
                     let question = letter.toLowerCase() + "q" + (i + 1).toString();
                     let number_of_answers = questions[i];
                     m.set(question, get_answers_for_a_question(question, number_of_answers));
+                    if (letters.includes(letter)) {
+                        m.set(question + "i", get_intention_answer_for_a_question(question, number_of_answers));
+                    }
                 }
             }
             <!-- set free text fields -->
@@ -272,6 +326,18 @@
                 }
             }
             return answers;
+        }
+
+        function get_intention_answer_for_a_question(question, number_of_answers) {
+            let intention = "";
+            for (let j = 0; j < number_of_answers; j++) {
+                <!-- choice is e.g. "fq1.2" -->
+                let choice = question + "." + (j + 1).toString();
+                if (checked(choice) && answer_is_no(choice)) {
+                    intention = intention_questions_answer(question)
+                }
+            }
+            return intention;
         }
 
         function get_negative_answers() {

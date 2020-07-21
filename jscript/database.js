@@ -65,10 +65,10 @@
                         var a = childSnapshot.val();
                         answers.push(organizationSnapshot.key + "," + a.date + "," +
                                         a.yq1 + "," + a.yq2 + "," + a.yq3 + "," +
-                                        a.fq1 + "," + a.fq2 + "," + a.fq3 + "," +
-                                        a.aq1 + "," + a.aq2 + "," +
-                                        a.iq1 + "," + a.iq2 + "," +
-                                        a.rq1 + "," + a.rq2 + "," + a.rq3 + "," + a.rq4 + "," + a.rq5 + "," +
+                                        a.fq1 + "," + a.fq1i + "," + a.fq2 + "," + a.fq2i + "," + a.fq3 + "," + a.fq3i + "," +
+                                        a.aq1 + "," + a.aq1i + "," + a.aq2 + "," + a.aq2i + "," +
+                                        a.iq1 + "," + a.iq1i + "," + a.iq2 + "," + a.iq2i + "," +
+                                        a.rq1 + "," + a.rq1i + "," + a.rq2 + "," + a.rq2i + "," + a.rq3 + "," + a.rq3i + "," + a.rq4 + "," + a.rq4i + "," + a.rq5 + "," + a.rq5i + "," +
                                         a.qq1 + "," + a.qq2 + "," + a.qq3 + "," + a.qq4
                                     );
                     });
@@ -78,7 +78,7 @@
         }
 
         function downloadAnswers(answers) {
-            var csv = 'Host, Date, Domain, Role, Organization, FQ1, FQ2, FQ3, AQ1, AQ2, IQ1, IQ2, RQ1, RQ2, RQ3, RQ4, RQ5, Not understandable, Missing metrics, General feedback, Awareness raised\n';
+            var csv = 'Host, Date, Domain, Role, Organization, FQ1, FQ1-i, FQ2, FQ2-i, FQ3, FQ3-i, AQ1, AQ1-i, AQ2, AQ2-i, IQ1, IQ1-i, IQ2, IQ2-i, RQ1, RQ1-i, RQ2, RQ2-i, RQ3, RQ3-i, RQ4, RQ4-i, RQ5, RQ5-i, Not understandable, Missing metrics, General feedback, Awareness raised\n';
             answers.forEach(function(row) {
                 csv += row + "\n";
             })
