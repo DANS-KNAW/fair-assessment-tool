@@ -11,7 +11,9 @@
         the Handle System, identifiers.org, w3id.org and Archival Resource Key (ARK).</p>
     <p>Identifiers are normally assigned by data repositories (or other service providers) when data and/or metadata are made available
         through their services. Repositories ensure that the identifier continues to point to the same data or metadata,
-        according to the specified access terms and conditions.</p>
+        according to the specified access terms and conditions. You can search for data repositories supporting PIDs (for e.g., DOI)
+        on registries such as <a href="https://www.re3data.org/search?query=&pidSystems%5B%5D=DOI" target="_blank">Re3data<i class="fa fa-external-link"></i></a>
+        or <a href="https://fairsharing.org/FAIRsharing.hFLKCn" target="_blank">FAIRsharing<i class="fa fa-external-link"></i></a>.</p>
     <p>It is worth noting here that not all data you produce during your research will need a PID.
         In general, those that underpin published findings or have longer term value are worth assigning a PID.
         If in doubt about which data should be allocated a PID, speak to your local research data management support team.</p>
@@ -29,44 +31,69 @@
 </div>
 
 <div id="F-i-2-contents">
-    <p>The necessary discovery metadata is descriptive information about the data object (e.g. creator, title, publisher,
-        creation and publication date, summary and keywords describing the data) provided by the data creator when
-        documenting the dataset and/or provided by the depositor in a data repository.</p>
+    <p>The necessary metadata is descriptive information about the data object (e.g. creator, title, publisher, creation and publication date,
+        summary and keywords describing the data) provided by the researcher when documenting the dataset for deposit in a data repository.</p>
     <p>Since the metadata required depends on the type of users and the intended applications,
         the focus here is on ensuring the minimum descriptive information needed to enable data discovery and citation by potential users -
         even those from other domains. The metadata should include the PID for the data so that users can discover and access the data.
-        In cases where the data cannot be shared openly for ethical or commercial reasons, the metadata should make clear how a potential
+        In cases where the data cannot be shared openly for ethical, legal or commercial reasons, the metadata should make clear how a potential
         reuser can request legitimate access.</p>
-    <p>Guidelines on descriptive metadata include common data citation guidelines,
-        (e.g., <a href="https://datacite.org/cite-your-data.html" target="_blank">DataCite<i class="fa fa-external-link"></i></a>,
-        <a href="https://doi.org/10.6084/m9.figshare.8441816.v1" target="_blank">ESIP<i class="fa fa-external-link"></i></a>, and
-        <a href="https://iassistdata.org/file/community/sigdc/iassist.html" target="_blank">IASSIST<i class="fa fa-external-link"></i></a>),
-        and metadata recommendations for data discovery,
-        (e.g., <a href="https://eoscpilot.eu/edmi-metadata-guidelines" target="_blank">EOSC Datasets Minimum Information (EDMI)<i class="fa fa-external-link"></i></a>,
-        <a href="https://schema.datacite.org/" target="_blank">DataCite Metadata Schema<i class="fa fa-external-link"></i></a>,
-        and <a href="https://www.w3.org/TR/2017/REC-dwbp-20170131/" target="_blank">W3C Recommendation Data on the Web Best Practices<i class="fa fa-external-link"></i></a>).</p>
+    <p><b>Data content</b><br>
+        The content of the dataset should be specified in the metadata. It should be an accurate reflection of the actual data deposited.
+        Examples of the properties specifying data content are: resource type (e.g., data or a collection of data), variable(s) measured
+        or observed, method, data format and size. Ideally, ontological vocabularies should be used to describe data content (e.g., variable)
+        to support interdisciplinary reuse.</p>
+    <p><b>Linked data</b><br>
+        Metadata should also include meaningful and explicit links to other kinds of research output (ideally with a PID) to increase its
+        potential for reuse. A data object may be linked to its prior version, other relevant datasets, related publications,
+        data source (for e.g. the instrument or sample), data creators or collectors and organization such as a funder or a host institution.</p>
+    <p><b>Relevant data repositories </b><br>
+        The good news is that when you deposit your data with a domain or discipline-specific repository it will likely be using common
+        metadata standards. This means that when you enter the basic details about your research on deposit, your description will conform
+        to standards that enable search and retrieval by users within your domain and potentially beyond your domain.
+        You can search for data repositories supporting a metadata standard (for e.g., Dublin Core) in registries such as
+        <a href="https://www.re3data.org/search?query=&metadataStandards%5B%5D=Dublin%20Co" target="_blank">Re3data<i class="fa fa-external-link"></i></a>
+        or <a href="https://fairsharing.org/FAIRsharing.3nx7t" target="_blank">Fairsharing<i class="fa fa-external-link"></i></a>.</p>
+    <p><b>Good description of data  </b><br>
+        It can pay to spend a bit more time on providing a good description rather than just providing the minimum information required
+        to ensure that your data is not only findable, but can be clearly understood as well.</p>
     <p>FAIR data also needs the richer more domain-specific metadata that follows a community-endorsed standard.
         Domain or discipline-specific metadata specifications are covered under a separate assessment question.</p>
-    <p>The good news is that when you deposit your data with a domain or discipline-specific repository it will likely be using common
-        metadata standards. This means that when you enter the basic details about your research on deposit, your description will
-        conform to standards that enable search and retrieval by users within your domain and potentially beyond your domain.
-        It can pay to spend a bit more time on providing a good description rather than just providing the minimum information
-        required to ensure that your data is not only findable, but can be clearly understood as well.</p>
+    <button id="F-i-2-more" onclick="show_additional_text('F-i-2')" >Want to know more?</button>
+    <div id="F-i-2-additional">
+        <p>Guidelines on descriptive metadata include common data citation guidelines,
+            (e.g., <a href="https://datacite.org/cite-your-data.html" target="_blank">DataCite<i class="fa fa-external-link"></i></a>,
+            <a href="https://doi.org/10.6084/m9.figshare.8441816.v1" target="_blank">ESIP<i class="fa fa-external-link"></i></a>, and
+            <a href="https://iassistdata.org/file/community/sigdc/iassist.html" target="_blank">IASSIST<i class="fa fa-external-link"></i></a>),
+            and metadata recommendations for data discovery,
+            (e.g., <a href="https://dublincore.org" target="_blank">Dublin Core<i class="fa fa-external-link"></i></a>,
+            <a href="https://eoscpilot.eu/edmi-metadata-guidelines" target="_blank">EOSC Datasets Minimum Information (EDMI)<i class="fa fa-external-link"></i></a>,
+            <a href="https://schema.datacite.org/" target="_blank">DataCite Metadata Schema<i class="fa fa-external-link"></i></a>,
+            and <a href="https://www.w3.org/TR/2017/REC-dwbp-20170131/" target="_blank">W3C Recommendation Data on the Web Best Practices<i class="fa fa-external-link"></i></a>).</p>
+        <p>Links between data and its related entities should be explicit and meaningful, and expressed through relation types
+            (for e.g. the DataCite Metadata Schema specifies relation types between research objects through the fields
+            <i>RelatedIdentifier</i> and <i>RelationType</i>).</p>
+        <p>See this dataset for example: <a href="https://doi.org/10.1594/PANGAEA.906168" target="_blank">Klages, Johann Philipp et al. (2019):
+            Apatite radiogenic isotopes and ages of sediment core 2R at site PS104_20-2. PANGAEA<i class="fa fa-external-link"></i></a>.</p>
+    </div>
 </div>
 
 <div id="F-i-3-contents">
     <p>This question refers to the capability to make the metadata accessible online in a standard and machine-readable format.
-        Machine-readability refers to a structured format that can be read and processed by a computer. By ensuring that the metadata
-        describing your data deposit is machine-readable, your data deposit will be visible to search engines and aggregators which
-        can improve your chances of having your data cited and reused. This capability is normally offered by the data repository
-        that holds the data and makes the essential details about it available online. For example, some repositories expose the
-        metadata online to allow access or harvesting through a standard protocol (e.g. OAI-PMH) and/or a web service. Your choice
-        of a data repository will be critical to meet this requirement. You can select a repository offering such capability
-        by searching for example in the Registry of Research Repositories re3data.org for repositories supporting
+        Machine-readability refers to a structured format that can be read and processed by a computer.</p>
+    <p><b>Advantages of machine-readable formats</b><br>
+        By ensuring that the metadata describing your data deposit is machine-readable, your data deposit will be visible to
+        search engines and aggregators which can improve your chances of having your data cited and reused. This capability is
+        normally offered by the data repository that holds the data and makes the essential details about it available online.
+        For example, some repositories expose the metadata online to allow access or harvesting through a standard protocol
+        (e.g. OAI-PMH) and/or a web service. Your choice of a data repository will be critical to meet this requirement.
+        You can select a repository offering such capability by searching for example in the Registry of Research Repositories
+        re3data.org for repositories supporting
         <a href="https://www.re3data.org/search?query=&apis%5B%5D=OAI-PMH" target="_blank">OAI-PMH<i class="fa fa-external-link"></i></a>.</p>
-    <p>Metadata may also be exposed as structured data embedded within a web page to make it more machine-actionable.
+    <p><b>Metadata as structured data</b><br>
+        Metadata may also be exposed as structured data embedded within a web page to make it more machine-actionable.
         The schema.org standard is one approach that helps to ensure indexing by web search engines such as Google and Bing.
-        This allows the <a href="https://datasetsearch.research.google.com/" target="_blank">Google Dataset Search<i class="fa fa-external-link"></i></a>
+        This allows the <a href="https://datasetsearch.research.google.com" target="_blank">Google Dataset Search<i class="fa fa-external-link"></i></a>
         which you can use to check if data hosted by the repository of your choice is indexed.
         Dublin Core is another metadata standard that repositories use to make metadata harvestable by indexing systems.</p>
 </div>
@@ -86,43 +113,61 @@
 <!-- ======================================= Accessible  ======================================= -->
 
 <div id="A-i-1-contents">
-    <p>Ideally, datasets should be public domain and openly accessible without restrictions. However, there can be legitimate
-        reasons not to share data such as those due to ethical and commercial constraints. As such, it is up to the depositing
-        researcher to be aware of what can be shared, with whom and when and to take appropriate steps to ensure that the data
-        is as open as possible and as closed as necessary.</p>
-    <p>The metadata describing your dataset should include details about who can access the data. Access levels can be public,
-        embargoed, restricted, or closed access. In some cases, you may even need to apply  a variety of access levels to
-        different parts of the same dataset. It is important to consider these issues early on in your project so that by the
-        time of deposit in a repository, access levels have been clearly defined for any data you will deposit.</p>
-    <p>Embargoed access refers to data that will be made publicly accessible at a specific date which should be specified in the metadata.
-        For example, a data author may release their data after having published their findings from the data.</p>
-    <p>Restricted access refers to data that can be accessed under certain conditions (e.g. because of commercial, sensitive,
-        or other confidentiality reasons or the data are only accessible via a subscription or a fee). Restricted data may be
-        available to a particular group of users or after permission is granted. For restricted data, the metadata should include
-        the conditions of access to the data (e.g., point of contact or instructions to access the data). In cases where access
-        will need to be restricted, you should check that the repository offers the required functionality to support access
-        requests before depositing with them.</p>
-    <p>Closed access refers to data that is not made publicly available and for which only metadata is publicly available.</p>
+    <p>Ideally, datasets should be public domain and openly accessible without restrictions. However, there can be legitimate reasons
+        not to share data such as those due to privacy protection, ethical, legal, and commercial constraints. As such, it is up to
+        the researcher depositing data to be aware of what can be shared, with whom and when, and to take appropriate steps to ensure
+        that the data is as open as possible and as closed as necessary.</p>
+   <p><b>Data access</b><br>
+       The metadata describing your dataset should include details about who can access the data as well as any possible related conditions.
+       Access levels can be public, embargoed, restricted, or closed access. In some cases, you may even need to apply a variety of access
+       levels to different parts of the same dataset. It is important to consider these issues early on for all datasets so that by the
+       time of deposit in a repository, access levels have been clearly defined.</p>
+   <p><b>Licences</b><br>
+       Data should be clearly licenced so that other users can legally reuse it. Application of licences is encouraged for all kinds of
+       data and access levels. Without an explicit licence, users do not have a clear sense of what can be done with your data.
+       Licences can be of standard type
+       (e.g., <a href="https://creativecommons.org/licenses/" target="_blank">Creative Commons<i class="fa fa-external-link"></i></a>)
+       or bespoke licences, and rights statements which indicate the conditions under which data can be reused.</p>
+    <p>It is highly recommended to use a standard, machine-readable licence such that it can be interpreted by machines and humans.
+        In order to inform users about what rights they have to use a dataset, the licence information should be specified as part
+        of the dataset’s metadata.</p>
+    <button id="A-i-1-more" onclick="show_additional_text('A-i-1')" >Want to know more?</button>
+    <div id="A-i-1-additional">
+        <p>Access levels can be categorised as follows:</p>
+        <p>Embargoed access refers to data that will be made publicly accessible – either publicly or restricted –
+            at a specific date which should be specified in the metadata. For example, a researcher may release
+            their data after having published their findings from the data.</p>
+        <p>Restricted access refers to data that can be accessed under certain conditions (e.g. because of commercial, sensitive,
+            or other confidentiality reasons or the data are only accessible via a subscription or a fee). Restricted data may be
+            available to a particular group of users or after permission is granted. For restricted data, the metadata should include
+            the conditions of access to the data (e.g., point of contact or instructions to access the data). In cases where access
+            will need to be restricted, you should check that the repository offers the required functionality to support access requests
+            before depositing with them.</p>
+        <p>Closed access refers to data that is not made publicly available and for which only metadata is publicly available.</p>
+    </div>
 </div>
 
 <div id="A-i-2-contents">
-    <p>This question is about whether the metadata will be preserved even when the data they describe may no longer be available.
-        Continued access to data and metadata depends on the data repository preservation practices which are usually documented
-        in the repository’s service policies or statements(e.g. in a preservation plan or policy).</p>
+    <p>Even if a dataset is no longer available, published references and links should always point to its metadata for
+        transparency and integrity. In other words, this question is about whether the metadata will be preserved even
+        when the data it describes may no longer be available. Continued access to data and metadata depends on the data
+        repository preservation practices which are usually documented in the repository’s service policies or statements
+        (e.g. in a preservation plan or policy).</p>
     <p>Trustworthy data repositories typically guarantee a minimum retention period. When assigning globally unique and
-        persistent identifiers such as DOIs, trustworthy data repositories ensure that metadata will remain accessible even if
-        the data is no longer available by providing a tombstone page displaying metadata about the removed item.</p>
-    <p>The preservation of data and metadata is normally considered during the data management planning stage.</p>
-    <p>If your research data is associated with consent forms (for e.g. personal data) outlining terms and conditions,
+        persistent identifiers such as DOIs, trustworthy data repositories ensure that metadata will remain accessible even
+        if the data is no longer available by providing a tombstone page displaying metadata about the removed item.</p>
+    <p>The preservation of data and metadata is normally considered during data management planning.</p>
+    <p><b>Sensitive data</b><br>
+        If your research data is associated with consent forms (for e.g., personal data) outlining terms and conditions,
         the data you deposit with a repository may only be legally preserved for a set period of time (e.g., five years after publication)
         and then must be destroyed. In such cases, the metadata record should make clear that the data no longer exists and why it is not available.
         However, the metadata record itself should be maintained to provide a record about the research that took place.</p>
     <button id="A-i-2-more" onclick="show_additional_text('A-i-2')" >Want to know more?</button>
     <div id="A-i-2-additional">
-        <p>A good tip is to consider whether you should include blanket statements about data destruction in the consent forms you use.
-            Speak to your local research data management support and ethics teams early on in your project to make sure you can develop
-            consent forms that match your aims for longer-term data retention and sharing. If eventual data destruction is unavoidable,
-            you will need to check that this can be handled by your choice of data repository.</p>
+        <p>A good tip is to consider whether you should include general statements about data destruction in the consent forms you use.
+            Speak to your local research data management support and ethics teams early on to make sure you can develop consent forms
+            that match your aims for longer-term data retention and sharing. If eventual data destruction is unavoidable, you will need
+            to check that this can be handled by your data repository of choice.</p>
     </div>
 </div>
 
@@ -138,12 +183,30 @@
 
 <div id="I-i-1-contents">
     <p>Metadata should use semantic vocabularies so that the contents are unambiguous and can be interpreted automatically by machines.
-        Using vocabularies in metadata may facilitate enhanced data search and interoperability of data from different sources.</p>
-    <p>Ontologies, thesauri, and taxonomies are kinds of semantic vocabularies, and they come with different degrees of sophistication
-        (for e.g. in their level of). When semantic vocabularies are included in the metadata, your data repository of choice may be able
-        to publish the metadata in machine-interpretable format, thus greatly increasing their machine actionability.</p>
-    <p><a href="https://www.w3.org/standards/semanticweb/data" target="_blank">Linked Data<i class="fa fa-external-link"></i></a><br>
-        <a href="https://www.w3.org/TR/ld-bp/#VOCABULARIES" target="_blank">Best Practices for Publishing Linked Data<i class="fa fa-external-link"></i></a></p>
+        Using vocabularies in metadata may facilitate enhanced data search and interoperability of data from different sources.
+        Repositories should provide support for the use of semantic vocabularies in metadata by offering relevant functionalities.
+        Such repositories can be found on registries such as
+        <a href="https://www.re3data.org/" target="_blank">re3data.org<i class="fa fa-external-link"></i></a> or
+        <a href="https://fairsharing.org/" target="_blank">FAIRsharing.org<i class="fa fa-external-link"></i></a>.</p>
+    <button id="I-i-1-more" onclick="show_additional_text('I-i-1')" >Want to know more?</button>
+    <div id="I-i-1-additional">
+        <p>Ontologies, thesauri, and taxonomies are kinds of semantic vocabularies, and they come with different degrees of sophistication
+            (for e.g. in their level of). When semantic vocabularies are included in the metadata, your data repository of choice may be
+            able to publish the metadata in machine-interpretable format, thus greatly increasing their machine actionability and
+            supporting the <a href="https://www.w3.org/standards/semanticweb" target="_blank">Semantic Web<i class="fa fa-external-link"></i></a>.</p>
+        <p>Examples of repositories or look-up services for semantic resources (the list is not exhaustive):</p>
+        <ul>
+            <li><a href="https://lov.linkeddata.es/dataset/lov" target="_blank">Linked Open Vocabularies (LOV)<i class="fa fa-external-link"></i></a></li>
+            <li><a href="http://www.obofoundry.org/" target="_blank">OBO Foundry<i class="fa fa-external-link"></i></a></li>
+            <li><a href="https://bioportal.bioontology.org/" target="_blank">BioPortal<i class="fa fa-external-link"></i></a></li>
+            <li><a href="https://bartoc.org/" target="_blank">Basel Register of Thesauri, Ontologies & Classifications (BARTOC)<i class="fa fa-external-link"></i></a></li>
+            <li><a href="https://vocab.nerc.ac.uk/" target="_blank">NERC Vocabulary Server<i class="fa fa-external-link"></i></a></li>
+            <li><a href="https://vocabs.ands.org.au/" target="_blank">Research Vocabulary Australia<i class="fa fa-external-link"></i></a></li>
+            <li><a href="https://mmisw.org/" target="_blank">MMI Ontology Registry and Repository (ORR)<i class="fa fa-external-link"></i></a></li>
+            <li><a href="https://www.industrialontologies.org/" target="_blank">Industrial Ontologies Foundry (IOF)<i class="fa fa-external-link"></i></a></li>
+            <li><a href="https://vocabularies.cessda.eu/" target="_blank">CESSDA Vocabulary Service<i class="fa fa-external-link"></i></a></li>
+        </ul>
+    </div>
 </div>
 
 <div id="I-i-2-contents">
@@ -174,7 +237,7 @@
 </div>
 
 <div id="R-i-2-contents">
-    <p>Data should be clearly licenced so that other users can legally reuse it. We encourage the application of licences
+    <p>Data should be clearly licensed so that other users can legally reuse it. We encourage the application of licences
         for all kinds of data whether public, restricted or for specific users. Without an explicit licence, users do not
         have a clear sense of what can be done with your data. Licences can be of standard type
         (e.g., <a href="https://creativecommons.org/licenses/" target="_blank">Creative Commons<i class="fa fa-external-link"></i></a>)
@@ -200,32 +263,40 @@
 </div>
 
 <div id="R-i-4-contents">
-    <p>In addition to core metadata required to support data citation and discovery, metadata to support data reusability should
-        be made available following community-endorsed metadata standards.</p>
-    <p>Some communities have well-established metadata standards (e.g., geospatial: ISO19115, biodiversity: DarwinCore, ABCD, EML,
-        social science: DDI, astronomy: International Virtual Observatory Alliance Technical Specifications) and well-established
-        domain and discipline-specific repositories supporting these community endorsed metadata standards. Community-endorsed
-        metadata standards are listed on registries such as the
+    <p>To ensure that your metadata can be broadly shared and understood within your research domain, it is recommended to use a
+        community-endorsed standard.</p>
+    <p>For example, some communities have well-established metadata standards (e.g., geospatial: ISO19115, biodiversity: DarwinCore,
+        ABCD, EML, social science: DDI, astronomy: International Virtual Observatory Alliance Technical Specifications,
+        linguistics: CLARIN CMDI) and well-established domain and discipline-specific repositories supporting these community
+        endorsed metadata standards.</p>
+    <p><b>Relevant lists</b><br>
+        Community-endorsed metadata standards are listed on metadata registries such as the
         <a href="https://rd-alliance.github.io/metadata-directory/standards/" target="_blank">RDA<i class="fa fa-external-link"></i></a>
-        or <a href="https://www.dcc.ac.uk/guidance/standards/metadata" target="_blank">Digital Curation Centre<i class="fa fa-external-link"></i></a> Metadata Directories.
-        Domain and discipline-specific repositories should therefore be the preferred choice to deposit your data. The Registry of Research
-        data repositories re3data.org enables searching for a suitable data repository by
-        <a href="https://www.re3data.org/browse/by-subject/" target="_blank">domain<i class="fa fa-external-link"></i></a>.</p>
-    <p>In contrast, other communities, including new domains, may have limited standards or standards that are under development
-        (for e.g. engineering and linguistics), and no dedicated data repositories. In such cases the best approach is to contact a
+        or <a href="https://www.dcc.ac.uk/guidance/standards/metadata" target="_blank">Digital Curation Centre<i class="fa fa-external-link"></i></a>
+        and <a href="https://fairsharing.org/standards/" target="_blank">FAIRsharing<i class="fa fa-external-link"></i></a>.
+        Domain and discipline-specific repositories should therefore be the preferred choice to deposit your data.
+        The Registry of Research data repositories re3data.org enables searching for a suitable data repository by
+        <a href="https://www.re3data.org/browse/by-subject/" target="_blank">domain<i class="fa fa-external-link"></i></a>.
+    </p>
+    <p><b>Exceptions</b><br>
+        In contrast, other communities, including new domains, may have limited standards or standards that are under development
+        (for e.g. engineering), and no dedicated data repositories. In such cases the best approach is to contact a
         research data management expert to identify possible solutions.</p>
 </div>
 
 <div id="R-i-5-contents">
     <p>File formats refer to methods for encoding digital information. For example, CSV for tabular data, NetCDF for multidimensional
         data and GeoTIFF for raster imagery.</p>
-    <p>Data should be made available in a recommended file format that is accepted by the research community to enable data sharing and reuse,
-        and by the repository to enable long-term preservation. See examples of recommended file formats based on data types
-        <a href="https://www.ukdataservice.ac.uk/manage-data/format/recommended-formats.aspx" target="_blank">here<i class="fa fa-external-link"></i></a>.</p>
+    <p><b>Advantages of recommended file formats</b><br>
+        Data should be made available in a recommended file format that is accepted by the research community to enable data sharing and reuse,
+        and by the repository to enable long-term preservation. Repositories normally have different recommended standard file formats based
+        on data types (for example:
+        <a href="https://www.ukdataservice.ac.uk/manage-data/format/recommended-formats.aspx" target="_blank">UK Data Service<i class="fa fa-external-link"></i></a>).</p>
     <p>Recommended formats are widely used and supported by the most common software and tools ensuring that your data can be read in the future,
-        but they will also help increase the reusability and interoperability. Using preferred formats enables data to be loaded directly into
-        the software and tools used for data analysis. It makes it possible to easily integrate your data with other data using the same format.
-        The use of preferred formats will allow migration of the format to a newer one, in case a preferred format becomes outdated.</p>
+        but they will also help increase the reusability and interoperability. Using recommended preferred formats enables data to be loaded
+        directly into the software and tools used for data analysis. It makes it possible to easily integrate your data with other data using
+        the same format. The use of recommended preferred formats will allow migration of the format to a newer one, in case a preferred format
+        becomes outdated.</p>
 </div>
 
 <div id="R-i-1-advice">
