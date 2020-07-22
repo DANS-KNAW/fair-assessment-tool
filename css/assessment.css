@@ -15,8 +15,7 @@
     button:hover {color: #000000; background-color: #f5f5f5 }
     input {horizontal-align: 30px;}
     .w3-border{border:1px solid #ccc!important}
-    .panel-heading .glyphicon-info-sign {font-size: 1.3em; color: #FFFFFF;}
-    .panel-body .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
+    .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
     .panel {background-color: #f5f5f5; border: 0px;}
     .panel-default>.panel-heading {background-image: none; background-color: #2795c8; }
     .panel-title {color: #FFFFFF;background-color: #2795c8; font-size: 15px;}
@@ -24,7 +23,7 @@
     .modal-body {background-color: #FDFDFD; margin-left: 1px; }
     .footer {background-color: #f5f5f5; padding-top: 20px; }
     .fa-external-link, .fa-envelope-o, .fa-long-arrow-left {color: #2795c8;}
-    .fa-print {font-size: 50px; color: #2795c8; }
+    .fa-print {font-size: 50px; color: #2795c8;}
     .fa-paper-plane {font-size: 40px; color: #2795c8;}
     .fa-download {font-size: 10px; color: #2795c8;}
     .work-category {color: #606060;}
