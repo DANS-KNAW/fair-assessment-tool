@@ -13,7 +13,7 @@
             ['F', [2, 2, 2]],
             ['A', [2, 2]],
             ['I', [2]],
-            ['R', [2, 2, 2, 2, 2]],
+            ['R', [2, 2, 2, 2]],
             ['Q', [12, 0, 0, 5]]
         ])
         var short_answers = new Map([
@@ -236,7 +236,7 @@
         }
 
         function get_score() {
-            let score = 11 - get_negative_answers().length;
+            let score = 10 - get_negative_answers().length;
             if (score < 6) { return "Not FAIR-Aware" }
             else if (score < 8) { return "Moderately FAIR-Aware" }
             else { return "Very FAIR-Aware" }
