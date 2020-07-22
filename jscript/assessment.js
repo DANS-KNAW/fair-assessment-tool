@@ -9,7 +9,7 @@
             <!-- The value of the item is the number of possible answers to the respective question. -->
             <!-- For questions where the answer is given in free text, the value is 0. -->
             <!-- Notice: It is important to update this Map when questions are removed or added! -->
-            ['Y', [48, 6, 9]],
+            ['Y', [49, 6, 9]],
             ['F', [2, 2, 2]],
             ['A', [2, 2]],
             ['I', [2]],
@@ -175,6 +175,7 @@
 
         function show_info_tip(question) {
             if (question != null) {
+                // question -> info_tip_key e.g. fq1 -> F-i-1
                 info_tip_key = (question.charAt(0).toUpperCase() + question.slice(1)).replace("q", "-i-")
                 show_modal(info_tip_key)
             }
