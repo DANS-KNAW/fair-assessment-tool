@@ -30,13 +30,14 @@
                     write_to_modal("SUBMISSION", error.message);
                 } else {
                     let submitted = "Answers were succesfully submitted into the database." + "<br><br>"
+                    let score = "Awareness score: " + get_score() + "<br><br>";
                     let advice = ""
 //                    let advice = get_negative_answers().length > 0 ?
 //                        "You had answered some questions with 'No'. If you want to see advice concerning these questions, please click " +
 //                        "<a data-toggle='modal' onclick='show_advice_for_negative_answers()' style='color:blue' style='cursor:pointer'> here</a>. " +
 //                        "When you print the assessment, you will also see this advice." + "<br><br>" : "";
                     let thanks = "Thank you for your participation!";
-                    write_to_modal("SUBMISSION", submitted + advice + thanks);
+                    write_to_modal("SUBMISSION", submitted + score + advice + thanks);
                 }
             })
         }
@@ -78,7 +79,7 @@
         }
 
         function downloadAnswers(answers) {
-            var csv = 'Host, Date, Domain, Role, Organization, FQ1, FQ1-i, FQ2, FQ2-i, FQ3, FQ3-i, AQ1, AQ1-i, IQ1, IQ1-i, IQ2, IQ2-i, RQ1, RQ1-i, RQ2, RQ2-i, RQ3, RQ3-i, RQ4, RQ4-i, RQ5, RQ5-i, Not understandable, Missing metrics, General feedback, Awareness raised\n';
+            var csv = 'Host, Date, Domain, Role, Organization, FQ1, FQ1-i, FQ2, FQ2-i, FQ3, FQ3-i, AQ1, AQ1-i, AQ2, AQ2-i, IQ1, IQ1-i, RQ1, RQ1-i, RQ2, RQ2-i, RQ3, RQ3-i, RQ4, RQ4-i, RQ5, RQ5-i, Not understandable, Missing metrics, General feedback, Awareness raised\n';
             answers.forEach(function(row) {
                 csv += row + "\n";
             })

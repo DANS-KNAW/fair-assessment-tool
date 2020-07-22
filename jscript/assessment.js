@@ -151,22 +151,22 @@
 
         /* ----------------------- F ----------------------- */
         function update_F(question) {
-            show_intention_question(question)
+            show_intention_question(question);
         }
 
         /* ----------------------- A ----------------------- */
         function update_A(question) {
-            show_intention_question(question)
+            show_intention_question(question);
         }
 
         /* ------------------------ I ----------------------- */
         function update_I(question) {
-            show_intention_question(question)
+            show_intention_question(question);
         }
 
         /* ----------------------- R ------------------------ */
         function update_R(question) {
-            show_intention_question(question)
+            show_intention_question(question);
         }
 
         function show_intention_question(question) {
@@ -191,7 +191,9 @@
             document.getElementById("image-a").style.display = "none"
             document.getElementById("image-i").style.display = "none"
             document.getElementById("image-r").style.display = "none"
-//            if (add_advice_texts().length != 0) {document.getElementById("print-advice").style.display = "block"};
+            add_score_text();
+            add_advice_texts();
+            document.getElementById("print-advice").style.display = "block"
             window.print();
             document.getElementById("logos").style.display = "block"
             document.getElementById("icons").style.display = "block"
@@ -215,6 +217,17 @@
             }
             if (advices.length != 0) {$("#print-advice-contents").html(advices);}
             return advices;
+        }
+
+        function add_score_text() {
+            $("#print-score-contents").html(get_score());
+        }
+
+        function get_score() {
+            let score = 11 - get_negative_answers().length;
+            if (score < 6) { return "Not FAIR-Aware" }
+            else if (score < 8) { return "Moderately FAIR-Aware" }
+            else { return "Very FAIR-Aware" }
         }
 
         /* ------------------ Validate answers --------------- */
