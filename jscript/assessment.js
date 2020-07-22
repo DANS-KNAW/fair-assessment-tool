@@ -152,21 +152,32 @@
         /* ----------------------- F ----------------------- */
         function update_F(question) {
             show_intention_question(question);
+            show_info_tip(question);
         }
 
         /* ----------------------- A ----------------------- */
         function update_A(question) {
             show_intention_question(question);
+            show_info_tip(question);
         }
 
         /* ------------------------ I ----------------------- */
         function update_I(question) {
             show_intention_question(question);
+            show_info_tip(question);
         }
 
         /* ----------------------- R ------------------------ */
         function update_R(question) {
             show_intention_question(question);
+            show_info_tip(question);
+        }
+
+        function show_info_tip(question) {
+            if (question != null) {
+                info_tip_key = (question.charAt(0).toUpperCase() + question.slice(1)).replace("q", "-i-")
+                show_modal(info_tip_key)
+            }
         }
 
         function show_intention_question(question) {
