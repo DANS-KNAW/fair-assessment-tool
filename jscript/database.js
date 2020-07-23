@@ -31,11 +31,10 @@
                 } else {
                     let submitted = "Answers were succesfully submitted into the database." + "<br><br>"
                     let score = "Awareness score: " + get_score() + "<br><br>";
-                    let advice = ""
-//                    let advice = get_negative_answers().length > 0 ?
-//                        "You had answered some questions with 'No'. If you want to see advice concerning these questions, please click " +
-//                        "<a data-toggle='modal' onclick='show_advice_for_negative_answers()' style='color:blue' style='cursor:pointer'> here</a>. " +
-//                        "When you print the assessment, you will also see this advice." + "<br><br>" : "";
+                    let advice = get_negative_answers().length > 0 ?
+                        "You had answered some questions with 'No'. If you want to see advice concerning these questions, please click " +
+                        "<a data-toggle='modal' onclick='show_advice_for_negative_answers()' style='color:blue' style='cursor:pointer'> here</a>. " +
+                        "When you print the assessment, you will also see this advice." + "<br><br>" : "";
                     let thanks = "Thank you for your participation!";
                     write_to_modal("SUBMISSION", submitted + score + advice + thanks);
                 }
