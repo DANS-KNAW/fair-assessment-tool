@@ -223,11 +223,15 @@
             let advices = "";
             let negative = get_negative_answers();
             for(let question_key of negative) {
+                let additional_text = "";
                 let question = document.getElementById(question_key + "-title").textContent.bold();
-                let advice = document.getElementById(question_key + "-advice").innerHTML;
+                let basic_text = document.getElementById(question_key + "-default").innerHTML;
+                let additional = document.getElementById(question_key + "-additional");
+                if (additional) {additional_text = additional.innerHTML }
+                let advice = basic_text + additional_text;
                 advices += question + "\n" + advice;
             }
-            if (advices.length != 0) {$("#print-advice-contents").html(advices);}
+            {$("#print-advice-contents").html(advices);}
             return advices;
         }
 
