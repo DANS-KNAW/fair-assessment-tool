@@ -153,24 +153,28 @@
         function update_F(question) {
             show_intention_question(question);
             show_info_tip(question);
+            update_print_letters();
         }
 
         /* ----------------------- A ----------------------- */
         function update_A(question) {
             show_intention_question(question);
             show_info_tip(question);
+            update_print_letters();
         }
 
         /* ------------------------ I ----------------------- */
         function update_I(question) {
             show_intention_question(question);
             show_info_tip(question);
+            update_print_letters();
         }
 
         /* ----------------------- R ------------------------ */
         function update_R(question) {
             show_intention_question(question);
             show_info_tip(question);
+            update_print_letters();
         }
 
         function show_info_tip(question) {
@@ -236,14 +240,24 @@
         }
 
         function add_score_text() {
-            $("#print-score-contents").html(get_score());
+            $("#print-score-contents").html(get_score_text());
+        }
+
+        function get_score_text() {
+            let score = get_score();
+            if (score < 6) { return "Not sufficiently FAIR-Aware" }
+            else if (score < 8) { return "Moderately FAIR-Aware" }
+            else { return "Very FAIR-Aware" }
         }
 
         function get_score() {
-            let score = 10 - get_negative_answers().length;
-            if (score < 6) { return "Not FAIR-Aware" }
-            else if (score < 8) { return "Moderately FAIR-Aware" }
-            else { return "Very FAIR-Aware" }
+            return 10 - get_negative_answers().length;
+        }
+
+        function update_print_letters() {
+            for (let letter of letters) {
+                document.getElementById(("image-print-" + letter).toLowerCase()).src = "images/print/" + letter + "_" + get_score() * 10 + ".jpg"
+            }
         }
 
         /* ------------------ Validate answers --------------- */
