@@ -153,28 +153,28 @@
         function update_F(question) {
             show_intention_question(question);
             show_info_tip(question);
-            update_print_letters();
+            update_print_letters(question);
         }
 
         /* ----------------------- A ----------------------- */
         function update_A(question) {
             show_intention_question(question);
             show_info_tip(question);
-            update_print_letters();
+            update_print_letters(question);
         }
 
         /* ------------------------ I ----------------------- */
         function update_I(question) {
             show_intention_question(question);
             show_info_tip(question);
-            update_print_letters();
+            update_print_letters(question);
         }
 
         /* ----------------------- R ------------------------ */
         function update_R(question) {
             show_intention_question(question);
             show_info_tip(question);
-            update_print_letters();
+            update_print_letters(question);
         }
 
         function show_info_tip(question) {
@@ -254,9 +254,12 @@
             return 10 - get_negative_answers().length;
         }
 
-        function update_print_letters() {
-            for (let letter of letters) {
-                document.getElementById(("image-print-" + letter).toLowerCase()).src = "images/print/" + letter + "_" + get_score() * 10 + ".jpg"
+        function update_print_letters(question) {
+            if (question != null) {
+                let percent = get_score() * 10;
+                for (let letter of letters) {
+                    document.getElementById(("image-print-" + letter).toLowerCase()).src = "images/print/" + letter + "_" + percent + ".jpg"
+                }
             }
         }
 
