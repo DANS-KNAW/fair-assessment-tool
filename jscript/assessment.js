@@ -154,6 +154,7 @@
             show_intention_question(question);
             show_info_tip(question);
             update_print_letters(question);
+            set_to_default_color(question);
         }
 
         /* ----------------------- A ----------------------- */
@@ -161,6 +162,7 @@
             show_intention_question(question);
             show_info_tip(question);
             update_print_letters(question);
+            set_to_default_color(question);
         }
 
         /* ------------------------ I ----------------------- */
@@ -168,6 +170,7 @@
             show_intention_question(question);
             show_info_tip(question);
             update_print_letters(question);
+            set_to_default_color(question);
         }
 
         /* ----------------------- R ------------------------ */
@@ -175,6 +178,17 @@
             show_intention_question(question);
             show_info_tip(question);
             update_print_letters(question);
+            set_to_default_color(question);
+        }
+
+        /* ----------------------- Y ----------------------- */
+        function update_Y(question) {
+            set_to_default_color(question);
+        }
+
+        /* ----------------------- Q ----------------------- */
+        function update_Q(question) {
+            set_to_default_color(question);
         }
 
         function show_info_tip(question) {
@@ -193,6 +207,14 @@
                  else {
                     document.getElementById(question + "-i").style.display = "block";
                 }
+            }
+        }
+
+        function set_to_default_color(question) {
+            if (question != null) {
+                // question -> question_key e.g. fq1 -> F-i-1-title
+                question_key = (question.charAt(0).toUpperCase() + question.slice(1)).replace("q", "-i-") + "-title";
+                document.getElementById(question_key).style.color = "#000000";
             }
         }
 
@@ -266,7 +288,7 @@
         /* ------------------ Validate answers --------------- */
 
         function valid_input() {
-            let text = "";
+            let unanswered = false;
             for (let [letter, questions] of fields) {
                 for(let i = 0; i < questions.length; i++) {
                     let number_of_answers = questions[i];
@@ -287,17 +309,19 @@
                     if (!answered && !excluded(question)) {
                         <!-- question_key is e.g. "F-i-1-title" -->
                         question_key = letter + "-i-" + (i + 1).toString() + "-title";
-                        text +=  not_answered_question(letter, question_key) + "<br><br>";
+                        document.getElementById(question_key).style.color = "red";
+                        unanswered = true;
                     }
                     if (answered && intention_questions_answered < 0) {
                         <!-- question_key is e.g. "F-i-1-title" -->
                         question_key = letter + "-i-" + (i + 1).toString() + "-title";
-                        text +=  not_answered_question(letter, question_key) + " - Intention to comply<br><br>";
+                        document.getElementById(question_key).style.color = "red";
+                        unanswered = true;
                     }
                 }
             }
-            if (!(text === "")) {
-                write_to_modal("Following questions are not yet answered:", text);
+            if (unanswered) {
+                write_to_modal("Some questions are not answered yet.", "They are marked in <font color='red'>red</font>.");
                 return false;
             }
             return true;
@@ -418,6 +442,7 @@
         function show_domains() {
             let domains = get_answers_for_a_question("yq1", get_number_of_domain_answers())
             $("#show-domains").html(domains);
+            document.getElementById("Y-i-1-title").style.color = "#000000";
         }
 
         function get_number_of_domain_answers() {
