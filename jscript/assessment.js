@@ -21,7 +21,6 @@
             ['yq2.3', 'Research support'],
             ['yq3.5', 'eInfrastructure'],
         ])
-        var info_tip_tip_shown;
 
 
         /* -------------------- Initialize -------------------- */
@@ -30,7 +29,6 @@
 
         function initialise() {
             update();
-            info_tip_tip_shown = false;
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
             hide_intention_questions();
             document.getElementById("print-advice").style.display = "none"
@@ -195,10 +193,9 @@
 
         function show_info_tip(question) {
             if (question != null) {
-                if (!info_tip_tip_shown) {
-                    write_to_modal("INFO-TIPS", "You can see information about a question by clicking the &nbsp;<span class='glyphicon glyphicon-info-sign'></span>&nbsp; icon.");
-                    info_tip_tip_shown = true;
-                }
+                // question -> info_tip_key e.g. fq1 -> F-i-1
+                info_tip_key = (question.charAt(0).toUpperCase() + question.slice(1)).replace("q", "-i-")
+                show_modal(info_tip_key)
             }
         }
 
