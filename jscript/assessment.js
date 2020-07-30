@@ -191,6 +191,11 @@
             set_to_default_color(question);
         }
 
+        /* --------------------- Intention --------------------- */
+        function update_intention(question) {
+            set_to_default_color(question);
+        }
+
         function show_info_tip(question) {
             if (question != null) {
                 // question -> info_tip_key e.g. fq1 -> F-i-1
