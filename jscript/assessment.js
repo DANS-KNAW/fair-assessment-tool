@@ -31,6 +31,7 @@
             update();
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
             hide_intention_questions();
+            document.getElementById("logos-print").style.display = "none"
             document.getElementById("print-advice").style.display = "none"
             document.getElementById("introduction").style.display = "none"
             document.getElementById("texts").style.display = "none"
@@ -234,6 +235,7 @@
             document.getElementById("image-a").style.display = "none"
             document.getElementById("image-i").style.display = "none"
             document.getElementById("image-r").style.display = "none"
+            document.getElementById("logos-print").style.display = "block"
             add_score_text();
             add_advice_texts();
             document.getElementById("print-advice").style.display = "block"
@@ -246,6 +248,7 @@
             document.getElementById("image-a").style.display = "block"
             document.getElementById("image-i").style.display = "block"
             document.getElementById("image-r").style.display = "block"
+            document.getElementById("logos-print").style.display = "none"
             document.getElementById("print-advice").style.display = "none"
             update();
         }
