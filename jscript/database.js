@@ -11,6 +11,7 @@
 
         function submit_page() {
             if (valid_input()) {
+                document.getElementById("submit-button").style.display = "none";
                 firebase.auth().signInAnonymously()
                 .then(function() {
                     let answers = get_answers();
@@ -18,6 +19,7 @@
                 })
                 .catch(function(error) {
                     write_to_modal("SIGN IN", error.message + "  " +  error.code);
+                    document.getElementById("submit-button").style.display = "block";
                 });
             }
         }
@@ -28,8 +30,8 @@
             hostRef.push(m, function(error) {
                 if (error) {
                     write_to_modal("SUBMISSION", error.message);
+                    document.getElementById("submit-button").style.display = "block";
                 } else {
-                    document.getElementById("submit-button").style.display = "none";
                     if (window.print) { document.getElementById("print-button").style.display = "block"; }
                     let submitted = "Answers were succesfully submitted into the database." + "<br><br>";
                     let fair_letters = document.getElementById("letters").innerHTML + "<br><br>";
@@ -83,7 +85,7 @@
         function downloadAnswers(answers) {
             var csv = 'Host, Date, Domain, Role, Organization, FQ1, FQ1-i, FQ2, FQ2-i, FQ3, FQ3-i, AQ1, AQ1-i, AQ2, AQ2-i, IQ1, IQ1-i, RQ1, RQ1-i, RQ2, RQ2-i, RQ3, RQ3-i, RQ4, RQ4-i, Not understandable, Missing metrics, General feedback, Awareness raised\n';
             answers.forEach(function(row) {
-                csv += row + "\n";
+                csv += row.replace("#", "") + "\n";     // "#" causes an error
             })
             var hiddenElement = document.createElement('a');
             hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
