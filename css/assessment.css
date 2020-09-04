@@ -37,7 +37,7 @@
     #image-print-f, #image-print-a, #image-print-i, #image-print-r { width: 10%; heigth: 10%; }
     #image-print-fairsfair { width: 25%; heigth: 25%; }
     #image-print-dans { width: 20%; heigth: 20%; }
-
+    #fairisfairteam { padding-left: 20px; }
     @media (max-width: 768px) {
         div.col-md-2 {padding-left: 30px;}
         div.col-md-10 {padding-left: 30px;}
