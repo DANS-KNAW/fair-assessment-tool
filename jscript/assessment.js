@@ -199,9 +199,11 @@
 
         function show_info_tip(question) {
             if (question != null) {
-                // question -> info_tip_key e.g. fq1 -> F-i-1
-                info_tip_key = (question.charAt(0).toUpperCase() + question.slice(1)).replace("q", "-i-")
-                show_modal(info_tip_key)
+                if (checked(question + ".2")) {
+                    // question -> info_tip_key e.g. fq1 -> F-i-1
+                    info_tip_key = (question.charAt(0).toUpperCase() + question.slice(1)).replace("q", "-i-")
+                    show_modal(info_tip_key)
+                }
             }
         }
 
