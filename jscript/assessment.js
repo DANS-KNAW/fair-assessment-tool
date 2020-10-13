@@ -207,12 +207,7 @@
 
         function show_intention_question(question) {
             if (question != null) {
-                if (checked(question + ".1")) {
-                    document.getElementById(question + "-i").style.display = "none";
-                }
-                 else {
-                    document.getElementById(question + "-i").style.display = "block";
-                }
+                document.getElementById(question + "-i").style.display = "block";
             }
         }
 
