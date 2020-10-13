@@ -90,10 +90,6 @@
             return document.getElementById(element).checked ? 1 : 0;
         }
 
-        function answer_is_no(element) {
-            return document.getElementById(element).value == 0;
-        }
-
         function disable(elements) {
             for (let element of elements) {
                 document.getElementById(element).checked = 0;
@@ -306,7 +302,7 @@
                         let choice = question + "." + (j + 1).toString();
                         if (checked(choice)) {
                             answered = true;
-                            if (letters.includes(letter) && answer_is_no(choice)) {
+                            if (letters.includes(letter)) {
                                 intention_questions_answered = intention_questions_answer(question)
                             }
                         }
@@ -408,7 +404,7 @@
             for (let j = 0; j < number_of_answers; j++) {
                 <!-- choice is e.g. "fq1.2" -->
                 let choice = question + "." + (j + 1).toString();
-                if (checked(choice) && answer_is_no(choice)) {
+                if (checked(choice)) {
                     intention = intention_questions_answer(question)
                 }
             }
