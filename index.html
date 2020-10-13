@@ -505,71 +505,95 @@
                         <p>Please answer the four questions below to help us improve the tool and make it even more relevant for the community.</p>
                         <div id="Q-i-1-title">
                             <br>
-                            <ul><li>Are any of the issues covered in this assessment difficult to understand and/or answer? Please indicate them below.</li></ul>
+                            <ul>
+                                <li>Are any of the issues covered in this assessment difficult to understand and/or answer? Please indicate them below.</li>
+                            </ul>
                         </div>
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-5">
-                                <label id="lqq1.1"><input type="checkbox" id="qq1.1"> Globally unique persistent identifier (PID)</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label id="lqq1.2"><input type="checkbox" id="qq1.2"> Use of semantic vocabularies in metadata</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-5">
-                                <label id="lqq1.3"><input type="checkbox" id="qq1.3"> Metadata for citation and discovery including PID</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label id="lqq1.4"><input type="checkbox" id="qq1.4"> Metadata includes links to other entities</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-5">
-                                <label id="lqq1.5"><input type="checkbox" id="qq1.5"> Metadata available online</label>
-                            </div>
-                            <div class="col-md-6"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-5"></div>
-                            <div class="col-md-6">
-                                <label id="lqq1.6"><input type="checkbox" id="qq1.6"> Content descriptions in metadata</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-5">
-                                <label id="lqq1.7"><input type="checkbox" id="qq1.7"> Level of access and conditions to access the data</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label id="lqq1.8"><input type="checkbox" id="qq1.8"> Metadata includes licence </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-5">
-                                <label id="lqq1.9"><input type="checkbox" id="qq1.9"> Persistence of metadata</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label id="lqq1.10"><input type="checkbox" id="qq1.10"> Metadata includes provenance </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-5"></div>
-                            <div class="col-md-6">
-                                <label id="lqq1.11"><input type="checkbox" id="qq1.11"> Community-endorsed metadata</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-5"></div>
-                            <div class="col-md-6">
-                                <label id="lqq1.12"><input type="checkbox" id="qq1.12"> Data in a prefered format</label>
-                            </div>
+                        <div>
+                            <ul>
+                                <ul style="list-style-type:none;">
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <li><label id="lqq1.1"><a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-1')">Globally unique persistent identifier (PID)</a></label></li>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.1">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <li><label id="lqq1.2"><a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-2')">Metadata for citation and discovery including PID</a></label></li>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.2">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <li><label id="lqq1.3"><a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-3')">Metadata available online readable by humans and machines</a></label></li>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.3">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <li><label id="lqq1.4"><a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-1')">Metadata includes licence, level of access and conditions to access the data</a></label></li>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.4">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <li><label id="lqq1.5"><a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-2')">Persistence of metadata</a></label></li>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.5">
+                                        </div>
+                                    </div>
+                                   <div  class="row">
+                                        <div class="col-md-5">
+                                            <li><label id="lqq1.6"><a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')">Use of controlled vocabularies in metadata</a></label></li>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.6">
+                                        </div>
+                                    </div>
+                                   <div  class="row">
+                                        <div class="col-md-5">
+                                            <li><label id="lqq1.7"><a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')">Metadata includes provenance</a></label></li>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.7">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <li><label id="lqq1.8"><a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-2')">Community-endorsed metadata</a></label></li>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.8">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <li><label id="lqq1.9"><a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-3')">Data in a prefererd format for reuse and preservation</a></label></li>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.9">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <li><label id="lqq1.10"><a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-4')">Digital curation and preservation</a></label></li>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.10">
+                                        </div>
+                                    </div>
+                                </ul>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -727,7 +751,7 @@
     <p>FAIR-Aware is an online tool developed by the <a href="https://www.fairsfair.eu/" target="_blank">FAIRsFAIR<i class="fa fa-external-link"></i></a> project.
         The tool is not meant to give you a score for the FAIRness of a specific dataset.
         You should, however, have a target dataset in mind to be able to answer the questions and complete the assessment.</p>
-    <p>The assessment starts with a few questions ‘about you’ followed by 10 questions about FAIR. After you answer each question additional
+    <p>The assessment starts with a few questions ‘about you’ followed by 10 questions about FAIR. For each question additional
         information and guidance will be displayed. The majority of the questions will help you assess your current level of awareness about what
         actions are needed to make data FAIR. At the end, Your feedback will help us improve FAIR-Aware and make it as user-friendly as possible.
         You will need between 10 and 30 minutes to complete the assessment depending on your familiarity with the subject and issues covered.</p>

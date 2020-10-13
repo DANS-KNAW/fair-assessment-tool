@@ -14,7 +14,7 @@
             ['A', [2, 2]],
             ['I', [2]],
             ['R', [2, 2, 2, 2]],
-            ['Q', [12, 0, 0, 5]]
+            ['Q', [10, 0, 0, 5]]
         ])
         var short_answers = new Map([
             <!-- Shortened answers to make downloaded data more readable -->
