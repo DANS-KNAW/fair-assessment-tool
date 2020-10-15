@@ -56,19 +56,9 @@
                 <br><br>
             </div>
         </div>
-        <div class="row" id="logos-print">
-            <div class="col-md-2 col-sm-1"></div>
-            <div class="col-md-10 col-sm-11">
-                <img id="image-print-fairsfair" src="images/fairisfair.png">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <img id="image-print-dans" src="images/dans.jpg">
-                <br><br>
-            </div>
-        </div>
 
         <!-- === INTRODUCTION === -->
-        <div class="intro">
+        <div class="intro" id="intro">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
@@ -79,6 +69,52 @@
             </div>
         </div>
         <div class="pagebreak"></div>
+
+        <!-- ============================================================ -->
+        <!-- ======== SCORE AND GUIDANCE TEXTS AFTER SUBMITTING  ======== -->
+        <!-- ============================================================ -->
+        <div id="score-and-guidance">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <h2>Thank you for your participation!</h2>
+                </div>
+            </div><br><br>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div id="fair-letters">
+                                    <div id="letters">
+                                        <img id="image-print-f" src="images/print/F_0.jpg" alt="F"/>
+                                        <img id="image-print-a" src="images/print/A_0.jpg" alt="A"/>
+                                        <img id="image-print-i" src="images/print/I_0.jpg" alt="I"/>
+                                        <img id="image-print-r" src="images/print/R_0.jpg" alt="R"/>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <h2 id="score"></h2>
+                            <h2 id="score-text"></h2>
+                        </div>
+                    </div>
+                    <div class="row" id="guidance-texts">
+                        <div class="col-md-12">
+                            <h2>Guidance:</h2>
+                            <h4>Below you can review the FAIR questions guidance for which your indicated a lack of awareness.</h4><br>
+                            <div id="guidance"></div><br>
+                        </div>
+                    </div>
+                    <div class="pagebreak"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Summary of your responses:</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- =========================== -->
         <!-- ======== ABOUT YOU ======== -->
@@ -643,31 +679,6 @@
             </div>
         </div>
 
-        <!-- ====================================================== -->
-        <!-- ======== SCORE AND ADVICE TEXTS FOR PRINTING  ======== -->
-        <!-- ======================================================= -->
-        <div id="print-advice">
-            <div class="pagebreak"></div>
-            <div>
-                <h4>SCORE</h4><br>
-                <div id="fair-letters">
-                    <div class="row">
-                        <div class="col-md-1" id="letters">
-                            <img id="image-print-f" src="images/print/F_0.jpg" alt="F"/>
-                            <img id="image-print-a" src="images/print/A_0.jpg" alt="A"/>
-                            <img id="image-print-i" src="images/print/I_0.jpg" alt="I"/>
-                            <img id="image-print-r" src="images/print/R_0.jpg" alt="R"/>
-                        </div>
-                    </div>
-                </div><br>
-                <div id="print-score-contents"></div>
-            </div><br>
-            <div>
-                <h4>ADVICE</h4><br>
-                <div id="print-advice-contents"></div>
-            </div>
-        </div>
-
         <!-- ================================= -->
         <!-- ======== SUBMIT & PRINT  ======== -->
         <!-- ================================= -->
@@ -680,8 +691,8 @@
                         <br>
                         <div class="col-md-4 col-sm-3 col-xs-0"></div>
                         <div class="col-md-3 col-sm-4 col-xs-5">
-                            <button id="submit-button" onclick="submit_page()" data-toggle="tooltip" data-placement="bottom" title="Submit your answers into the database.  No personal data will be stored."><i class="fa fa-paper-plane"> Submit</i></button>
-                            <button id="print-button" onclick="print_page()" data-toggle="tooltip" data-placement="bottom" title="Print your answers."><i class="fa fa-print"></i></button>
+                            <button id="submit-button" onclick="submit()" data-toggle="tooltip" data-placement="bottom" title="Submit your answers into the database.  No personal data will be stored."><i class="fa fa-paper-plane"> Submit</i></button>
+                            <button id="print-button" onclick="print_results()" data-toggle="tooltip" data-placement="bottom" title="Print results."><i class="fa fa-print"></i></button>
                         </div>
                     </div>
                 </div>

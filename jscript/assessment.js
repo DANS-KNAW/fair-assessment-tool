@@ -16,6 +16,7 @@
             ['R', [2, 2, 2, 2]],
             ['Q', [10, 0, 0, 5]]
         ])
+        var number_fair_questions = get_number_of_fair_questions();
         var short_answers = new Map([
             <!-- Shortened answers to make downloaded data more readable -->
             ['yq2.3', 'Research support'],
@@ -31,8 +32,7 @@
             update();
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
             hide_intention_questions();
-            document.getElementById("logos-print").style.display = "none"
-            document.getElementById("print-advice").style.display = "none"
+            document.getElementById("score-and-guidance").style.display = "none"
             document.getElementById("introduction").style.display = "none"
             document.getElementById("texts").style.display = "none"
             document.getElementById("print-button").style.display = "none";
@@ -87,7 +87,7 @@
         }
 
         function checked(element) {
-            return document.getElementById(element).checked ? 1 : 0;
+            return (document.getElementById(element) !=null && document.getElementById(element).checked) ? 1 : 0;
         }
 
         function disable(elements) {
@@ -219,7 +219,7 @@
 
         /* ----------------------- Print --------------------- */
 
-        function print_page() {
+        function print_results() {
             document.getElementById("logos").style.display = "none"
             document.getElementById("icons").style.display = "none"
             document.getElementById("footer").style.display = "none"
@@ -228,10 +228,6 @@
             document.getElementById("image-a").style.display = "none"
             document.getElementById("image-i").style.display = "none"
             document.getElementById("image-r").style.display = "none"
-            document.getElementById("logos-print").style.display = "block"
-            add_score_text();
-            add_advice_texts();
-            document.getElementById("print-advice").style.display = "block"
             window.print();
             document.getElementById("logos").style.display = "block"
             document.getElementById("icons").style.display = "block"
@@ -241,13 +237,11 @@
             document.getElementById("image-a").style.display = "block"
             document.getElementById("image-i").style.display = "block"
             document.getElementById("image-r").style.display = "block"
-            document.getElementById("logos-print").style.display = "none"
-            document.getElementById("print-advice").style.display = "none"
             update();
         }
 
-        function add_advice_texts() {
-            let advices = "";
+        function get_guidance_texts() {
+            let guidance = "";
             let negative = get_negative_answers();
             for(let question_key of negative) {
                 let additional_text = "";
@@ -255,15 +249,14 @@
                 let basic_text = document.getElementById(question_key + "-default").innerHTML;
                 let additional = document.getElementById(question_key + "-additional");
                 if (additional) {additional_text = additional.innerHTML }
-                let advice = basic_text + additional_text;
-                advices += question + "\n" + advice;
+                let text = basic_text + additional_text;
+                guidance += question + "\n" + text;
             }
-            {$("#print-advice-contents").html(advices);}
-            return advices;
+            return guidance;
         }
 
         function add_score_text() {
-            $("#print-score-contents").html(get_score_text());
+            $("#score").html(get_score_text());
         }
 
         function get_score_text() {
@@ -274,12 +267,12 @@
         }
 
         function get_score() {
-            return 10 - get_negative_answers().length;
+            return number_fair_questions - get_negative_answers().length;
         }
 
         function update_print_letters(question) {
             if (question != null) {
-                let percent = get_score() * 10;
+                let percent = Math.floor(get_score() / number_fair_questions * 10) * 10;
                 for (let letter of letters) {
                     document.getElementById(("image-print-" + letter).toLowerCase()).src = "images/print/" + letter + "_" + percent + ".jpg"
                 }
@@ -440,6 +433,16 @@
             }
         }
 
+        function get_number_of_fair_questions() {
+            let number = 0;
+            for (let [letter, questions] of fields) {
+                if (letters.includes(letter)) {
+                    number += questions.length
+                }
+            }
+            return number;
+        }
+
         function show_domains() {
             let domains = get_answers_for_a_question("yq1", get_number_of_domain_answers())
             $("#show-domains").html(domains);
@@ -451,4 +454,23 @@
                 if (letter == "Y")
                     return questions[0]
             }
+        }
+
+
+        /* ------------------ Submit answers --------------- */
+
+        function submit() {
+            if (valid_input()) {
+                submit_page()
+            }
+        }
+
+        function show_results() {
+            document.getElementById("intro").style.display = "none";
+            document.getElementById("score-and-guidance").style.display = "block";
+            $("#score").html("Awareness score: " + get_score() + "/" + number_fair_questions);
+            $("#score-text").html(get_score_text());
+            if (get_score() < number_fair_questions) { $("#guidance").html(get_guidance_texts()); }
+            else { document.getElementById("guidance-texts").style.display = "none"; }
+            if (window.print) { document.getElementById("print-button").style.display = "block"; }
         }
