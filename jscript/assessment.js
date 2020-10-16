@@ -122,10 +122,6 @@
             document.getElementById(question + "-additional").style.display = "block";
         }
 
-        function show_advice_for_negative_answers() {
-            write_to_modal("Advice", add_advice_texts());
-        }
-
         function write_to_modal(title, contents) {
             $("#modal-title").html(title);
             $("#modal-body").html(contents);
@@ -338,6 +334,15 @@
             return answers;
         }
 
+        function get_answer(choice) {
+            if (short_answers.has(choice)) {
+                return short_answers.get(choice)
+            } else {
+                let answer = "l" + choice;
+                return document.getElementById(answer).textContent.replace(/,/g, " ").trim();
+            }
+        }
+
         function get_intention_answer_for_a_question(question, number_of_answers) {
             let intention = "";
             for (let j = 0; j < number_of_answers; j++) {
@@ -348,15 +353,6 @@
                 }
             }
             return intention;
-        }
-
-        function get_answer(choice) {
-            if (short_answers.has(choice)) {
-                return short_answers.get(choice)
-            } else {
-                let answer = "l" + choice;
-                return document.getElementById(answer).textContent.replace(/,/g, " ").trim();
-            }
         }
 
         /* ------------------ Submit answers --------------- */
@@ -377,6 +373,17 @@
             if (window.print) { document.getElementById("print-button").style.display = "block"; }
         }
 
+        function get_score() {
+            return number_fair_questions - get_negative_answers().length;
+        }
+
+        function get_score_text() {
+            let score = get_score();
+            if (score < 6) { return "Not sufficiently FAIR-Aware" }
+            else if (score < 8) { return "Moderately FAIR-Aware" }
+            else { return "Very FAIR-Aware" }
+        }
+
         function get_guidance_texts() {
             let guidance = "";
             let negative = get_negative_answers();
@@ -390,17 +397,6 @@
                 guidance += question + "\n" + text;
             }
             return guidance;
-        }
-
-        function get_score_text() {
-            let score = get_score();
-            if (score < 6) { return "Not sufficiently FAIR-Aware" }
-            else if (score < 8) { return "Moderately FAIR-Aware" }
-            else { return "Very FAIR-Aware" }
-        }
-
-        function get_score() {
-            return number_fair_questions - get_negative_answers().length;
         }
 
         function get_negative_answers() {

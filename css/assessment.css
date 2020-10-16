@@ -35,8 +35,6 @@
     #main-title {font-size: 40px; color: #2795c8;}
     #image-f, #image-a, #image-i, #image-r { padding-top: 10px; }
     #image-print-f, #image-print-a, #image-print-i, #image-print-r { width: 20%; heigth: 20%; }
-    #image-print-fairsfair { width: 25%; heigth: 25%; }
-    #image-print-dans { width: 20%; heigth: 20%; }
     #fairisfairteam { padding-left: 20px; }
     @media (max-width: 768px) {
         div.col-md-2 {padding-left: 30px;}
