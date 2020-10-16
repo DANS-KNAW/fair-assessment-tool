@@ -209,6 +209,15 @@
             }
         }
 
+        function update_print_letters(question) {
+            if (question != null) {
+                let percent = Math.floor(get_score() / number_fair_questions * 10) * 10;
+                for (let letter of letters) {
+                    document.getElementById(("image-print-" + letter).toLowerCase()).src = "images/print/" + letter + "_" + percent + ".jpg"
+                }
+            }
+        }
+
         function set_to_default_color(question) {
             if (question != null) {
                 // question -> question_key e.g. fq1 -> F-i-1-title
@@ -217,65 +226,18 @@
             }
         }
 
-        /* ----------------------- Print --------------------- */
+        /* ------------------ Domains --------------- */
 
-        function print_results() {
-            document.getElementById("logos").style.display = "none"
-            document.getElementById("icons").style.display = "none"
-            document.getElementById("footer").style.display = "none"
-            document.getElementById("for-administrators").style.display = "none"
-            document.getElementById("image-f").style.display = "none"
-            document.getElementById("image-a").style.display = "none"
-            document.getElementById("image-i").style.display = "none"
-            document.getElementById("image-r").style.display = "none"
-            window.print();
-            document.getElementById("logos").style.display = "block"
-            document.getElementById("icons").style.display = "block"
-            document.getElementById("footer").style.display = "block"
-            document.getElementById("for-administrators").style.display = "block"
-            document.getElementById("image-f").style.display = "block"
-            document.getElementById("image-a").style.display = "block"
-            document.getElementById("image-i").style.display = "block"
-            document.getElementById("image-r").style.display = "block"
-            update();
+        function show_domains() {
+            let domains = get_answers_for_a_question("yq1", get_number_of_domain_answers())
+            $("#show-domains").html(domains);
+            document.getElementById("Y-i-1-title").style.color = "#000000";
         }
 
-        function get_guidance_texts() {
-            let guidance = "";
-            let negative = get_negative_answers();
-            for(let question_key of negative) {
-                let additional_text = "";
-                let question = document.getElementById(question_key + "-title").textContent.bold();
-                let basic_text = document.getElementById(question_key + "-default").innerHTML;
-                let additional = document.getElementById(question_key + "-additional");
-                if (additional) {additional_text = additional.innerHTML }
-                let text = basic_text + additional_text;
-                guidance += question + "\n" + text;
-            }
-            return guidance;
-        }
-
-        function add_score_text() {
-            $("#score").html(get_score_text());
-        }
-
-        function get_score_text() {
-            let score = get_score();
-            if (score < 6) { return "Not sufficiently FAIR-Aware" }
-            else if (score < 8) { return "Moderately FAIR-Aware" }
-            else { return "Very FAIR-Aware" }
-        }
-
-        function get_score() {
-            return number_fair_questions - get_negative_answers().length;
-        }
-
-        function update_print_letters(question) {
-            if (question != null) {
-                let percent = Math.floor(get_score() / number_fair_questions * 10) * 10;
-                for (let letter of letters) {
-                    document.getElementById(("image-print-" + letter).toLowerCase()).src = "images/print/" + letter + "_" + percent + ".jpg"
-                }
+        function get_number_of_domain_answers() {
+            for (let [letter, questions] of fields) {
+                if (letter == "Y")
+                    return questions[0]
             }
         }
 
@@ -326,10 +288,6 @@
             return question == "qq1" || question == "qq2" ||question == "qq3";
         }
 
-        function not_answered_question(letter, key) {
-            return letter_text(letter) + document.getElementById(question_key).textContent;
-        }
-
         function intention_questions_answer(question) {
             let intention_questions = document.getElementsByName(question + "-i");
             for (let i = 0; i < 5; i++) {
@@ -338,18 +296,6 @@
                 }
             }
             return -1;
-        }
-
-        function letter_text(letter) {
-            switch(letter) {
-              case "Y": return "About you: ";
-              case "F": return "Findable: ";
-              case "A": return "Accessible: ";
-              case "I": return "Interoperable: ";
-              case "R": return "Reusable: ";
-              case "Q": return "Feedback: ";
-              default: return "";
-            }
         }
 
         /* ------------------ Retrieve answers --------------- */
@@ -404,6 +350,58 @@
             return intention;
         }
 
+        function get_answer(choice) {
+            if (short_answers.has(choice)) {
+                return short_answers.get(choice)
+            } else {
+                let answer = "l" + choice;
+                return document.getElementById(answer).textContent.replace(/,/g, " ").trim();
+            }
+        }
+
+        /* ------------------ Submit answers --------------- */
+
+        function submit() {
+            if (valid_input()) {
+                submit_page()
+            }
+        }
+
+        function show_results() {
+            document.getElementById("intro").style.display = "none";
+            document.getElementById("score-and-guidance").style.display = "block";
+            $("#score").html("Awareness score: " + get_score() + "/" + number_fair_questions);
+            $("#score-text").html(get_score_text());
+            if (get_score() < number_fair_questions) { $("#guidance").html(get_guidance_texts()); }
+            else { document.getElementById("guidance-texts").style.display = "none"; }
+            if (window.print) { document.getElementById("print-button").style.display = "block"; }
+        }
+
+        function get_guidance_texts() {
+            let guidance = "";
+            for(let question_key of negative) {
+                let additional_text = "";
+                let question = document.getElementById(question_key + "-title").textContent.bold();
+                let basic_text = document.getElementById(question_key + "-default").innerHTML;
+                let additional = document.getElementById(question_key + "-additional");
+                if (additional) {additional_text = additional.innerHTML }
+                let text = basic_text + additional_text;
+                guidance += question + "\n" + text;
+            }
+            return guidance;
+        }
+
+        function get_score_text() {
+            let score = get_score();
+            if (score < 6) { return "Not sufficiently FAIR-Aware" }
+            else if (score < 8) { return "Moderately FAIR-Aware" }
+            else { return "Very FAIR-Aware" }
+        }
+
+        function get_score() {
+            return number_fair_questions - get_negative_answers().length;
+        }
+
         function get_negative_answers() {
             let neg = []
             for (let [letter, questions] of fields) {
@@ -424,15 +422,6 @@
             return neg;
         }
 
-        function get_answer(choice) {
-            if (short_answers.has(choice)) {
-                return short_answers.get(choice)
-            } else {
-                let answer = "l" + choice;
-                return document.getElementById(answer).textContent.replace(/,/g, " ").trim();
-            }
-        }
-
         function get_number_of_fair_questions() {
             let number = 0;
             for (let [letter, questions] of fields) {
@@ -443,34 +432,25 @@
             return number;
         }
 
-        function show_domains() {
-            let domains = get_answers_for_a_question("yq1", get_number_of_domain_answers())
-            $("#show-domains").html(domains);
-            document.getElementById("Y-i-1-title").style.color = "#000000";
-        }
+        /* ----------------------- Print --------------------- */
 
-        function get_number_of_domain_answers() {
-            for (let [letter, questions] of fields) {
-                if (letter == "Y")
-                    return questions[0]
-            }
-        }
-
-
-        /* ------------------ Submit answers --------------- */
-
-        function submit() {
-            if (valid_input()) {
-                submit_page()
-            }
-        }
-
-        function show_results() {
-            document.getElementById("intro").style.display = "none";
-            document.getElementById("score-and-guidance").style.display = "block";
-            $("#score").html("Awareness score: " + get_score() + "/" + number_fair_questions);
-            $("#score-text").html(get_score_text());
-            if (get_score() < number_fair_questions) { $("#guidance").html(get_guidance_texts()); }
-            else { document.getElementById("guidance-texts").style.display = "none"; }
-            if (window.print) { document.getElementById("print-button").style.display = "block"; }
+        function print_results() {
+            document.getElementById("logos").style.display = "none"
+            document.getElementById("icons").style.display = "none"
+            document.getElementById("footer").style.display = "none"
+            document.getElementById("for-administrators").style.display = "none"
+            document.getElementById("image-f").style.display = "none"
+            document.getElementById("image-a").style.display = "none"
+            document.getElementById("image-i").style.display = "none"
+            document.getElementById("image-r").style.display = "none"
+            window.print();
+            document.getElementById("logos").style.display = "block"
+            document.getElementById("icons").style.display = "block"
+            document.getElementById("footer").style.display = "block"
+            document.getElementById("for-administrators").style.display = "block"
+            document.getElementById("image-f").style.display = "block"
+            document.getElementById("image-a").style.display = "block"
+            document.getElementById("image-i").style.display = "block"
+            document.getElementById("image-r").style.display = "block"
+            update();
         }
