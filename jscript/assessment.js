@@ -379,6 +379,7 @@
 
         function get_guidance_texts() {
             let guidance = "";
+            let negative = get_negative_answers();
             for(let question_key of negative) {
                 let additional_text = "";
                 let question = document.getElementById(question_key + "-title").textContent.bold();
@@ -411,7 +412,7 @@
                     for (let j = 0; j < number_of_answers; j++) {
                         let choice = question + "." + (j + 1).toString();
                         if (checked(choice)) {
-                            if (get_answer(choice) == "No") {
+                            if (get_answer(choice).toLowerCase() == "no") {
                                 question_key = letter + "-i-" + (i + 1).toString();
                                 neg.push(question_key)
                             }
