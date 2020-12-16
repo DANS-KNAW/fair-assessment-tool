@@ -213,6 +213,8 @@
             (for e.g. in their level of). When semantic vocabularies are included in the metadata, your data repository of choice may be
             able to publish the metadata in machine-interpretable format, thus greatly increasing their machine actionability and
             supporting the <a href="https://www.w3.org/standards/semanticweb" target="_blank">Semantic Web<i class="fa fa-external-link"></i></a>.</p>
+        <p>APIs (Application Programming Interface), a software intermediary that allows two applications to talk to each other,
+            also increases technical interoperability between different components.</p>
         <p>Examples of repositories or look-up services for semantic resources (the list is not exhaustive):</p>
         <ul>
             <li><a href="https://lov.linkeddata.es/dataset/lov" target="_blank">Linked Open Vocabularies (LOV)<i class="fa fa-external-link"></i></a></li>
@@ -249,7 +251,14 @@
             <li>Data versioning information
         </ul>
     </div>
-</div>
+    <button id="R-i-1-more" onclick="show_additional_text('R-i-1')" >Want to know more?</button>
+    <div id="R-i-1-additional">
+        <p>There are various ways through which provenance information may be included in a metadata record.
+            Some of the provenance properties (e.g., instrument, contributor) may be best represented using PIDs (such as DOIs for data, ORCIDs for researchers).
+            This way, humans and machines can retrieve more information about each of the properties by resolving the PIDs.</p>
+        <p>Alternatively, the provenance information can be given a linked provenance record expressed explicitly in, e.g., PROV-O or PAV or Vocabulary of Interlinked Datasets (VoID).
+            For further information on which provenance data is necessary for the research community of your research domain, contact your research support staff.</p>
+    </div></div>
 
 <div id="R-i-2-contents">
     <div id="R-i-2-default">
@@ -260,9 +269,10 @@
             linguistics: CLARIN CMDI) and well-established domain and discipline-specific repositories supporting these community
             endorsed metadata standards.</p>
         <p><u>Metadata registries</u><br>
-            Community-endorsed metadata standards are listed on metadata registries such as the
+            Community-endorsed metadata standards are listed in metadata registries such as the
             <a href="https://rd-alliance.github.io/metadata-directory/standards/" target="_blank">RDA<i class="fa fa-external-link"></i></a>
-            or <a href="https://www.dcc.ac.uk/guidance/standards/metadata" target="_blank">Digital Curation Centre<i class="fa fa-external-link"></i></a>.
+            or <a href="https://www.dcc.ac.uk/guidance/standards/metadata" target="_blank">Digital Curation Centre<i class="fa fa-external-link"></i></a>,
+            where you can find more information on these standards.
             Domain and discipline-specific repositories should therefore be the preferred choice to deposit your data.
             The Registry of Research data repositories re3data.org enables searching for a suitable data repository by
             <a href="https://www.re3data.org/browse/by-subject/" target="_blank">domain<i class="fa fa-external-link"></i></a>.
@@ -275,7 +285,7 @@
 
 <div id="R-i-3-contents">
     <div id="R-i-3-default">
-        <p>File formats refer to methods for encoding digital information. For example, CSV for tabular data, NetCDF for multidimensional
+        <p>File formats refer to methods for encoding digital information. If there is no open format available, then you may also use a proprietary format. For example, CSV for tabular data, NetCDF for multidimensional
             data and GeoTIFF for raster imagery.</p>
         <p>Data should be made available in a recommended file format that is accepted by the research community to enable data sharing and reuse,
             and by the repository to enable long-term preservation. Repositories normally have different recommended standard file formats based
