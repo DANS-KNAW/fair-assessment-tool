@@ -36,6 +36,7 @@
     #image-f, #image-a, #image-i, #image-r { padding-top: 10px; }
     #image-print-f, #image-print-a, #image-print-i, #image-print-r { width: 20%; heigth: 20%; }
     #fairisfairteam { padding-left: 20px; }
+    #show-summary a {color: #2795c8;}
     @media (max-width: 768px) {
         div.col-md-2 {padding-left: 30px;}
         div.col-md-10 {padding-left: 30px;}

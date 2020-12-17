@@ -366,12 +366,20 @@
 
         function show_results() {
             document.getElementById("intro").style.display = "none";
+            document.getElementById("contents").style.display = "none";
             document.getElementById("score-and-guidance").style.display = "block";
+            document.getElementById("summary-responses").style.display = "none";
             $("#score").html("Awareness score: " + get_score() + "/" + number_fair_questions);
             $("#score-text").html(get_score_text());
             if (get_score() < number_fair_questions) { $("#guidance").html(get_guidance_texts()); }
             else { document.getElementById("guidance-texts").style.display = "none"; }
             if (window.print) { document.getElementById("print-button").style.display = "block"; }
+        }
+
+        function show_responses() {
+            document.getElementById("summary-responses").style.display = "block";
+            document.getElementById("contents").style.display = "block";
+            document.getElementById("show-summary").style.display = "none";
         }
 
         function get_score() {
@@ -446,6 +454,7 @@
             document.getElementById("image-a").style.display = "none"
             document.getElementById("image-i").style.display = "none"
             document.getElementById("image-r").style.display = "none"
+            document.getElementById("show-summary").style.display = "none"
             window.print();
             document.getElementById("logos").style.display = "block"
             document.getElementById("icons").style.display = "block"

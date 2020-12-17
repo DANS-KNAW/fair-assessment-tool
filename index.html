@@ -70,7 +70,6 @@
                 </div>
             </div>
         </div>
-        <div class="pagebreak"></div>
 
         <!-- ============================================================ -->
         <!-- ======== SCORE AND GUIDANCE TEXTS AFTER SUBMITTING  ======== -->
@@ -108,8 +107,13 @@
                             <div id="guidance"></div><br>
                         </div>
                     </div>
-                    <div class="pagebreak"></div>
-                    <div class="row">
+                    <div id="show-summary" class="row">
+                        <div class="col-md-12">
+                            <h3>If you would like to view a summary of your responses, click <a onclick="show_responses()">here</a></h3>
+                        </div>
+                    </div>
+                    <div id="summary-responses" class="row">
+                        <div class="pagebreak"></div>
                         <div class="col-md-12">
                             <h2>Summary of your responses:</h2>
                         </div>
@@ -121,558 +125,560 @@
         <!-- =========================== -->
         <!-- ======== ABOUT YOU ======== -->
         <!-- =========================== -->
-        <div class="context">
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
-                    <h3>About you <i class="fa fa-user-circle" aria-hidden="true"></i></h3>
+        <div id="contents">
+            <div class="context">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+                        <h3>About you <i class="fa fa-user-circle" aria-hidden="true"></i></h3>
 
-                    <div class="row">
-                       <div class="col-md-3" id="Y-i-1-title">
-                            <p>Which research domain do you work in?
-                                <a href="#fhelp" data-toggle="modal" onclick="show_modal('Y-i-1')">
-                                    <span class="glyphicon glyphicon-info-sign" ></span>
-                                </a>
-                            </p>
-                       </div>
-                       <div class="col-md-9">
-                           <div id="yq1">
-                               <div class="row">
-                                   <div class="col-md-2">
-                                       <div id="domain" html-file="domain.html"></div>
-                                       <script>includeHTML("domain");</script>
-                                   </div>
-                                   <div class="col-md-10">
-                                       <div id="show-domains"></div>
+                        <div class="row">
+                           <div class="col-md-3" id="Y-i-1-title">
+                                <p>Which research domain do you work in?
+                                    <a href="#fhelp" data-toggle="modal" onclick="show_modal('Y-i-1')">
+                                        <span class="glyphicon glyphicon-info-sign" ></span>
+                                    </a>
+                                </p>
+                           </div>
+                           <div class="col-md-9">
+                               <div id="yq1">
+                                   <div class="row">
+                                       <div class="col-md-2">
+                                           <div id="domain" html-file="domain.html"></div>
+                                           <script>includeHTML("domain");</script>
+                                       </div>
+                                       <div class="col-md-10">
+                                           <div id="show-domains"></div>
+                                       </div>
                                    </div>
                                </div>
                            </div>
-                       </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-3" id="Y-i-2-title">
-                            <p>Which of the following describes your role? Please select all that apply. </p>
                         </div>
-                        <div class="col-md-9">
-                            <div id="yq2">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <label id="lyq2.1"><input type="checkbox" id="yq2.1" onclick="update_Y('yq2')"> Researcher</label><br>
-                                        <label id="lyq2.2"><input type="checkbox" id="yq2.2" onclick="update_Y('yq2')"> Policy maker</label><br>
-                                        <label id="lyq2.3"><input type="checkbox" id="yq2.3" onclick="update_Y('yq2')"> Research support (e.g. data steward, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curator, data manager, librarian, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information technology professional)</label><br>
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-6">
-                                        <label id="lyq2.4"><input type="checkbox" id="yq2.4" onclick="update_Y('yq2')"> Funder</label><br>
-                                        <label id="lyq2.5"><input type="checkbox" id="yq2.5" onclick="update_Y('yq2')"> Publisher</label><br>
-                                        <label id="lyq2.6"><input type="checkbox" id="yq2.6" onclick="update_Y('yq2')"> Other</label><br>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-3" id="Y-i-2-title">
+                                <p>Which of the following describes your role? Please select all that apply. </p>
+                            </div>
+                            <div class="col-md-9">
+                                <div id="yq2">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label id="lyq2.1"><input type="checkbox" id="yq2.1" onclick="update_Y('yq2')"> Researcher</label><br>
+                                            <label id="lyq2.2"><input type="checkbox" id="yq2.2" onclick="update_Y('yq2')"> Policy maker</label><br>
+                                            <label id="lyq2.3"><input type="checkbox" id="yq2.3" onclick="update_Y('yq2')"> Research support (e.g. data steward, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curator, data manager, librarian, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information technology professional)</label><br>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-6">
+                                            <label id="lyq2.4"><input type="checkbox" id="yq2.4" onclick="update_Y('yq2')"> Funder</label><br>
+                                            <label id="lyq2.5"><input type="checkbox" id="yq2.5" onclick="update_Y('yq2')"> Publisher</label><br>
+                                            <label id="lyq2.6"><input type="checkbox" id="yq2.6" onclick="update_Y('yq2')"> Other</label><br>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
+                        <br>
 
-                    <div class="row">
-                        <div class="col-md-3" id="Y-i-3-title">
-                            <p>Which of the following types of organisations best describe your employer? Please select all that apply.</p>
-                        </div>
-                        <div class="col-md-9">
-                            <div id="yq3">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <label id="lyq3.1"><input type="checkbox" id="yq3.1" onclick="update_Y('yq3')"> Research Infrastructure/eInfrastructure &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(e.g. data repository, service provider, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;library)</label><br>
-                                        <label id="lyq3.2"><input type="checkbox" id="yq3.2" onclick="update_Y('yq3')"> University</label><br>
-                                        <label id="lyq3.3"><input type="checkbox" id="yq3.3" onclick="update_Y('yq3')"> Research Performing Organisation</label><br>
-                                        <label id="lyq3.4"><input type="checkbox" id="yq3.4" onclick="update_Y('yq3')"> Government</label><br>
-                                        <label id="lyq3.5"><input type="checkbox" id="yq3.5" onclick="update_Y('yq3')"> eInfrastructure (e.g. repository or &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scientific data provider)</label><br>
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-6">
-                                        <label id="lyq3.6"><input type="checkbox" id="yq3.6" onclick="update_Y('yq3')"> Funding Body</label><br>
-                                        <label id="lyq3.7"><input type="checkbox" id="yq3.7" onclick="update_Y('yq3')"> Publisher</label><br>
-                                        <label id="lyq3.8"><input type="checkbox" id="yq3.8" onclick="update_Y('yq3')"> Industry</label><br>
-                                        <label id="lyq3.9"><input type="checkbox" id="yq3.9" onclick="update_Y('yq3')"> Other</label><br>
+                        <div class="row">
+                            <div class="col-md-3" id="Y-i-3-title">
+                                <p>Which of the following types of organisations best describe your employer? Please select all that apply.</p>
+                            </div>
+                            <div class="col-md-9">
+                                <div id="yq3">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label id="lyq3.1"><input type="checkbox" id="yq3.1" onclick="update_Y('yq3')"> Research Infrastructure/eInfrastructure &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(e.g. data repository, service provider, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;library)</label><br>
+                                            <label id="lyq3.2"><input type="checkbox" id="yq3.2" onclick="update_Y('yq3')"> University</label><br>
+                                            <label id="lyq3.3"><input type="checkbox" id="yq3.3" onclick="update_Y('yq3')"> Research Performing Organisation</label><br>
+                                            <label id="lyq3.4"><input type="checkbox" id="yq3.4" onclick="update_Y('yq3')"> Government</label><br>
+                                            <label id="lyq3.5"><input type="checkbox" id="yq3.5" onclick="update_Y('yq3')"> eInfrastructure (e.g. repository or &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scientific data provider)</label><br>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-6">
+                                            <label id="lyq3.6"><input type="checkbox" id="yq3.6" onclick="update_Y('yq3')"> Funding Body</label><br>
+                                            <label id="lyq3.7"><input type="checkbox" id="yq3.7" onclick="update_Y('yq3')"> Publisher</label><br>
+                                            <label id="lyq3.8"><input type="checkbox" id="yq3.8" onclick="update_Y('yq3')"> Industry</label><br>
+                                            <label id="lyq3.9"><input type="checkbox" id="yq3.9" onclick="update_Y('yq3')"> Other</label><br>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-        <br>
-
-        <div class="pagebreak"></div>
-
-        <div class="panel-group">
-
-            <!-- ========================== -->
-            <!-- ======== FINDABLE ======== -->
-            <!-- ========================== -->
-            <div class="row">
-                <div class="col-md-2">
-                    <br><br><br>
-                    <img id="image-f" src="images/F_100.jpg" alt="F">
-                </div>
-                <div class="col-md-10">
-                    <h3>FAIR questions <i class="fa fa-eye" aria-hidden="true"></i><i class="fa fa-eye" aria-hidden="true"></i></h3>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <div id="F-i-title">FINDABLE</div>
-                            </h4>
-                        </div>
-                        <div class="panel-body">
-                            <form>
-                                <div class="form-group row">
-                                    <label for="fq1" class="col-sm-6 col-form-label" id="F-i-1-title">
-                                        1. Are you aware that a dataset should be assigned a globally unique and persistent identifier when deposited with a data repository?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-1')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-                                    <div class="col-sm-1" id="fq1">
-                                        <label class="radio-inline" id="lfq1.1"><input type="radio" name="fq1" id="fq1.1" value="1" onclick="update_F('fq1')"> Yes</label><br>
-                                        <label class="radio-inline" id="lfq1.2"><input type="radio" name="fq1" id="fq1.2" value="0" onclick="update_F('fq1')"> No</label><br>
-                                    </div>
-                                    <div class="col-sm-5 col-xs-12 intention"  id="fq1-i">
-                                        To what degree do you intend to comply with this?<br>
-                                        Very likely&nbsp;&nbsp;
-                                        <label class="radio-inline" id="lfq1.1-i"><input type="radio" name="fq1-i" id="fq1.1-i" value="5" onclick="update_intention('fq1')">5</label>
-                                        <label class="radio-inline" id="lfq1.2-i"><input type="radio" name="fq1-i" id="fq1.2-i" value="4" onclick="update_intention('fq1')">4</label>
-                                        <label class="radio-inline" id="lfq1.3-i"><input type="radio" name="fq1-i" id="fq1.3-i" value="3" onclick="update_intention('fq1')">3</label>
-                                        <label class="radio-inline" id="lfq1.4-i"><input type="radio" name="fq1-i" id="fq1.4-i" value="2" onclick="update_intention('fq1')">2</label>
-                                        <label class="radio-inline" id="lfq1.5-i"><input type="radio" name="fq1-i" id="fq1.5-i" value="1" onclick="update_intention('fq1')">1</label>
-                                        &nbsp;&nbsp;Very unlikely<br>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="fq2" class="col-sm-6 col-form-label" id="F-i-2-title">
-                                        2. Are you aware that when you deposit a dataset with a repository, you will need to provide some details (known as discovery metadata)
-                                        in order to make the data findable, understandable and reusable to others?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-2')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-                                    <div class="col-sm-1" id="fq2">
-                                        <label class="radio-inline" id="lfq2.1"><input type="radio" name="fq2" id="fq2.1" value="1" onclick="update_F('fq2')"> Yes</label><br>
-                                        <label class="radio-inline" id="lfq2.2"><input type="radio" name="fq2" id="fq2.2" value="0" onclick="update_F('fq2')" > No</label><br>
-                                    </div>
-                                    <div class="col-sm-5 col-xs-12 intention"  id="fq2-i">
-                                        To what degree do you intend to comply with this?<br>
-                                        Very likely&nbsp;&nbsp;
-                                        <label class="radio-inline" id="lfq2.1-i"><input type="radio" name="fq2-i" id="fq2.1-i" value="5" onclick="update_intention('fq2')">5</label>
-                                        <label class="radio-inline" id="lfq2.2-i"><input type="radio" name="fq2-i" id="fq2.2-i" value="4" onclick="update_intention('fq2')">4</label>
-                                        <label class="radio-inline" id="lfq2.3-i"><input type="radio" name="fq2-i" id="fq2.3-i" value="3" onclick="update_intention('fq2')">3</label>
-                                        <label class="radio-inline" id="lfq2.4-i"><input type="radio" name="fq2-i" id="fq2.4-i" value="2" onclick="update_intention('fq2')">2</label>
-                                        <label class="radio-inline" id="lfq2.5-i"><input type="radio" name="fq2-i" id="fq2.5-i" value="1" onclick="update_intention('fq2')">1</label>
-                                        &nbsp;&nbsp;Very unlikely<br>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="fq3" class="col-sm-6 col-form-label" id="F-i-3-title">
-                                        3. Are you aware that the repository providing access to your dataset should make the metadata
-                                        describing your datasets available in a format readable by machines as well as humans?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-3')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-                                    <div class="col-sm-1" id="fq3">
-                                        <label class="radio-inline" id="lfq3.1"><input type="radio" name="fq3" id="fq3.1" value=1" onclick="update_F('fq3')"> Yes</label><br>
-                                        <label class="radio-inline" id="lfq3.2"><input type="radio" name="fq3" id="fq3.2" value="0" onclick="update_F('fq3')"> No</label><br>
-                                    </div>
-                                    <div class="col-sm-5 col-xs-12 intention"  id="fq3-i">
-                                        To what degree do you intend to comply with this?<br>
-                                        Very likely&nbsp;&nbsp;
-                                        <label class="radio-inline" id="lfq3.1-i"><input type="radio" name="fq3-i" id="fq3.1-i" value="5" onclick="update_intention('fq3')">5</label>
-                                        <label class="radio-inline" id="lfq3.2-i"><input type="radio" name="fq3-i" id="fq3.2-i" value="4" onclick="update_intention('fq3')">4</label>
-                                        <label class="radio-inline" id="lfq3.3-i"><input type="radio" name="fq3-i" id="fq3.3-i" value="3" onclick="update_intention('fq3')">3</label>
-                                        <label class="radio-inline" id="lfq3.4-i"><input type="radio" name="fq3-i" id="fq3.4-i" value="2" onclick="update_intention('fq3')">2</label>
-                                        <label class="radio-inline" id="lfq3.5-i"><input type="radio" name="fq3-i" id="fq3.5-i" value="1" onclick="update_intention('fq3')">1</label>
-                                        &nbsp;&nbsp;Very unlikely<br>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>
+            <br>
+
             <div class="pagebreak"></div>
 
-            <!-- ============================ -->
-            <!-- ======== ACCESSIBLE ======== -->
-            <!-- ============================ -->
-            <div class="row">
-                <div class="col-md-2">
-                    <img id="image-a" src="images/A_100.jpg" alt="A">
-                </div>
-                <div class="col-md-10">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <div id="A-i-title">ACCESSIBLE</div>
-                            </h4>
-                        </div>
-                        <div class="panel-body">
-                            <form>
-                                <div class="form-group row">
-                                    <label for="aq1" class="col-sm-6 col-form-label" id="A-i-1-title">
-                                        4. Are you aware that access to your dataset may need to be controlled and that metadata
-                                        should include licence information under which the data can be reused?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-1')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-                                    <div class="col-sm-1" id="aq1">
-                                        <label class="radio-inline" id="laq1.1"><input type="radio" name="aq1" id="aq1.1" value="1" onclick="update_A('aq1')"> Yes</label><br>
-                                        <label class="radio-inline" id="laq1.2"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A('aq1')"> No</label><br>
+            <div class="panel-group">
+
+                <!-- ========================== -->
+                <!-- ======== FINDABLE ======== -->
+                <!-- ========================== -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <br><br><br>
+                        <img id="image-f" src="images/F_100.jpg" alt="F">
+                    </div>
+                    <div class="col-md-10">
+                        <h3>FAIR questions <i class="fa fa-eye" aria-hidden="true"></i><i class="fa fa-eye" aria-hidden="true"></i></h3>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div id="F-i-title">FINDABLE</div>
+                                </h4>
+                            </div>
+                            <div class="panel-body">
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="fq1" class="col-sm-6 col-form-label" id="F-i-1-title">
+                                            1. Are you aware that a dataset should be assigned a globally unique and persistent identifier when deposited with a data repository?
+                                            <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-1')">
+                                                <span class="glyphicon glyphicon-info-sign" ></span>
+                                            </a>
+                                        </label>
+                                        <div class="col-sm-1" id="fq1">
+                                            <label class="radio-inline" id="lfq1.1"><input type="radio" name="fq1" id="fq1.1" value="1" onclick="update_F('fq1')"> Yes</label><br>
+                                            <label class="radio-inline" id="lfq1.2"><input type="radio" name="fq1" id="fq1.2" value="0" onclick="update_F('fq1')"> No</label><br>
+                                        </div>
+                                        <div class="col-sm-5 col-xs-12 intention"  id="fq1-i">
+                                            To what degree do you intend to comply with this?<br>
+                                            Very likely&nbsp;&nbsp;
+                                            <label class="radio-inline" id="lfq1.1-i"><input type="radio" name="fq1-i" id="fq1.1-i" value="5" onclick="update_intention('fq1')">5</label>
+                                            <label class="radio-inline" id="lfq1.2-i"><input type="radio" name="fq1-i" id="fq1.2-i" value="4" onclick="update_intention('fq1')">4</label>
+                                            <label class="radio-inline" id="lfq1.3-i"><input type="radio" name="fq1-i" id="fq1.3-i" value="3" onclick="update_intention('fq1')">3</label>
+                                            <label class="radio-inline" id="lfq1.4-i"><input type="radio" name="fq1-i" id="fq1.4-i" value="2" onclick="update_intention('fq1')">2</label>
+                                            <label class="radio-inline" id="lfq1.5-i"><input type="radio" name="fq1-i" id="fq1.5-i" value="1" onclick="update_intention('fq1')">1</label>
+                                            &nbsp;&nbsp;Very unlikely<br>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-5 col-xs-12 intention"  id="aq1-i">
-                                        To what degree do you intend to comply with this?<br>
-                                        Very likely&nbsp;&nbsp;
-                                        <label class="radio-inline" id="laq1.1-i"><input type="radio" name="aq1-i" id="aq1.1-i" value="5" onclick="update_intention('aq1')">5</label>
-                                        <label class="radio-inline" id="laq1.2-i"><input type="radio" name="aq1-i" id="aq1.2-i" value="4" onclick="update_intention('aq1')">4</label>
-                                        <label class="radio-inline" id="laq1.3-i"><input type="radio" name="aq1-i" id="aq1.3-i" value="3" onclick="update_intention('aq1')">3</label>
-                                        <label class="radio-inline" id="laq1.4-i"><input type="radio" name="aq1-i" id="aq1.4-i" value="2" onclick="update_intention('aq1')">2</label>
-                                        <label class="radio-inline" id="laq1.5-i"><input type="radio" name="aq1-i" id="aq1.5-i" value="1" onclick="update_intention('aq1')">1</label>
-                                        &nbsp;&nbsp;Very unlikely<br>
+                                    <div class="form-group row">
+                                        <label for="fq2" class="col-sm-6 col-form-label" id="F-i-2-title">
+                                            2. Are you aware that when you deposit a dataset with a repository, you will need to provide some details (known as discovery metadata)
+                                            in order to make the data findable, understandable and reusable to others?
+                                            <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-2')">
+                                                <span class="glyphicon glyphicon-info-sign" ></span>
+                                            </a>
+                                        </label>
+                                        <div class="col-sm-1" id="fq2">
+                                            <label class="radio-inline" id="lfq2.1"><input type="radio" name="fq2" id="fq2.1" value="1" onclick="update_F('fq2')"> Yes</label><br>
+                                            <label class="radio-inline" id="lfq2.2"><input type="radio" name="fq2" id="fq2.2" value="0" onclick="update_F('fq2')" > No</label><br>
+                                        </div>
+                                        <div class="col-sm-5 col-xs-12 intention"  id="fq2-i">
+                                            To what degree do you intend to comply with this?<br>
+                                            Very likely&nbsp;&nbsp;
+                                            <label class="radio-inline" id="lfq2.1-i"><input type="radio" name="fq2-i" id="fq2.1-i" value="5" onclick="update_intention('fq2')">5</label>
+                                            <label class="radio-inline" id="lfq2.2-i"><input type="radio" name="fq2-i" id="fq2.2-i" value="4" onclick="update_intention('fq2')">4</label>
+                                            <label class="radio-inline" id="lfq2.3-i"><input type="radio" name="fq2-i" id="fq2.3-i" value="3" onclick="update_intention('fq2')">3</label>
+                                            <label class="radio-inline" id="lfq2.4-i"><input type="radio" name="fq2-i" id="fq2.4-i" value="2" onclick="update_intention('fq2')">2</label>
+                                            <label class="radio-inline" id="lfq2.5-i"><input type="radio" name="fq2-i" id="fq2.5-i" value="1" onclick="update_intention('fq2')">1</label>
+                                            &nbsp;&nbsp;Very unlikely<br>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="aq2" class="col-sm-6 col-form-label" id="A-i-2-title">
-                                        5. Are you aware that metadata should remain available over time, even if the data is no longer accessible?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-2')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-                                    <div class="col-sm-1" id="aq2">
-                                        <label class="radio-inline" id="laq2.1"><input type="radio" name="aq2" id="aq2.1" value="1" onclick="update_A('aq2')"> Yes</label><br>
-                                        <label class="radio-inline" id="laq2.2"><input type="radio" name="aq2" id="aq2.2" value="0" onclick="update_A('aq2')" > No</label><br>
+                                    <div class="form-group row">
+                                        <label for="fq3" class="col-sm-6 col-form-label" id="F-i-3-title">
+                                            3. Are you aware that the repository providing access to your dataset should make the metadata
+                                            describing your datasets available in a format readable by machines as well as humans?
+                                            <a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-3')">
+                                                <span class="glyphicon glyphicon-info-sign" ></span>
+                                            </a>
+                                        </label>
+                                        <div class="col-sm-1" id="fq3">
+                                            <label class="radio-inline" id="lfq3.1"><input type="radio" name="fq3" id="fq3.1" value=1" onclick="update_F('fq3')"> Yes</label><br>
+                                            <label class="radio-inline" id="lfq3.2"><input type="radio" name="fq3" id="fq3.2" value="0" onclick="update_F('fq3')"> No</label><br>
+                                        </div>
+                                        <div class="col-sm-5 col-xs-12 intention"  id="fq3-i">
+                                            To what degree do you intend to comply with this?<br>
+                                            Very likely&nbsp;&nbsp;
+                                            <label class="radio-inline" id="lfq3.1-i"><input type="radio" name="fq3-i" id="fq3.1-i" value="5" onclick="update_intention('fq3')">5</label>
+                                            <label class="radio-inline" id="lfq3.2-i"><input type="radio" name="fq3-i" id="fq3.2-i" value="4" onclick="update_intention('fq3')">4</label>
+                                            <label class="radio-inline" id="lfq3.3-i"><input type="radio" name="fq3-i" id="fq3.3-i" value="3" onclick="update_intention('fq3')">3</label>
+                                            <label class="radio-inline" id="lfq3.4-i"><input type="radio" name="fq3-i" id="fq3.4-i" value="2" onclick="update_intention('fq3')">2</label>
+                                            <label class="radio-inline" id="lfq3.5-i"><input type="radio" name="fq3-i" id="fq3.5-i" value="1" onclick="update_intention('fq3')">1</label>
+                                            &nbsp;&nbsp;Very unlikely<br>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-5 col-xs-12 intention"  id="aq2-i">
-                                        To what degree do you intend to comply with this?<br>
-                                        Very likely&nbsp;&nbsp;
-                                        <label class="radio-inline" id="laq2.1-i"><input type="radio" name="aq2-i" id="aq2.1-i" value="5" onclick="update_intention('aq2')">5</label>
-                                        <label class="radio-inline" id="laq2.2-i"><input type="radio" name="aq2-i" id="aq2.2-i" value="4" onclick="update_intention('aq2')">4</label>
-                                        <label class="radio-inline" id="laq2.3-i"><input type="radio" name="aq2-i" id="aq2.3-i" value="3" onclick="update_intention('aq2')">3</label>
-                                        <label class="radio-inline" id="laq2.4-i"><input type="radio" name="aq2-i" id="aq2.4-i" value="2" onclick="update_intention('aq2')">2</label>
-                                        <label class="radio-inline" id="laq2.5-i"><input type="radio" name="aq2-i" id="aq2.5-i" value="1" onclick="update_intention('aq2')">1</label>
-                                        &nbsp;&nbsp;Very unlikely<br>
-                                    </div>
-                                </div>
-                                <br><br><br><br>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="pagebreak"></div>
 
-            <!-- =============================== -->
-            <!-- ======== INTEROPERABLE ======== -->
-            <!-- =============================== -->
-            <div class="row">
-                <div class="col-md-2">
-                    <img id="image-i" src="images/I_100.jpg" alt="I">
-                </div>
-                <div class="col-md-10">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <div id="I-i-title">INTEROPERABLE</div>
-                            </h4>
-                        </div>
-                        <div class="panel-body">
-                            <form>
-                               <div class="form-group row">
-                                    <label for="iq1" class="col-sm-6 col-form-label" id="I-i-1-title">
-                                        6. Are you aware that the metadata describing your datasets should use  controlled vocabularies?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-                                    <div class="col-sm-1" id="iq1">
-                                        <label class="radio-inline" id="liq1.1"><input type="radio" name="iq1" id="iq1.1" value="1" onclick="update_I('iq1')"> Yes</label><br>
-                                        <label class="radio-inline" id="liq1.2"><input type="radio" name="iq1" id="iq1.2" value="0" onclick="update_I('iq1')" > No</label><br>
+                <!-- ============================ -->
+                <!-- ======== ACCESSIBLE ======== -->
+                <!-- ============================ -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <img id="image-a" src="images/A_100.jpg" alt="A">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div id="A-i-title">ACCESSIBLE</div>
+                                </h4>
+                            </div>
+                            <div class="panel-body">
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="aq1" class="col-sm-6 col-form-label" id="A-i-1-title">
+                                            4. Are you aware that access to your dataset may need to be controlled and that metadata
+                                            should include licence information under which the data can be reused?
+                                            <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-1')">
+                                                <span class="glyphicon glyphicon-info-sign" ></span>
+                                            </a>
+                                        </label>
+                                        <div class="col-sm-1" id="aq1">
+                                            <label class="radio-inline" id="laq1.1"><input type="radio" name="aq1" id="aq1.1" value="1" onclick="update_A('aq1')"> Yes</label><br>
+                                            <label class="radio-inline" id="laq1.2"><input type="radio" name="aq1" id="aq1.2" value="0" onclick="update_A('aq1')"> No</label><br>
+                                        </div>
+                                        <div class="col-sm-5 col-xs-12 intention"  id="aq1-i">
+                                            To what degree do you intend to comply with this?<br>
+                                            Very likely&nbsp;&nbsp;
+                                            <label class="radio-inline" id="laq1.1-i"><input type="radio" name="aq1-i" id="aq1.1-i" value="5" onclick="update_intention('aq1')">5</label>
+                                            <label class="radio-inline" id="laq1.2-i"><input type="radio" name="aq1-i" id="aq1.2-i" value="4" onclick="update_intention('aq1')">4</label>
+                                            <label class="radio-inline" id="laq1.3-i"><input type="radio" name="aq1-i" id="aq1.3-i" value="3" onclick="update_intention('aq1')">3</label>
+                                            <label class="radio-inline" id="laq1.4-i"><input type="radio" name="aq1-i" id="aq1.4-i" value="2" onclick="update_intention('aq1')">2</label>
+                                            <label class="radio-inline" id="laq1.5-i"><input type="radio" name="aq1-i" id="aq1.5-i" value="1" onclick="update_intention('aq1')">1</label>
+                                            &nbsp;&nbsp;Very unlikely<br>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-5 col-xs-12 intention"  id="iq1-i">
-                                        To what degree do you intend to comply with this?<br>
-                                        Very likely&nbsp;&nbsp;
-                                        <label class="radio-inline" id="liq1.1-i"><input type="radio" name="iq1-i" id="iq1.1-i" value="5" onclick="update_intention('iq1')">5</label>
-                                        <label class="radio-inline" id="liq1.2-i"><input type="radio" name="iq1-i" id="iq1.2-i" value="4" onclick="update_intention('iq1')">4</label>
-                                        <label class="radio-inline" id="liq1.3-i"><input type="radio" name="iq1-i" id="iq1.3-i" value="3" onclick="update_intention('iq1')">3</label>
-                                        <label class="radio-inline" id="liq1.4-i"><input type="radio" name="iq1-i" id="iq1.4-i" value="2" onclick="update_intention('iq1')">2</label>
-                                        <label class="radio-inline" id="liq1.5-i"><input type="radio" name="iq1-i" id="iq1.5-i" value="1" onclick="update_intention('iq1')">1</label>
-                                        &nbsp;&nbsp;Very unlikely<br>
+                                    <div class="form-group row">
+                                        <label for="aq2" class="col-sm-6 col-form-label" id="A-i-2-title">
+                                            5. Are you aware that metadata should remain available over time, even if the data is no longer accessible?
+                                            <a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-2')">
+                                                <span class="glyphicon glyphicon-info-sign" ></span>
+                                            </a>
+                                        </label>
+                                        <div class="col-sm-1" id="aq2">
+                                            <label class="radio-inline" id="laq2.1"><input type="radio" name="aq2" id="aq2.1" value="1" onclick="update_A('aq2')"> Yes</label><br>
+                                            <label class="radio-inline" id="laq2.2"><input type="radio" name="aq2" id="aq2.2" value="0" onclick="update_A('aq2')" > No</label><br>
+                                        </div>
+                                        <div class="col-sm-5 col-xs-12 intention"  id="aq2-i">
+                                            To what degree do you intend to comply with this?<br>
+                                            Very likely&nbsp;&nbsp;
+                                            <label class="radio-inline" id="laq2.1-i"><input type="radio" name="aq2-i" id="aq2.1-i" value="5" onclick="update_intention('aq2')">5</label>
+                                            <label class="radio-inline" id="laq2.2-i"><input type="radio" name="aq2-i" id="aq2.2-i" value="4" onclick="update_intention('aq2')">4</label>
+                                            <label class="radio-inline" id="laq2.3-i"><input type="radio" name="aq2-i" id="aq2.3-i" value="3" onclick="update_intention('aq2')">3</label>
+                                            <label class="radio-inline" id="laq2.4-i"><input type="radio" name="aq2-i" id="aq2.4-i" value="2" onclick="update_intention('aq2')">2</label>
+                                            <label class="radio-inline" id="laq2.5-i"><input type="radio" name="aq2-i" id="aq2.5-i" value="1" onclick="update_intention('aq2')">1</label>
+                                            &nbsp;&nbsp;Very unlikely<br>
+                                        </div>
                                     </div>
-                               </div>
-                                <br><br><br><br><br><br><br><br>
-                            </form>
+                                    <br><br><br><br>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="pagebreak"></div>
 
-            <!-- ========================== -->
-            <!-- ======== REUSABLE ======== -->
-            <!-- ========================== -->
-            <div class="row">
-                <div class="col-md-2">
-                    <br>
-                    <img id="image-r" src="images/R_100.jpg" alt="R">
-                </div>
-                <div class="col-md-10">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <div id="R-i-title">REUSABLE</div>
-                            </h4>
-                        </div>
-                        <div class="panel-body">
-                            <form>
-                                <div class="form-group row">
-                                    <label for="rq1" class="col-sm-6 col-form-label" id="R-i-1-title">
-                                        7. Are you aware that provenance information about the collection and/or generation of data should be included in the metadata?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-                                    <div class="col-sm-1" id="rq1">
-                                        <label class="radio-inline" id="lrq1.1"><input type="radio" name="rq1" id="rq1.1" value="1" onclick="update_R('rq1')"> Yes</label><br>
-                                        <label class="radio-inline" id="lrq1.2"><input type="radio" name="rq1" id="rq1.2" value="0" onclick="update_R('rq1')"> No</label><br>
-                                    </div>
-                                   <div class="col-sm-5 col-xs-12 intention"  id="rq1-i">
-                                        To what degree do you intend to comply with this?<br>
-                                        Very likely&nbsp;&nbsp;
-                                        <label class="radio-inline" id="lrq1.1-i"><input type="radio" name="rq1-i" id="rq1.1-i" value="5" onclick="update_intention('rq1')">5</label>
-                                        <label class="radio-inline" id="lrq1.2-i"><input type="radio" name="rq1-i" id="rq1.2-i" value="4" onclick="update_intention('rq1')">4</label>
-                                        <label class="radio-inline" id="lrq1.3-i"><input type="radio" name="rq1-i" id="rq1.3-i" value="3" onclick="update_intention('rq1')">3</label>
-                                        <label class="radio-inline" id="lrq1.4-i"><input type="radio" name="rq1-i" id="rq1.4-i" value="2" onclick="update_intention('rq1')">2</label>
-                                        <label class="radio-inline" id="lrq1.5-i"><input type="radio" name="rq1-i" id="rq1.5-i" value="1" onclick="update_intention('rq1')">1</label>
-                                        &nbsp;&nbsp;Very unlikely<br>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="rq2" class="col-sm-6 col-form-label" id="R-i-2-title">
-                                        8. Are you aware that metadata describing your data should follow the specifications of a community-endorsed standard?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-2')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-                                    <div class="col-sm-1" id="rq2">
-                                        <label class="radio-inline" id="lrq2.1"><input type="radio" name="rq2" id="rq2.1" value="1" onclick="update_R('rq2')"> Yes</label><br>
-                                        <label class="radio-inline" id="lrq2.2"><input type="radio" name="rq2" id="rq2.2" value="0" onclick="update_R('rq2')"> No</label><br>
-                                    </div>
-                                    <div class="col-sm-5 col-xs-12 intention"  id="rq2-i">
-                                        To what degree do you intend to comply with this?<br>
-                                        Very likely&nbsp;&nbsp;
-                                        <label class="radio-inline" id="lrq2.1-i"><input type="radio" name="rq2-i" id="rq2.1-i" value="5" onclick="update_intention('rq2')">5</label>
-                                        <label class="radio-inline" id="lrq2.2-i"><input type="radio" name="rq2-i" id="rq2.2-i" value="4" onclick="update_intention('rq2')">4</label>
-                                        <label class="radio-inline" id="lrq2.3-i"><input type="radio" name="rq2-i" id="rq2.3-i" value="3" onclick="update_intention('rq2')">3</label>
-                                        <label class="radio-inline" id="lrq2.4-i"><input type="radio" name="rq2-i" id="rq2.4-i" value="2" onclick="update_intention('rq2')">2</label>
-                                        <label class="radio-inline" id="lrq2.5-i"><input type="radio" name="rq2-i" id="rq2.5-i" value="1" onclick="update_intention('rq2')">1</label>
-                                        &nbsp;&nbsp;Very unlikely<br>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="rq3" class="col-sm-6 col-form-label" id="R-i-3-title">
-                                        9. Are you aware that data should be deposited preferably in a file format that is open
-                                        – to support reuse – and supported by the repository for long-term preservation?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-3')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-                                    <div class="col-sm-1" id="rq3">
-                                        <label class="radio-inline" id="lrq3.1"><input type="radio" name="rq3" id="rq3.1" value="1" onclick="update_R('rq3')"> Yes</label><br>
-                                        <label class="radio-inline" id="lrq3.2"><input type="radio" name="rq3" id="rq3.2" value="0" onclick="update_R('rq3')"> No</label><br>
-                                    </div>
-                                    <div class="col-sm-5 col-xs-12 intention"  id="rq3-i">
-                                        To what degree do you intend to comply with this?<br>
-                                        Very likely&nbsp;&nbsp;
-                                        <label class="radio-inline" id="lrq3.1-i"><input type="radio" name="rq3-i" id="rq3.1-i" value="5" onclick="update_intention('rq3')">5</label>
-                                        <label class="radio-inline" id="lrq3.2-i"><input type="radio" name="rq3-i" id="rq3.2-i" value="4" onclick="update_intention('rq3')">4</label>
-                                        <label class="radio-inline" id="lrq3.3-i"><input type="radio" name="rq3-i" id="rq3.3-i" value="3" onclick="update_intention('rq3')">3</label>
-                                        <label class="radio-inline" id="lrq3.4-i"><input type="radio" name="rq3-i" id="rq3.4-i" value="2" onclick="update_intention('rq3')">2</label>
-                                        <label class="radio-inline" id="lrq3.5-i"><input type="radio" name="rq3-i" id="rq3.5-i" value="1" onclick="update_intention('rq3')">1</label>
-                                        &nbsp;&nbsp;Very unlikely<br>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="rq4" class="col-sm-6 col-form-label" id="R-i-4-title">
-                                        10. Are you aware that maintaining your dataset FAIR over time requires professional data curation and preservation?
-                                        <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-4')">
-                                            <span class="glyphicon glyphicon-info-sign" ></span>
-                                        </a>
-                                    </label>
-                                    <div class="col-sm-1" id="rq4">
-                                        <label class="radio-inline" id="lrq4.1"><input type="radio" name="rq4" id="rq4.1" value="1" onclick="update_R('rq4')"> Yes</label><br>
-                                        <label class="radio-inline" id="lrq4.2"><input type="radio" name="rq4" id="rq4.2" value="0" onclick="update_R('rq4')"> No</label><br>
-                                    </div>
-                                    <div class="col-sm-5 col-xs-12 intention"  id="rq4-i">
-                                        To what degree do you intend to comply with this?<br>
-                                        Very likely&nbsp;&nbsp;
-                                        <label class="radio-inline" id="lrq4.1-i"><input type="radio" name="rq4-i" id="rq4.1-i" value="5" onclick="update_intention('rq4')">5</label>
-                                        <label class="radio-inline" id="lrq4.2-i"><input type="radio" name="rq4-i" id="rq4.2-i" value="4" onclick="update_intention('rq4')">4</label>
-                                        <label class="radio-inline" id="lrq4.3-i"><input type="radio" name="rq4-i" id="rq4.3-i" value="3" onclick="update_intention('rq4')">3</label>
-                                        <label class="radio-inline" id="lrq4.4-i"><input type="radio" name="rq4-i" id="rq4.4-i" value="2" onclick="update_intention('rq4')">2</label>
-                                        <label class="radio-inline" id="lrq4.5-i"><input type="radio" name="rq4-i" id="rq4.5-i" value="1" onclick="update_intention('rq4')">1</label>
-                                        &nbsp;&nbsp;Very unlikely<br>
-                                    </div>
-                                </div>
-                            </form>
+                <!-- =============================== -->
+                <!-- ======== INTEROPERABLE ======== -->
+                <!-- =============================== -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <img id="image-i" src="images/I_100.jpg" alt="I">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div id="I-i-title">INTEROPERABLE</div>
+                                </h4>
+                            </div>
+                            <div class="panel-body">
+                                <form>
+                                   <div class="form-group row">
+                                        <label for="iq1" class="col-sm-6 col-form-label" id="I-i-1-title">
+                                            6. Are you aware that the metadata describing your datasets should use  controlled vocabularies?
+                                            <a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')">
+                                                <span class="glyphicon glyphicon-info-sign" ></span>
+                                            </a>
+                                        </label>
+                                        <div class="col-sm-1" id="iq1">
+                                            <label class="radio-inline" id="liq1.1"><input type="radio" name="iq1" id="iq1.1" value="1" onclick="update_I('iq1')"> Yes</label><br>
+                                            <label class="radio-inline" id="liq1.2"><input type="radio" name="iq1" id="iq1.2" value="0" onclick="update_I('iq1')" > No</label><br>
+                                        </div>
+                                        <div class="col-sm-5 col-xs-12 intention"  id="iq1-i">
+                                            To what degree do you intend to comply with this?<br>
+                                            Very likely&nbsp;&nbsp;
+                                            <label class="radio-inline" id="liq1.1-i"><input type="radio" name="iq1-i" id="iq1.1-i" value="5" onclick="update_intention('iq1')">5</label>
+                                            <label class="radio-inline" id="liq1.2-i"><input type="radio" name="iq1-i" id="iq1.2-i" value="4" onclick="update_intention('iq1')">4</label>
+                                            <label class="radio-inline" id="liq1.3-i"><input type="radio" name="iq1-i" id="iq1.3-i" value="3" onclick="update_intention('iq1')">3</label>
+                                            <label class="radio-inline" id="liq1.4-i"><input type="radio" name="iq1-i" id="iq1.4-i" value="2" onclick="update_intention('iq1')">2</label>
+                                            <label class="radio-inline" id="liq1.5-i"><input type="radio" name="iq1-i" id="iq1.5-i" value="1" onclick="update_intention('iq1')">1</label>
+                                            &nbsp;&nbsp;Very unlikely<br>
+                                        </div>
+                                   </div>
+                                    <br><br><br><br><br><br><br><br>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="pagebreak"></div>
-        </div>
+                <div class="pagebreak"></div>
 
-        <!-- =========================== -->
-        <!-- ======== FEEDBACK  ======== -->
-        <!-- =========================== -->
-        <div id="feedback">
-            <div>
+                <!-- ========================== -->
+                <!-- ======== REUSABLE ======== -->
+                <!-- ========================== -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <br>
+                        <img id="image-r" src="images/R_100.jpg" alt="R">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div id="R-i-title">REUSABLE</div>
+                                </h4>
+                            </div>
+                            <div class="panel-body">
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="rq1" class="col-sm-6 col-form-label" id="R-i-1-title">
+                                            7. Are you aware that provenance information about the collection and/or generation of data should be included in the metadata?
+                                            <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')">
+                                                <span class="glyphicon glyphicon-info-sign" ></span>
+                                            </a>
+                                        </label>
+                                        <div class="col-sm-1" id="rq1">
+                                            <label class="radio-inline" id="lrq1.1"><input type="radio" name="rq1" id="rq1.1" value="1" onclick="update_R('rq1')"> Yes</label><br>
+                                            <label class="radio-inline" id="lrq1.2"><input type="radio" name="rq1" id="rq1.2" value="0" onclick="update_R('rq1')"> No</label><br>
+                                        </div>
+                                       <div class="col-sm-5 col-xs-12 intention"  id="rq1-i">
+                                            To what degree do you intend to comply with this?<br>
+                                            Very likely&nbsp;&nbsp;
+                                            <label class="radio-inline" id="lrq1.1-i"><input type="radio" name="rq1-i" id="rq1.1-i" value="5" onclick="update_intention('rq1')">5</label>
+                                            <label class="radio-inline" id="lrq1.2-i"><input type="radio" name="rq1-i" id="rq1.2-i" value="4" onclick="update_intention('rq1')">4</label>
+                                            <label class="radio-inline" id="lrq1.3-i"><input type="radio" name="rq1-i" id="rq1.3-i" value="3" onclick="update_intention('rq1')">3</label>
+                                            <label class="radio-inline" id="lrq1.4-i"><input type="radio" name="rq1-i" id="rq1.4-i" value="2" onclick="update_intention('rq1')">2</label>
+                                            <label class="radio-inline" id="lrq1.5-i"><input type="radio" name="rq1-i" id="rq1.5-i" value="1" onclick="update_intention('rq1')">1</label>
+                                            &nbsp;&nbsp;Very unlikely<br>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="rq2" class="col-sm-6 col-form-label" id="R-i-2-title">
+                                            8. Are you aware that metadata describing your data should follow the specifications of a community-endorsed standard?
+                                            <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-2')">
+                                                <span class="glyphicon glyphicon-info-sign" ></span>
+                                            </a>
+                                        </label>
+                                        <div class="col-sm-1" id="rq2">
+                                            <label class="radio-inline" id="lrq2.1"><input type="radio" name="rq2" id="rq2.1" value="1" onclick="update_R('rq2')"> Yes</label><br>
+                                            <label class="radio-inline" id="lrq2.2"><input type="radio" name="rq2" id="rq2.2" value="0" onclick="update_R('rq2')"> No</label><br>
+                                        </div>
+                                        <div class="col-sm-5 col-xs-12 intention"  id="rq2-i">
+                                            To what degree do you intend to comply with this?<br>
+                                            Very likely&nbsp;&nbsp;
+                                            <label class="radio-inline" id="lrq2.1-i"><input type="radio" name="rq2-i" id="rq2.1-i" value="5" onclick="update_intention('rq2')">5</label>
+                                            <label class="radio-inline" id="lrq2.2-i"><input type="radio" name="rq2-i" id="rq2.2-i" value="4" onclick="update_intention('rq2')">4</label>
+                                            <label class="radio-inline" id="lrq2.3-i"><input type="radio" name="rq2-i" id="rq2.3-i" value="3" onclick="update_intention('rq2')">3</label>
+                                            <label class="radio-inline" id="lrq2.4-i"><input type="radio" name="rq2-i" id="rq2.4-i" value="2" onclick="update_intention('rq2')">2</label>
+                                            <label class="radio-inline" id="lrq2.5-i"><input type="radio" name="rq2-i" id="rq2.5-i" value="1" onclick="update_intention('rq2')">1</label>
+                                            &nbsp;&nbsp;Very unlikely<br>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="rq3" class="col-sm-6 col-form-label" id="R-i-3-title">
+                                            9. Are you aware that data should be deposited preferably in a file format that is open
+                                            – to support reuse – and supported by the repository for long-term preservation?
+                                            <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-3')">
+                                                <span class="glyphicon glyphicon-info-sign" ></span>
+                                            </a>
+                                        </label>
+                                        <div class="col-sm-1" id="rq3">
+                                            <label class="radio-inline" id="lrq3.1"><input type="radio" name="rq3" id="rq3.1" value="1" onclick="update_R('rq3')"> Yes</label><br>
+                                            <label class="radio-inline" id="lrq3.2"><input type="radio" name="rq3" id="rq3.2" value="0" onclick="update_R('rq3')"> No</label><br>
+                                        </div>
+                                        <div class="col-sm-5 col-xs-12 intention"  id="rq3-i">
+                                            To what degree do you intend to comply with this?<br>
+                                            Very likely&nbsp;&nbsp;
+                                            <label class="radio-inline" id="lrq3.1-i"><input type="radio" name="rq3-i" id="rq3.1-i" value="5" onclick="update_intention('rq3')">5</label>
+                                            <label class="radio-inline" id="lrq3.2-i"><input type="radio" name="rq3-i" id="rq3.2-i" value="4" onclick="update_intention('rq3')">4</label>
+                                            <label class="radio-inline" id="lrq3.3-i"><input type="radio" name="rq3-i" id="rq3.3-i" value="3" onclick="update_intention('rq3')">3</label>
+                                            <label class="radio-inline" id="lrq3.4-i"><input type="radio" name="rq3-i" id="rq3.4-i" value="2" onclick="update_intention('rq3')">2</label>
+                                            <label class="radio-inline" id="lrq3.5-i"><input type="radio" name="rq3-i" id="rq3.5-i" value="1" onclick="update_intention('rq3')">1</label>
+                                            &nbsp;&nbsp;Very unlikely<br>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="rq4" class="col-sm-6 col-form-label" id="R-i-4-title">
+                                            10. Are you aware that maintaining your dataset FAIR over time requires professional data curation and preservation?
+                                            <a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-4')">
+                                                <span class="glyphicon glyphicon-info-sign" ></span>
+                                            </a>
+                                        </label>
+                                        <div class="col-sm-1" id="rq4">
+                                            <label class="radio-inline" id="lrq4.1"><input type="radio" name="rq4" id="rq4.1" value="1" onclick="update_R('rq4')"> Yes</label><br>
+                                            <label class="radio-inline" id="lrq4.2"><input type="radio" name="rq4" id="rq4.2" value="0" onclick="update_R('rq4')"> No</label><br>
+                                        </div>
+                                        <div class="col-sm-5 col-xs-12 intention"  id="rq4-i">
+                                            To what degree do you intend to comply with this?<br>
+                                            Very likely&nbsp;&nbsp;
+                                            <label class="radio-inline" id="lrq4.1-i"><input type="radio" name="rq4-i" id="rq4.1-i" value="5" onclick="update_intention('rq4')">5</label>
+                                            <label class="radio-inline" id="lrq4.2-i"><input type="radio" name="rq4-i" id="rq4.2-i" value="4" onclick="update_intention('rq4')">4</label>
+                                            <label class="radio-inline" id="lrq4.3-i"><input type="radio" name="rq4-i" id="rq4.3-i" value="3" onclick="update_intention('rq4')">3</label>
+                                            <label class="radio-inline" id="lrq4.4-i"><input type="radio" name="rq4-i" id="rq4.4-i" value="2" onclick="update_intention('rq4')">2</label>
+                                            <label class="radio-inline" id="lrq4.5-i"><input type="radio" name="rq4-i" id="rq4.5-i" value="1" onclick="update_intention('rq4')">1</label>
+                                            &nbsp;&nbsp;Very unlikely<br>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pagebreak"></div>
+            </div>
+
+            <!-- =========================== -->
+            <!-- ======== FEEDBACK  ======== -->
+            <!-- =========================== -->
+            <div id="feedback">
+                <div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10 feedback">
+                            <h3>Feedback <i class="fa fa-hand-o-left" aria-hidden="true"></i></h3>
+                            <p>Please answer the four questions below to help us improve the tool and make it even more relevant for the community.</p>
+                            <div id="Q-i-1-title">
+                                <br>
+                                <ul>
+                                    <li>Which of the following issues do you find hard to understand and/or to answer?</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label id="lqq1.1">1. Globally unique persistent identifier (PID)&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.1">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <label id="lqq1.2">2. Metadata for citation and discovery including PID&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-2')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.2">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <label id="lqq1.3">3. Metadata available online is readable by humans and <br>&nbsp;&nbsp;&nbsp;&nbsp;machines&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-3')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.3">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <label id="lqq1.4">4. Metadata includes licence, level of access and <br>&nbsp;&nbsp;&nbsp;&nbsp;conditions to access the data&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.4">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <label id="lqq1.5">5. Persistence of metadata&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-2')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.5">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <label id="lqq1.6">6. Use of controlled vocabularies in metadata&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.6">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <label id="lqq1.7">7. Metadata includes provenance&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.7">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <label id="lqq1.8">8. Community-endorsed metadata&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-2')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.8">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <label id="lqq1.9">9. Data in a preferred format for reuse & preservation&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-3')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.9">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-5">
+                                            <label id="lqq1.10">10. Digital curation and preservation&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-4')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <input type="checkbox" id="qq1.10">
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
                 <div class="row">
                     <div class="col-md-2"></div>
-                    <div class="col-md-10 feedback">
-                        <h3>Feedback <i class="fa fa-hand-o-left" aria-hidden="true"></i></h3>
-                        <p>Please answer the four questions below to help us improve the tool and make it even more relevant for the community.</p>
-                        <div id="Q-i-1-title">
-                            <br>
-                            <ul>
-                                <li>Which of the following issues do you find hard to understand and/or to answer?</li>
-                            </ul>
+                    <div class="col-md-10">
+                        <div id="Q-i-2-title">
+                            <ul><li>Are there any issues relevant to your discipline and/or needed for enabling reusability of your dataset that
+                                are missing from this assessment?
+                                &nbsp;(Please do not include any personal data, such as your name and email address in your response.)</li></ul>
                         </div>
-                        <div>
-                            <ul>
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <label id="lqq1.1">1. Globally unique persistent identifier (PID)&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="checkbox" id="qq1.1">
-                                    </div>
-                                </div>
-                                <div  class="row">
-                                    <div class="col-md-5">
-                                        <label id="lqq1.2">2. Metadata for citation and discovery including PID&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-2')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="checkbox" id="qq1.2">
-                                    </div>
-                                </div>
-                                <div  class="row">
-                                    <div class="col-md-5">
-                                        <label id="lqq1.3">3. Metadata available online is readable by humans and <br>&nbsp;&nbsp;&nbsp;&nbsp;machines&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-3')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="checkbox" id="qq1.3">
-                                    </div>
-                                </div>
-                                <div  class="row">
-                                    <div class="col-md-5">
-                                        <label id="lqq1.4">4. Metadata includes licence, level of access and <br>&nbsp;&nbsp;&nbsp;&nbsp;conditions to access the data&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="checkbox" id="qq1.4">
-                                    </div>
-                                </div>
-                                <div  class="row">
-                                    <div class="col-md-5">
-                                        <label id="lqq1.5">5. Persistence of metadata&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-2')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="checkbox" id="qq1.5">
-                                    </div>
-                                </div>
-                                <div  class="row">
-                                    <div class="col-md-5">
-                                        <label id="lqq1.6">6. Use of controlled vocabularies in metadata&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="checkbox" id="qq1.6">
-                                    </div>
-                                </div>
-                                <div  class="row">
-                                    <div class="col-md-5">
-                                        <label id="lqq1.7">7. Metadata includes provenance&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="checkbox" id="qq1.7">
-                                    </div>
-                                </div>
-                                <div  class="row">
-                                    <div class="col-md-5">
-                                        <label id="lqq1.8">8. Community-endorsed metadata&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-2')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="checkbox" id="qq1.8">
-                                    </div>
-                                </div>
-                                <div  class="row">
-                                    <div class="col-md-5">
-                                        <label id="lqq1.9">9. Data in a preferred format for reuse & preservation&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-3')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="checkbox" id="qq1.9">
-                                    </div>
-                                </div>
-                                <div  class="row">
-                                    <div class="col-md-5">
-                                        <label id="lqq1.10">10. Digital curation and preservation&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-4')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="checkbox" id="qq1.10">
-                                    </div>
-                                </div>
-                            </ul>
+                        <textarea class="feedback-textarea" id="qq2" rows="4"></textarea>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+                        <div id="Q-i-3-title">
+                            <ul><li>Please submit any other feedback on how we might improve the FAIR-Aware assessment tool,
+                                including possible additional guidance.<br>
+                                (Please do not include any personal data, such as your name and email address in your response.)</li></ul>
                         </div>
+                        <textarea class="feedback-textarea" id="qq3" rows="4"></textarea>
                     </div>
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
-                    <div id="Q-i-2-title">
-                        <ul><li>Are there any issues relevant to your discipline and/or needed for enabling reusability of your dataset that
-                            are missing from this assessment?
-                            &nbsp;(Please do not include any personal data, such as your name and email address in your response.)</li></ul>
-                    </div>
-                    <textarea class="feedback-textarea" id="qq2" rows="4"></textarea>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
-                    <div id="Q-i-3-title">
-                        <ul><li>Please submit any other feedback on how we might improve the FAIR-Aware assessment tool,
-                            including possible additional guidance.<br>
-                            (Please do not include any personal data, such as your name and email address in your response.)</li></ul>
-                    </div>
-                    <textarea class="feedback-textarea" id="qq3" rows="4"></textarea>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
-                    <div id="Q-i-4-title">
-                        <ul><li>Undertaking this assessment helped raise my awareness and my understanding of the FAIR data Principles.</li></ul>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-1 col-sm-2 col-xs-2"></div>
-                        <div class="col-md-11 col-sm-10  col-xs-10" id="qq4">
-                            <label class="radio-inline" id="lqq4.1"><input type="radio" name="qq4" id="qq4.1" value="0" onclick="update_Q('qq4')"> Strongly Agree</label>
-                            <label class="radio-inline" id="lqq4.2"><input type="radio" name="qq4" id="qq4.2" value="0" onclick="update_Q('qq4')"> Agree</label>
-                            <label class="radio-inline" id="lqq4.3"><input type="radio" name="qq4" id="qq4.3" value="0" onclick="update_Q('qq4')"> Neutral</label>
-                            <label class="radio-inline" id="lqq4.4"><input type="radio" name="qq4" id="qq4.4" value="0" onclick="update_Q('qq4')"> Disagree</label>
-                            <label class="radio-inline" id="lqq4.5"><input type="radio" name="qq4" id="qq4.5" value="0" onclick="update_Q('qq4')"> Strongly Disagree</label>
+                <br>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+                        <div id="Q-i-4-title">
+                            <ul><li>Undertaking this assessment helped raise my awareness and my understanding of the FAIR data Principles.</li></ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1 col-sm-2 col-xs-2"></div>
+                            <div class="col-md-11 col-sm-10  col-xs-10" id="qq4">
+                                <label class="radio-inline" id="lqq4.1"><input type="radio" name="qq4" id="qq4.1" value="0" onclick="update_Q('qq4')"> Strongly Agree</label>
+                                <label class="radio-inline" id="lqq4.2"><input type="radio" name="qq4" id="qq4.2" value="0" onclick="update_Q('qq4')"> Agree</label>
+                                <label class="radio-inline" id="lqq4.3"><input type="radio" name="qq4" id="qq4.3" value="0" onclick="update_Q('qq4')"> Neutral</label>
+                                <label class="radio-inline" id="lqq4.4"><input type="radio" name="qq4" id="qq4.4" value="0" onclick="update_Q('qq4')"> Disagree</label>
+                                <label class="radio-inline" id="lqq4.5"><input type="radio" name="qq4" id="qq4.5" value="0" onclick="update_Q('qq4')"> Strongly Disagree</label>
+                            </div>
                         </div>
                     </div>
                 </div>
