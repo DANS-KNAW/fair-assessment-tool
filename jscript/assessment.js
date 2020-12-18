@@ -367,6 +367,7 @@
         function show_results() {
             document.getElementById("intro").style.display = "none";
             document.getElementById("contents").style.display = "none";
+            $("#contents :input").attr("disabled", true);
             document.getElementById("score-and-guidance").style.display = "block";
             document.getElementById("summary-responses").style.display = "none";
             $("#score").html("Awareness score: " + get_score() + "/" + number_fair_questions);
