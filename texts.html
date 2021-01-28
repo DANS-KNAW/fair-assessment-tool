@@ -13,7 +13,7 @@
 
 <div id="F-i-1-contents">
     <div id="F-i-1-default">
-        <p>Selected datasets should be assigned a globally unique and persistent identifier (PID) so they  can be located unambiguously
+        <p>Selected datasets should be assigned a globally unique, persistent and resolvable identifier (PID) so they  can be located unambiguously
             by humans or machines on the web. Persistent identifiers are maintained and governed so that they remain stable and direct
             the users to the same relevant object consistently over time. Examples of PIDs include Digital Object Identifier (DOI),
             the Handle System, identifiers.org, w3id.org and Archival Resource Key (ARK).</p>
@@ -46,14 +46,16 @@
             summary and keywords describing the data) provided by the researcher when documenting the dataset for deposit in a data repository.</p>
         <p>Since the metadata required depends on the type of users and the intended applications,
             the focus here is on ensuring the minimum descriptive information needed to enable data discovery and citation by potential users -
-            even those from other domains. The metadata should include the unique and persistent identifier (PID)
+            even those from other domains. The metadata should include the unique, persistent and resolvable identifier (PID)
             for the data so that users can discover and access the data. In cases where the data cannot be shared openly for ethical,
             legal or commercial reasons, the metadata should make clear how a potential reuser can request legitimate access.</p>
         <p><u>Data content</u> (relates to Reusability in the FAIR principle)<br>
             The content of the dataset should be specified in the metadata. It should be an accurate reflection of the actual data deposited.
             Examples of the properties specifying data content are: resource type (e.g., data or a collection of data), variable(s) measured
-            or observed, method, data format and size. Ideally, ontological vocabularies should be used to describe data content (e.g., variable)
-            to support interdisciplinary reuse.</p>
+            or observed, method, data format and size. Ideally, semantic vocabularies should be used to describe data content (e.g., variable)
+            to support interdisciplinary reuse. For example, variables should be described by providing a link with a PID to a resource (such as a landing page)
+            containing a structured description of the concept, references and links to other relevant concepts.
+            The access to the linked concepts should be available through the query interface (e.g., using SPARQL or GraphQL).</p>
         <p><u>Links to other research outputs</u> (relates to Interoperability in the FAIR Principles)<br>
             Metadata should also include meaningful and explicit links to other kinds of research output (ideally with a PID) to increase its
             potential for reuse. A data object may be linked to its prior version, other relevant datasets, related publications,
@@ -202,20 +204,25 @@
 <div id="I-i-1-contents">
     <div id="I-i-1-default">
         <p>Metadata should use semantic vocabularies so that the contents are unambiguous and can be interpreted automatically by machines.
-            Using vocabularies in metadata may facilitate enhanced data search and interoperability of data from different sources.
-            Repositories should provide support for the use of semantic vocabularies in metadata by offering relevant functionalities.
-            Repositories supporting your preferred semantic vocabulary can be found on registries like
-            <a href="https://fairsharing.org/standards/?q=&selected_facets=type_exact:terminology%20artifact" target="_blank">FAIRsharing.org<i class="fa fa-external-link"></i></a>.</p>
+            Ontologies, thesauri, and taxonomies are kinds of semantic vocabularies, and they come with different degrees of sophistication
+            (for e.g. in their level of expressiveness, structure, and inferential power)</p>
     </div>
     <button id="I-i-1-more" onclick="show_additional_text('I-i-1')" >Want to know more?</button>
     <div id="I-i-1-additional">
-        <p>Ontologies, thesauri, and taxonomies are kinds of semantic vocabularies, and they come with different degrees of sophistication
-            (for e.g. in their level of). When semantic vocabularies are included in the metadata, your data repository of choice may be
-            able to publish the metadata in machine-interpretable format, thus greatly increasing their machine actionability and
-            supporting the <a href="https://www.w3.org/standards/semanticweb" target="_blank">Semantic Web<i class="fa fa-external-link"></i></a>.</p>
-        <p>APIs (Application Programming Interface), a software intermediary that allows two applications to talk to each other,
-            also increases technical interoperability between different components.</p>
-        <p>Examples of repositories or look-up services for semantic resources (the list is not exhaustive):</p>
+        <p>Using semantic vocabularies in metadata facilitates enhanced data search and interoperability of data from different sources.
+            Repositories should provide support for the use of semantic vocabularies in metadata by offering relevant functionalities.
+            When semantic vocabularies are included in the metadata, your data repository of choice may be able to publish the metadata
+            in machine-interpretable format, thus greatly increasing their machine actionability and supporting the
+            <a href="https://www.w3.org/standards/semanticweb" target="_blank">Semantic Web<i class="fa fa-external-link"></i></a>.</p>
+        <p>Before using semantic vocabularies, you should establish the following:</p>
+        <ul>
+            <li>Whether you can find the vocabulary</li>
+            <li>Whether you know who curates and makes the vocabulary available to other users</li>
+            <li>Whether it is an nationally or internationally recognized vocabulary and if it is used extensively</li>
+            <li>Whether it is available online and is open to other users</li>
+        </ul>
+        <p>Repositories supporting your preferred semantic vocabulary can be found on registries like FAIRsharing.org.
+            Below is a list of some repositories or look-up services for semantic resources (the list is not exhaustive):</p>
         <ul>
             <li><a href="https://lov.linkeddata.es/dataset/lov" target="_blank">Linked Open Vocabularies (LOV)<i class="fa fa-external-link"></i></a></li>
             <li><a href="http://www.obofoundry.org/" target="_blank">OBO Foundry<i class="fa fa-external-link"></i></a></li>
