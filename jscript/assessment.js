@@ -209,7 +209,7 @@
             if (question != null) {
                 let percent = Math.floor(get_score() / number_fair_questions * 10) * 10;
                 for (let letter of letters) {
-                    document.getElementById(("image-print-" + letter).toLowerCase()).src = "images/print/" + letter + "_" + percent + ".jpg"
+                    document.getElementById(("image-print-" + letter).toLowerCase()).src = "images/print/blue/" + letter + "_" + percent + ".jpg"
                 }
             }
         }
