@@ -86,18 +86,31 @@
                 <div class="col-md-10">
                     <div class="row">
                         <div class="col-md-5">
-                            <div id="fair-letters">
-                                    <div id="letters">
-                                        <img id="image-print-f" src="images/print/blue/F_0.jpg" alt="F"/>
-                                        <img id="image-print-a" src="images/print/blue/A_0.jpg" alt="A"/>
-                                        <img id="image-print-i" src="images/print/blue/I_0.jpg" alt="I"/>
-                                        <img id="image-print-r" src="images/print/blue/R_0.jpg" alt="R"/>
-                                    </div>
+                            <div>
+                                <img class="print-letter" id="awareness-f" src="images/print/blue/F_0.jpg" alt="F"/>
+                                <img class="print-letter" id="awareness-a" src="images/print/blue/A_0.jpg" alt="A"/>
+                                <img class="print-letter" id="awareness-i" src="images/print/blue/I_0.jpg" alt="I"/>
+                                <img class="print-letter" id="awareness-r" src="images/print/blue/R_0.jpg" alt="R"/>
                             </div>
                         </div>
                         <div class="col-md-7">
-                            <h2 id="score"></h2>
-                            <h2 id="score-text"></h2>
+                            <h2>Awareness:</h2>
+                            <h2 id="score-text-awareness"></h2>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div>
+                                <img class="print-letter" id="willingness-f" src="images/print/yellow/F_0.jpg" alt="F"/>
+                                <img class="print-letter" id="willingness-a" src="images/print/yellow/A_0.jpg" alt="A"/>
+                                <img class="print-letter" id="willingness-i" src="images/print/yellow/I_0.jpg" alt="I"/>
+                                <img class="print-letter" id="willingness-r" src="images/print/yellow/R_0.jpg" alt="R"/>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <h2>Willingness to comply:</h2>
+                            <h2 id="score-text-willingness"></h2>
                         </div>
                     </div>
                     <div class="row" id="guidance-texts">
@@ -109,6 +122,7 @@
                     </div>
                     <div id="show-summary" class="row">
                         <div class="col-md-12">
+                            <br><br>
                             <h4>If you would like to view a summary of your responses, click <a onclick="show_responses()">here</a></h4>
                         </div>
                     </div>

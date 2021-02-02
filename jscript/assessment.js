@@ -16,7 +16,9 @@
             ['R', [2, 2, 2, 2]],
             ['Q', [10, 0, 0, 5]]
         ])
+        var willingness_max = 5
         var number_fair_questions = get_number_of_fair_questions();
+        var total_willingness_score = get_total_willingness_score();
         var short_answers = new Map([
             <!-- Shortened answers to make downloaded data more readable -->
             ['yq2.3', 'Research support'],
@@ -207,9 +209,11 @@
 
         function update_print_letters(question) {
             if (question != null) {
-                let percent = Math.floor(get_score() / number_fair_questions * 10) * 10;
+                let awareness_percent = Math.floor(get_awareness_score() / number_fair_questions * 10) * 10;
+                let willingness_percent = Math.floor(get_willingness_score() / total_willingness_score * 10) * 10;
                 for (let letter of letters) {
-                    document.getElementById(("image-print-" + letter).toLowerCase()).src = "images/print/blue/" + letter + "_" + percent + ".jpg"
+                    document.getElementById(("awareness-" + letter).toLowerCase()).src = "images/print/blue/" + letter + "_" + awareness_percent + ".jpg"
+                    document.getElementById(("willingness-" + letter).toLowerCase()).src = "images/print/yellow/" + letter + "_" + willingness_percent + ".jpg"
                 }
             }
         }
@@ -370,9 +374,9 @@
             $("#contents :input").attr("disabled", true);
             document.getElementById("score-and-guidance").style.display = "block";
             document.getElementById("summary-responses").style.display = "none";
-            $("#score").html("Awareness score: " + get_score() + "/" + number_fair_questions);
-            $("#score-text").html(get_score_text());
-            if (get_score() < number_fair_questions) { $("#guidance").html(get_guidance_texts()); }
+            $("#score-text-awareness").html(get_awareness_score_text() + " (" + get_awareness_score() + "/" + number_fair_questions + ")");
+            $("#score-text-willingness").html(get_willingness_score_text() + " (" + get_willingness_score() + "/" + total_willingness_score + ")");
+            if (get_awareness_score() < number_fair_questions) { $("#guidance").html(get_guidance_texts()); }
             else { document.getElementById("guidance-texts").style.display = "none"; }
             if (window.print) { document.getElementById("print-button").style.display = "block"; }
         }
@@ -383,15 +387,40 @@
             document.getElementById("show-summary").style.display = "none";
         }
 
-        function get_score() {
+        function get_awareness_score() {
             return number_fair_questions - get_negative_answers().length;
         }
 
-        function get_score_text() {
-            let score = get_score();
-            if (score < 6) { return "Not sufficiently FAIR-Aware" }
-            else if (score < 8) { return "Moderately FAIR-Aware" }
-            else { return "Very FAIR-Aware" }
+        function get_awareness_score_text() {
+            let score = get_awareness_score();
+            if (score < 6) { return "Low" }
+            else if (score < 8) { return "Moderate" }
+            else { return "High" }
+        }
+
+        function get_willingness_score() {
+            let count = 0
+            for (let [letter, questions] of fields) {
+                if (letters.includes(letter)) {
+                    for(let i = 0; i < questions.length; i++) {
+                        let intention = letter.toLowerCase() + "q" + (i + 1).toString();
+                        for (let j = 0; j < willingness_max; j++) {
+                            let choice = intention + "." + (j + 1).toString() + "-i";
+                            if (checked(choice)) {
+                                count += parseInt(get_answer(choice));
+                            }
+                        }
+                    }
+                }
+            }
+            return count;
+        }
+
+        function get_willingness_score_text() {
+            let score = get_willingness_score();
+            if (score < 30) { return "Low" }
+            else if (score < 40) { return "Moderate" }
+            else { return "High" }
         }
 
         function get_guidance_texts() {
@@ -439,6 +468,16 @@
             return number;
         }
 
+        function get_total_willingness_score() {
+            let total_score = 0;
+            for (let [letter, questions] of fields) {
+                if (letters.includes(letter)) {
+                    total_score += questions.length * willingness_max
+                }
+            }
+            return total_score;
+        }
+
         function scrollToTop() {
             document.body.scrollTop = 0; // For Safari
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -465,5 +504,6 @@
             document.getElementById("image-a").style.display = "block"
             document.getElementById("image-i").style.display = "block"
             document.getElementById("image-r").style.display = "block"
+            document.getElementById("show-summary").style.display = "block"
             update();
         }
