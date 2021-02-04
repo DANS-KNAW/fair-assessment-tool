@@ -37,6 +37,8 @@
     #awareness-f, #awareness-a, #awareness-i, #awareness-r, #willingness-f, #willingness-a, #willingness-i, #willingness-r { width: 20%; heigth: 20%; }
     #fairisfairteam { padding-left: 20px; }
     #show-summary a {color: #2795c8;}
+    #logos a.fairsfair-logo { background: url(../images/logos/fairaware_tablet.png) no-repeat; display: block; height: 50px; width: 260px; }
+    #logos a.dans-logo { background: url(../images/logos/dans_mobile.jpg) no-repeat; display: block; height: 30px; width: 80px; }
     @media (max-width: 768px) {
         div.col-md-2 {padding-left: 30px;}
         div.col-md-10 {padding-left: 30px;}
@@ -53,12 +55,15 @@
         .fa-print {font-size: 40px;}
         .fa-paper-plane {font-size: 30px;}
         #image-f, #image-a, #image-i, #image-r {padding-top: 80px;}
+        #logos a.dans-logo { background: url(../images/logos/dans_tablet.jpg) no-repeat; display: block; height: 60px; width: 150px; }
     }
     @media (min-width: 1025px) {
         div.col-md-2 {padding-left: 10px;}
         div.col-md-10 {padding-left: 10px;}
         .fa-print {font-size: 40px;}
         .fa-paper-plane {font-size: 30px;}
+        #logos a.fairsfair-logo { background: url(../images/logos/fairaware.png) no-repeat; display: block; height: 75px; width: 380px; }
+        #logos a.dans-logo { background: url(../images/logos/dans.jpg) no-repeat; display: block; height: 75px; width: 230px; }
     }
     @media print {.pagebreak { page-break-before: always; }}
 
