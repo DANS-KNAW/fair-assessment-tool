@@ -169,7 +169,7 @@
         /* ----------------------------- F ----------------------------- */
         function update_F() {
             var fscore1 = parseInt($("#fq1").val());
-            var fscore2 = get_value("fq2.1") + get_value("fq2.2") + get_value("fq2.3");
+            var fscore2 = get_value("fq2.1") || get_value("fq2.2") || get_value("fq2.3");
             if (fscore2 > 0) { uncheck("fq2.4")}
             var fscore3 = get_value("fq3.1") + get_value("fq3.2") + get_value("fq3.3");
             var f_1_sel = document.getElementById("fq1").selectedIndex;
@@ -385,9 +385,9 @@
 
                                     <div class="col-sm-6">
                                         <div id="fq2">
-                                            <input type="checkbox" id="fq2.1" value="11" onclick="update_F()"> Controlled vocabularies<br>
-                                            <input type="checkbox" id="fq2.2" value="11" onclick="update_F()"> Taxonomies (thesauri)<br>
-                                            <input type="checkbox" id="fq2.3" value="11" onclick="update_F()"> Ontologies<br>
+                                            <input type="checkbox" id="fq2.1" value="33" onclick="update_F()"> Controlled vocabularies<br>
+                                            <input type="checkbox" id="fq2.2" value="33" onclick="update_F()"> Taxonomies (thesauri)<br>
+                                            <input type="checkbox" id="fq2.3" value="33" onclick="update_F()"> Ontologies<br>
                                             <input type="checkbox" id="fq2.4" value="5" onclick="update_F()"> There are no standards  for my discipline
                                         </div>
                                     </div>
@@ -486,7 +486,7 @@
                                     <div class="col-sm-6">
                                         <select class="form-control" id="aq3" onchange="update_A()">
                                             <option value="50">Open access (CC0)</option>
-                                            <option value="25">Restricted access</option>
+                                            <option value="50">Restricted access</option>
                                             <option value="25">Embargo</option>
                                             <option value="25">Other access</option>
                                             <option value="0">I don't know which of these licenses apply to my data</option>
