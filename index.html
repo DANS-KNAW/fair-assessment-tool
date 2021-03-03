@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://www.w3.org/1999/xhtml/vocab"/>
+        <script src="https://www.recaptcha.net/recaptcha/api.js?hl=en" async="async" defer="defer"></script>
 
     <title>FAIR-Aware</title>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+    <link type="text/css" rel="stylesheet" href="https://www.fairsfair.eu/sites/default/files/css/css_xE-rWrJf-fncB6ztZfd2huxqgxu4WO-qwma6Xer30m4.css" media="all"/>
+    <link type="text/css" rel="stylesheet" href="https://www.fairsfair.eu/sites/default/files/css/css_G0otIBxZikG1_YQ4uMlxOyMRokq2Ws8PA3dp4cJjE5w.css" media="all"/>
+    <link type="text/css" rel="stylesheet" href="https://www.fairsfair.eu/sites/default/files/css/css_8GKCprghswEHMUqFBynVCQkz1eRITpCVZtaCSF2lnJ8.css" media="all"/>
+
+    <link type="text/css" rel="stylesheet" href="https://www.fairsfair.eu/sites/default/files/css/css_bXD_KwDY4Uxf2ADDnUfO7XE540GTrR5Wdcv4k3-RX2A.css" media="all"/>
+
+    <link type="text/css" rel="stylesheet" href="https://www.fairsfair.eu/sites/default/files/css/css_5Qf7pj3TsWzvX-Y_43xsRmLomq3-BpHfM-vui2ZDBrs.css" media="all"/>
+    <link type="text/css" rel="stylesheet" href="https://www.fairsfair.eu/sites/default/files/css/css_8Lubiw2bWzGemMVHhgDnIwBUorWuPPQczgoJo10LscQ.css" media="all"/>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap via CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -34,32 +50,339 @@
     <link rel="shortcut icon" href="images/favicon.ico">
     <!-- Schema.org definitions -->
     <script type="application/ld+json" id="nl-knaw-dans-fairaware">{"@context": "https://schema.org","@type": "Webpage","name": "FAIR-Aware","url": "https://fairaware.dans.knaw.nl/","about": "A tool to assess user's awareness of FAIR principles of research data (FAIR = findable, accessible, interoperable and reusable)","assesses" :  "Awareness of FAIR principles of research data (FAIR = findable, accessible, interoperable and reusable)","audience" : "Researchers, policy makers, publishers, funders,data stewards, curators, data managers, librarian, information technology professionals, other","significantLink" : ["https://www.fairsfair.eu/fair-aware", "https://www.fairsfair.eu/", "https://www.force11.org/group/fairgroup/fairprinciples"],"creator": {"@type": "Project","name": "FAIRsFAIR ","url": "https://www.fairsfair.eu/",    "logo": "https://fairaware.dans.knaw.nl/images/fairisfair.png","contactPoint": {"@type": "ContactPoint","name": "FAIRsFAIR","email": "info@fairsfair.eu"}},"maintainer": {"@id": "https://ror.org/008pnp284","@type": "Organization","name": "Data Archiving & Networked Services DANS","address": "Anna van Saksenlaan 51, 2593 HW Den Haag","url": "https://dans.knaw.nl",    "logo": "https://fairaware.dans.knaw.nl/images/dans.jpg","contactPoint": {"@type": "ContactPoint","name": "DANS","telephone": "+31 70 349 44 50","email": "info@dans.knaw.nl"},"sameAs": ["https://www.youtube.com/user/DANSDataArchiving","https://twitter.com/DANSKNAW"]}}</script>
+	  <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+
+
 </head>
-
-<!-- ============================ -->
-<!-- =========== BODY =========== -->
-<!-- ============================ -->
 <body>
+    <div id="skip-link">
+        <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+    </div>
 
-<div class="container">
-    <div class="fair">
+    <a href="http://github.com/FAIRsFAIR-Project">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="sites/all/modules/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"/>
+    </a>
+    <div class="page-wrapper">
 
-        <!-- === LOGOS === -->
-        <div class="row" id="logos">
-            <div class="col-md-2 col-sm-1 col-xs-0"></div>
-            <div class="col-md-6 col-sm-5 col-xs-8">
-                <br><br>
-                <a class="fairsfair-logo" href="https://www.fairsfair.eu/fair-aware" target="_blank"></a>
+
+        <!-- Main Header / Header Style Four-->
+        <header class="main-header header-style-four">
+
+            <!-- Header Top  Two / Style Two-->
+            <div class="header-top style-two">
+                <div class="container-fluid padding-header">
+                    <div class="clearfix">
+
+                        <!--Top Left-->
+                        <div class="top-left">
+                            <ul class="links clearfix">
+                                <li>
+                                    <a href="#">Fostering FAIR Data Practices in Europe</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.fairsfair.eu/communication-kit">
+                                        <span class="icon fa fa-link"></span>
+                                         Communication Kit
+                                    </a>
+                                </li>
+                                <li>
+                                    <span class="icon fa fa-envelope-o"></span>
+                                    <a href="https://www.fairsfair.eu/form/contact-us">Contact Us</a>
+                                </li>
+
+                                <li>
+                                    <a href="https://www.fairsfair.eu/user/register" title="Sign out">Register</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.fairsfair.eu/user/login" title="Sign out">
+                                        <span class="icon fa fa-sign-in"></span>
+                                         Login
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!--Top Right-->
+                        <div class="top-right clearfix">
+                            <ul class="social-icon">
+
+                                <li></li>
+
+                                <li>
+                                    <a href="https://www.linkedin.com/company/fairsfair/">
+                                        <span class="fa fa-linkedin"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/FAIRsFAIR_eu">
+                                        <span class="fa fa-twitter"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.youtube.com/channel/UCE4wSBnNIBfu6SqlBaIMfNg">
+                                        <span class="fa fa-youtube"></span>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-4">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <br>
-                <a class="dans-logo" href="https://dans.knaw.nl/" target="_blank"></a>
-                <br><br>
+            <!-- Header Top Two End -->
+
+            <!--Header-Upper-->
+            <div class="header-upper">
+                <div class="container-fluid clearfix padding-header">
+                    <div class="pull-left logo-outer">
+                        <div class="logo">
+                            <a href="/">
+                                <img src="images/logo.png" alt="" title="">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="menu-content" class="pull-right upper-right clearfix">
+                        <div class="nav-outer clearfix">
+                            <!-- Main Menu -->
+                            <nav class="main-menu">
+                                <div class="navbar-header">
+                                    <!-- Toggle Button -->
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                        <span class="icon-menu-square"></span>
+                                    </button>
+                                </div>
+
+                                <div class="collapse navbar-collapse ">
+
+                                    <ul class="navigation clearfix">
+                                        <li class="dropdown">
+                                            <a href="https://www.fairsfair.eu" title="">About</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/the-project">The project</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/partners" title="Partners in the Project">The Partners</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/fairsfair-eosc">FAIRsFAIR in EOSC</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/advisory-board/hlac" title="">High Level Advisory Committee</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/advisory-board/synchronisation-force" title="">Synchronisation force</a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a href="https://www.fairsfair.eu/advisory-board/egfc" title="">Our Champions</a>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="https://www.fairsfair.eu/advisory-board/egfc" title="">FAIRsFAIR Champions</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="https://www.fairsfair.eu/form/open-call-european-fair-champions">Open Call for European FAIR Champions</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="/" title="">FAIR Support</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/form/open-call-policy-enhancement-support">Open call for policy enhancement support</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/application-results-open-call-data-repositories">Support programme for Data Repositories</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="https://www.fairsfair.eu/" title="">FAIR Landscape</a>
+                                            <ul>
+                                                <li>
+                                                    <a href=" https://www.fairsfair.eu/fairsfair-open-consultation-fair-data-policies-and-practices">FAIR Data Policies and Practices</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/fair-semantics-interoperability-and-services-0">FAIR Semantics, Interoperability, and Services</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/fair-european-higher-education">FAIR in European Higher Education.</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/fair-frameworks-training-programmes" title="">FAIR frameworks &amp; training programmes</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="https://www.fairsfair.eu/tools-software" title="">Tools &amp; Software</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/fair-aware">FAIR-Aware</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/fairsfair-data-object-assessment-metrics-request-comments">FAIRsFAIR Data Object Assessment Metrics</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/f-uji-automated-fair-data-assessment-tool">F-UJI - Automated FAIR Data Assessment Tool</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="https://www.fairsfair.eu/competence-centre" title="" class="active-trail">Competence Centre</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/fairdata-forum" title="" class="active-trail active">FAIR Data Forum</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/events/training" title="">Data Steward Training</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="https://www.fairsfair.eu/events" title="Upcoming events">Events</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/events/fairsfair-events">FAIRsFAIR Events</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/events/other-events">Other events</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/events/webinars">Webinars</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/events/past-event">Past Events</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="https://www.fairsfair.eu/" title="">Project outputs</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/fairsfair-deliverables-community-review">Documents for community review</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/reports-deliverables">Deliverables &amp; Milestones</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.euhttps://www.fairsfair.eu/presentations" title="">Presentations</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/datasets" title="">Data, code and other outputs</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="https://www.fairsfair.eu/" title="">Outreach</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/news" title="">News</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/articles-publications" title="">Articles, blogs &amp; publications</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/videos" title="FAIRsFAIR Videos and Interviews">Videos</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/press-clipping" title="">Press Clippings</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/fairsfair-social-media-sentiment" title="">Social Media Roundup</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/fairsfair-newletters">FAIRsFAIR Newletters</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.fairsfair.eu/podcasts">Podcasts</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Header Upper-->
+
+        </header>
+        <!--End Main Header -->
+        <!--Slider Section-->
+        <section class="main-slider">
+            <div class="region region-slider">
+
+                <div id="block-md-slider-internal-page" class="block block-md-slider">
+
+                    <div class="content">
+                        <div id="md-slider-2-block" class="md-slide-items" data-thumb-width='100' data-thumb-height='75' style='min-height:220px;'>
+                            <div class="wrap-loader-slider animated">
+                                <div class="wrap-cube">
+                                    <div class="sk-cube-grid">
+                                        <div class="sk-cube sk-cube1"></div>
+                                        <div class="sk-cube sk-cube2"></div>
+                                        <div class="sk-cube sk-cube3"></div>
+                                        <div class="sk-cube sk-cube4"></div>
+                                        <div class="sk-cube sk-cube5"></div>
+                                        <div class="sk-cube sk-cube6"></div>
+                                        <div class="sk-cube sk-cube7"></div>
+                                        <div class="sk-cube sk-cube8"></div>
+                                        <div class="sk-cube sk-cube9"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md-slide-item slide-1" data-timeout='8000' data-thumb-type='image' data-thumb-alt='' data-thumb='https://www.fairsfair.eu/sites/default/files/styles/md_slider_2_thumb/public/bg_slider1.jpg?itok=4t7W90nH'>
+                                <div class="md-mainimg" style="">
+
+                                    <img src="https://www.fairsfair.eu/sites/default/files/bg_slider1.jpg" alt=""/>
+                                </div>
+                                <div class="md-slider-overlay" style="background: rgba(36, 56, 123, 0.77)"></div>
+                                <div class="md-objects"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!--End Slider Section-->
+
+        <!--Page Title-->
+        <section class="page-title">
+            <div class="auto-container">
+	                <div class="row" id="logos">
+            <div class="col-md-2 col-sm-1 col-xs-0"></div>
+            <div class="col-md-4 col-sm-5 col-xs-5">
+                <a class="fairsfair-logo" href="https://www.fairsfair.eu/fair-aware" target="_blank"><img src="images/logos/fairaware.png"></a>
+            </div>
+			<div class="col-md-3 col-sm-1 col-xs-2"></div>
+            <div class="col-md-3 col-sm-5 col-xs-5">
+
+
+                <a class="dans-logo" href="https://dans.knaw.nl/" target="_blank"><img src="images/logos/dans.png
+                "></a>
+
             </div>
         </div>
+			<!--END LOGOS-->
 
-        <!-- === INTRODUCTION === -->
+            </div>
+        </section>
+        <!--End Page Title-->
+
+        <!--About Section-->
+        <div class="introcontainer">
+	<div class="container">
+ <!-- === INTRODUCTION === -->
         <div class="intro" id="intro">
             <div class="row">
                 <div class="col-md-2"></div>
@@ -70,6 +393,13 @@
                 </div>
             </div>
         </div>
+	</div>
+</div>
+<div class="container">
+    <div class="fair">
+
+        <!-- === LOGOS === -->
+
 
         <!-- ============================================================ -->
         <!-- ======== SCORE AND GUIDANCE TEXTS AFTER SUBMITTING  ======== -->
@@ -235,7 +565,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <br><br><br>
-                        <img id="image-f" src="images/icons/F_100.jpg" alt="F">
+                        <img id="image-f" src="images/icons/F_100.png" alt="F">
                     </div>
                     <div class="col-md-10">
                         <h3>FAIR questions <i class="fa fa-eye" aria-hidden="true"></i><i class="fa fa-eye" aria-hidden="true"></i></h3>
@@ -301,7 +631,7 @@
                                             </a>
                                         </label>
                                         <div class="col-sm-1" id="fq3">
-                                            <label class="radio-inline" id="lfq3.1"><input type="radio" name="fq3" id="fq3.1" value=1" onclick="update_F('fq3')"> Yes</label><br>
+                                            <label class="radio-inline" id="lfq3.1"><input type="radio" name="fq3" id="fq3.1" value="1" onclick="update_F('fq3')"> Yes</label><br>
                                             <label class="radio-inline" id="lfq3.2"><input type="radio" name="fq3" id="fq3.2" value="0" onclick="update_F('fq3')"> No</label><br>
                                         </div>
                                         <div class="col-sm-5 col-xs-12 intention"  id="fq3-i">
@@ -327,7 +657,7 @@
                 <!-- ============================ -->
                 <div class="row">
                     <div class="col-md-2">
-                        <img id="image-a" src="images/icons/A_100.jpg" alt="A">
+                        <img id="image-a" src="images/icons/A_100.png" alt="A">
                     </div>
                     <div class="col-md-10">
                         <div class="panel panel-default">
@@ -395,7 +725,7 @@
                 <!-- =============================== -->
                 <div class="row">
                     <div class="col-md-2">
-                        <img id="image-i" src="images/icons/I_100.jpg" alt="I">
+                        <img id="image-i" src="images/icons/I_100.png" alt="I">
                     </div>
                     <div class="col-md-10">
                         <div class="panel panel-default">
@@ -442,7 +772,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <br>
-                        <img id="image-r" src="images/icons/R_100.jpg" alt="R">
+                        <img id="image-r" src="images/icons/R_100.png" alt="R">
                     </div>
                     <div class="col-md-10">
                         <div class="panel panel-default">
@@ -711,32 +1041,9 @@
                         <br>
                         <div class="col-md-4 col-sm-3 col-xs-0"></div>
                         <div class="col-md-3 col-sm-4 col-xs-5">
+							<br><br><br>
                             <button id="submit-button" onclick="submit()" data-toggle="tooltip" data-placement="bottom" title="Submit your answers into the database.  No personal data will be stored."><i class="fa fa-paper-plane"> Submit</i></button>
                             <button id="print-button" onclick="print_results()" data-toggle="tooltip" data-placement="bottom" title="Print results."><i class="fa fa-print"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ========================= -->
-        <!-- ======== FOOTER  ======== -->
-        <!-- ========================= -->
-        <br>
-        <div id="footer">
-            <div class="row">
-                <br>
-                <div class="col-md-2 col-sm-0 col-xs-0"></div>
-                <div class="col-md-10 col-sm-12 footer">
-                    <div class="row">
-                        <div class="col-md-2 col-sm-1 col-xs-0"></div>
-                        <div class="col-md-4 col-sm-5 col-xs-6">
-                            Contact:
-                            <a href="mailto:info@fairsfair.eu">info@fairsfair.eu <i class="fa fa-envelope-o"></i></a>
-                            <br><br>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/privacy-statement" target="_blank">Privacy statement <i class="fa fa-external-link"></i></a>
                         </div>
                     </div>
                 </div>
@@ -801,6 +1108,311 @@
 <!-- ====================================================================================== -->
 <div id="texts" html-file="texts.html"></div>
 <script>includeHTML("texts");</script>
+        <!--End About Section-->
 
-</body>
+        <!--Main Footer-->
+        <footer class="main-footer">
+            <div class="auto-container">
+
+                <!--Widgets Section-->
+                <div class="widgets-section">
+                    <div class="row clearfix">
+
+                        <!--big column-->
+
+
+
+                                <!--Footer Column-->
+                                <div class="footer-column col-md-6 col-sm-6 col-xs-6 text-center"  style="color: whitesmoke;">
+                                     Contact:
+                                       <a href="mailto:info@fairsfair.eu"  style="color: white;">info@fairsfair.eu <i class="fa fa-envelope-o"></i></a>
+                                </div>
+
+                                <!--Footer Column-->
+                                <div class="footer-column col-md-6 col-sm-6 col-xs-6 text-center">
+                                    <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/privacy-statement" target="_blank"  style="color: white;">Privacy statement <i class="fa fa-external-link"></i></a>
+                                </div>
+
+                            </div>
+
+
+
+                </div>
+
+                <!--Footer Bottom-->
+                <div class="footer-bottom">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-2 col-md-1">
+                                    <img style="width: 100%;" src="images/eu-flag.png"/>
+                                </div>
+                                <div class="col-10 col-md-11">
+                                    © Copyright 2020 – FAIRsFAIR “Fostering FAIR Data Practices In Europe” has received funding from the European Union’s Horizon 2020 project call H2020-INFRAEOSC-2018-2020 Grant agreement 831558. The content of this document does not represent the opinion of the European Union, and the European Union is not responsible for any use that might be made of such content.
+                                    <a href="https://www.fairsfair.eu/privacy-policy">Privacy Policy</a>
+                                     |
+                                    <a href="https://www.fairsfair.eu/privacy-policy-full">Terms of Use</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <div class="copyright"></div>
+                        </div>
+                        <div class="pull-right">
+                            <div class="created"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </footer>
+
+    </div>
+    <!--End pagewrapper-->
+
+    <!--Scroll to top-->
+    <div class="scroll-to-top scroll-to-target" data-target="html">
+        <span class="icon fa fa-angle-double-up"></span>
+    </div>
+
+    <script type="text/javascript" src="https://www.fairsfair.eu/sites/default/files/js/js_h8Od-FAGkhR_7A30HaaMaTrO_5Hale-5uw8QHV7ogq0.js"></script>
+    <script type="text/javascript" src="https://www.fairsfair.eu/sites/default/files/js/js_CDCl-1bprIF7l1puWCbtfEQqytsb8jRvaKvfUHl0nKc.js"></script>
+    <script type="text/javascript" src="https://www.fairsfair.eu/sites/default/files/js/js_HSOSVOQAub0755ADwSJDJq4Oq-3sRguwgBxs7ROKK5k.js"></script>
+    <script type="text/javascript">
+    ////--><![CDATA[//><!--
+    (function($) {
+        $(document).ready(function() {
+            effectsIn = Drupal.settings.inEffects;
+            effectsOut = Drupal.settings.outEffects;
+            var options_2 = Drupal.settings.md_slider_options_2;
+            if (!window.listMegaSlide) {
+                window.listMegaSlide = [];
+            }
+            $('.md-slide-items').each(function(index, item) {
+                if ($(item).attr('id') == 'md-slider-2-block') {
+                    listMegaSlide[index] = $('#md-slider-2-block').mdSlider(options_2);
+                }
+            });
+        });
+    })(jQuery);
+    //--><!]]>
+    </script>
+    <script type="text/javascript" src="https://www.fairsfair.eu/sites/default/files/js/js_-fwlSqBdxM2nD_GhMoLXI0ZTUXWv7KzFBzNoEC2V6_c.js"></script>
+    <script type="text/javascript">
+    ////--><![CDATA[//><!--
+    window.a2a_config = window.a2a_config || {};
+    window.da2a = {
+        done: false,
+        html_done: false,
+        script_ready: false,
+        script_load: function() {
+            var a = document.createElement('script'),
+                s = document.getElementsByTagName('script')[0];
+            a.type = 'text/javascript';
+            a.async = true;
+            a.src = 'https://static.addtoany.com/menu/page.js';
+            s.parentNode.insertBefore(a, s);
+            da2a.script_load = function() {};
+        },
+        script_onready: function() {
+            da2a.script_ready = true;
+            if (da2a.html_done)
+                da2a.init();
+        },
+        init: function() {
+            for (var i = 0, el, target, targets = da2a.targets, length = targets.length; i < length; i++) {
+                el = document.getElementById('da2a_' + (i + 1));
+                target = targets[i];
+                a2a_config.linkname = target.title;
+                a2a_config.linkurl = target.url;
+                if (el) {
+                    a2a.init('page', {
+                        target: el
+                    });
+                    el.id = '';
+                }
+                da2a.done = true;
+            }
+            da2a.targets = [];
+        }
+    };
+    (function($) {
+        Drupal.behaviors.addToAny = {
+            attach: function(context, settings) {
+                if (context !== document && window.da2a) {
+                    if (da2a.script_ready)
+                        a2a.init_all();
+                    da2a.script_load();
+                }
+            }
+        }
+    })(jQuery);
+    a2a_config.callbacks = a2a_config.callbacks || [];
+    a2a_config.callbacks.push({
+        ready: da2a.script_onready
+    });
+    a2a_config.overlays = a2a_config.overlays || [];
+    a2a_config.templates = a2a_config.templates || {};
+    //--><!]]>
+    </script>
+    <script type="text/javascript" src="https://www.fairsfair.eu/sites/default/files/js/js_yCrmsQINpUPNRI6rUxfsk8Kl2hKN6287Tw4VZrsmyM8.js"></script>
+    <script type="text/javascript">
+    ////--><![CDATA[//><!--
+    jQuery.extend(Drupal.settings, {
+        "basePath": "\/",
+        "pathPrefix": "",
+        "ajaxPageState": {
+            "theme": "arcadia",
+            "theme_token": "Go3_myG3CeqJrQDnBJZ_0h1qPvtQyZUCLB3febIOIrM",
+            "js": {
+                "0": 1,
+                "sites\/all\/modules\/jquery_update\/replace\/jquery\/1.10\/jquery.min.js": 1,
+                "misc\/jquery-extend-3.4.0.js": 1,
+                "misc\/jquery-html-prefilter-3.5.0-backport.js": 1,
+                "misc\/jquery.once.js": 1,
+                "misc\/drupal.js": 1,
+                "sites\/all\/modules\/admin_menu\/admin_devel\/admin_devel.js": 1,
+                "sites\/all\/modules\/ckeditor_accordion\/js\/ckeditor-accordion.js": 1,
+                "sites\/all\/modules\/trust_ppg\/js\/disabler.js": 1,
+                "sites\/all\/modules\/md_slider\/js\/jquery.touchwipe.js": 1,
+                "sites\/all\/modules\/md_slider\/js\/modernizr.js": 1,
+                "sites\/all\/modules\/md_slider\/js\/jquery-migrate-1.2.1.min.js": 1,
+                "sites\/all\/modules\/md_slider\/js\/jquery.easing.js": 1,
+                "sites\/all\/modules\/md_slider\/js\/md-slider.js": 1,
+                "1": 1,
+                "sites\/all\/modules\/captcha\/captcha.js": 1,
+                "sites\/all\/modules\/trust_ppg\/js\/trust_ppg.js": 1,
+                "2": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/js\/jquery.themepunch.revolution.min.js": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/js\/jquery.themepunch.tools.min.js": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/js\/extensions\/revolution.extension.actions.min.js": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/js\/extensions\/revolution.extension.carousel.min.js": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/js\/extensions\/revolution.extension.kenburn.min.js": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/js\/extensions\/revolution.extension.layeranimation.min.js": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/js\/extensions\/revolution.extension.migration.min.js": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/js\/extensions\/revolution.extension.navigation.min.js": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/js\/extensions\/revolution.extension.parallax.min.js": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/js\/extensions\/revolution.extension.slideanims.min.js": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/js\/extensions\/revolution.extension.video.min.js": 1,
+                "sites\/all\/themes\/arcadia\/js\/main-slider-script.js": 1,
+                "sites\/all\/themes\/arcadia\/js\/bootstrap.min.js": 1,
+                "sites\/all\/themes\/arcadia\/js\/jquery.fancybox.js": 1,
+                "sites\/all\/themes\/arcadia\/js\/jquery-ui.js": 1,
+                "sites\/all\/themes\/arcadia\/js\/owl.js": 1,
+                "sites\/all\/themes\/arcadia\/js\/jquery.mousewheel.min.js": 1,
+                "sites\/all\/themes\/arcadia\/js\/appear.js": 1,
+                "sites\/all\/themes\/arcadia\/js\/wow.js": 1,
+                "sites\/all\/themes\/arcadia\/js\/script.js": 1
+            },
+            "css": {
+                "modules\/system\/system.base.css": 1,
+                "modules\/system\/system.menus.css": 1,
+                "modules\/system\/system.messages.css": 1,
+                "modules\/system\/system.theme.css": 1,
+                "sites\/all\/modules\/simplenews\/simplenews.css": 1,
+                "sites\/all\/modules\/ckeditor_accordion\/css\/ckeditor-accordion.css": 1,
+                "modules\/comment\/comment.css": 1,
+                "sites\/all\/modules\/date\/date_api\/date.css": 1,
+                "sites\/all\/modules\/date\/date_popup\/themes\/datepicker.1.7.css": 1,
+                "modules\/field\/theme\/field.css": 1,
+                "modules\/node\/node.css": 1,
+                "modules\/search\/search.css": 1,
+                "modules\/user\/user.css": 1,
+                "sites\/all\/modules\/views\/css\/views.css": 1,
+                "sites\/all\/modules\/ckeditor\/css\/ckeditor.css": 1,
+                "sites\/all\/modules\/ctools\/css\/ctools.css": 1,
+                "sites\/all\/modules\/md_slider\/css\/animate.css": 1,
+                "sites\/all\/modules\/md_slider\/css\/md-slider.css": 1,
+                "0": 1,
+                "sites\/all\/modules\/md_slider\/css\/md-slider-style.css": 1,
+                "1": 1,
+                "sites\/all\/modules\/trust_ppg\/css\/main.css": 1,
+                "sites\/all\/modules\/trust_ppg\/css\/modal.css": 1,
+                "sites\/all\/modules\/addtoany\/addtoany.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/bootstrap.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/animate.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/font-awesome.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/linearicons.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/hover.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/jquery.fancybox.min.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/owl.css": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/css\/settings.css": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/css\/layers.css": 1,
+                "sites\/all\/themes\/arcadia\/plugins\/revolution\/css\/navigation.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/text-rotate.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/style.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/responsive.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/layout.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/ckeditor-accordion.css": 1,
+                "sites\/all\/themes\/arcadia\/css\/custom.css": 1
+            }
+        },
+        "trust_ppg": {
+            "policy_url": "privacy-policy-full",
+            "ga_guid": "",
+            "main_text": "\u003Cbr \/\u003E\u003Cp\u003ECookies consist of portions of code installed in the browser that assist the owner in providing the service based on the purposes described. Some of the purposes of installing cookies may also require the consent of the user. When the installation of cookies takes place on the basis of consent, this consent can be revoked freely at any time following the instructions contained in this document.\u003C\/p\u003E",
+            "policy_label": "Please read the privacy policy",
+            "cookie_policy": "245",
+            "cookie_3rdparties": "246",
+            "cookie_additional": "0",
+            "cookie_policy_label": "Strictly Necessary Cookies",
+            "cookie_3rdparties_label": "3rd Parties Cookies",
+            "cookie_additional_label": "N\/A",
+            "cookie_policy_body": "These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms. You can set your browser to block or alert you about these cookies, but some parts of the site will not then work. These cookies do not store any personally identifiable information. ",
+            "cookie_3rdparties_body": "These cookies enable the website to provide enhanced functionality and personalisation. They may be set by third party providers whose services we have added to our pages. If you do not allow these cookies then some or all of these services may not function properly. We\u0027d like also to set Google Analytics cookies to help us to improve our website by collecting and reporting information on how you use it. The cookies collect information in a way that does not directly identify anyone. Under current GDPR, the installation of these third-party cookies requires your prior consent. For more information on how these cookies work, please see our \u0027Cookies policy\u0027.",
+            "cookie_additional_body": "N\/A"
+        },
+        "inEffects": ["bounceIn", "bounceInDown", "bounceInUp", "bounceInLeft", "bounceInRight", "fadeIn", "fadeInUp", "fadeInDown", "fadeInLeft", "fadeInRight", "fadeInUpBig", "fadeInDownBig", "fadeInLeftBig", "fadeInRightBig", "flipInX", "flipInY", "foolishIn", "lightSpeedIn", "puffIn", "rollIn", "rotateIn", "rotateInDownLeft", "rotateInDownRight", "rotateInUpLeft", "rotateInUpRight", "twisterInDown", "twisterInUp", "swap", "swashIn", "tinRightIn", "tinLeftIn", "tinUpIn", "tinDownIn", "vanishIn"],
+        "outEffects": ["bombRightOut", "bombLeftOut", "bounceOut", "bounceOutDown", "bounceOutUp", "bounceOutLeft", "bounceOutRight", "fadeOut", "fadeOutUp", "fadeOutDown", "fadeOutLeft", "fadeOutRight", "fadeOutUpBig", "fadeOutDownBig", "fadeOutLeftBig", "fadeOutRightBig", "flipOutX", "flipOutY", "foolishOut", "hinge", "holeOut", "lightSpeedOut", "puffOut", "rollOut", "rotateOut", "rotateOutDownLeft", "rotateOutDownRight", "rotateOutUpLeft", "rotateOutUpRight", "rotateDown", "rotateUp", "rotateLeft", "rotateRight", "swashOut", "tinRightOut", "tinLeftOut", "tinUpOut", "tinDownOut", "vanishOut"],
+        "md_slider_options_2": {
+            "fullwidth": true,
+            "transitionsSpeed": 800,
+            "width": "1170",
+            "height": "220",
+            "enableDrag": true,
+            "responsive": true,
+            "pauseOnHover": false,
+            "loop": false,
+            "showLoading": false,
+            "loadingPosition": "bottom",
+            "showArrow": false,
+            "showBullet": false,
+            "showNavigationLinks": false,
+            "posBullet": "5",
+            "showThumb": false,
+            "posThumb": "1",
+            "slideShowDelay": "8000",
+            "slideShow": false,
+            "styleBorder": "0",
+            "styleShadow": "0",
+            "videoBox": false,
+            "autoplayVideo": false
+        },
+        "ckeditor_accordion": {
+            "collapseAll": 1
+        }
+    });
+    //--><!]]>
+    </script>
+
+    <script type="text/javascript">
+    ////--><![CDATA[//><!--
+    da2a.targets = [
+    {
+        title: "FAIRData Forum",
+        url: "https:\/\/www.fairsfair.eu\/fairdata-forum"
+    }];
+    da2a.html_done = true;
+    if (da2a.script_ready && !da2a.done)
+        da2a.init();
+    da2a.script_load();
+    //--><!]]>
+    </script>
+
+  </body>
 </html>
+
