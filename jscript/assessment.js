@@ -31,7 +31,6 @@
         $('document').ready(initialise);
 
         function initialise() {
-            update();
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
             hide_intention_questions();
             document.getElementById("score-and-guidance").style.display = "none"
@@ -130,64 +129,27 @@
             $('#modal').modal('show');
         }
 
-        /* ------------------ Update all ------------------- */
-
-        function update() {
-            /*
-            In all of the following variable names, if there is a prefix of [fair], it stands for
-            Findable, Accessible, Interoperable and Reusable respectively. Letter q refers to a question,
-            and letter a to an answer. For example, '#aq1' is a reference to question 1 for Accessible.
-            */
-            update_F();
-            update_A();
-            update_I();
-            update_R();
-        }
-
-        /* ----------------------- F ----------------------- */
-        function update_F(question) {
+        /* --------------------- Update -------------------- */
+        function update(question) {
             show_intention_question(question);
             show_info_tip(question);
             update_print_letters(question);
             set_to_default_color(question);
         }
 
-        /* ----------------------- A ----------------------- */
-        function update_A(question) {
-            show_intention_question(question);
-            show_info_tip(question);
-            update_print_letters(question);
-            set_to_default_color(question);
-        }
-
-        /* ------------------------ I ----------------------- */
-        function update_I(question) {
-            show_intention_question(question);
-            show_info_tip(question);
-            update_print_letters(question);
-            set_to_default_color(question);
-        }
-
-        /* ----------------------- R ------------------------ */
-        function update_R(question) {
-            show_intention_question(question);
-            show_info_tip(question);
-            update_print_letters(question);
-            set_to_default_color(question);
-        }
-
-        /* ----------------------- Y ----------------------- */
+        /* --------------- Update About You ---------------- */
         function update_Y(question) {
             set_to_default_color(question);
         }
 
-        /* ----------------------- Q ----------------------- */
+        /* ---------------- Update Feedback ---------------- */
         function update_Q(question) {
             set_to_default_color(question);
         }
 
-        /* --------------------- Intention --------------------- */
+        /* ------------------- Intention ------------------- */
         function update_intention(question) {
+            update_print_letters(question);
             set_to_default_color(question);
         }
 
@@ -505,5 +467,4 @@
             document.getElementById("image-i").style.display = "block"
             document.getElementById("image-r").style.display = "block"
             document.getElementById("show-summary").style.display = "block"
-            update();
         }
