@@ -25,7 +25,7 @@
 			"name": "Data Archiving & Networked Services DANS",
 			"address": "Anna van Saksenlaan 51, 2593 HW Den Haag",
 			"url": "https://dans.knaw.nl",
-			"logo": "https://fairaware.dans.knaw.nl/images/dans.jpg",
+			"logo": "https://fairaware.dans.knaw.nl/images/dans.png",
 			"contactPoint": {
 				"@type": "ContactPoint",
 				"name": "DANS",
