@@ -28,7 +28,8 @@
 
         /* -------------------- Initialize -------------------- */
 
-        $('document').ready(initialise);
+        $(document).ready(initialise);
+        $(document).ready(function(){ $('[rel=tooltip]').tooltip({ trigger: "hover" }); });
 
         function initialise() {
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
