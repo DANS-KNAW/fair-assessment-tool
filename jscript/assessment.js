@@ -267,7 +267,7 @@
             let m = new Map();
             neg = new Map();
             var today = new Date();
-            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
             m.set("date", date)
             for (let [letter, questions] of fields) {
                 for(let i = 0; i < questions.length; i++) {
