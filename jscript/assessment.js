@@ -9,6 +9,7 @@
             <!-- The value of the item is the number of possible answers to the respective question. -->
             <!-- For questions where the answer is given in free text, the value is 0. -->
             <!-- Notice: It is important to update this Map when questions are removed or added! -->
+            ['C', [0]],
             ['Y', [62, 6, 9]],
             ['F', [2, 2, 2]],
             ['A', [2, 2]],
@@ -248,7 +249,7 @@
 
         function excluded(question) {
             <!-- questions excluded from validation -->
-            return question == "qq1" || question == "qq2" ||question == "qq3";
+            return question == "cq1" || question == "qq1" || question == "qq2" ||question == "qq3";
         }
 
         function intention_questions_answer(question) {
@@ -281,6 +282,7 @@
                 }
             }
             <!-- set free text fields -->
+            m.set("cq1", document.getElementById("cq1").value.trim())
             m.set("qq2", document.getElementById("qq2").value.replace(/(\n)+/g, " ").replace(/,/g, " ").replace(/;/g, " ").trim())
             m.set("qq3", document.getElementById("qq3").value.replace(/(\n)+/g, " ").replace(/,/g, " ").replace(/;/g, " ").trim())
 
