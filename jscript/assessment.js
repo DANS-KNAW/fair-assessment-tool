@@ -471,3 +471,14 @@
             document.getElementById("image-r").style.display = "block"
             document.getElementById("show-summary").style.display = "block"
         }
+
+        /* --------------------- Social media ------------------- */
+
+        var social_media = function( url ) {
+            let text = (url.includes("twitter")) ? "I just used #FAIRAwareTool to assess and increase my knowledge on the #FAIR data principles! Try it out for yourself here: https://fairaware.dans.knaw.nl/" +
+                        "\n\n@DANS_knaw_nwo | @FAIRsFAIR_eu | #FAIRAware" : "";
+            let mode = (url.includes("skype")) ? "_self" : "_blank"
+            let dimensions = (url.includes("linkedin") || url.includes("wa.me")) ? "width=1200,height=800" : "width=600,height=600"
+            window.open(url + encodeURIComponent(text), mode, dimensions);
+        }
+
