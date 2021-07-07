@@ -478,18 +478,19 @@
             let url = "";
             let linkedin_company = "dans";
             whatsapp_number = "31613835135";
+            skype_id = "vesaakerman";
             switch(media) {
                 case "twitter":
                     url = "https://twitter.com/intent/tweet?text="
                     break;
                 case "linkedin":
-                    url = "https://www.linkedin.com/company/" + linkedin_company + "/mycompany"
+                    url = "https://www.linkedin.com/company/" + linkedin_company
                     break;
                 case "whatsapp":
                     url = "https://wa.me/" + whatsapp_number
                     break;
                 case "skype":
-                    url = "skype:vesaakerman?chat"
+                    url = "skype:" + skype_id + "?chat"
                     break;
                 default:
             }
