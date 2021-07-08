@@ -476,27 +476,26 @@
 
         var social_media = function( media ) {
             let url = "";
-            linkedin_company = "fairsfair";
             skype_id = "vesaakerman";
             switch(media) {
                 case "twitter":
                     url = "https://twitter.com/intent/tweet?text="
-                    break;
+                    break
                 case "linkedin":
-                    url = "https://www.linkedin.com/company/" + linkedin_company
-                    break;
+                    url = "https://www.linkedin.com/shareArticle?mini=true&url=https://fairaware.dans.knaw.nl"
+                    break
                 case "whatsapp":
                     url = "https://wa.me/?text="
-                    break;
+                    break
                 case "skype":
                     url = "skype:" + skype_id + "?chat"
-                    break;
+                    break
                 default:
             }
-            text = "I just used #FAIRAwareTool to assess and increase my knowledge on the #FAIR data principles! Try it out for yourself here: https://fairaware.dans.knaw.nl/";
+            text = (media == "linkedin") ? "" : "I just used #FAIRAwareTool to assess and increase my knowledge on the #FAIR data principles! Try it out for yourself here: https://fairaware.dans.knaw.nl/";
             if (media == "twitter") text = text + "\n\n@DANS_knaw_nwo | @FAIRsFAIR_eu | #FAIRAware";
             mode = (media =="skype") ? "_self" : "_blank"
-            dimensions = (media =="linkedin" || media =="whatsapp") ? "width=1200,height=800" : "width=600,height=600"
-            window.open(url + encodeURIComponent(text), mode, dimensions);
+            dimensions = (media =="whatsapp") ? "width=1200,height=800" : "width=600,height=600"
+            window.open(url + encodeURIComponent(text), mode, dimensions)
         }
 
