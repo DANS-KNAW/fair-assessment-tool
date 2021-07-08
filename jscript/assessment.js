@@ -476,7 +476,7 @@
 
         var social_media = function( media ) {
             let url = "";
-            let linkedin_company = "dans";
+            linkedin_company = "fairsfair";
             whatsapp_number = "31613835135";
             skype_id = "vesaakerman";
             switch(media) {
