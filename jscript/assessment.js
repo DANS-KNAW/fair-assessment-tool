@@ -477,7 +477,6 @@
         var social_media = function( media ) {
             let url = "";
             linkedin_company = "fairsfair";
-            whatsapp_number = "31613835135";
             skype_id = "vesaakerman";
             switch(media) {
                 case "twitter":
@@ -487,17 +486,17 @@
                     url = "https://www.linkedin.com/company/" + linkedin_company
                     break;
                 case "whatsapp":
-                    url = "https://wa.me/" + whatsapp_number
+                    url = "https://wa.me/?text="
                     break;
                 case "skype":
                     url = "skype:" + skype_id + "?chat"
                     break;
                 default:
             }
-            let text = (media =="twitter") ? "I just used #FAIRAwareTool to assess and increase my knowledge on the #FAIR data principles! Try it out for yourself here: https://fairaware.dans.knaw.nl/" +
-                        "\n\n@DANS_knaw_nwo | @FAIRsFAIR_eu | #FAIRAware" : "";
-            let mode = (media =="skype") ? "_self" : "_blank"
-            let dimensions = (media =="linkedin" || media =="whatsapp") ? "width=1200,height=800" : "width=600,height=600"
+            text = "I just used #FAIRAwareTool to assess and increase my knowledge on the #FAIR data principles! Try it out for yourself here: https://fairaware.dans.knaw.nl/";
+            if (media == "twitter") text = text + "\n\n@DANS_knaw_nwo | @FAIRsFAIR_eu | #FAIRAware";
+            mode = (media =="skype") ? "_self" : "_blank"
+            dimensions = (media =="linkedin" || media =="whatsapp") ? "width=1200,height=800" : "width=600,height=600"
             window.open(url + encodeURIComponent(text), mode, dimensions);
         }
 
