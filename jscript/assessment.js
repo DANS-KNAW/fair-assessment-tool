@@ -487,15 +487,11 @@
                 case "whatsapp":
                     url = "https://wa.me/?text="
                     break
-                case "skype":
-                    url = "skype:" + skype_id + "?chat"
-                    break
                 default:
             }
             text = (media == "linkedin") ? "" : "I just used #FAIRAwareTool to assess and increase my knowledge on the #FAIR data principles! Try it out for yourself here: https://fairaware.dans.knaw.nl/";
             if (media == "twitter") text = text + "\n\n@DANS_knaw_nwo | @FAIRsFAIR_eu | #FAIRAware";
-            mode = (media =="skype") ? "_self" : "_blank"
             dimensions = (media =="whatsapp") ? "width=1200,height=800" : "width=600,height=600"
-            window.open(url + encodeURIComponent(text), mode, dimensions)
+            window.open(url + encodeURIComponent(text), "_blank", dimensions)
         }
 
