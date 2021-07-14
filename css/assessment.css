@@ -38,6 +38,8 @@
     .dropdown-submenu:hover { background-color: #BCBCBC; }
     .intention { padding-left: 5px; }
     .feedback-textarea { width: 96%; margin-left: 35px; }
+    .french-flag-description { visibility: hidden; }
+    .french-flag:hover .french-flag-description { visibility: visible; }
     #main-title {font-size: 40px; color: #2795c8;}
     #image-f, #image-a, #image-i, #image-r { padding-top: 10px; }
     #awareness-f, #awareness-a, #awareness-i, #awareness-r, #willingness-f, #willingness-a, #willingness-i, #willingness-r { width: 20%; heigth: 20%; }
