@@ -16,7 +16,7 @@
 			"contactPoint": {
 				"@type": "ContactPoint",
 				"name": "FAIRsFAIR",
-				"email": "info@fairsfair.eu"
+				"email": "fair-aware@dans.knaw.nl"
 			}
 		},
 		"maintainer": {
