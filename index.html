@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="FAIR-Aware online assessment tool"/>
+    <meta property="og:description" content="FAIR-Aware is an disciplinary-agnostic online tool developed by the FAIRsFAIR project. Different scientific communities can adapt it to their own use."/>
+    <meta property="og:image" content="https://fairaware.dans.knaw.nl/images/logos/fairaware_linkedin.png"/>
+    <meta property="og:image:width" content="180" />
+    <meta property="og:image:height" content="110" />
+    <meta property="og:url" content="https://fairaware.dans.knaw.nl" />
 
     <title>FAIR-Aware</title>
 
@@ -13,9 +19,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
-    <!-- FontAwesome via BootstrapCDN -->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <!-- Latest compiled and minified JavaScript -->
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
@@ -136,10 +142,37 @@
             </div>
         </div>
 
-        <!-- =========================== -->
-        <!-- ======== ABOUT YOU ======== -->
-        <!-- =========================== -->
         <div id="contents">
+
+            <!-- ======================== -->
+            <!-- ======== COURSE ======== -->
+            <!-- ======================== -->
+            <div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+                        <h3>Course <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i></h3>
+
+                        <div class="row">
+                            <div class="col-md-3" id="C-i-1-title">
+                                <p>Course identification
+                                    <a href="#fhelp" data-toggle="modal" onclick="show_modal('C-i-1')">
+                                        <span class="glyphicon glyphicon-info-sign" ></span>
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="col-md-9">
+                                <input id="cq1"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <!-- =========================== -->
+            <!-- ======== ABOUT YOU ======== -->
+            <!-- =========================== -->
             <div class="context">
                 <div class="row">
                     <div class="col-md-2"></div>
@@ -238,7 +271,7 @@
                         <img id="image-f" src="images/icons/F_100.jpg" alt="F">
                     </div>
                     <div class="col-md-10">
-                        <h3>FAIR questions <i class="fa fa-eye" aria-hidden="true"></i><i class="fa fa-eye" aria-hidden="true"></i></h3>
+                        <h3>FAIR questions <i class="far fa-eye" aria-hidden="true"></i><i class="far fa-eye" aria-hidden="true"></i></h3>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
@@ -558,7 +591,7 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-10 feedback">
-                            <h3>Feedback <i class="fa fa-hand-o-left" aria-hidden="true"></i></h3>
+                            <h3>Feedback <i class="far fa-hand-point-left" aria-hidden="true"></i></h3>
                             <p>Please answer the four questions below to help us improve the tool and make it even more relevant for the community.</p>
                             <div id="Q-i-1-title">
                                 <br>
@@ -569,7 +602,7 @@
                             <div>
                                 <ul>
                                     <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 col-sm-7 col-xs-10">
                                             <label id="lqq1.1">1. Globally unique persistent identifier (PID)&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
                                         </div>
                                         <div class="col-md-1">
@@ -577,7 +610,7 @@
                                         </div>
                                     </div>
                                     <div  class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 col-sm-7 col-xs-10">
                                             <label id="lqq1.2">2. Metadata for citation and discovery including PID&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-2')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
                                         </div>
                                         <div class="col-md-1">
@@ -585,7 +618,7 @@
                                         </div>
                                     </div>
                                     <div  class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 col-sm-7 col-xs-10">
                                             <label id="lqq1.3">3. Metadata available online is readable by humans and <br>&nbsp;&nbsp;&nbsp;&nbsp;machines&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('F-i-3')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
                                         </div>
                                         <div class="col-md-1">
@@ -593,7 +626,7 @@
                                         </div>
                                     </div>
                                     <div  class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 col-sm-7 col-xs-10">
                                             <label id="lqq1.4">4. Metadata includes licence, level of access and <br>&nbsp;&nbsp;&nbsp;&nbsp;conditions to access the data&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
                                         </div>
                                         <div class="col-md-1">
@@ -601,7 +634,7 @@
                                         </div>
                                     </div>
                                     <div  class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 col-sm-7 col-xs-10">
                                             <label id="lqq1.5">5. Persistence of metadata&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('A-i-2')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
                                         </div>
                                         <div class="col-md-1">
@@ -609,7 +642,7 @@
                                         </div>
                                     </div>
                                     <div  class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 col-sm-7 col-xs-10">
                                             <label id="lqq1.6">6. Use of controlled vocabularies in metadata&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('I-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
                                         </div>
                                         <div class="col-md-1">
@@ -617,7 +650,7 @@
                                         </div>
                                     </div>
                                     <div  class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 col-sm-7 col-xs-10">
                                             <label id="lqq1.7">7. Metadata includes provenance&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-1')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
                                         </div>
                                         <div class="col-md-1">
@@ -625,7 +658,7 @@
                                         </div>
                                     </div>
                                     <div  class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 col-sm-7 col-xs-10">
                                             <label id="lqq1.8">8. Community-endorsed metadata&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-2')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
                                         </div>
                                         <div class="col-md-1">
@@ -633,7 +666,7 @@
                                         </div>
                                     </div>
                                     <div  class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 col-sm-7 col-xs-10">
                                             <label id="lqq1.9">9. Data in a preferred format for reuse & preservation&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-3')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
                                         </div>
                                         <div class="col-md-1">
@@ -641,7 +674,7 @@
                                         </div>
                                     </div>
                                     <div  class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 col-sm-7 col-xs-10">
                                             <label id="lqq1.10">10. Digital curation and preservation&nbsp;<a href="#fhelp" data-toggle="modal" onclick="show_modal('R-i-4')"><span class="glyphicon glyphicon-info-sign" ></span></a></label>
                                         </div>
                                         <div class="col-md-1">
@@ -709,7 +742,7 @@
                 <div class="col-md-10 col-sm-10 col-xs-10">
                     <div class="row" id="icons">
                         <br>
-                        <div class="col-md-4 col-sm-3 col-xs-0"></div>
+                        <div class="col-md-5 col-sm-3 col-xs-2"></div>
                         <div class="col-md-3 col-sm-4 col-xs-5">
                             <button id="submit-button" onclick="submit()" data-toggle="tooltip" rel="tooltip" data-placement="bottom" title="Submit your answers into the database.  No personal data will be stored."><i class="fa fa-paper-plane"> Submit</i></button>
                             <button id="print-button" onclick="print_results()" data-toggle="tooltip" rel="tooltip" data-placement="bottom" title="Print results."><i class="fa fa-print"></i></button>
@@ -730,13 +763,21 @@
                 <div class="col-md-10 col-sm-12 footer">
                     <div class="row">
                         <div class="col-md-2 col-sm-1 col-xs-0"></div>
-                        <div class="col-md-4 col-sm-5 col-xs-6">
+                        <div class="col-md-3 col-sm-4 col-xs-5">
                             Contact:
                             <a href="mailto:fair-aware@dans.knaw.nl">fair-aware@dans.knaw.nl <i class="fa fa-envelope-o"></i></a>
                             <br><br>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-md-4 col-sm-5 col-xs-4">
                             <a href="https://dans.knaw.nl/en/about/organisation-and-policy/legal-information/privacy-statement" target="_blank">Privacy statement <i class="fa fa-external-link"></i></a>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <a href="https://doranum.fr/enjeux-benefices/outil-fair-aware" target="_blank">
+                                <div class="french-flag">
+                                    <img src="images/logos/french_flag.jpg" alt="French flag" width="20" height="12">
+                                    <div class="french-flag-description">French version <i class="fa fa-external-link"></i></div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -749,7 +790,7 @@
                         <div class="col-md-1  col-sm-1 col-xs-1">
                             <img style="width: 100%;" src="images/logos/eu-flag.png"/>
                         </div>
-                        <div class="col-md-9  col-sm-12 col-xs-12">
+                        <div class="col-md-9  col-sm-11 col-xs-11">
                             © Copyright 2020 – FAIRsFAIR “Fostering FAIR Data Practices In Europe” has received funding from the European Union’s Horizon 2020 project call
                             H2020-INFRAEOSC-2018-2020 Grant agreement 831558. The content of this document does not represent the opinion of the European Union,
                             and the European Union is not responsible for any use that might be made of such content.<br><br>
@@ -757,6 +798,29 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-0 col-xs-0"></div>
+                <div class="col-md-10 col-sm-12 footer">
+                   <div class="row social">
+                        <div class="col-md-4  col-sm-4 col-xs-1">
+                        </div>
+                        <div class="col-md-1  col-sm-1 col-xs-2">
+                            <a onclick="social_media('twitter')"><i class="fab fa-twitter-square"></i></a>
+                        </div>
+                        <div class="col-md-1  col-sm-1 col-xs-2">
+                            <a onclick="social_media('linkedin')"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                        <div class="col-md-1  col-sm-1 col-xs-2">
+                            <a href="mailto:?subject=FAIR-Aware assessment tool&body=I just used FAIR-Aware Assessment tool to assess and increase my knowledge on the FAIR data principles! %0D%0ATry it out for yourself here: https://fairaware.dans.knaw.nl"><i class="fas fa-envelope-square"></i></a>
+                        </div>
+                        <div class="col-md-1  col-sm-1 col-xs-2">
+                            <a onclick="social_media('whatsapp')"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -768,9 +832,9 @@
 </div>
 
 
-<!-- ====================================================================================== -->
-<!-- =================================== MODAL WINDOW  ==================================== -->
-<!-- ====================================================================================== -->
+<!-- ======================================================================================= -->
+<!-- =================================== MODAL WINDOWS  ==================================== -->
+<!-- ======================================================================================= -->
 <div id="modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -781,6 +845,37 @@
             <div class="modal-body" id="modal-body"></div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="download-authorization" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <p>Download answers</p> (restricted to administrators and trainers)
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-2 col-sm-0 col-xs-0">Email</div>
+                    <div class="col-md-10 col-sm-12"><input id="download-id" size="30"/></div><br><br>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-sm-0 col-xs-0">Password</div>
+                    <div class="col-md-10 col-sm-12"><input type="password" id="download-pw" size="30"/></div><br><br>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-sm-0 col-xs-0">Code</div>
+                    <div class="col-md-10 col-sm-12"><input id="download-code" size="30"/></div><br><br>
+                <div class="row">
+                    <div class="col-md-2 col-sm-0 col-xs-0"></div>
+                    <div class="col-md-10 col-sm-12">
+                        <button type="button" class="btn" data-dismiss="modal" onclick="authenticate_and_download()">Submit</button>
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
     </div>
@@ -823,3 +918,4 @@
 
 </body>
 </html>
+

@@ -22,16 +22,24 @@
     .modal-header, .modal-footer { margin: 1px; font-size: 18px; font-weight: 600; }
     .modal-body {background-color: #FDFDFD; margin-left: 1px; }
     .footer {background-color: #f5f5f5; padding-top: 20px; }
+    .footer .social { font-size: 35px; }
     .fa-external-link, .fa-envelope-o, .fa-long-arrow-left {color: #2795c8;}
     .fa-print {font-size: 50px; color: #2795c8;}
     .fa-paper-plane {font-size: 40px; color: #2795c8;}
     .fa-download {font-size: 10px; color: #2795c8;}
+    .fa-twitter-square { color: #1DA1F2; }
+    .fa-linkedin { color: #0177B5; }
+    .fa-envelope-square { color: #0166FF; }
+    .fa-whatsapp { color: #01E676; }
+    .fa-skype { color: #01AFF0; }
     .work-category {color: #606060;}
     .dropdown-submenu {position: relative;}
     .dropdown-submenu .dropdown-menu {top: 0; left: 100%; margin-top: -1px;}
     .dropdown-submenu:hover { background-color: #BCBCBC; }
     .intention { padding-left: 5px; }
     .feedback-textarea { width: 96%; margin-left: 35px; }
+    .french-flag-description { visibility: hidden; }
+    .french-flag:hover .french-flag-description { visibility: visible; }
     #main-title {font-size: 40px; color: #2795c8;}
     #image-f, #image-a, #image-i, #image-r { padding-top: 10px; }
     #awareness-f, #awareness-a, #awareness-i, #awareness-r, #willingness-f, #willingness-a, #willingness-i, #willingness-r { width: 20%; heigth: 20%; }

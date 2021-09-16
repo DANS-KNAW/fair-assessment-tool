@@ -9,6 +9,7 @@
             <!-- The value of the item is the number of possible answers to the respective question. -->
             <!-- For questions where the answer is given in free text, the value is 0. -->
             <!-- Notice: It is important to update this Map when questions are removed or added! -->
+            ['C', [0]],
             ['Y', [62, 6, 9]],
             ['F', [2, 2, 2]],
             ['A', [2, 2]],
@@ -248,7 +249,7 @@
 
         function excluded(question) {
             <!-- questions excluded from validation -->
-            return question == "qq1" || question == "qq2" ||question == "qq3";
+            return question == "cq1" || question == "qq1" || question == "qq2" ||question == "qq3";
         }
 
         function intention_questions_answer(question) {
@@ -281,6 +282,7 @@
                 }
             }
             <!-- set free text fields -->
+            m.set("cq1", document.getElementById("cq1").value.trim())
             m.set("qq2", document.getElementById("qq2").value.replace(/(\n)+/g, " ").replace(/,/g, " ").replace(/;/g, " ").trim())
             m.set("qq3", document.getElementById("qq3").value.replace(/(\n)+/g, " ").replace(/,/g, " ").replace(/;/g, " ").trim())
 
@@ -469,3 +471,27 @@
             document.getElementById("image-r").style.display = "block"
             document.getElementById("show-summary").style.display = "block"
         }
+
+        /* --------------------- Social media ------------------- */
+
+        var social_media = function( media ) {
+            let url = "";
+            skype_id = "vesaakerman";
+            switch(media) {
+                case "twitter":
+                    url = "https://twitter.com/intent/tweet?text="
+                    break
+                case "linkedin":
+                    url = "https://www.linkedin.com/shareArticle?mini=true&url=https://fairaware.dans.knaw.nl"
+                    break
+                case "whatsapp":
+                    url = "https://wa.me/?text="
+                    break
+                default:
+            }
+            text = (media == "linkedin") ? "" : "I just used #FAIRAwareTool to assess and increase my knowledge on the #FAIR data principles! Try it out for yourself here: https://fairaware.dans.knaw.nl/";
+            if (media == "twitter") text = text + "\n\n@DANS_knaw_nwo | @FAIRsFAIR_eu | #FAIRAware";
+            dimensions = (media =="whatsapp") ? "width=1200,height=800" : "width=600,height=600"
+            window.open(url + encodeURIComponent(text), "_blank", dimensions)
+        }
+
