@@ -108,7 +108,7 @@
 
         /* ----------- Show text in modal window ------------ */
 
-        function show_modal(id_prefix) {
+        function show_modal(id_prefix, modal_nr=1) {
             var title = document.getElementById(id_prefix + "-title").textContent;
             var more = document.getElementById(id_prefix + "-more");
             var additional = document.getElementById(id_prefix + "-additional");
@@ -117,7 +117,7 @@
                 additional.style.display = "none";
             }
             var contents = document.getElementById(id_prefix + "-contents").innerHTML;
-            write_to_modal(title, contents);
+            write_to_modal(title, contents, modal_nr);
         }
 
         function show_additional_text(question) {
@@ -125,10 +125,10 @@
             document.getElementById(question + "-additional").style.display = "block";
         }
 
-        function write_to_modal(title, contents) {
-            $("#modal-title").html(title);
-            $("#modal-body").html(contents);
-            $('#modal').modal('show');
+        function write_to_modal(title, contents, modal_nr) {
+            $(`#modal-title-${modal_nr}`).html(title);
+            $(`#modal-body-${modal_nr}`).html(contents);
+            $(`#modal-${modal_nr}`).modal('show');
         }
 
         /* --------------------- Update -------------------- */
