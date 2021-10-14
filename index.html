@@ -130,6 +130,17 @@
                         <div class="col-md-12">
                             <br><br>
                             <h4>If you would like to view a summary of your responses, click <a onclick="show_responses()">here</a></h4>
+                    <div class="row social">
+                        <div class="col-md-12">
+                            <h4>
+                                Please share this tool with others:&nbsp;&nbsp;
+                                <a onclick="social_media('twitter')"><i class="fab fa-twitter-square"></i></a>&nbsp;&nbsp;
+                                <a onclick="social_media('linkedin')"><i class="fab fa-linkedin"></i></a>&nbsp;&nbsp;
+                                <a href="mailto:?subject=FAIR-Aware assessment tool&body=I just used FAIR-Aware Assessment tool to assess and increase my knowledge on the FAIR data principles! %0D%0ATry it out for yourself here: https://fairaware.dans.knaw.nl"><i class="fas fa-envelope-square"></i></a>&nbsp;&nbsp;
+                                <a onclick="social_media('whatsapp')"><i class="fab fa-whatsapp"></i></a>
+                            </h4>
+                        </div>
+                    </div>
                         </div>
                     </div>
                     <div id="summary-responses" class="row">
@@ -803,7 +814,7 @@
             <div class="row">
                 <div class="col-md-2 col-sm-0 col-xs-0"></div>
                 <div class="col-md-10 col-sm-12 footer">
-                   <div class="row social">
+                   <div class="row social" id="social-media">
                         <div class="col-md-4  col-sm-4 col-xs-1">
                         </div>
                         <div class="col-md-1  col-sm-1 col-xs-2">

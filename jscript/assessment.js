@@ -368,7 +368,7 @@
 
         function show_results() {
             $("#contents :input").attr("disabled", true);
-            hide_elements(["intro", "contents", "summary-responses"])
+            hide_elements(["intro", "contents", "summary-responses", "footer", "download-button"])
             show_element("score-and-guidance")
             $("#score-text-awareness").html(get_awareness_score_text() + " (" + get_awareness_score() + "/" + number_fair_questions + ")");
             $("#score-text-willingness").html(get_willingness_score_text() + " (" + get_willingness_score() + "/" + total_willingness_score + ")");
