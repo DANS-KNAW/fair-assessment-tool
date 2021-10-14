@@ -142,7 +142,7 @@
             show_element(question + "-additional");
         }
 
-        function write_to_modal(title, contents, modal_nr) {
+        function write_to_modal(title, contents, modal_nr=1) {
             $(`#modal-title-${modal_nr}`).html(title);
             $(`#modal-body-${modal_nr}`).html(contents);
             $(`#modal-${modal_nr}`).modal('show');
