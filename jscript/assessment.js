@@ -34,16 +34,25 @@
 
         function initialise() {
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
+            hide_elements(["yq2.6.1", "yq3.9.1", "score-and-guidance", "introduction", "texts", "print-button"])
             hide_intention_questions();
-            document.getElementById("score-and-guidance").style.display = "none"
-            document.getElementById("introduction").style.display = "none"
-            document.getElementById("texts").style.display = "none"
-            document.getElementById("print-button").style.display = "none";
         }
 
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
+
+        function hide_elements(elements_to_hide) {
+            for (let element of elements_to_hide) {
+                hide_element(element)
+            }
+        }
+
+        function show_elements(elements_to_show) {
+            for (let element of elements_to_show) {
+                show_element(element)
+            }
+        }
 
         function hide_intention_questions() {
             for (let [letter, questions] of fields) {
@@ -51,10 +60,18 @@
                     for(let i = 0; i < questions.length; i++) {
                         <!-- question is e.g. "fq1" -->
                         let question = letter.toLowerCase() + "q" + (i + 1).toString();
-                        document.getElementById(question + "-i").style.display = "none"
+                        hide_element(question + "-i")
                     }
                 }
             }
+        }
+
+        function hide_element(element) {
+            document.getElementById(element).style.display = "none"
+        }
+
+        function show_element(element) {
+            document.getElementById(element).style.display = "block"
         }
 
         /* ----------- Include another html file ----------- */
@@ -121,8 +138,8 @@
         }
 
         function show_additional_text(question) {
-            document.getElementById(question + "-more").style.display = "none";
-            document.getElementById(question + "-additional").style.display = "block";
+            hide_element(question + "-more");
+            show_element(question + "-additional");
         }
 
         function write_to_modal(title, contents, modal_nr) {
@@ -142,6 +159,17 @@
         /* --------------- Update About You ---------------- */
         function update_Y(question) {
             set_to_default_color(question);
+            update_other(["yq2.6", "yq3.9"])
+        }
+
+        function update_other(questions) {
+            for (let question of questions) {
+                if (checked(question)) {
+                    show_element(question + ".1")
+                } else {
+                    hide_element(question + ".1")
+                }
+            }
         }
 
         /* ---------------- Update Feedback ---------------- */
@@ -307,8 +335,13 @@
             if (short_answers.has(choice)) {
                 return short_answers.get(choice)
             } else {
-                let answer = "l" + choice;
-                return document.getElementById(answer).textContent.replace(/,/g, " ").trim();
+                if ((choice == "yq2.6" || choice == "yq3.9") && document.getElementById(choice + ".1").value.trim() != "") {
+                    // get value from the Other input field
+                    return document.getElementById(choice + ".1").value.replace(/,/g, " ").replace(/;/g, " ").trim()
+                } else {
+                    let answer = "l" + choice;
+                    return document.getElementById(answer).textContent.replace(/,/g, " ").replace(/;/g, " ").trim();
+                }
             }
         }
 
@@ -334,22 +367,19 @@
         }
 
         function show_results() {
-            document.getElementById("intro").style.display = "none";
-            document.getElementById("contents").style.display = "none";
             $("#contents :input").attr("disabled", true);
-            document.getElementById("score-and-guidance").style.display = "block";
-            document.getElementById("summary-responses").style.display = "none";
+            hide_elements(["intro", "contents", "summary-responses"])
+            show_element("score-and-guidance")
             $("#score-text-awareness").html(get_awareness_score_text() + " (" + get_awareness_score() + "/" + number_fair_questions + ")");
             $("#score-text-willingness").html(get_willingness_score_text() + " (" + get_willingness_score() + "/" + total_willingness_score + ")");
             if (get_awareness_score() < number_fair_questions) { $("#guidance").html(get_guidance_texts()); }
-            else { document.getElementById("guidance-texts").style.display = "none"; }
-            if (window.print) { document.getElementById("print-button").style.display = "block"; }
+            else { hide_element("guidance-texts"); }
+            if (window.print) { show_element("print-button"); }
         }
 
         function show_responses() {
-            document.getElementById("summary-responses").style.display = "block";
-            document.getElementById("contents").style.display = "block";
-            document.getElementById("show-summary").style.display = "none";
+            show_elements(["summary-responses", "contents"])
+            hide_element("show-summary")
         }
 
         function get_awareness_score() {
@@ -451,32 +481,15 @@
         /* ----------------------- Print --------------------- */
 
         function print_results() {
-            document.getElementById("logos").style.display = "none"
-            document.getElementById("icons").style.display = "none"
-            document.getElementById("footer").style.display = "none"
-            document.getElementById("for-administrators").style.display = "none"
-            document.getElementById("image-f").style.display = "none"
-            document.getElementById("image-a").style.display = "none"
-            document.getElementById("image-i").style.display = "none"
-            document.getElementById("image-r").style.display = "none"
-            document.getElementById("show-summary").style.display = "none"
+            hide_elements(["logos", "icons", "footer", "for-administrators", "image-f", "image-a", "image-i", "image-r", "show-summary"]);
             window.print();
-            document.getElementById("logos").style.display = "block"
-            document.getElementById("icons").style.display = "block"
-            document.getElementById("footer").style.display = "block"
-            document.getElementById("for-administrators").style.display = "block"
-            document.getElementById("image-f").style.display = "block"
-            document.getElementById("image-a").style.display = "block"
-            document.getElementById("image-i").style.display = "block"
-            document.getElementById("image-r").style.display = "block"
-            document.getElementById("show-summary").style.display = "block"
+            show_elements(["logos", "icons", "footer", "for-administrators", "image-f", "image-a", "image-i", "image-r", "show-summary"]);
         }
 
         /* --------------------- Social media ------------------- */
 
         var social_media = function( media ) {
             let url = "";
-            skype_id = "vesaakerman";
             switch(media) {
                 case "twitter":
                     url = "https://twitter.com/intent/tweet?text="
