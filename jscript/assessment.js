@@ -31,6 +31,12 @@
 
         $(document).ready(initialise);
         $(document).ready(function(){ $('[rel=tooltip]').tooltip({ trigger: "hover" }); });
+        jQuery(function() {
+            // when leaving #modal-2 show the parent modal window, which was hidden
+            $('#modal-2').on('hidden.bs.modal', function() {
+                $("#modal-1").modal('show');
+            });
+        });
 
         function initialise() {
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
@@ -143,6 +149,10 @@
         }
 
         function write_to_modal(title, contents, modal_nr=1) {
+            if (modal_nr == 2) {
+                // hide the parent modal window (this is necessary because of focus issues)
+                $("#modal-1").modal('hide');
+            }
             $(`#modal-title-${modal_nr}`).html(title);
             $(`#modal-body-${modal_nr}`).html(contents);
             $(`#modal-${modal_nr}`).modal('show');
