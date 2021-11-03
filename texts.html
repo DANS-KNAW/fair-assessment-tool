@@ -20,13 +20,15 @@
 <div id="F-i-1-contents">
     <div id="F-i-1-default">
         <h4>What does this mean?</h4>
-        <p>A <b>persistent identifier</b> is a long-lasting reference to a resource. The <b>data(set)</b> you deposit in a
-            <b>data repository</b> should be assigned a globally unique, persistent and resolvable identifier (PID) so that
+        <p>A <b><a onclick="show_modal('glossary-persistent-identifier', 2)">persistent identifier</a></b> is a long-lasting reference to a resource.
+            The <b><a onclick="show_modal('glossary-dataset', 2)">data(set)</a></b> you deposit in a
+            <b><a onclick="show_modal('glossary-data-repository', 2)">data repository</a></b> should be assigned a globally unique, persistent and resolvable identifier (PID) so that
             both humans and machines can find it. Persistent identifiers are maintained and governed so that they remain
             stable and direct the users to the same relevant object consistently over time. Examples of PIDs include
             Digital Object Identifier (DOI), Handle, and Archival Resource Key (ARK).</p>
         <h4>Why is this important?</h4>
-        <p>If your data(set) or metadata does not have a PID, you run the risk of "<b>link rot</b>" (also known as “link death”).
+        <p>If your data(set) or metadata does not have a PID, you run the risk of
+            "<b><a onclick="show_modal('glossary-link-rot', 2)">link rot</a></b>" (also known as “link death”).
             When your data(set) or metadata is moved, updated to a new version, or deleted, older hyperlinks will no longer
             refer to an active page. Without a PID, others will not be able to find or reuse your data(set) or metadata
             in the long-term. </p>
@@ -63,7 +65,8 @@
 <div id="F-i-2-contents">
     <div id="F-i-2-default">
         <h4>What does this mean?</h4>
-        <p><b>Metadata</b> is “data about data”, meaning that this type of data only contains information that describes
+        <p><b><a onclick="show_modal('glossary-metadata', 2)">Metadata</a></b> is “data about data”,
+            meaning that this type of data only contains information that describes
             or characterizes other data. There are different types of metadata that underlie different FAIR aspects.
             The focus of this question is on making sure your data(set) has a set of minimum descriptive information
             elements (also known as “discovery metadata”) to adequately communicate the content of your data(set) to others.</p>
@@ -119,11 +122,13 @@
     <div id="F-i-3-default">
         <h4>What does this mean?</h4>
         <p>This question refers to the capability to make the metadata accessible online in a standard and machine-readable format.
-            <b>Machine-readability</b> means that the data is presented in a structured <b>format</b> that computers can read and process.
+            <b><a onclick="show_modal('glossary-machine-readable-format', 2)">Machine-readability</a></b> means that the data is presented
+            in a structured <b><a onclick="show_modal('glossary-file-format', 2)">format</a></b> that computers can read and process.
             Facilitating this process is a responsibility of the data repository you deposit your data(set) in.</p>
         <h4>Why is this important?</h4>
         <p>By ensuring that the metadata describing your data(set) is machine-readable, it will be findable to the systems that
-            collect (also known as <b>harvesting</b>) and aggregate data for search engines or databases (e.g., Google Search, Web of Science,
+            collect (also known as <b><a onclick="show_modal('glossary-harvesting', 2)">harvesting</a></b>) and
+            aggregate data for search engines or databases (e.g., Google Search, Web of Science,
             or a university library collection). This improves your chances of having your data(set) cited and reused, because
             it will reach a larger audience. Without machine-readable metadata, your data(set) will only be found by people searching
             the data collection of the specific repository you deposited in or those that have a direct link to your data(set).</p>
@@ -140,7 +145,8 @@
     <button id="F-i-3-more" onclick="show_additional_text('F-i-3')" >Want to know more?</button>
     <div id="F-i-3-additional">
         <h4>Want to know more?</h4>
-        <p>Metadata may also be exposed as <b>structured data</b> embedded within a webpage. This makes the metadata more <b>machine-actionable</b>.
+        <p>Metadata may also be exposed as <b><a onclick="show_modal('glossary-structured-data', 2)">structured data</a></b>
+            embedded within a webpage. This makes the metadata more <b><a onclick="show_modal('glossary-machine-actionable', 2)">machine-actionable</a></b>.
             The <a href="https://www.schema.org" target="_blank">Schema.org<i class="fa fa-external-link"></i></a> standard is one approach that
             helps to ensure indexing by web search engines such as Google and Bing. This facilitates the
             <a href="https://datasetsearch.research.google.com" target="_blank">Google Dataset Search<i class="fa fa-external-link"></i></a>
@@ -157,10 +163,10 @@
 <div id="A-i-1-contents">
     <div id="A-i-1-default">
         <h4>What does this mean?</h4>
-        <p>Ideally, data(sets) should be public domain and openly <b>accessible</b> without restrictions. However, there can be legitimate
-            reasons not to share data (e.g., privacy protection, ethical, legal, or commercial constraints). As such, it is your
-           responsibility to be aware of what can be shared, with whom and when, and to take appropriate steps to ensure that the
-           data is as open as possible and as closed as necessary.</p>
+        <p>Ideally, data(sets) should be public domain and openly <b><a onclick="show_modal('glossary-access', 2)">accessible</a></b>
+            without restrictions. However, there can be legitimate reasons not to share data (e.g., privacy protection, ethical,
+            legal, or commercial constraints). As such, it is your responsibility to be aware of what can be shared, with whom
+            and when, and to take appropriate steps to ensure that the data is as open as possible and as closed as necessary.</p>
         <h4>Why is this important?</h4>
         <p>As explained in Q2, the metadata describing your data(set) should include details about who can access the data(set) as well
             as any possible related conditions that need to be met in order to gain access. By clearly specifying these details, you will
@@ -169,10 +175,11 @@
         <p>In some cases, you may even need to apply a variety of access levels to different parts of the same data(set). It is important
             to consider these issues early on for all your data(sets), so that the access levels are clearly defined before you upload
             the data(set) to a data repository. </p>
-        <p>Data should also be accompanied by a clear <b>licence</b> so that other people can legally reuse it. It is recommended to add a licence
-            to all kinds of data(sets) and access levels. Without an explicit licence or a waiver, potential reusers do not have a clear
-            sense of what can be done with your data.  It is easiest to use a standard type license for your data(set), since there are
-            many different types that will cover most basic legal situations
+        <p>Data should also be accompanied by a clear <b><a onclick="show_modal('glossary-licence', 2)">licence</a></b> so that other
+            people can legally reuse it. It is recommended to add a licence to all kinds of data(sets) and access levels. Without
+            an explicit licence or a waiver, potential reusers do not have a clear sense of what can be done with your data.
+            It is easiest to use a standard type license for your data(set), since there are many different types that will cover
+            most basic legal situations
             (e.g., <a href="https://creativecommons.org/licenses" target="_blank">Creative Commons<i class="fa fa-external-link"></i></a>).
             It is also possible to create your own bespoke licence, though it is recommended to seek help from a legal expert if you wish
             to pursue this. Your chosen licence should also be part of your (machine-readable) metadata to effectively inform any human or
@@ -184,7 +191,8 @@
             level and licence. You can search for such a data repository on a registry such as
             <a href="https://www.re3data.org/search?query=" target="_blank">Re3data<i class="fa fa-external-link"></i></a>,
             by filtering on ‘Database access’ and ‘Database license’.</p>
-        <p>If you are depositing data associated with a publication, it is recommended to include a <b>data availability statement</b> in your publication.
+        <p>If you are depositing data associated with a publication, it is recommended to include a
+            <b><a onclick="show_modal('glossary-data-availability', 2)">data availability statement</a></b> in your publication.
             This statement communicates to readers of your publication where the data(set) is available and how it can be accessed.
             It also includes a link to the data(set). Most journals, especially those with a data sharing policy, will have templates for
             data availability statements available.</p>
@@ -227,27 +235,27 @@
             the case, links to your data(set) will not become invalid, but will simply point to the metadata only.</p>
         <h4>How to do this?</h4>
         <p>Whether or not a data repository provides continued access to metadata depends on the data repository preservation
-            practices, which are usually documented in a <b>preservation plan</b> or <b>policy</b>. You should check whether
-            the data repository you deposit your data(set) in has the policy to maintain metadata when data are removed.
-            Make sure to include the persistent identifier in the remaining metadata and a statement on why this data(set)
-            is no longer available. </p>
+            practices, which are usually documented in a <b><a onclick="show_modal('glossary-preservation-plan', 2)">preservation plan</a></b>
+            or <b><a onclick="show_modal('glossary-preservation-plan', 2)">policy</a></b>.
+            You should check whether the data repository you deposit your data(set) in has the policy to maintain metadata when data are removed.
+            Make sure to include the persistent identifier in the remaining metadata and a statement on why this data(set) is no longer available.</p>
     </div>
     <button id="A-i-2-more" onclick="show_additional_text('A-i-2')" >Want to know more?</button>
     <div id="A-i-2-additional">
         <h4>Want to know more?</h4>
-        <p>After the <b>data retention period</b> has passed, there are different justifiable reasons to not keep (all) of
-            your data(set) available over time:</p>
-        <p>In case you have used <b>consent forms</b> which specified a certain preservation period after which your data
-            must be destroyed, we recommend:</p>
+        <p>After the <b><a onclick="show_modal('glossary-data-retention', 2)">data retention period</a></b> has passed,
+            there are different justifiable reasons to not keep (all) of your data(set) available over time:</p>
+        <p>In case you have used <b><a onclick="show_modal('glossary-consent-form', 2)">consent forms</a></b>
+            which specified a certain preservation period after which your data must be destroyed, we recommend:</p>
         <ul>
             <li>to update your metadata record after destroying the rest of the data(set)</li>
             <li>to indicate why the data(set) is no longer available </li>
             <li>to make sure the metadata is rich enough for others to understand what the data(set) was about</li>
         </ul>
         <p>You should discuss with your local research data management support whether it is necessary to incorporate
-            a <b>data destruction statement</b> in your consent form. Try to aim for the longest data retention and sharing
-            period possible for you. If data destruction is unavoidable, make sure you choose a data repository that
-            can adequately handle this.</p>
+            a <b><a onclick="show_modal('glossary-data-destruction', 2)">data destruction statement</a></b> in your consent form.
+            Try to aim for the longest data retention and sharing period possible for you. If data destruction is unavoidable,
+            make sure you choose a data repository that can adequately handle this.</p>
         <p>Maintaining (all of) your data(set) may be too costly in the long term. By removing (parts of) your data(set),
             you can lower these costs and keep your data(set) accessible for longer. Make sure the remaining (meta)data
             is rich enough for others to understand what the data that is no longer accessible was about.</p>
@@ -265,11 +273,11 @@
         <h4>What does this mean?</h4>
         <p>There are many different ways you can describe the same information when filling out the metadata for your deposit.
             To prevent ambiguity and facilitate better findability, interoperability, and machine-readability,
-            you should use a <b>controlled vocabulary</b> to enter your metadata.</p>
+            you should use a <b><a onclick="show_modal('glossary-controlled-vocabulary', 2)">controlled vocabulary</a></b> to enter your metadata.</p>
         <p>Controlled vocabularies are lists of terms that are created for specific uses or contexts. They are a type of
-            <b>semantic artefact</b> and can take the form of, for example, an ontology, thesaurus, or taxonomy. Each type of
-            vocabulary comes with a different degree of sophistication (e.g. in their level of expressiveness,
-            structure, and inferential power).</p>
+            <b><a onclick="show_modal('glossary-semantic-artefact', 2)">semantic artefact</a></b> and can take the form of, for example,
+            an ontology, thesaurus, or taxonomy. Each type of vocabulary comes with a different degree of sophistication
+            (e.g. in their level of expressiveness, structure, and inferential power).</p>
         <h4>Why is this important?</h4>
         <p>When using controlled vocabularies, the discovery, linking, understanding, and reuse of research data are improved.
             Using controlled vocabularies in metadata facilitates enhanced data search because people will not have to guess
@@ -319,16 +327,18 @@
 <div id="R-i-1-contents">
     <div id="R-i-1-default">
         <h4>What does this mean?</h4>
-        <p>Data <b>provenance</b> (also known as lineage) is a type of metadata that represents the history of your data(set), including information
-            about the people, entities, and processes involved in the data creation. You can also describe and/or link previous versions of
-            your data(set) in the provenance information. Aside from conveying important information about your data(set) to potential reusers,
-            you can also communicate how you wish to be cited. </p>
+        <p>Data <b><a onclick="show_modal('glossary-provenance', 2)">provenance</a></b> (also known as lineage) is a type of metadata
+            that represents the history of your data(set), including information about the people, entities, and processes involved
+            in the data creation. You can also describe and/or link previous versions of your data(set) in the provenance information.
+            Aside from conveying important information about your data(set) to potential reusers, you can also communicate how you
+            wish to be cited. </p>
         <h4>Why is this important?</h4>
         <p>By providing provenance information about the data(set) (e.g. sources, date, contributor, version), you make it possible for users to
             determine whether to trust the authenticity of the data(set) and enable its (re)use. It is a transparent way to communicate why,
             how, when, where, and by whom your data(set) was created. </p>
         <h4>How to do this?</h4>
-        <p>The provenance information that is necessary for your data(set) depends on the <b>data type</b> (e.g., measurement, observation, derived data,
+        <p>The provenance information that is necessary for your data(set) depends on the
+            <b><a onclick="show_modal('glossary-data-type', 2)">data type</a></b> (e.g., measurement, observation, derived data,
             or data product) and research domain of your work. For that reason, it is difficult to capture a set of finite provenance records
             adequate to all domains. It is recommended to include at a minimum the following provenance properties of data generation or collection
             should be supplied as part of the metadata (this is not an exhaustive list):</p>
@@ -355,7 +365,8 @@
     <div id="R-i-2-default">
          <h4>What does this mean?</h4>
         <p>To ensure that your metadata can be broadly shared and understood within your research domain, we recommend using a
-            <b>community-endorsed standard</b>. A standard is any semantic artefact (see Q6), format (see Q3) or other information
+            <b><a onclick="show_modal('glossary-standard', 2)">community-endorsed standard</a></b>.
+            A standard is any semantic artefact (see Q6), format (see Q3) or other information
             structure that is widely used in a specific group. If there are any agreements on best practices or standards
             in your community, you should always give preference to this option.</p>
         <p>Community standards may be formally recognized or less formal in their occurrence, but they will always be used and
@@ -409,15 +420,17 @@
 <div id="R-i-3-contents">
     <div id="R-i-3-default">
         <h4>What does this mean?</h4>
-        <p><b>File formats</b> refer to methods for encoding digital information. You can recognize a file format by the extension
-            (the three or four letters at the end of a filename). A file can either be <b>open</b> or <b>proprietary</b> in its format.
+        <p><b><a onclick="show_modal('glossary-file-format', 2)">File formats</a></b> refer to methods for encoding digital information.
+            You can recognize a file format by the extension (the three or four letters at the end of a filename). A file can either be
+            <b>open</b> or <b>proprietary</b> in its format.
             It is highly recommended to use an open file format for your data(set), so that others can easily access and reuse it.</p>
         <h4>Why is this important?</h4>
         <p>A proprietary file format is created and owned by a company and often accompanies a specific software. This means that
             people who don’t have a licence for this software will not be able to open your file(s). Moreover, the developments and
             updates such a file format may undergo are dependent on the owner of the company, therefore it may be that older versions
             of the file format will not be supported in the future, or that the file format will cease to exist entirely.
-            This doesn’t facilitate <b>long-term preservation</b>, as people may not be able to open your file(s) in the future.</p>
+            This doesn’t facilitate <b><a onclick="show_modal('glossary-long-term-preservation', 2)">long-term preservation</a></b>,
+            as people may not be able to open your file(s) in the future.</p>
         <p>Open file formats are publicly accessible and often undergo less changes over time. They can be opened by anyone without
             the necessity of a license, which means your data(set) can be used more widely.</p>
         <h4>How to do this?</h4>
@@ -445,11 +458,14 @@
 <div id="R-i-4-contents">
     <div id="R-i-4-default">
         <h4>What does this mean?</h4>
-        <p><b>Data curation</b> is the active and ongoing management of data to ensure that it’s available for discovery and reuse. This process covers
+        <p><b><a onclick="show_modal('glossary-data-curation', 2)">Data curation</a></b> is the active and ongoing management
+            of data to ensure that it’s available for discovery and reuse. This process covers
             the entire lifecycle of the data(set), starting at the selection or creation and continuing on for as long as the data(set) exists.
-            <b>Digital preservation</b> is a part of this data curation process and refers to the series of managed activities necessary to ensure
+            <b><a onclick="show_modal('glossary-digital-preservation', 2)">Digital preservation</a></b> is a part of this data curation
+            process and refers to the series of managed activities necessary to ensure
             continued access to and reusability of the data(set) for as long as necessary (i.e. keeping the data(set) FAIR over time).
-            These actions are a collaborative effort of the researcher and the data repository. <b>Data stewardship</b> also plays an important
+            These actions are a collaborative effort of the researcher and the data repository.
+            <b><a onclick="show_modal('glossary-data-stewardship', 2)">Data stewardship</a></b> also plays an important
             role throughout the process by managing and overseeing an organization’s data assets.</p>
         <h4>Why is this important?</h4>
         <p>Data curation and digital preservation requires people, skills, and technology. All the steps you take towards making your data(set)
@@ -459,7 +475,8 @@
             epository that you make has a great impact on not only the findability, accessibility, interoperability, and reusability,
             but also the general value and impact of your data(set).</p>
         <h4>How to do this?</h4>
-        <p>To make sure your data(set) is in good hands, we recommend you to deposit it in a <b>trusted digital repository</b> (TDR). TDRs have an
+        <p>To make sure your data(set) is in good hands, we recommend you to deposit it in a
+            <b><a onclick="show_modal('glossary-trusted-digital-repository', 2)">trusted digital repository</a></b> (TDR). TDRs have an
             explicit mission to provide access to and preserve data. They play a critical role in making data FAIR, providing support, and
             preserving data over time in a FAIR manner. You can find certified data repositories in registries such as
             <a href="https://www.re3data.org/search?query=" target="_blank">Re3data<i class="fa fa-external-link"></i></a>, by filtering
@@ -482,7 +499,8 @@
             Technology (TRUST). Certification requirements are based on these principles, to make sure certification is an indication of trustworthiness.</p>
         <p>In the absence of formal certification, a data repository can still be FAIR-enabling by facilitating some of the important qualities mentioned
             in the FAIR and TRUST principles. However, this is more difficult to discover on the outside. Other organisations, including funders or publishers,
-            can also enable or support FAIRness by upholding requirements for data management or FAIR practices (e.g., mandating <b>Data Management Plans</b>),
+            can also enable or support FAIRness by upholding requirements for data management or FAIR practices (e.g., mandating
+            <b><a onclick="show_modal('glossary-data-management-plan', 2)">Data Management Plans</a></b>),
             these organisations contribute to a more FAIR scientific landscape.</p>
     </div>
 
