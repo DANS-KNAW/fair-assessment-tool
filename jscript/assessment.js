@@ -10,7 +10,7 @@
             <!-- For questions where the answer is given in free text, the value is 0. -->
             <!-- Notice: It is important to update this Map when questions are removed or added! -->
             ['C', [0]],
-            ['Y', [62, 6, 9]],
+            ['Y', [62, 6, 8]],
             ['F', [2, 2, 2]],
             ['A', [2, 2]],
             ['I', [2]],
@@ -40,7 +40,7 @@
 
         function initialise() {
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
-            hide_elements(["yq2.6.1", "yq3.9.1", "score-and-guidance", "introduction", "texts", "print-button"])
+            hide_elements(["yq2.6.1", "yq3.8.1", "score-and-guidance", "introduction", "texts", "print-button"])
             hide_intention_questions();
         }
 
@@ -169,7 +169,7 @@
         /* --------------- Update About You ---------------- */
         function update_Y(question) {
             set_to_default_color(question);
-            update_other(["yq2.6", "yq3.9"])
+            update_other(["yq2.6", "yq3.8"])
         }
 
         function update_other(questions) {
@@ -345,7 +345,7 @@
             if (short_answers.has(choice)) {
                 return short_answers.get(choice)
             } else {
-                if ((choice == "yq2.6" || choice == "yq3.9") && document.getElementById(choice + ".1").value.trim() != "") {
+                if ((choice == "yq2.6" || choice == "yq3.8") && document.getElementById(choice + ".1").value.trim() != "") {
                     // get value from the Other input field
                     return document.getElementById(choice + ".1").value.replace(/,/g, " ").replace(/;/g, " ").trim()
                 } else {

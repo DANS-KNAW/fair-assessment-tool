@@ -48,74 +48,84 @@
 
 <div id="F-i-1-contents">
     <div id="F-i-1-default">
-        <p>Selected datasets should be assigned a globally unique, persistent and resolvable identifier
-            (<b><a onclick="show_modal('glossary-pid', 2)">PID</a></b>) so they  can be located unambiguously
-            by humans or machines on the web. Persistent identifiers are maintained and governed so that they remain stable and direct
-            the users to the same relevant object consistently over time. Examples of PIDs include Digital Object Identifier (DOI),
-            the Handle System, identifiers.org, w3id.org and Archival Resource Key (ARK).</p>
-        <p>Identifiers are normally assigned by data repositories (or other service providers) when data and/or metadata are made available
-            through their services. Repositories ensure that the identifier continues to point to the same data or metadata,
-            according to the specified access terms and conditions.
-            For example, you can search for data repositories providing DOIs on registries such as
-            <a href="https://www.re3data.org/search?query=&pidSystems%5B%5D=DOI" target="_blank">Re3data<i class="fa fa-external-link"></i></a>
-            or <a href="https://fairsharing.org/FAIRsharing.hFLKCn" target="_blank">FAIRsharing (see related databases) <i class="fa fa-external-link"></i></a>.</p>
-        <p>It is worth noting here that not all data you produce during your research will need a PID.
-            In general, those that underpin published findings or have longer term value are worth assigning a PID.
-            If in doubt about which data should be allocated a PID, speak to your local research data management support team.</p>
+        <h4>What does this mean?</h4>
+        <p>A <b>persistent identifier</b> is a long-lasting reference to a resource. The <b>data(set)</b> you deposit in a
+            <b>data repository</b> should be assigned a globally unique, persistent and resolvable identifier (PID) so that
+            both humans and machines can find it. Persistent identifiers are maintained and governed so that they remain
+            stable and direct the users to the same relevant object consistently over time. Examples of PIDs include
+            Digital Object Identifier (DOI), Handle, and Archival Resource Key (ARK).</p>
+        <h4>Why is this important?</h4>
+        <p>If your data(set) or metadata does not have a PID, you run the risk of "<b>link rot</b>" (also known as “link death”).
+            When your data(set) or metadata is moved, updated to a new version, or deleted, older hyperlinks will no longer
+            refer to an active page. Without a PID, others will not be able to find or reuse your data(set) or metadata
+            in the long-term. </p>
+        <h4>How to do this?</h4>
+        <p>When you upload your data(set) or metadata to a data repository, the data repository (or other service providers)
+            usually assigns a PID. Repositories ensure that the identifier continues to point to the same data or metadata,
+            according to access terms and conditions you specified.</p>
+        <p>There are many different types of PIDs, each with their own advantages, disadvantages, and disciplines they are
+            typically used in. Generally speaking, the data repository will have thought about these aspects before deciding
+            which PID type to use. In case you have to choose the PID type yourself, you can visit the Knowledge Hub on
+            the PID Forum for guidance. Some disciplines or organisations also provide tools to help you make this choice,
+            see for example this Persistent Identifier Guide for cultural heritage researchers. Once you have chosen a PID type,
+            you can search for data repositories providing that specific PID in registries such as
+            <a href="https://www.re3data.org/search?query=&pidSystems%5B%5D=DOI" target="_blank">Re3data<i class="fa fa-external-link"></i></a> or
+            <a href="https://fairsharing.org/FAIRsharing.hFLKCn" target="_blank">FAIRsharing (see related databases) <i class="fa fa-external-link"></i></a>.</p>
+        <p>Not all data you produce during your research will need a PID. In general, those that underpin published findings
+            or have longer term value are worth assigning a PID. If in doubt about which data should be allocated a PID,
+            speak to your local research data management support team or the data repository.</p>
     </div>
     <button id="F-i-1-more" onclick="show_additional_text('F-i-1')" >Want to know more?</button>
     <div id="F-i-1-additional">
-        <p>For example, the DOI system guarantees the persistence (and uniqueness) of its identifiers in two main ways:
-            1) by applying policies that govern how organisations assign these identifiers,  and
-            2) by operating the necessary technical infrastructures to ensure they continue to point to the same data or metadata,
-            according to specified access terms and conditions.</p>
-        <p>Persistent identifiers may point to a data file, a web service response that contains data values,
-            or ideally to  an online page that contains metadata for context and the link to access the actual data or
-            details about how to request access. The technical process of translating the identifier to a location
-            is called ‘resolving’ an identifier.</p>
+        <h4>Want to know more?</h4>
+        <p>Did you know that a PID can refer to any kind of resource? Besides publications or datasets,
+            a PID can also refer to, for example, a person, a scientific sample, a funding body, a set of geographical coordinates,
+            an unpublished report, or a piece of software. Depending on what you find important to link to, you might want
+            to consider using a PID for one or more of these resource types.</p>
+        <p>Persistent identifiers may point to a data file, a web service response that contains data values, or ideally
+            to an online page that contains metadata for context and the link to access the actual data or details about
+            how to request access. The technical process of translating the identifier to a location is called ‘resolving’
+            an identifier.</p>
     </div>
 </div>
 
 <div id="F-i-2-contents">
     <div id="F-i-2-default">
-        <p>The necessary metadata is descriptive information about the data object (e.g. creator, title, publisher, creation and publication date,
-            summary and keywords describing the data) provided by the researcher when documenting the dataset for deposit in a
-            <u><a onclick="show_modal('glossary-data-repository', 2)">data repository</a></u>.</p>
-        <p>Since the metadata required depends on the type of users and the intended applications,
-            the focus here is on ensuring the minimum descriptive information needed to enable data discovery and citation by potential users -
-            even those from other domains. The metadata should include the unique, persistent and resolvable identifier (PID)
-            for the data so that users can discover and access the data. In cases where the data cannot be shared openly for ethical,
-            legal or commercial reasons, the metadata should make clear how a potential reuser can request legitimate access.</p>
-        <p><u>Data content</u> (relates to Reusability in the FAIR principle)<br>
-            The content of the dataset should be specified in the metadata. It should be an accurate reflection of the actual data deposited.
-            Examples of the properties specifying data content are: resource type (e.g., data or a collection of data), variable(s) measured
-            or observed, method, data format and size. Ideally, semantic vocabularies should be used to describe data content (e.g., variable)
-            to support interdisciplinary reuse. For example, variables should be described by providing a link with a PID to a resource (such as a landing page)
-            containing a structured description of the concept, references and links to other relevant concepts.
-            The access to the linked concepts should be available through the query interface (e.g., using SPARQL or GraphQL).</p>
-        <p><u>Links to other research outputs</u> (relates to Interoperability in the FAIR Principles)<br>
-            Metadata should also include meaningful and explicit links to other kinds of research output (ideally with a PID) to increase its
-            potential for reuse. A data object may be linked to its prior version, other relevant datasets, related publications,
-            data source (for e.g. the instrument or sample), data creators or collectors and organization such as a funder or a host institution.</p>
-        <p><u>Recommended data repositories</u><br>
-            The good news is that when you deposit your data with a domain or discipline-specific repository it will likely be using common
-            metadata standards. This means that when you enter the basic details about your research on deposit, your description will conform
-            to standards that enable search and retrieval by users within your domain and potentially beyond your domain.
-            You can search for data repositories supporting a metadata standard (for e.g., Darwin Core or DDI) in registries such as Re3data (
-            <a href="https://www.re3data.org/search?query=&metadataStandards%5B%5D=Darwin%20Core" target="_blank">Darwin Core<i class="fa fa-external-link"></i></a>
-            , <a href="https://www.re3data.org/search?query=&metadataStandards%5B%5D=DDI%20-%20Data%20Documentation%20Initiative" target="_blank">DDI<i class="fa fa-external-link"></i></a>) or FAIRSharing (
-            <a href="https://fairsharing.org/FAIRsharing.xvf5y3" target="_blank">Darwin Core<i class="fa fa-external-link"></i></a>
-            , <a href="https://fairsharing.org/FAIRsharing.EZCpPd" target="_blank">DDI<i class="fa fa-external-link"></i></a>).</p>
-
-        <p><u>Good description of data  </u><br>
-            It can pay to spend a bit more time on providing a good description rather than just providing the minimum information required
-            to ensure that your data is not only findable, but can be clearly understood as well.</p>
-        <p>FAIR data also needs the richer, more domain-specific metadata that follows a community-endorsed standard.
-            Domain or discipline-specific metadata specifications are covered under a separate assessment question.</p>
+        <h4>What does this mean?</h4>
+        <p><b>Metadata</b> is “data about data”, meaning that this type of data only contains information that describes
+            or characterizes other data. There are different types of metadata that underlie different FAIR aspects.
+            The focus of this question is on making sure your data(set) has a set of minimum descriptive information
+            elements (also known as “discovery metadata”) to adequately communicate the content of your data(set) to others.</p>
+        <h4>Why is this important?</h4>
+        <p>By providing the minimum descriptive information about your data(set), you will be assured that potential users,
+            including those from other research domains, will be able to find and cite your data(set).</p>
+        <p>It is worth spending time on providing a good description of your data(set). By sharing more details,
+            you will make your data not just findable but also easier to understand for others. The more extensive, accurate,
+            and clear the discovery metadata, the easier it is for potential reusers to determine whether or not they want
+            to access your data(set).</p>
+        <h4>How to do this?</h4>
+        <p>When depositing your data(set), the data repository will show the metadata fields they support. The more fields
+            you fill in, the easier it will be for others to find your data(set). You can use the following list as
+            guidance on which minimum metadata elements to include:</p>
+        <ul>
+            <li>Descriptive information about the data(set) (e.g., creator, title, publisher,
+                creation and publication date, summary and keywords describing the data).</li>
+            <li>The unique, persistent, and resolvable identifier (PID) for the data(set).</li>
+            <l>Data content (e.g., resource type, variable(s) measured or observed, method, data format and size)
+                to accurately reflect the deposited data and increase its reusability.</l>
+            <li>Access rights (e.g., information on how to request access in case the data(set) cannot be shared
+                openly for ethical, legal, or commercial reasons). You should also include information about
+                the rights holder and contact details here (see Q4).</li>
+            <li>Meaningful and explicit links to other research outputs (e.g., prior versions of the data(set),
+                other relevant data(sets), related publications, data source, relevant people (data creators or collectors),
+                relevant organisations (the funder or host institution), ideally with their PIDs) to increase the
+                interoperability and the potential for reuse of your data(set).</li>
+        </ul>
     </div>
     <button id="F-i-2-more" onclick="show_additional_text('F-i-2')" >Want to know more?</button>
     <div id="F-i-2-additional">
-        <p>Guidelines on descriptive metadata include common data citation guidelines,
+        <h4>Want to know more?</h4>
+        <p>If you are looking for additional resources on descriptive metadata, see common data citation guidelines
             (e.g., <a href="https://datacite.org/cite-your-data.html" target="_blank">DataCite<i class="fa fa-external-link"></i></a>,
             <a href="https://doi.org/10.6084/m9.figshare.8441816.v1" target="_blank">ESIP<i class="fa fa-external-link"></i></a>, and
             <a href="https://iassistdata.org/file/community/sigdc/iassist.html" target="_blank">IASSIST<i class="fa fa-external-link"></i></a>),
@@ -124,251 +134,385 @@
             <a href="https://eoscpilot.eu/edmi-metadata-guidelines" target="_blank">EOSC Datasets Minimum Information (EDMI)<i class="fa fa-external-link"></i></a>,
             <a href="https://schema.datacite.org/" target="_blank">DataCite Metadata Schema<i class="fa fa-external-link"></i></a>,
             and <a href="https://www.w3.org/TR/2017/REC-dwbp-20170131/" target="_blank">W3C Recommendation Data on the Web Best Practices<i class="fa fa-external-link"></i></a>).</p>
-        <p>Links between data and its related entities should be explicit and meaningful, and expressed through relation types
-            (for e.g. the DataCite Metadata Schema specifies relation types between research objects through the fields
-            <i>RelatedIdentifier</i> and <i>RelationType</i>).</p>
-        <p>See this dataset for example: <a href="https://doi.org/10.1594/PANGAEA.906168" target="_blank">Klages, Johann Philipp et al. (2019):
-            Apatite radiogenic isotopes and ages of sediment core 2R at site PS104_20-2. PANGAEA<i class="fa fa-external-link"></i></a>.</p>
+        <p>These are some examples of datasets with good discovery metadata:</p>
+        <ul>
+            <li><a href="https://doi.org/10.17026/dans-xsw-kkeq" target="_blank">Social Sciences and Humanities - Gregory, K.M. (Data Archive and Networked Services) (2020): Data Discovery and Reuse Practices in Research.<i class="fa fa-external-link"></i></a></li>
+            <li><a href="https://doi.org/10.7910/DVN/0HNECY" target="_blank">Life Sciences - Apriyanti, D.H., Spreeuwers, L.J., Lucas, P.J.F., & Veldhuis, R.N.J. (2020).<i class="fa fa-external-link"></i></a></li>
+            <li><a href="https://doi.org/10.1594/PANGAEA.906168" target="_blank">Natural Sciences - Klages, J. P., et al. (2019). Apatite radiogenic isotopes and ages of sediment core 2R at site PS104_20-2.<i class="fa fa-external-link"></i></a></li>
+            <li><a href="https://doi.org/10.34894/DTRPFW" target="_blank">Engineering Science - Pascoe, J.A.; Usman, M., (2016). Effect of temperature on fatigue crack growth in adhesive bonds.<i class="fa fa-external-link"></i></a></li>
+        </ul>
     </div>
 </div>
 
 <div id="F-i-3-contents">
     <div id="F-i-3-default">
+        <h4>What does this mean?</h4>
         <p>This question refers to the capability to make the metadata accessible online in a standard and machine-readable format.
-            Machine-readability refers to a structured format that can be read and processed by a computer.</p>
-        <p><u>Advantages of machine-readable formats</u><br>
-            By ensuring that the metadata describing your data deposit is machine-readable, your data deposit will be visible to
-            search engines and aggregators which can improve your chances of having your data cited and reused. This capability is
-            normally offered by the data repository that holds the data and makes the essential details about it available online.
-            For example, some repositories expose the metadata online to allow access or harvesting through a standard protocol
-            (e.g. OAI-PMH) and/or a web service. Your choice of a data repository will be critical to meet this requirement.
-            You can select a repository offering such capability by searching for example in the Registry of Research Repositories
-            re3data.org for repositories supporting
-            <a href="https://www.re3data.org/search?query=&apis%5B%5D=OAI-PMH" target="_blank">OAI-PMH<i class="fa fa-external-link"></i></a>.</p>
-        <p><u>Metadata as structured data</u><br>
-            Metadata may also be exposed as structured data embedded within a web page to make it more machine-actionable.
-            The <a href="https://www.schema.org" target="_blank">schema.org<i class="fa fa-external-link"></i></a>
-            standard is one approach that helps to ensure indexing by web search engines such as Google and Bing.
-            This allows the <a href="https://datasetsearch.research.google.com" target="_blank">Google Dataset Search<i class="fa fa-external-link"></i></a>
-            which you can use to check if data hosted by the repository of your choice is indexed.
-            Dublin Core is another metadata standard that repositories use to make metadata harvestable by indexing systems.</p>
+            <b>Machine-readability</b> means that the data is presented in a structured <b>format</b> that computers can read and process.
+            Facilitating this process is a responsibility of the data repository you deposit your data(set) in.</p>
+        <h4>Why is this important?</h4>
+        <p>By ensuring that the metadata describing your data(set) is machine-readable, it will be findable to the systems that
+            collect (also known as <b>harvesting</b>) and aggregate data for search engines or databases (e.g., Google Search, Web of Science,
+            or a university library collection). This improves your chances of having your data(set) cited and reused, because
+            it will reach a larger audience. Without machine-readable metadata, your data(set) will only be found by people searching
+            the data collection of the specific repository you deposited in or those that have a direct link to your data(set).</p>
+        <h4>How to do this?</h4>
+        <p>Most digital data repositories will have some kind of protocol for making metadata machine-readable. Two protocols
+            that support FAIR (because they are open, free, and universally implementable) are
+            <a href="http://www.openarchives.org/pmh/" target="_blank">OAI-PMH<i class="fa fa-external-link"></i></a> and
+            <a href="https://restfulapi.net/" target="_blank">REST API<i class="fa fa-external-link"></i></a>.
+            Therefore, even though it is the responsibility of the data repository to carry out this task, it is your
+            responsibility to select the right data repository to meet this requirement.  You can search for such a data
+            repository on a registry such as
+            <a href="https://www.re3data.org/search?query=" target="_blank">Re3data<i class="fa fa-external-link"></i></a> by filtering on ‘API’.</p>
     </div>
-</div>
-
-<div id="F-i-1-advice">
-    <p>no advice yet.</p>
-</div>
-
-<div id="F-i-2-advice">
-    <p>no advice yet.</p>
-</div>
-
-<div id="F-i-3-advice">
-    <p>no advice yet.</p>
+    <button id="F-i-3-more" onclick="show_additional_text('F-i-3')" >Want to know more?</button>
+    <div id="F-i-3-additional">
+        <h4>Want to know more?</h4>
+        <p>Metadata may also be exposed as <b>structured data</b> embedded within a webpage. This makes the metadata more <b>machine-actionable</b>.
+            The <a href="https://www.schema.org" target="_blank">Schema.org<i class="fa fa-external-link"></i></a> standard is one approach that
+            helps to ensure indexing by web search engines such as Google and Bing. This facilitates the
+            <a href="https://datasetsearch.research.google.com" target="_blank">Google Dataset Search<i class="fa fa-external-link"></i></a>
+            which you can use to check if data hosted by the repository of your choice is indexed.</p>
+        <p>If you are interested to understand more about how a machine reads a webpage, you can enable the developer view in your
+            web browser (instructions vary between browsers) and take a look at a website.
+            <a href="https://zenodo.org" target="_blank">Zenodo<i class="fa fa-external-link"></i></a> is an example of a website that uses
+            the Schema.org metadata standard.</p>
+    </div>
 </div>
 
 <!-- ======================================= Accessible  ======================================= -->
 
 <div id="A-i-1-contents">
     <div id="A-i-1-default">
-        <p>Ideally, datasets should be public domain and openly accessible without restrictions. However, there can be legitimate reasons
-            not to share data such as those due to privacy protection, ethical, legal, and commercial constraints. As such, it is up to
-            the researcher depositing data to be aware of what can be shared, with whom and when, and to take appropriate steps to ensure
-            that the data is as open as possible and as closed as necessary.</p>
-       <p><u>Data access</u><br>
-           The metadata describing your dataset should include details about who can access the data as well as any possible related conditions.
-           Access levels can be public, embargoed, restricted, or closed access. In some cases, you may even need to apply a variety of access
-           levels to different parts of the same dataset. It is important to consider these issues early on for all datasets so that by the
-           time of deposit in a repository, access levels have been clearly defined.</p>
-       <p><u>Licences</u> (relates to Reusability in the FAIR Principles)<br>
-           Data should be clearly licenced so that other users can legally reuse it. Application of licences is encouraged for all kinds of
-           data and access levels. Without an explicit licence, users do not have a clear sense of what can be done with your data.
-           Licences can be of standard type
-           (e.g., <a href="https://creativecommons.org/licenses/" target="_blank">Creative Commons<i class="fa fa-external-link"></i></a>)
-           or bespoke licences, and rights statements which indicate the conditions under which data can be reused.</p>
-        <p>It is highly recommended to use a standard, machine-readable licence such that it can be interpreted by machines and humans.
-            In order to inform users about what rights they have to use a dataset, the licence information should be specified as part
-            of the dataset’s metadata.</p>
+        <h4>What does this mean?</h4>
+        <p>Ideally, data(sets) should be public domain and openly <b>accessible</b> without restrictions. However, there can be legitimate
+            reasons not to share data (e.g., privacy protection, ethical, legal, or commercial constraints). As such, it is your
+           responsibility to be aware of what can be shared, with whom and when, and to take appropriate steps to ensure that the
+           data is as open as possible and as closed as necessary.</p>
+        <h4>Why is this important?</h4>
+        <p>As explained in Q2, the metadata describing your data(set) should include details about who can access the data(set) as well
+            as any possible related conditions that need to be met in order to gain access. By clearly specifying these details, you will
+            be assured of the most appropriate access level to your data(set). A data(set) can have a public, embargoed, restricted, or
+            closed access level. You can read more about access levels in the ‘What to know more?’ section.</p>
+        <p>In some cases, you may even need to apply a variety of access levels to different parts of the same data(set). It is important
+            to consider these issues early on for all your data(sets), so that the access levels are clearly defined before you upload
+            the data(set) to a data repository. </p>
+        <p>Data should also be accompanied by a clear <b>licence</b> so that other people can legally reuse it. It is recommended to add a licence
+            to all kinds of data(sets) and access levels. Without an explicit licence or a waiver, potential reusers do not have a clear
+            sense of what can be done with your data.  It is easiest to use a standard type license for your data(set), since there are
+            many different types that will cover most basic legal situations
+            (e.g., <a href="https://creativecommons.org/licenses" target="_blank">Creative Commons<i class="fa fa-external-link"></i></a>).
+            It is also possible to create your own bespoke licence, though it is recommended to seek help from a legal expert if you wish
+            to pursue this. Your chosen licence should also be part of your (machine-readable) metadata to effectively inform any human or
+            machine that comes across your data(set) about what they’re allowed to do with it.</p>
+        <h4>How to do this?</h4>
+        <p>You should determine the access level(s) and licence of your data(set) before depositing in a data repository. If you are not
+            sure about the right access level or the licence for your data(set), check the institutional or funder policies or speak to
+            your local research data management support team. Also be sure to choose a data repository that supports your desired access
+            level and licence. You can search for such a data repository on a registry such as
+            <a href="https://www.re3data.org/search?query=" target="_blank">Re3data<i class="fa fa-external-link"></i></a>,
+            by filtering on ‘Database access’ and ‘Database license’.</p>
+        <p>If you are depositing data associated with a publication, it is recommended to include a <b>data availability statement</b> in your publication.
+            This statement communicates to readers of your publication where the data(set) is available and how it can be accessed.
+            It also includes a link to the data(set). Most journals, especially those with a data sharing policy, will have templates for
+            data availability statements available.</p>
     </div>
     <button id="A-i-1-more" onclick="show_additional_text('A-i-1')" >Want to know more?</button>
     <div id="A-i-1-additional">
+        <h4>Want to know more?</h4>
         <p>Access levels can be categorised as follows:</p>
-        <p>Embargoed access refers to data that will be made publicly accessible – either publicly or restricted –
-            at a specific date which should be specified in the metadata. For example, a researcher may release
-            their data after having published their findings from the data.</p>
-        <p>Restricted access refers to data that can be accessed under certain conditions (e.g. because of commercial, sensitive,
-            or other confidentiality reasons or the data are only accessible via a subscription or a fee). Restricted data may be
-            available to a particular group of users or after permission is granted. For restricted data, the metadata should include
-            the conditions of access to the data (e.g., point of contact or instructions to access the data). In cases where access
-            will need to be restricted, you should check that the repository offers the required functionality to support access requests
-            before depositing with them.</p>
-        <p>Closed access refers to data that is not made publicly available and for which only metadata is publicly available.</p>
+        <ul>
+            <li><b>Public access</b> refers to data which everyone can access without any restrictions.</li>
+            <li><b>Restricted access</b> refers to data that one can access under certain conditions
+                (e.g. because of commercial, sensitive, or other confidentiality reasons or the data is only accessible
+                via a subscription or a fee). Restricted data may be available to a particular group of users or after permission is granted.
+                For restricted data, the metadata should include the conditions of access to the data
+                (e.g., point of contact or instructions to access the data). In case you need to restrict access to your data(set),
+                you should check if your data repository of choice supports access requests.</li>
+            <li><b>Closed access</b> refers to data that is not made publicly available and for which only metadata is publicly available.</li>
+            <li><b>Embargoed access</b> refers to data that will be made publicly accessible – either publicly or restricted –
+                at a specific date which should be specified in the metadata. For example, a researcher may release their data after having
+                published their findings from the data.</li>
+        </ul>
+        <p>You can learn more about standard and bespoke licenses in this
+            “<a href="https://www.dcc.ac.uk/guidance/how-guides/license-research-data#top" target="_blank">How to License Research Data<i class="fa fa-external-link"></i></a>”
+            guide from DCC.</p>
     </div>
 </div>
 
 <div id="A-i-2-contents">
     <div id="A-i-2-default">
-        <p>Even if a dataset is no longer available, published references and links should always point to its metadata for
+        <h4>What does this mean?</h4>
+        <p>Even if a data(set) is no longer available, published references and links should always point to its metadata for
             transparency and integrity. In other words, this question is about whether the metadata will be preserved even
-            when the data it describes may no longer be available. Continued access to data and metadata depends on the data
-            repository preservation practices which are usually documented in the repository’s service policies or statements
-            (e.g. in a preservation plan or policy).</p>
-        <p>Trustworthy data repositories typically guarantee a minimum retention period. When assigning globally unique and
-            persistent identifiers such as DOIs, trustworthy data repositories ensure that metadata will remain accessible even
-            if the data is no longer available by providing a tombstone page displaying metadata about the removed item.</p>
-        <p>The preservation of data and metadata is normally considered during data management planning.</p>
-        <p><u>Sensitive data</u><br>
-            If your research data is associated with consent forms (e.g., personal data) outlining terms and conditions,
-            the data you deposit with a repository may only be legally preserved for a set period of time (e.g., five years after publication)
-            and then must be destroyed. In such cases, the metadata record should make clear that the data no longer exists and why it is not available.
-            However, the metadata record itself should be maintained to provide a record about the research that took place.</p>
+            when the data(set) it describes may no longer be available. </p>
+        <h4>Why is this important?</h4>
+        <p>Even when your data(set) is not accessible, the metadata in itself can be very valuable for future reuse,
+            especially when it is rich enough. Rich metadata means that it is elaborate enough to adequately inform someone
+            with no prior knowledge about your data(set).  Keeping metadata accessible is a way to assure that your work can
+            still be of use for future (replication) studies. If you want others to continue to discover and cite your work,
+            it is essential to make sure the metadata describing your data(set) always remains available. As long as this is
+            the case, links to your data(set) will not become invalid, but will simply point to the metadata only.</p>
+        <h4>How to do this?</h4>
+        <p>Whether or not a data repository provides continued access to metadata depends on the data repository preservation
+            practices, which are usually documented in a <b>preservation plan</b> or <b>policy</b>. You should check whether
+            the data repository you deposit your data(set) in has the policy to maintain metadata when data are removed.
+            Make sure to include the persistent identifier in the remaining metadata and a statement on why this data(set)
+            is no longer available. </p>
     </div>
     <button id="A-i-2-more" onclick="show_additional_text('A-i-2')" >Want to know more?</button>
     <div id="A-i-2-additional">
-        <p>A good tip is to consider whether you should include general statements about data destruction in the consent forms you use.
-            Speak to your local research data management support and ethics teams early on to make sure you can develop consent forms
-            that match your aims for longer-term data retention and sharing. If eventual data destruction is unavoidable, you will need
-            to check that this can be handled by your data repository of choice.</p>
+        <h4>Want to know more?</h4>
+        <p>After the <b>data retention period</b> has passed, there are different justifiable reasons to not keep (all) of
+            your data(set) available over time:</p>
+        <p>In case you have used <b>consent forms</b> which specified a certain preservation period after which your data
+            must be destroyed, we recommend:</p>
+        <ul>
+            <li>to update your metadata record after destroying the rest of the data(set)</li>
+            <li>to indicate why the data(set) is no longer available </li>
+            <li>to make sure the metadata is rich enough for others to understand what the data(set) was about</li>
+        </ul>
+        <p>You should discuss with your local research data management support whether it is necessary to incorporate
+            a <b>data destruction statement</b> in your consent form. Try to aim for the longest data retention and sharing
+            period possible for you. If data destruction is unavoidable, make sure you choose a data repository that
+            can adequately handle this.</p>
+        <p>Maintaining (all of) your data(set) may be too costly in the long term. By removing (parts of) your data(set),
+            you can lower these costs and keep your data(set) accessible for longer. Make sure the remaining (meta)data
+            is rich enough for others to understand what the data that is no longer accessible was about.</p>
+        <p>Data retention standards vary greatly in scientific fields. You should follow the data retention guidelines
+            from the field you work in. In some cases, this could mean that you preserve a smaller part of your data(set)
+            or that you preserve it for a shorter period of time. Do make sure that your metadata is rich enough both for
+            humans and machines to understand it.</p>
     </div>
-</div>
-
-<div id="A-i-1-advice">
-    <p>no advice yet.</p>
-</div>
-
-<div id="A-i-2-advice">
-    <p>no advice yet.</p>
 </div>
 
 <!-- ======================================= Interoperable  ======================================= -->
 
 <div id="I-i-1-contents">
     <div id="I-i-1-default">
-        <p>Metadata should use semantic vocabularies so that the contents are unambiguous and can be interpreted automatically by machines.
-            Ontologies, thesauri, and taxonomies are kinds of semantic vocabularies, and they come with different degrees of sophistication
-            (for e.g. in their level of expressiveness, structure, and inferential power)</p>
-    </div>
-    <button id="I-i-1-more" onclick="show_additional_text('I-i-1')" >Want to know more?</button>
-    <div id="I-i-1-additional">
-        <p>Using semantic vocabularies in metadata facilitates enhanced data search and interoperability of data from different sources.
-            Repositories should provide support for the use of semantic vocabularies in metadata by offering relevant functionalities.
-            When semantic vocabularies are included in the metadata, your data repository of choice may be able to publish the metadata
-            in machine-interpretable format, thus greatly increasing their machine actionability and supporting the
-            <a href="https://www.w3.org/standards/semanticweb" target="_blank">Semantic Web<i class="fa fa-external-link"></i></a>.</p>
-        <p>Before using semantic vocabularies, you should establish the following:</p>
+        <h4>What does this mean?</h4>
+        <p>There are many different ways you can describe the same information when filling out the metadata for your deposit.
+            To prevent ambiguity and facilitate better findability, interoperability, and machine-readability,
+            you should use a <b>controlled vocabulary</b> to enter your metadata.</p>
+        <p>Controlled vocabularies are lists of terms that are created for specific uses or contexts. They are a type of
+            <b>semantic artefact</b> and can take the form of, for example, an ontology, thesaurus, or taxonomy. Each type of
+            vocabulary comes with a different degree of sophistication (e.g. in their level of expressiveness,
+            structure, and inferential power).</p>
+        <h4>Why is this important?</h4>
+        <p>When using controlled vocabularies, the discovery, linking, understanding, and reuse of research data are improved.
+            Using controlled vocabularies in metadata facilitates enhanced data search because people will not have to guess
+            the exact terms you used to describe your data(set) to find it. It also helps facilitate better interoperability
+            of data from different sources, since it will be clear that data(sets) using the same terms cover the same information.</p>
+        <p>Data repositories should provide support for the use of controlled vocabularies in metadata by offering relevant
+            functionalities. They will often display which controlled vocabularies they support on their website.
+            When controlled vocabularies are included in the metadata, your data repository of choice may be able to publish
+            the metadata in machine-readable format, thus greatly increasing their machine actionability.</p>
+        <h4>How to do this?</h4>
+        <p>Controlled vocabularies are often domain-specific. It is recommended to use the vocabulary that is used most often
+            in your field or specific line of research (see Q8). If you are unsure about this, you can contact your research
+            support staff or look up some data(sets) from colleagues in your field.</p>
+        <p>You can find data repositories supporting your preferred controlled vocabulary in registries such as FAIRsharing or
+            <a href="https://www.re3data.org/search?query=" target="_blank">Re3dataa<i class="fa fa-external-link"></i></a> by
+            filtering on ‘metadata standards’. Below is a non-exhaustive list of some registries or look-up services for vocabularies.
+            You can use these resources to search for a vocabulary that covers terms relevant for your research.</p>
         <ul>
-            <li>Whether you can find the vocabulary</li>
-            <li>Whether you know who curates and makes the vocabulary available to other users</li>
-            <li>Whether it is an nationally or internationally recognized vocabulary and if it is used extensively</li>
-            <li>Whether it is available online and is open to other users</li>
-        </ul>
-        <p>Repositories supporting your preferred semantic vocabulary can be found on registries like FAIRsharing.org.
-            Below is a list of some repositories or look-up services for semantic resources (the list is not exhaustive):</p>
-        <ul>
+            <li><a href="https://bartoc.org/" target="_blank">Basel Register of Thesauri, Ontologies & Classifications (BARTOC)<i class="fa fa-external-link"></i></a></li>
+            <li><a href="https://vocabularies.cessda.eu/" target="_blank">CESSDA Vocabulary Service<i class="fa fa-external-link"></i></a></li>
             <li><a href="https://lov.linkeddata.es/dataset/lov" target="_blank">Linked Open Vocabularies (LOV)<i class="fa fa-external-link"></i></a></li>
             <li><a href="http://www.obofoundry.org/" target="_blank">OBO Foundry<i class="fa fa-external-link"></i></a></li>
             <li><a href="https://bioportal.bioontology.org/" target="_blank">BioPortal<i class="fa fa-external-link"></i></a></li>
-            <li><a href="https://bartoc.org/" target="_blank">Basel Register of Thesauri, Ontologies & Classifications (BARTOC)<i class="fa fa-external-link"></i></a></li>
             <li><a href="https://vocab.nerc.ac.uk/" target="_blank">NERC Vocabulary Server<i class="fa fa-external-link"></i></a></li>
             <li><a href="https://vocabs.ands.org.au/" target="_blank">Research Vocabulary Australia<i class="fa fa-external-link"></i></a></li>
             <li><a href="https://mmisw.org/" target="_blank">MMI Ontology Registry and Repository (ORR)<i class="fa fa-external-link"></i></a></li>
             <li><a href="https://www.industrialontologies.org/" target="_blank">Industrial Ontologies Foundry (IOF)<i class="fa fa-external-link"></i></a></li>
-            <li><a href="https://vocabularies.cessda.eu/" target="_blank">CESSDA Vocabulary Service<i class="fa fa-external-link"></i></a></li>
         </ul>
     </div>
-</div>
-
-<div id="I-i-1-advice">
-    <p>no advice yet.</p>
+    <button id="I-i-1-more" onclick="show_additional_text('I-i-1')" >Want to know more?</button>
+    <div id="I-i-1-additional">
+        <h4>Want to know more?</h4>
+        <p>If your field has no common controlled vocabularies (yet), you can search for one you personally find most suitable.
+            It is recommended to do this in collaboration with your research support staff. Before using a controlled vocabulary,
+            you should establish the following:</p>
+        <ul>
+            <li>Whether it is available online and is open to other users</li>
+            <li>Whether it contains the relevant terms for your line of research</li>
+            <li>Whether you know who curates and makes the vocabulary available to other users</li>
+            <li>Whether it is an nationally or internationally recognized vocabulary and if it is used extensively</li>
+        </ul>
+    </div>
 </div>
 
 <!-- ======================================= Reusable  ======================================= -->
 
 <div id="R-i-1-contents">
     <div id="R-i-1-default">
-        <p>By providing provenance information about the data (e.g. sources, date, contributor, version), you enable its (re)use.
-            Data provenance (also known as lineage) represents its history, including people, entities, and processes involved in the data creation.
-            It depends on the data type (e.g., measurement, observation, derived data, or data product) and research domains.
-            For that reason, it is difficult to capture a set of finite provenance records adequate to all domains. Based on existing work,
-            we suggest that the following provenance properties of data generation or collection should be supplied as part of the metadata
-            (this is not an exhaustive list):</p>
+        <h4>What does this mean?</h4>
+        <p>Data <b>provenance</b> (also known as lineage) is a type of metadata that represents the history of your data(set), including information
+            about the people, entities, and processes involved in the data creation. You can also describe and/or link previous versions of
+            your data(set) in the provenance information. Aside from conveying important information about your data(set) to potential reusers,
+            you can also communicate how you wish to be cited. </p>
+        <h4>Why is this important?</h4>
+        <p>By providing provenance information about the data(set) (e.g. sources, date, contributor, version), you make it possible for users to
+            determine whether to trust the authenticity of the data(set) and enable its (re)use. It is a transparent way to communicate why,
+            how, when, where, and by whom your data(set) was created. </p>
+        <h4>How to do this?</h4>
+        <p>The provenance information that is necessary for your data(set) depends on the <b>data type</b> (e.g., measurement, observation, derived data,
+            or data product) and research domain of your work. For that reason, it is difficult to capture a set of finite provenance records
+            adequate to all domains. It is recommended to include at a minimum the following provenance properties of data generation or collection
+            should be supplied as part of the metadata (this is not an exhaustive list):</p>
         <ul>
-            <li>Sources of data generation or collection, e.g., model, instrument</li>
-            <li>Data creation or collection date</li>
-            <li>Contributor involved</li>
-            <li>Data versioning information
+            <li>Sources of data generation or collection (e.g., model, instrument, methodology)</li>
+            <li>The date of data creation or collection</li>
+            <li>The contributor(s) involved</li>
+            <li>Data versioning information (indicate relations to other versions and describe changes)</li>
         </ul>
     </div>
     <button id="R-i-1-more" onclick="show_additional_text('R-i-1')" >Want to know more?</button>
     <div id="R-i-1-additional">
-        <p>There are various ways through which provenance information may be included in a metadata record.
-            Some of the provenance properties (e.g., instrument, contributor) may be best represented using PIDs (such as DOIs for data, ORCIDs for researchers).
-            This way, humans and machines can retrieve more information about each of the properties by resolving the PIDs.</p>
-        <p>Alternatively, the provenance information can be given a linked provenance record expressed explicitly in, e.g., PROV-O or PAV or Vocabulary of Interlinked Datasets (VoID).
-            For further information on which provenance data is necessary for the research community of your research domain, contact your research support staff.</p>
-    </div></div>
+        <h4>Want to know more?</h4>
+        <p>There are various ways in which provenance information may be included in a metadata record. Some of the provenance properties
+            (e.g., instrument, contributor) may be best represented using persistent identifiers (such as DOIs for data, ORCIDs for researchers,
+            GRID for organisations). This way, humans and machines can retrieve more information about each of the properties by resolving the PID.</p>
+        <p>Alternatively, the provenance information can be given a linked provenance record expressed explicitly using a controlled vocabulary
+            (e.g., PROV-O, PAV, or Vocabulary of Interlinked Datasets (VoID)). For further information on which provenance data is necessary for
+            the research community of your research domain, contact your research support staff.</p>
+    </div>
+</div>
 
 <div id="R-i-2-contents">
     <div id="R-i-2-default">
-        <p>To ensure that your metadata can be broadly shared and understood within your research domain, it is recommended to use a
-            community-endorsed standard.</p>
-        <p>For example, some communities have well-established metadata standards (e.g., geospatial: ISO19115, biodiversity: DarwinCore,
-            ABCD, EML, social science: DDI, astronomy: International Virtual Observatory Alliance Technical Specifications,
-            linguistics: CLARIN CMDI) and well-established domain and discipline-specific repositories supporting these community
-            endorsed metadata standards.</p>
-        <p><u>Metadata registries</u><br>
-            Community-endorsed metadata standards are listed in metadata registries such as the
+         <h4>What does this mean?</h4>
+        <p>To ensure that your metadata can be broadly shared and understood within your research domain, we recommend using a
+            <b>community-endorsed standard</b>. A standard is any semantic artefact (see Q6), format (see Q3) or other information
+            structure that is widely used in a specific group. If there are any agreements on best practices or standards
+            in your community, you should always give preference to this option.</p>
+        <p>Community standards may be formally recognized or less formal in their occurrence, but they will always be used and
+            endorsed by the majority of the given community. What “community” means in this context can vary. It is highly
+            recommended to follow domain- or discipline-specific standards, but there are also general purpose standards and
+            smaller scale standards for sub-disciplines or organisations.</p>
+        <h4>Why is this important?</h4>
+        <p>The main purpose of a community standard is to prevent misunderstandings due to ambiguity by making sure everyone
+            is speaking the same language. By following the specifications of a community-endorsed standard for your metadata,
+            you make sure that others can clearly understand and (re)use your data. It is easier to understand and reuse data
+            that is similar to your own or that of others in the same field. Moreover, using a clearly defined structure and
+            wording in your metadata can facilitate replication studies or meta-analyses.</p>
+        <h4>How to do this?</h4>
+        <p>You can use metadata registries such as the
             <a href="https://rd-alliance.github.io/metadata-directory/standards/" target="_blank">RDA<i class="fa fa-external-link"></i></a>
-            or <a href="https://www.dcc.ac.uk/guidance/standards/metadata" target="_blank">Digital Curation Centre<i class="fa fa-external-link"></i></a>,
-            where you can find more information on these standards.
-            Domain and discipline-specific repositories should therefore be the preferred choice to deposit your data.
-            The Registry of Research data repositories re3data.org enables searching for a suitable data repository by
-            <a href="https://www.re3data.org/browse/by-subject/" target="_blank">domain<i class="fa fa-external-link"></i></a>.
-        </p>
-        <p>In contrast, other communities, including new domains, may have limited standards or standards that are under development
-            (for e.g. engineering), and no dedicated data repositories. In such cases the best approach is to contact a
-            research data management expert to identify possible solutions.</p>
+            or <a href="https://www.dcc.ac.uk/guidance/standards/metadata" target="_blank">DCC<i class="fa fa-external-link"></i></a>
+            to find more information on community-endorsed standards. For example, some well-established metadata standards are:</p>
+        <ul>
+            <li><a href="https://dublincore.org/resources/metadata-basics/" target="_blank">Dublin Core Metadata Initiative (DCMI)<i class="fa fa-external-link"></i></a>
+                : General purpose standard for which elements and vocabulary to use in metadata.</li>
+            <li><a href="https://ddialliance.org/" target="_blank">DDI<i class="fa fa-external-link"></i></a>
+                : Standard for the social, behavioral, economic and health sciences</li>
+            <li><a href="https://dwc.tdwg.org/" target="_blank">Darwin Core<i class="fa fa-external-link"></i></a>
+                : A body of standards for the life sciences.</li>
+            <li><a href="https://geocase.eu/efg" target="_blank">ABCDEFG<i class="fa fa-external-link"></i></a>
+                : An extension of the standard for biological sciences to support the geosciences.</li>
+            <li><a href="https://www.nexusformat.org/" target="_blank">NeXus<i class="fa fa-external-link"></i></a>
+                : A data format standard specifically for x-ray, neutron, and muon science.</li>
+        </ul>
+        <p>A domain- or discipline-specific data repository should be your preferred choice for depositing your data(set).
+            Such a repository will support a metadata standard for your relevant community. You can search for a suitable
+            data repository by using Re3data and browsing on
+            <a href="https://www.re3data.org/browse/by-subject" target="_blank">domain or subject<i class="fa fa-external-link"></i></a>.</p>
+        <p>In case your domain has limited standards or standards that are still under development, you should follow general purpose standards.
+            In case no dedicated data repositories are available for your domain (yet), we recommend contacting a research data management
+            expert in your area to identify possible solutions.</p>
+    </div>
+    <button id="R-i-2-more" onclick="show_additional_text('R-i-2')" >Want to know more?</button>
+    <div id="R-i-2-additional">
+        <h4>Want to know more?</h4>
+        <p>If you are interested in learning how metadata elements are converted into machine-readable files, you can take a look at the
+            “<a href="https://nsteffel.github.io/dublin_core_generator" target="_blank">Dublin Core Generator<i class="fa fa-external-link"></i></a>”.
+            This tool can transform your Dublin Core metadata into a machine-readable format.</p>
+        <p>Many standards undergo continuous evaluation and development. The community-endorsed standards aim to be relevant for the users in
+            the community which is why many of the organisations and initiatives that develop and maintain these standards seek community feedback.
+            If you are interested in the topic of community standards and want to share your experiences or provide input, you can visit the
+            website of any specific standard to get in touch. </p>
     </div>
 </div>
 
 <div id="R-i-3-contents">
     <div id="R-i-3-default">
-        <p>File formats refer to methods for encoding digital information. If there is no open format available, then you may also use a proprietary format. For example, CSV for tabular data, NetCDF for multidimensional
-            data and GeoTIFF for raster imagery.</p>
-        <p>Data should be made available in a recommended file format that is accepted by the research community to enable data sharing and reuse,
-            and by the repository to enable long-term preservation. Repositories normally have different recommended standard file formats based
-            on data types (for example:
-            <a href="https://www.ukdataservice.ac.uk/manage-data/format/recommended-formats.aspx" target="_blank">UK Data Service<i class="fa fa-external-link"></i></a>)
-            and <a href="https://www.iso.org/standard/73117.html" target="_blank">ISO/TR 22299 Document management - Digital file format recommendations for long-term storage<i class="fa fa-external-link"></i></a>.</p>
-        <p>Recommended formats are widely used and supported by the most common software and tools ensuring that your data can be read in the future,
-            but they will also help increase the reusability and interoperability. Using recommended formats enables data to be loaded
-            directly into the software and tools used for data analysis. It makes it possible to easily integrate your data with other data using
-            the same format. The use of recommended formats will allow migration of the format to a newer one, in case a preferred format
-            becomes outdated.</p>
+        <h4>What does this mean?</h4>
+        <p><b>File formats</b> refer to methods for encoding digital information. You can recognize a file format by the extension
+            (the three or four letters at the end of a filename). A file can either be <b>open</b> or <b>proprietary</b> in its format.
+            It is highly recommended to use an open file format for your data(set), so that others can easily access and reuse it.</p>
+        <h4>Why is this important?</h4>
+        <p>A proprietary file format is created and owned by a company and often accompanies a specific software. This means that
+            people who don’t have a licence for this software will not be able to open your file(s). Moreover, the developments and
+            updates such a file format may undergo are dependent on the owner of the company, therefore it may be that older versions
+            of the file format will not be supported in the future, or that the file format will cease to exist entirely.
+            This doesn’t facilitate <b>long-term preservation</b>, as people may not be able to open your file(s) in the future.</p>
+        <p>Open file formats are publicly accessible and often undergo less changes over time. They can be opened by anyone without
+            the necessity of a license, which means your data(set) can be used more widely.</p>
+        <h4>How to do this?</h4>
+        <p>Data should be made available in a recommended file format that is accepted by the research community to enable data sharing,
+            interoperability, and reuse. It is also important that the file format is supported by the data repository to enable
+            long-term preservation. Repositories usually display an overview of their supported or preferred ( and sometimes also non-preferred)
+            file formats on their website, and will generally have a couple of different options per data type
+            (see for example the UK Data Service or DANS). If you deposit your data in such a file format, the repository should have
+            the necessary information, procedures, and expert knowledge to migrate your file(s) to a new one once it becomes outdated.</p>
+        <p>If there is no open file format available for your data type, you may use a proprietary format. Try to find formats that are
+            widely used and well-established, as the chances of those formats becoming obsolete are much smaller.</p>
+    </div>
+    <button id="R-i-3-more" onclick="show_additional_text('R-i-3')" >Want to know more?</button>
+    <div id="R-i-3-additional">
+        <h4>Want to know more?</h4>
+        <p>The choice you make for short-term data processing may differ from the choices you make for long-term data preservation.
+            During your research, you may want to adhere to the proprietary file formats that suit your chosen software or measurement instrument.
+            To meet this FAIR requirement, you should convert your file(s) before depositing in a data repository. The software will
+            often have some options built-in for this. During this process, it is important to be mindful of the risk of data loss during
+            conversion. If you are unsure about which file format to convert your data to or how to do it, you should consult your data
+            repository of choice or research support staff. </p>
     </div>
 </div>
 
 <div id="R-i-4-contents">
     <div id="R-i-4-default">
-        <p>Data curation is the active and ongoing management of data from the point of creation to ensure that it is fit for contemporary purpose
-            and available for discovery and reuse. Likewise, digital preservation refers to the series of managed activities necessary to ensure
-            continued access to and reusability of digital materials for as long as necessary (i.e FAIR).</p>
-        <p>Professional data curation and preservation require people, skills and technology. They are central to the mission of several academic institutions,
-            such as universities, libraries, data repositories and archives. Specifically, Trustworthy Digital Repositories (TDRs) play a critical role
-            in both making and preserving data FAIR over time. TDRs provide support and take responsibility for the curation and preservation of data
-            with different levels of FAIRness. Digital repositories demonstrate their trustworthiness, for example, through certification with
-            community-endorsed standards such as the
-            <a href="https://www.coretrustseal.org/why-certification/certified-repositories/" target="_blank">CoreTrustSeal<i class="fa fa-external-link"></i></a>,
-            <a href="http://nbn-resolving.de/urn:nbn:de:0008-2013100901" target="_blank">DIN31644/NESTOR<i class="fa fa-external-link"></i></a> and
-            <a href="https://public.ccsds.org/Pubs/652x0m1.pdf" target="_blank">ISO163638<i class="fa fa-external-link"></i></a>.
-            Trustworthy Data Repositories can be found on registries. For example, CoreTrustSeal certified repositories can be filtered on
-            <a href="https://www.re3data.org/search?query=&certificates%5B%5D=CoreTrustSeal" target="_blank">Re3data<i class="fa fa-external-link"></i></a>.</p>
+        <h4>What does this mean?</h4>
+        <p><b>Data curation</b> is the active and ongoing management of data to ensure that it’s available for discovery and reuse. This process covers
+            the entire lifecycle of the data(set), starting at the selection or creation and continuing on for as long as the data(set) exists.
+            <b>Digital preservation</b> is a part of this data curation process and refers to the series of managed activities necessary to ensure
+            continued access to and reusability of the data(set) for as long as necessary (i.e. keeping the data(set) FAIR over time).
+            These actions are a collaborative effort of the researcher and the data repository. <b>Data stewardship</b> also plays an important
+            role throughout the process by managing and overseeing an organization’s data assets.</p>
+        <h4>Why is this important?</h4>
+        <p>Data curation and digital preservation requires people, skills, and technology. All the steps you take towards making your data(set)
+            FAIR and of good quality contribute to the data curation process. You should be aware of the role a data repository plays in
+            this process from the start and determine what kind of care and expertise you expect from a data repository to make sure your
+            data(set) is preserved and kept FAIR over time. As other questions in this tool have already emphasized, the choice of data r
+            epository that you make has a great impact on not only the findability, accessibility, interoperability, and reusability,
+            but also the general value and impact of your data(set).</p>
+        <h4>How to do this?</h4>
+        <p>To make sure your data(set) is in good hands, we recommend you to deposit it in a <b>trusted digital repository</b> (TDR). TDRs have an
+            explicit mission to provide access to and preserve data. They play a critical role in making data FAIR, providing support, and
+            preserving data over time in a FAIR manner. You can find certified data repositories in registries such as
+            <a href="https://www.re3data.org/search?query=" target="_blank">Re3data<i class="fa fa-external-link"></i></a>, by filtering
+            on ‘certificates’, or on the website of the certificate organisation.</p>
+        <p>To make sure your data(set) can become as FAIR as possible and receive the best care over time, you should plan sufficient financial
+            and/or human resources in your research project early in advance. This should include the costs of data stewardship throughout
+            the project and the costs of long term preservation of the data to make sure your data is accessible for as long as possible.</p>
     </div>
     <button id="R-i-4-more" onclick="show_additional_text('R-i-4')" >Want to know more?</button>
     <div id="R-i-4-additional">
-        <p>Recently, the digital repository community has developed and endorsed a set of guiding principles to demonstrate digital repository trustworthiness.
-            These principles stand for Transparency, Responsibility, User focus, Sustainability and Technology
-            <a href="https://www.nature.com/articles/s41597-020-0486-7" target="_blank">(TRUST)<i class="fa fa-external-link"></i></a>.</p>
+        <h4>Want to know more?</h4>
+        <p>There are different community-endorsed repository certification standards, such as the
+            <a href="https://www.coretrustseal.org/why-certification/certified-repositories" target="_blank">CoreTrustSeal<i class="fa fa-external-link"></i></a>,
+            <a href="https://www.langzeitarchivierung.de/Webs/nestor/EN" target="_blank">DIN31644/NESTOR<i class="fa fa-external-link"></i></a> and
+            <a href="https://public.ccsds.org/Pubs/652x0m1.pdf" target="_blank">ISO163638<i class="fa fa-external-link"></i></a>.
+            Each of these standards have different requirements that a repository should meet to receive certification. You can find these
+            requirements on their respective websites.</p>
+        <p>More recently, the digital repository community has developed and endorsed a set of guiding principles to demonstrate general digital
+            repository trustworthiness. These principles stand for Transparency, Responsibility, User focus, Sustainability and
+            Technology (TRUST). Certification requirements are based on these principles, to make sure certification is an indication of trustworthiness.</p>
+        <p>In the absence of formal certification, a data repository can still be FAIR-enabling by facilitating some of the important qualities mentioned
+            in the FAIR and TRUST principles. However, this is more difficult to discover on the outside. Other organisations, including funders or publishers,
+            can also enable or support FAIRness by upholding requirements for data management or FAIR practices (e.g., mandating <b>Data Management Plans</b>),
+            these organisations contribute to a more FAIR scientific landscape.</p>
     </div>
 
 </div>
