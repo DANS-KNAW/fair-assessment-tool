@@ -40,7 +40,7 @@
 
         function initialise() {
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
-            hide_elements(["yq2.6.1", "yq3.8.1", "score-and-guidance", "introduction", "texts", "print-button"])
+            hide_elements(["yq2.6.1", "yq3.8.1", "score-and-guidance", "introduction", "texts", "glossary", "print-button"])
             hide_intention_questions();
         }
 
