@@ -23,7 +23,7 @@
         var short_answers = new Map([
             <!-- Shortened answers to make downloaded data more readable -->
             ['yq2.3', 'Research support'],
-            ['yq3.5', 'eInfrastructure'],
+            ['yq3.1', 'Research Infrastructure/eInfrastructure'],
         ])
 
 
