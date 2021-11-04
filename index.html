@@ -78,13 +78,13 @@
         <div class="intro" id="intro">
             <div class="row">
                 <div class="col-md-2"></div>
-                <div class="col-md-10">
+                <div class="col-md-10" id="intro-box">
                     <br>
                     <div id="introduction-text"></div>
-                    <br>
                 </div>
             </div>
         </div>
+        <br>
 
         <!-- ============================================================ -->
         <!-- ======== SCORE AND GUIDANCE TEXTS AFTER SUBMITTING  ======== -->
@@ -170,7 +170,7 @@
             <div>
                 <div class="row">
                     <div class="col-md-2"></div>
-                    <div class="col-md-10">
+                    <div class="col-md-10" id="course">
                         <h3>Course <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i></h3>
 
                         <div class="row">
@@ -196,7 +196,7 @@
             <div class="context">
                 <div class="row">
                     <div class="col-md-2"></div>
-                    <div class="col-md-10">
+                    <div class="col-md-10" id="about-you">
                         <h3>About you <i class="fa fa-user-circle" aria-hidden="true"></i></h3>
 
                         <div class="row">
@@ -307,8 +307,8 @@
                             </div>
                         </div>
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
+                            <div class="panel-heading" id="panel-heading-findable">
+                                <h4 class="panel-title" id="panel-title-findable">
                                     <div id="F-i-title">FINDABLE</div>
                                 </h4>
                             </div>
@@ -401,8 +401,8 @@
                     </div>
                     <div class="col-md-10">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
+                            <div class="panel-heading" id="panel-heading-accessible">
+                                <h4 class="panel-title" id="panel-title-accessible">
                                     <div id="A-i-title">ACCESSIBLE</div>
                                 </h4>
                             </div>
@@ -471,8 +471,8 @@
                     </div>
                     <div class="col-md-10">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
+                            <div class="panel-heading" id="panel-heading-interoperable">
+                                <h4 class="panel-title" id="panel-title-interoperable">
                                     <div id="I-i-title">INTEROPERABLE</div>
                                 </h4>
                             </div>
@@ -519,8 +519,8 @@
                     </div>
                     <div class="col-md-10">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
+                            <div class="panel-heading" id="panel-heading-reusable">
+                                <h4 class="panel-title" id="panel-title-reusable">
                                     <div id="R-i-title">REUSABLE</div>
                                 </h4>
                             </div>
@@ -634,7 +634,7 @@
                 <div>
                     <div class="row">
                         <div class="col-md-2"></div>
-                        <div class="col-md-10 feedback">
+                        <div class="col-md-10 feedback" id="feedback-box">
                             <h3>Feedback <i class="far fa-hand-point-left" aria-hidden="true"></i></h3>
                             <p>Please answer the four questions below to help us improve the tool and make it more relevant for the community.</p>
                             <div id="Q-i-1-title">
@@ -727,56 +727,50 @@
                                     </div>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">
-                        <div id="Q-i-2-title">
-                            <ul><li>Are there any other topics missing from this assessment that you need to make your data(set) more FAIR?<br>
-                                &nbsp;Please do not include any personal data, such as your name and email address in your response.<br>
-                                &nbsp;Please note that FAIR-Aware is domain-agnostic. Use this box to write down any missing topics or missing
-                                guidance information that you think are applicable to most or all research domains. For more specific questions
-                                or discussion points related to one of the FAIR-Aware topics, please use our dedicated space on the
-                                <a href="https://fairdataforum.org/c/fair-aware/42" target="_blank">FAIR Data Forum<i class="fa fa-external-link"></i></a>.
-                            </li></ul>
-                        </div>
-                        <textarea class="feedback-textarea" id="qq2" rows="4"></textarea>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">
-                        <div id="Q-i-3-title">
-                            <ul><li>Please leave any other feedback to share your experience with the FAIR-Aware tool and help us to further improve it.<br>
-                                (Do not include any personal data, such as your name and email address in your response.)</li></ul>
-                        </div>
-                        <textarea class="feedback-textarea" id="qq3" rows="4"></textarea>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">
-                        <div id="Q-i-4-title">
-                            <ul><li>Please indicate to what extent you agree or disagree with the following statement:<br>
-                                Undertaking this assessment helped raise my awareness and understanding of the FAIR data principles.</li></ul>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1 col-sm-2 col-xs-2"></div>
-                            <div class="col-md-11 col-sm-10  col-xs-10" id="qq4">
-                                <label class="radio-inline" id="lqq4.1"><input type="radio" name="qq4" id="qq4.1" value="0" onclick="update_Q('qq4')"> Strongly Agree</label>
-                                <label class="radio-inline" id="lqq4.2"><input type="radio" name="qq4" id="qq4.2" value="0" onclick="update_Q('qq4')"> Agree</label>
-                                <label class="radio-inline" id="lqq4.3"><input type="radio" name="qq4" id="qq4.3" value="0" onclick="update_Q('qq4')"> Neutral</label>
-                                <label class="radio-inline" id="lqq4.4"><input type="radio" name="qq4" id="qq4.4" value="0" onclick="update_Q('qq4')"> Disagree</label>
-                                <label class="radio-inline" id="lqq4.5"><input type="radio" name="qq4" id="qq4.5" value="0" onclick="update_Q('qq4')"> Strongly Disagree</label>
+
+                            <div class="row">
+                                <div id="Q-i-2-title">
+                                    <ul><li>Are there any other topics missing from this assessment that you need to make your data(set) more FAIR?<br>
+                                        Please do not include any personal data, such as your name and email address in your response.<br>
+                                        Please note that FAIR-Aware is domain-agnostic. Use this box to write down any missing topics or missing
+                                        guidance information that you think are applicable to most or all research domains. For more specific questions
+                                        or discussion points related to one of the FAIR-Aware topics, please use our dedicated space on the
+                                        <a href="https://fairdataforum.org/c/fair-aware/42" target="_blank">FAIR Data Forum<i class="fa fa-external-link"></i></a>.
+                                    </li></ul>
+                                </div>
+                                <textarea class="feedback-textarea" id="qq2" rows="4"></textarea>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div id="Q-i-3-title">
+                                    <ul><li>Please leave any other feedback to share your experience with the FAIR-Aware tool and help us to further improve it.<br>
+                                        (Do not include any personal data, such as your name and email address in your response.)</li></ul>
+                                </div>
+                                <textarea class="feedback-textarea" id="qq3" rows="4"></textarea>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div id="Q-i-4-title">
+                                    <ul><li>Please indicate to what extent you agree or disagree with the following statement:<br>
+                                        Undertaking this assessment helped raise my awareness and understanding of the FAIR data principles.</li></ul>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1 col-sm-2 col-xs-2"></div>
+                                    <div class="col-md-11 col-sm-10  col-xs-10" id="qq4">
+                                        <label class="radio-inline" id="lqq4.1"><input type="radio" name="qq4" id="qq4.1" value="0" onclick="update_Q('qq4')"> Strongly Agree</label>
+                                        <label class="radio-inline" id="lqq4.2"><input type="radio" name="qq4" id="qq4.2" value="0" onclick="update_Q('qq4')"> Agree</label>
+                                        <label class="radio-inline" id="lqq4.3"><input type="radio" name="qq4" id="qq4.3" value="0" onclick="update_Q('qq4')"> Neutral</label>
+                                        <label class="radio-inline" id="lqq4.4"><input type="radio" name="qq4" id="qq4.4" value="0" onclick="update_Q('qq4')"> Disagree</label>
+                                        <label class="radio-inline" id="lqq4.5"><input type="radio" name="qq4" id="qq4.5" value="0" onclick="update_Q('qq4')"> Strongly Disagree</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <br>
             </div>
         </div>
 
