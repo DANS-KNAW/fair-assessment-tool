@@ -40,6 +40,7 @@
     .french-flag:hover .french-flag-description { visibility: visible; }
     #main-title {font-size: 40px; color: #2795c8;}
     #subtitle {font-size: 27px; color: #1e3a79;}
+    #A-i-title {color: black;}
     #panel-heading-findable {background-image: none; background-color: #1e3a79; }
     #panel-title-findable {color: #FFFFFF;background-color: #1e3a79; font-size: 15px;}
     #panel-heading-accessible {background-image: none; background-color: #ffde1b; }
@@ -48,10 +49,10 @@
     #panel-title-interoperable {color: #FFFFFF;background-color: #00a7d4; font-size: 15px;}
     #panel-heading-reusable {background-image: none; background-color: #5c85c4; }
     #panel-title-reusable {color: #FFFFFF;background-color: #5c85c4; font-size: 15px;}
-    #intro-box {border-style: solid; border-color: #1e3a79; border-radius: 15px; padding-left:15px; padding-bottom:15px;}
-    #course {border-style: solid; border-color: #5c85c4; border-radius: 15px; padding-left:15px; padding-bottom:15px;}
-    #about-you {border-style: solid; border-color: #ffde1b; border-radius: 15px; padding-left:15px; padding-bottom:15px;}
-    #feedback-box {border-style: solid; border-color: #00a7d4; border-radius: 15px; padding-left:15px; padding-right:30px; padding-bottom:30px;}
+    #intro-box {border-style: solid; border-color: #1e3a79; border-radius: 15px; padding-left:15px; padding-bottom:15px; background-color: #f5f5f5;}
+    #course {border-style: solid; border-color: #5c85c4; border-radius: 15px; padding-left:15px; padding-bottom:15px; background-color: #f5f5f5;}
+    #about-you {border-style: solid; border-color: #ffde1b; border-radius: 15px; padding-left:15px; padding-bottom:15px; background-color: #f5f5f5;}
+    #feedback-box {border-style: solid; border-color: #00a7d4; border-radius: 15px; padding-left:15px; padding-right:30px; padding-bottom:30px; background-color: #f5f5f5;}
     #feedback-box li {padding-right:18px;}
     #image-f, #image-a, #image-i, #image-r { padding-top: 10px; }
     #awareness-f, #awareness-a, #awareness-i, #awareness-r, #willingness-f, #willingness-a, #willingness-i, #willingness-r { width: 20%; heigth: 20%; }
