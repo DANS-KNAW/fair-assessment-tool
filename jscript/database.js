@@ -2,7 +2,7 @@
     <!-- ================== DATABASE SCRIPTS ================= -->
     <!-- ===================================================== -->
         var HOST = 'TEST';
-        var DOWNLOAD_FILE_NAME = 'assessment_answers.csv';
+        var DOWNLOAD_FILE_NAME = 'FAIRAware_results.csv';
 
         /* ---------------- Initialize database ---------------- */
         firebase.initializeApp(firebaseConfig);
