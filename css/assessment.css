@@ -17,14 +17,6 @@
     .w3-border{border:1px solid #ccc!important}
     .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
     .panel {background-color: #f5f5f5; border: 0px;}
-    #panel-heading-findable {background-image: none; background-color: #1e3a79; }
-    #panel-title-findable {color: #FFFFFF;background-color: #1e3a79; font-size: 15px;}
-    #panel-heading-accessible {background-image: none; background-color: #ffde1b; }
-    #panel-title-accessible {color: #FFFFFF;background-color: #ffde1b; font-size: 15px;}
-    #panel-heading-interoperable {background-image: none; background-color: #00a7d4; }
-    #panel-title-interoperable {color: #FFFFFF;background-color: #00a7d4; font-size: 15px;}
-    #panel-heading-reusable {background-image: none; background-color: #5c85c4; }
-    #panel-title-reusable {color: #FFFFFF;background-color: #5c85c4; font-size: 15px;}
     .modal-header, .modal-footer { margin: 1px; font-size: 18px; font-weight: 600; }
     .modal-body {background-color: #FDFDFD; margin-left: 1px; }
     .footer {background-color: #f5f5f5; padding-top: 20px; }
@@ -48,6 +40,14 @@
     .french-flag:hover .french-flag-description { visibility: visible; }
     #main-title {font-size: 40px; color: #2795c8;}
     #subtitle {font-size: 27px; color: #1e3a79;}
+    #panel-heading-findable {background-image: none; background-color: #1e3a79; }
+    #panel-title-findable {color: #FFFFFF;background-color: #1e3a79; font-size: 15px;}
+    #panel-heading-accessible {background-image: none; background-color: #ffde1b; }
+    #panel-title-accessible {color: #FFFFFF;background-color: #ffde1b; font-size: 15px;}
+    #panel-heading-interoperable {background-image: none; background-color: #00a7d4; }
+    #panel-title-interoperable {color: #FFFFFF;background-color: #00a7d4; font-size: 15px;}
+    #panel-heading-reusable {background-image: none; background-color: #5c85c4; }
+    #panel-title-reusable {color: #FFFFFF;background-color: #5c85c4; font-size: 15px;}
     #intro-box {border-style: solid; border-color: #1e3a79; border-radius: 15px; padding-left:15px; padding-bottom:15px;}
     #course {border-style: solid; border-color: #5c85c4; border-radius: 15px; padding-left:15px; padding-bottom:15px;}
     #about-you {border-style: solid; border-color: #ffde1b; border-radius: 15px; padding-left:15px; padding-bottom:15px;}
