@@ -75,7 +75,8 @@
         .fa-print {font-size: 40px;}
         .fa-paper-plane {font-size: 30px;}
         #image-f {padding-top: 80px;}
-        #image-a, #image-i, #image-r {padding-top: 60px;}
+        #image-a, #image-i {padding-top: 60px;}
+        #image-r {padding-top: 50px;}
     }
     @media (min-width: 1025px) {
         div.col-md-2 {padding-left: 10px;}
