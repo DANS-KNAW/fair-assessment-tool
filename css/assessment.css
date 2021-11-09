@@ -74,7 +74,8 @@
         div.col-md-10 {padding-left: 30px;}
         .fa-print {font-size: 40px;}
         .fa-paper-plane {font-size: 30px;}
-        #image-f, #image-a, #image-i, #image-r {padding-top: 80px;}
+        #image-f {padding-top: 80px;}
+        #image-a, #image-i, #image-r {padding-top: 60px;}
     }
     @media (min-width: 1025px) {
         div.col-md-2 {padding-left: 10px;}
