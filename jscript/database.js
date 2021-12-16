@@ -5,23 +5,29 @@
         var DOWNLOAD_FILE_NAME = 'FAIRAware_results.csv';
 
         /* ---------------- Initialize database ---------------- */
-        firebase.initializeApp(firebaseConfig);
+        if(typeof firebaseConfig != 'undefined') {
+            firebase.initializeApp(firebaseConfig);
+        }
 
         /* ---------------- Write to database ---------------- */
 
         function submit_page() {
-            document.getElementById("submit-button").style.display = "none";
-            firebase.auth().signInAnonymously()
-            .then(function() {
-                let answers = get_answers();
-                if (writeToSheet(answers)) {
-                    show_results();
-                }
-            })
-            .catch(function(error) {
-                write_to_modal("SIGN IN", error.message + "  " +  error.code);
-                document.getElementById("submit-button").style.display = "block";
-            });
+            if(typeof firebaseConfig === 'undefined') {
+                show_results();
+            } else {
+                document.getElementById("submit-button").style.display = "none";
+                firebase.auth().signInAnonymously()
+                .then(function() {
+                    let answers = get_answers();
+                    if (writeToSheet(answers)) {
+                        show_results();
+                    }
+                })
+                .catch(function(error) {
+                    write_to_modal("SIGN IN", error.message + "  " +  error.code);
+                    document.getElementById("submit-button").style.display = "block";
+                });
+            }
         }
 
         function writeToSheet(answers) {

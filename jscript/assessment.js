@@ -320,7 +320,11 @@
                 }
             }
             <!-- set free text fields -->
-            m.set("cq1", document.getElementById("cq1").value.trim())
+            if (document.getElementById("cq1").value.trim() == "") {
+                m.set("cq1", get_host())
+            } else {
+                m.set("cq1", document.getElementById("cq1").value.trim())
+            }
             m.set("qq2", document.getElementById("qq2").value.replace(/(\n)+/g, " ").replace(/,/g, " ").replace(/;/g, " ").trim())
             m.set("qq3", document.getElementById("qq3").value.replace(/(\n)+/g, " ").replace(/,/g, " ").replace(/;/g, " ").trim())
 
