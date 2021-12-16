@@ -12,10 +12,10 @@
         /* ---------------- Write to database ---------------- */
 
         function submit_page() {
+            document.getElementById("submit-button").style.display = "none";
             if(typeof firebaseConfig === 'undefined') {
                 show_results();
             } else {
-                document.getElementById("submit-button").style.display = "none";
                 firebase.auth().signInAnonymously()
                 .then(function() {
                     let answers = get_answers();
