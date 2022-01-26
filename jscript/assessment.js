@@ -4,11 +4,13 @@
 
         var letters = ["F", "A", "I", "R"]
         var fields = new Map([
-            <!-- For each letter (or 'about you'/'feedback' question) an array where  -->
+            <!-- This Map consists of arrays, where each array consists of a letter and an array.  -->
+            <!-- For each letter (representing a block of questions, like 'findable') an array where  -->
             <!-- the first item marks the first question, the second item the second question, etc. -->
             <!-- The value of the item is the number of possible answers to the respective question. -->
             <!-- For questions where the answer is given in free text, the value is 0. -->
-            <!-- Notice: It is important to update this Map when questions are removed or added! -->
+            <!-- C: course  Y: about you  F: findable  A: accessible  I: interoperable  R: reusable  Q: feedback -->
+            <!--It is important to update this Map when number of questions or number of answers to questions changes! -->
             ['C', [0]],
             ['Y', [62, 6, 8]],
             ['F', [2, 2, 2]],
@@ -31,12 +33,6 @@
 
         $(document).ready(initialise);
         $(document).ready(function(){ $('[rel=tooltip]').tooltip({ trigger: "hover" }); });
-        jQuery(function() {
-            // when leaving #modal-2 show the parent modal window, which was hidden
-            $('#modal-2').on('hidden.bs.modal', function() {
-                $("#modal-1").modal('show');
-            });
-        });
 
         function initialise() {
             $("#introduction-text").html(document.getElementById("introduction").innerHTML);
@@ -47,6 +43,15 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
+
+        /* ----------- Show and hide elements ----------- */
+
+        jQuery(function() {
+            // when leaving #modal-2 show the parent modal window, which was hidden
+            $('#modal-2').on('hidden.bs.modal', function() {
+                $("#modal-1").modal('show');
+            });
+        });
 
         function hide_elements(elements_to_hide) {
             for (let element of elements_to_hide) {
@@ -187,11 +192,13 @@
             set_to_default_color(question);
         }
 
-        /* ------------------- Intention ------------------- */
+        /* ---------------- Update Intention --------------- */
         function update_intention(question) {
             update_print_letters(question);
             set_to_default_color(question);
         }
+
+        /* ---------------- Update Functions --------------- */
 
         function show_info_tip(question) {
             if (question != null) {
@@ -367,7 +374,7 @@
             return intention;
         }
 
-        /* ------------------ Submit answers --------------- */
+        /* ------------------ Submit and show answers --------------- */
 
         function submit() {
             scrollToTop()
