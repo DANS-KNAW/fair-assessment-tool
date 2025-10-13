@@ -1,14 +1,14 @@
 var letters = ["F", "A", "I", "R"];
 var fields = new Map([
   /***
-            <!-- This Map consists of arrays, where each array consists of a letter and an array.  -->
-            <!-- For each letter (representing a block of questions, like 'findable') an array where  -->
-            <!-- the first item marks the first question, the second item the second question, etc. -->
-            <!-- The value of the item is the number of possible answers to the respective question. -->
-            <!-- For questions where the answer is given in free text, the value is 0. -->
-            <!-- C: course  Y: about you  F: findable  A: accessible  I: interoperable  R: reusable  Q: feedback -->
-            <!--It is important to update this Map when number of questions or number of answers to questions changes! -->
-          ***/
+    This Map consists of arrays, where each array consists of a letter and an array.
+    For each letter (representing a block of questions, like 'findable') an array where
+    the first item marks the first question, the second item the second question, etc.
+    The value of the item is the number of possible answers to the respective question.
+    For questions where the answer is given in free text, the value is 0.
+    C: course  Y: about you  F: findable  A: accessible  I: interoperable  R: reusable  Q: feedback 
+    It is important to update this Map when number of questions or number of answers to questions changes!
+  ***/
   ["C", [0]],
   ["Y", [62, 6, 8]],
   ["F", [2, 2, 2]],
@@ -21,7 +21,7 @@ var willingness_max = 5;
 var number_fair_questions = get_number_of_fair_questions();
 var total_willingness_score = get_total_willingness_score();
 var short_answers = new Map([
-  /*<!-- Shortened answers to make downloaded data more readable -->*/
+  // Shortened answers to make downloaded data more readable
   ["yq2.3", "Research support"],
   ["yq3.1", "Research Infrastructure/eInfrastructure"],
 ]);
