@@ -1,90 +1,312 @@
-<!-- ======================================== -->
-<!-- ================== CSS ================= -->
-<!-- ======================================== -->
-<style>
-    canvas {
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-    }
-    body, label{font: 14px "Avenir Next", sans-serif;color: #000000;}
-    a {cursor: pointer; color: #333; text-decoration: none;}
-    a:visited {text-decoration: none;}
-    a:hover {text-decoration: none;}
-    button {color: #21618C; background-color: #FFFFFF; border: 0px;}
-    button:hover {color: #000000; background-color: #f5f5f5 }
-    input {horizontal-align: 30px;}
-    div .col-md-10 {padding-right: 0px;}
-    .w3-border{border:1px solid #ccc!important}
-    .glyphicon-info-sign {font-size: 1.3em; color: #BCBCBC;}
-    .panel {background-color: #f5f5f5; border: 0px;}
-    .modal-header, .modal-footer { margin: 1px; font-size: 18px; font-weight: 600; }
-    .modal-body {background-color: #FDFDFD; margin-left: 1px; }
-    .footer {background-color: #f5f5f5; padding-top: 20px; }
-    .footer .social { font-size: 35px; }
-    .fa-external-link, .fa-envelope-o, .fa-long-arrow-left {color: #2795c8;}
-    .fa-print {font-size: 50px; color: #1e3a79;}
-    .fa-paper-plane {font-size: 40px; color: #1e3a79;}
-    .fa-download {font-size: 10px; color: #2795c8;}
-    .fa-twitter-square { color: #1DA1F2; }
-    .fa-linkedin { color: #0177B5; }
-    .fa-envelope-square { color: #0166FF; }
-    .fa-whatsapp { color: #01E676; }
-    .fa-skype { color: #01AFF0; }
-    .work-category {color: #606060;}
-    .dropdown-submenu {position: relative;}
-    .dropdown-submenu .dropdown-menu {top: 0; left: 100%; margin-top: -1px;}
-    .dropdown-submenu:hover { background-color: #BCBCBC; }
-    .intention { padding-left: 5px; }
-    .feedback-textarea { width: 94%; margin-left: 35px; }
-    .french-flag-description { visibility: hidden; }
-    .french-flag:hover .french-flag-description { visibility: visible; }
-    #main-title {font-size: 40px; color: #2795c8;}
-    #subtitle {font-size: 27px; color: #1e3a79;}
-    #A-i-title {color: black;}
-    #panel-heading-findable {background-image: none; background-color: #1e3a79; }
-    #panel-title-findable {color: #FFFFFF;background-color: #1e3a79; font-size: 15px;}
-    #panel-heading-accessible {background-image: none; background-color: #ffde1b; }
-    #panel-title-accessible {color: #FFFFFF;background-color: #ffde1b; font-size: 15px;}
-    #panel-heading-interoperable {background-image: none; background-color: #00a7d4; }
-    #panel-title-interoperable {color: #FFFFFF;background-color: #00a7d4; font-size: 15px;}
-    #panel-heading-reusable {background-image: none; background-color: #5c85c4; }
-    #panel-title-reusable {color: #FFFFFF;background-color: #5c85c4; font-size: 15px;}
-    #intro-box {border-style: solid; border-color: #1e3a79; border-radius: 15px; padding-left:15px; padding-bottom:15px; background-color: #f5f5f5;}
-    #course {border-style: solid; border-color: #5c85c4; border-radius: 15px; padding-left:15px; padding-bottom:15px; background-color: #f5f5f5;}
-    #about-you {border-style: solid; border-color: #ffde1b; border-radius: 15px; padding-left:15px; padding-bottom:15px; background-color: #f5f5f5;}
-    #feedback-box {border-style: solid; border-color: #00a7d4; border-radius: 15px; padding-left:15px; padding-right:30px; padding-bottom:30px; background-color: #f5f5f5;}
-    #feedback-box li {padding-right:18px;}
-    #image-f, #image-a, #image-i, #image-r { padding-top: 10px; }
-    #awareness-f, #awareness-a, #awareness-i, #awareness-r, #willingness-f, #willingness-a, #willingness-i, #willingness-r { width: 20%; heigth: 20%; }
-    #fairisfairteam { padding-left: 20px; }
-    #show-summary a {color: #2795c8;}
-    #logos img { width:  100%; }
-    @media (max-width: 768px) {
-        div.col-md-2 {padding-left: 30px;}
-        div.col-md-10 {padding-left: 30px;}
-        .fa-print {font-size: 20px;}
-        .fa-paper-plane {font-size: 20px;}
-        .fa-download {font-size: 2px;}
-        .intention { padding-left: 15px; }
-        .feedback { padding-left: 45px; }
-        #image-f, #image-a, #image-i, #image-r {padding-top: 20px;}
-    }
-    @media (min-width: 768px) {
-        div.col-md-2 {padding-left: 30px;}
-        div.col-md-10 {padding-left: 30px;}
-        .fa-print {font-size: 40px;}
-        .fa-paper-plane {font-size: 30px;}
-        #image-f {padding-top: 80px;}
-        #image-a, #image-i {padding-top: 60px;}
-        #image-r {padding-top: 50px;}
-    }
-    @media (min-width: 1025px) {
-        div.col-md-2 {padding-left: 10px;}
-        div.col-md-10 {padding-left: 10px;}
-        .fa-print {font-size: 40px;}
-        .fa-paper-plane {font-size: 30px;}
-    }
-    @media print {.pagebreak { page-break-before: always; }}
-
-</style>
+/* CSS for the FAIR assessment tool */
+canvas {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+body,
+label {
+  font: 14px "Avenir Next", sans-serif;
+  color: #000000;
+}
+a {
+  cursor: pointer;
+  color: #1e3a79;
+  text-decoration: none;
+  font-weight: bold;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+button {
+  color: #21618c;
+  background-color: #ffffff;
+  border: 0px;
+}
+button:hover {
+  color: #000000;
+  background-color: #f5f5f5;
+}
+input {
+  horizontal-align: 30px;
+}
+div .col-md-10 {
+  padding-right: 0px;
+}
+.w3-border {
+  border: 1px solid #ccc !important;
+}
+.glyphicon-info-sign {
+  font-size: 1.3em;
+  color: #bcbcbc;
+}
+.panel {
+  background-color: #f5f5f5;
+  border: 0px;
+}
+.modal-title {
+  font-size: 18px;
+  line-height: 1.42857143 !important;
+  font-weight: 600 !important;
+}
+.modal-header,
+.modal-footer {
+  margin: 1px;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+.modal-body {
+  background-color: #fdfdfd;
+  margin-left: 1px;
+}
+.footer {
+  background-color: #f5f5f5;
+  padding-top: 20px;
+}
+.footer .social {
+  font-size: 35px;
+}
+.fa-external-link,
+.fa-envelope-o,
+.fa-long-arrow-left {
+  color: #1e3a79;
+}
+.fa-print {
+  font-size: 50px;
+  color: #1e3a79;
+}
+.fa-paper-plane {
+  font-size: 40px;
+  color: #1e3a79;
+}
+.fa-download {
+  font-size: 10px;
+  color: #1e3a79;
+}
+.fa-twitter-square {
+  color: #1da1f2;
+}
+.fa-linkedin {
+  color: #0177b5;
+}
+.fa-envelope-square {
+  color: #0166ff;
+}
+.fa-whatsapp {
+  color: #01e676;
+}
+.fa-skype {
+  color: #01aff0;
+}
+.work-category {
+  color: #606060;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+.dropdown-submenu:hover {
+  background-color: #bcbcbc;
+}
+.intention {
+  padding-left: 5px;
+}
+.feedback-textarea {
+  width: 94%;
+  margin-left: 35px;
+}
+.french-flag-description {
+  visibility: hidden;
+}
+.french-flag:hover .french-flag-description {
+  visibility: visible;
+}
+#main-title {
+  font-size: 40px;
+  color: #2795c8;
+}
+#subtitle h1 {
+  font-size: 27px;
+  color: #1e3a79;
+  margin-top: 0;
+}
+#A-i-title {
+  color: black;
+}
+#panel-heading-findable {
+  background-image: none;
+  background-color: #1e3a79;
+}
+#panel-title-findable {
+  color: #ffffff;
+  background-color: #1e3a79;
+  font-size: 15px;
+}
+#panel-heading-accessible {
+  background-image: none;
+  background-color: #ffde1b;
+}
+#panel-title-accessible {
+  color: #ffffff;
+  background-color: #ffde1b;
+  font-size: 15px;
+}
+#panel-heading-interoperable {
+  background-image: none;
+  background-color: #00a7d4;
+}
+#panel-title-interoperable {
+  color: #ffffff;
+  background-color: #00a7d4;
+  font-size: 15px;
+}
+#panel-heading-reusable {
+  background-image: none;
+  background-color: #5c85c4;
+}
+#panel-title-reusable {
+  color: #ffffff;
+  background-color: #5c85c4;
+  font-size: 15px;
+}
+#intro-box {
+  border-style: solid;
+  border-color: #1e3a79;
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+  background-color: #f5f5f5;
+}
+#course {
+  border-style: solid;
+  border-color: #5c85c4;
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+  background-color: #f5f5f5;
+}
+#about-you {
+  border-style: solid;
+  border-color: #ffde1b;
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+  background-color: #f5f5f5;
+}
+#feedback-box {
+  border-style: solid;
+  border-color: #00a7d4;
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  background-color: #f5f5f5;
+}
+#feedback-box li {
+  padding-right: 18px;
+}
+#image-f,
+#image-a,
+#image-i,
+#image-r {
+  padding-top: 10px;
+}
+#awareness-f,
+#awareness-a,
+#awareness-i,
+#awareness-r,
+#willingness-f,
+#willingness-a,
+#willingness-i,
+#willingness-r {
+  width: 20%;
+  heigth: 20%;
+}
+#fairisfairteam {
+  padding-left: 20px;
+}
+#show-summary a {
+  color: #1e3a79;
+}
+#logos img {
+  width: 100%;
+}
+@media (max-width: 768px) {
+  div.col-md-2 {
+    padding-left: 30px;
+  }
+  div.col-md-10 {
+    padding-left: 30px;
+  }
+  .fa-print {
+    font-size: 20px;
+  }
+  .fa-paper-plane {
+    font-size: 20px;
+  }
+  .fa-download {
+    font-size: 2px;
+  }
+  .intention {
+    padding-left: 15px;
+  }
+  .feedback {
+    padding-left: 45px;
+  }
+  #image-f,
+  #image-a,
+  #image-i,
+  #image-r {
+    padding-top: 20px;
+  }
+}
+@media (min-width: 768px) {
+  div.col-md-2 {
+    padding-left: 30px;
+  }
+  div.col-md-10 {
+    padding-left: 30px;
+  }
+  .fa-print {
+    font-size: 40px;
+  }
+  .fa-paper-plane {
+    font-size: 30px;
+  }
+  #image-f {
+    padding-top: 80px;
+  }
+  #image-a,
+  #image-i {
+    padding-top: 60px;
+  }
+  #image-r {
+    padding-top: 50px;
+  }
+}
+@media (min-width: 1025px) {
+  div.col-md-2 {
+    padding-left: 10px;
+  }
+  div.col-md-10 {
+    padding-left: 10px;
+  }
+  .fa-print {
+    font-size: 40px;
+  }
+  .fa-paper-plane {
+    font-size: 30px;
+  }
+}
+@media print {
+  .pagebreak {
+    page-break-before: always;
+  }
+}
