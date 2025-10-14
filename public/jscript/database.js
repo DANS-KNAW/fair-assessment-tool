@@ -1,48 +1,39 @@
-var HOST = "DANS";
 var DOWNLOAD_FILE_NAME = "FAIRAware_results.csv";
 
-/* ---------------- Initialize database ---------------- */
-if (typeof firebaseConfig != "undefined") {
-  firebase.initializeApp(firebaseConfig);
-}
-
-/* ---------------- Write to database ---------------- */
+/* ---------------- Submit to server ---------------- */
 
 function submit_page() {
   document.getElementById("submit-button").style.display = "none";
-  if (typeof firebaseConfig === "undefined") {
-    show_results();
-  } else {
-    firebase
-      .auth()
-      .signInAnonymously()
-      .then(function () {
-        let answers = get_answers();
-        if (writeToSheet(answers)) {
-          show_results();
-        }
-      })
-      .catch(function (error) {
-        write_to_modal("SIGN IN", error.message + "  " + error.code);
-        document.getElementById("submit-button").style.display = "block";
-      });
-  }
-}
 
-function writeToSheet(answers) {
-  var hostRef = firebase.database().ref("/assessment tool answers/" + HOST);
-  let m = JSON.parse(answers);
-  hostRef.push(m, function (error) {
-    if (error) {
-      write_to_modal("SUBMISSION", error.message);
+  let answers = get_answers();
+  let answersObj = JSON.parse(answers);
+
+  fetch("/api/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(answersObj),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((err) => {
+          throw new Error(err.message || "Submission failed");
+        });
+      }
+      return response.json();
+    })
+    .then((data) => {
+      show_results();
+    })
+    .catch((error) => {
+      write_to_modal("SUBMISSION ERROR", error.message);
       document.getElementById("submit-button").style.display = "block";
-      return false;
-    }
-  });
-  return true;
+    });
 }
 
-/* ---------------- Download database ---------------- */
+/* ---------------- Download from server ---------------- */
+
 function read_database() {
   document.getElementById("download-id").value = "";
   document.getElementById("download-pw").value = "";
@@ -52,104 +43,85 @@ function read_database() {
 }
 
 function authenticate_and_download() {
-  let userid = document.getElementById("download-id").value;
-  let pw = document.getElementById("download-pw").value;
+  let email = document.getElementById("download-id").value;
+  let password = document.getElementById("download-pw").value;
   let code = document.getElementById("download-code").value;
-  if (userid) {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(userid, pw)
-      .then(function () {
-        download(code);
-      })
-      .catch(function (error) {
-        write_to_modal("SIGN IN", error.message + "  " + error.code);
-      });
-  }
-}
 
-function download(code) {
-  let answers = [];
-  let ref = firebase.database().ref("assessment tool answers/");
-  ref.on("value", function (snapshot) {
-    snapshot.forEach(function (organizationSnapshot) {
-      organizationSnapshot.forEach(function (childSnapshot) {
-        var a = childSnapshot.val();
-        if (code == "downloadall" || (a.cq1 == code && code != "")) {
-          answers.push(
-            organizationSnapshot.key +
-              "," +
-              a.date +
-              "," +
-              a.cq1 +
-              "," +
-              a.yq1 +
-              "," +
-              a.yq2 +
-              "," +
-              a.yq3 +
-              "," +
-              a.fq1 +
-              "," +
-              a.fq1i +
-              "," +
-              a.fq2 +
-              "," +
-              a.fq2i +
-              "," +
-              a.fq3 +
-              "," +
-              a.fq3i +
-              "," +
-              a.aq1 +
-              "," +
-              a.aq1i +
-              "," +
-              a.aq2 +
-              "," +
-              a.aq2i +
-              "," +
-              a.iq1 +
-              "," +
-              a.iq1i +
-              "," +
-              a.rq1 +
-              "," +
-              a.rq1i +
-              "," +
-              a.rq2 +
-              "," +
-              a.rq2i +
-              "," +
-              a.rq3 +
-              "," +
-              a.rq3i +
-              "," +
-              a.rq4 +
-              "," +
-              a.rq4i +
-              "," +
-              a.qq1 +
-              "," +
-              a.qq2 +
-              "," +
-              a.qq3 +
-              "," +
-              a.qq4
-          );
-        }
-      });
+  if (!email || !password || !code) {
+    write_to_modal("VALIDATION ERROR", "Please fill in all fields");
+    return;
+  }
+
+  fetch("/api/download", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password, code }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((err) => {
+          throw new Error(err.message || "Download failed");
+        });
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data.success && data.data) {
+        downloadAnswers(data.data);
+      } else {
+        write_to_modal("DOWNLOAD ERROR", data.message || "No answers found");
+      }
+    })
+    .catch((error) => {
+      write_to_modal("DOWNLOAD ERROR", error.message);
     });
-    downloadAnswers(answers);
-  });
 }
 
 function downloadAnswers(answers) {
   var csv =
     "Host, Date, Code, Domain, Role, Organization, FQ1, FQ1-i, FQ2, FQ2-i, FQ3, FQ3-i, AQ1, AQ1-i, AQ2, AQ2-i, IQ1, IQ1-i, RQ1, RQ1-i, RQ2, RQ2-i, RQ3, RQ3-i, RQ4, RQ4-i, Not understandable, Missing metrics, General feedback, Awareness raised\n";
-  answers.forEach(function (row) {
-    csv += row.replace("#", "") + "\n"; // "#" causes an error
+
+  answers.forEach(function (answer) {
+    const row = [
+      answer.host || "",
+      answer.date || "",
+      answer.cq1 || "",
+      answer.yq1 || "",
+      answer.yq2 || "",
+      answer.yq3 || "",
+      answer.fq1 || "",
+      answer.fq1i || "",
+      answer.fq2 || "",
+      answer.fq2i || "",
+      answer.fq3 || "",
+      answer.fq3i || "",
+      answer.aq1 || "",
+      answer.aq1i || "",
+      answer.aq2 || "",
+      answer.aq2i || "",
+      answer.iq1 || "",
+      answer.iq1i || "",
+      answer.rq1 || "",
+      answer.rq1i || "",
+      answer.rq2 || "",
+      answer.rq2i || "",
+      answer.rq3 || "",
+      answer.rq3i || "",
+      answer.rq4 || "",
+      answer.rq4i || "",
+      answer.qq1 || "",
+      answer.qq2 || "",
+      answer.qq3 || "",
+      answer.qq4 || "",
+    ]
+      .map((val) => val.toString().replace(/,/g, " ").replace(/#/g, ""))
+      .join(",");
+
+    csv += row + "\n";
   });
+
   var hiddenElement = document.createElement("a");
   hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
   hiddenElement.target = "_blank";
