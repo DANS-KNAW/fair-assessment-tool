@@ -1,0 +1,61 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
+    container_name: fair-assessment-tool
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      PORT: ${APPLICATION_PORT:-3000}
+      HOST_INSTANCE: ${HOST_INSTANCE:-DANS}
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-fair_aware}
+      MYSQL_DATABASE_USER: ${MYSQL_DATABASE_USER:-fair_aware_user}
+      MYSQL_DATABASE_PASSWORD: ${MYSQL_DATABASE_PASSWORD:-Us3rSt@r0ngP@ssw0rd!1}
+      MYSQL_DATABASE_PORT: ${MYSQL_DATABASE_PORT:-3306}
+    ports:
+      - "${APPLICATION_PORT:-3000}:${APPLICATION_PORT:-3000}"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:${APPLICATION_PORT:-3000}/api/health",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-St@r0ngP@ssw0rd!9}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-fair_aware}
+      MYSQL_USER: ${MYSQL_DATABASE_USER:-fair_aware_user}
+      MYSQL_PASSWORD: ${MYSQL_DATABASE_PASSWORD:-Us3rSt@r0ngP@ssw0rd!1}
+    ports:
+      - "127.0.0.1:${MYSQL_DATABASE_PORT:-3306}:3306"
+    volumes:
+      - ./database_structure.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: --character-set-server=utf8mb4 --local-infile=1
+
+volumes:
+  mysql_data:

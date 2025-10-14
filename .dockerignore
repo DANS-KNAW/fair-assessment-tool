@@ -1,0 +1,9 @@
+.env
+.env.example
+database_structure.sql
+node_modules/
+.gitignore
+.git/
+dist/
+README.md
+docker-compose.yml
