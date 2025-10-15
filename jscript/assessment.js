@@ -1,14 +1,14 @@
 var letters = ["F", "A", "I", "R"];
 var fields = new Map([
-  /*
-   * This Map consists of arrays, where each array consists of a letter and an array.
-   * For each letter (representing a block of questions, like 'findable') an array where
-   * the first item marks the first question, the second item the second question, etc.
-   * The value of the item is the number of possible answers to the respective question.
-   * For questions where the answer is given in free text, the value is 0.
-   * C: course  Y: about you  F: findable  A: accessible  I: interoperable  R: reusable  Q: feedback 
-   * It is important to update this Map when number of questions or number of answers to questions changes!
-   */
+  /***
+    This Map consists of arrays, where each array consists of a letter and an array.
+    For each letter (representing a block of questions, like 'findable') an array where
+    the first item marks the first question, the second item the second question, etc.
+    The value of the item is the number of possible answers to the respective question.
+    For questions where the answer is given in free text, the value is 0.
+    C: course  Y: about you  F: findable  A: accessible  I: interoperable  R: reusable  Q: feedback 
+    It is important to update this Map when number of questions or number of answers to questions changes!
+  ***/
   ["C", [0]],
   ["Y", [62, 6, 8]],
   ["F", [2, 2, 2]],
@@ -341,9 +341,22 @@ function intention_questions_answer(question) {
 function get_answers() {
   let m = new Map();
   neg = new Map();
+  var today = new Date();
+  var date =
+    today.getFullYear() +
+    "-" +
+    (today.getMonth() + 1) +
+    "-" +
+    today.getDate() +
+    " " +
+    today.getHours() +
+    ":" +
+    today.getMinutes() +
+    ":" +
+    today.getSeconds();
+  m.set("date", date);
   for (let [letter, questions] of fields) {
     for (let i = 0; i < questions.length; i++) {
-      // question is e.g. "fq1"
       let question = letter.toLowerCase() + "q" + (i + 1).toString();
       let number_of_answers = questions[i];
       m.set(question, get_answers_for_a_question(question, number_of_answers));
@@ -355,7 +368,6 @@ function get_answers() {
       }
     }
   }
-  // set free text fields
   m.set("cq1", document.getElementById("cq1").value.trim());
   m.set(
     "qq2",
