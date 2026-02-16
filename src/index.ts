@@ -1,14 +1,12 @@
-import { Hono } from "hono";
+import { readFileSync } from "node:fs";
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { cors } from "hono/cors";
-import { logger } from "hono/logger";
-import { readFileSync } from "fs";
+import { Hono } from "hono";
+import { trimTrailingSlash } from "hono/trailing-slash";
+import { seedDefaultAdmin } from "./admin/db/seed.js";
+import { createAdminApp } from "./admin/index.js";
+import { createApiApp } from "./api/index.js";
 import { DatabaseHandler } from "./utils/database.js";
-import {
-  assessmentAnswerSchema,
-  downloadRequestSchema,
-} from "./types/assessment-answers.js";
 import "dotenv/config";
 
 const app = new Hono();
@@ -23,19 +21,15 @@ const database = new DatabaseHandler({
 
 const ASSESSMENT_HOST = process.env.HOST_INSTANCE || "unknown";
 
-const customLogger = (message: string, ...rest: string[]) => {
-  console.log(message, ...rest);
-};
+// Trim trailing slashes (redirects /admin/ → /admin on 404)
+app.use(trimTrailingSlash());
 
-app.use("/api/*", logger(customLogger));
-app.use(
-  "/api/*",
-  cors({
-    origin: "*",
-    allowMethods: ["GET", "POST", "OPTIONS"],
-    allowHeaders: ["Content-Type"],
-  })
-);
+// Sub-apps (must be before static file serving)
+const adminApp = createAdminApp(database.getPool());
+app.route("/admin", adminApp);
+
+const apiApp = createApiApp(database, ASSESSMENT_HOST);
+app.route("/api", apiApp);
 
 app.use("/*", serveStatic({ root: "./public" }));
 
@@ -50,165 +44,13 @@ app.get("/", (c) => {
   }
 });
 
-// Submit assessment answers
-app.post("/api/submit", async (c) => {
-  try {
-    let body;
-    try {
-      body = await c.req.json();
-    } catch (jsonError) {
-      customLogger("/api/submit - body parse error");
-      return c.json(
-        {
-          success: false,
-          message: "Invalid or missing JSON body",
-        },
-        400
-      );
-    }
-
-    const result = assessmentAnswerSchema.safeParse(body);
-
-    if (!result.success) {
-      customLogger("/api/submit - validation failed");
-      return c.json(
-        {
-          success: false,
-          message: "Validation failed",
-          errors: result.error.issues.map((err) => ({
-            field: err.path.join("."),
-            message: err.message,
-          })),
-        },
-        400
-      );
-    }
-
-    const insertId = await database.setAnswer(result.data, ASSESSMENT_HOST);
-    customLogger("/api/submit - answer submitted", `${insertId}`);
-
-    return c.json(
-      {
-        success: true,
-        message: "Assessment submitted successfully",
-        id: insertId,
-      },
-      201
-    );
-  } catch (error) {
-    console.error("Failed to submit assessment:", error);
-    return c.json(
-      {
-        success: false,
-        message:
-          error instanceof Error ? error.message : "Internal server error",
-      },
-      500
-    );
-  }
-});
-
-// Download assessment answers
-app.post("/api/download", async (c) => {
-  try {
-    let body;
-    try {
-      body = await c.req.json();
-    } catch (jsonError) {
-      customLogger("/api/download - body parse error");
-      return c.json(
-        {
-          success: false,
-          message: "Invalid or missing JSON body",
-        },
-        400
-      );
-    }
-
-    const result = downloadRequestSchema.safeParse(body);
-
-    if (!result.success) {
-      customLogger("/api/download - validation failed");
-      return c.json(
-        {
-          success: false,
-          message: "Validation failed",
-          errors: result.error.issues.map((err) => ({
-            field: err.path.join("."),
-            message: err.message,
-          })),
-        },
-        400
-      );
-    }
-
-    const isAuthenticated = await database.validateUser(
-      result.data.email,
-      result.data.password
-    );
-
-    if (!isAuthenticated) {
-      customLogger("/api/download - authentication failed");
-      return c.json(
-        {
-          success: false,
-          message: "Authentication failed",
-        },
-        401
-      );
-    }
-
-    const answers = await database.getAnswers(
-      result.data.code,
-      ASSESSMENT_HOST
-    );
-
-    if (answers.length === 0) {
-      return c.json(
-        {
-          success: false,
-          message: "No answers found for the provided code",
-        },
-        404
-      );
-    }
-
-    return c.json(
-      {
-        success: true,
-        message: "Answers retrieved successfully",
-        data: answers,
-        count: answers.length,
-      },
-      200
-    );
-  } catch (error) {
-    console.error("Failed to download answers:", error);
-    return c.json(
-      {
-        success: false,
-        message:
-          error instanceof Error ? error.message : "Internal server error",
-      },
-      500
-    );
-  }
-});
-
-app.get("/api/health", (c) => {
-  return c.json({
-    status: "ok",
-    timestamp: new Date().toISOString(),
-  });
-});
-
 app.notFound((c) => {
   return c.json(
     {
       success: false,
       message: "Route not found",
     },
-    404
+    404,
   );
 });
 
@@ -220,7 +62,7 @@ app.onError((err, c) => {
       success: false,
       message: "An unexpected error occurred",
     },
-    500
+    500,
   );
 });
 
@@ -234,7 +76,10 @@ const server = serve(
   },
   (info) => {
     console.log(`Server is running on http://localhost:${info.port}`);
-  }
+    seedDefaultAdmin(database.getPool()).catch((err) => {
+      console.error("[admin] Failed to seed default admin:", err);
+    });
+  },
 );
 
 const shutdown = async (signal: string) => {
