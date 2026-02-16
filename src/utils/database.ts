@@ -1,10 +1,10 @@
-import mysql from "mysql2/promise";
 import type {
   Pool,
   PoolOptions,
   ResultSetHeader,
   RowDataPacket,
 } from "mysql2/promise";
+import mysql from "mysql2/promise";
 import type {
   AssessmentAnswerDto,
   CompleteAnswerDto,
@@ -22,6 +22,10 @@ export class DatabaseHandler {
       enableKeepAlive: true,
       keepAliveInitialDelay: 0,
     });
+  }
+
+  getPool(): Pool {
+    return this.pool;
   }
 
   /**
@@ -95,7 +99,7 @@ export class DatabaseHandler {
    */
   async getAnswers(
     code: string | "downloadall",
-    host?: string
+    host?: string,
   ): Promise<CompleteAnswerDto[]> {
     let query = `
       SELECT 
