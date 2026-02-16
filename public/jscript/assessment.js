@@ -6,7 +6,7 @@ var fields = new Map([
    * the first item marks the first question, the second item the second question, etc.
    * The value of the item is the number of possible answers to the respective question.
    * For questions where the answer is given in free text, the value is 0.
-   * C: course  Y: about you  F: findable  A: accessible  I: interoperable  R: reusable  Q: feedback 
+   * C: course  Y: about you  F: findable  A: accessible  I: interoperable  R: reusable  Q: feedback
    * It is important to update this Map when number of questions or number of answers to questions changes!
    */
   ["C", [0]],
@@ -29,13 +29,13 @@ var short_answers = new Map([
 /* -------------------- Initialize -------------------- */
 
 $(document).ready(initialise);
-$(document).ready(function () {
+$(document).ready(() => {
   $("[rel=tooltip]").tooltip({ trigger: "hover" });
 });
 
 function initialise() {
   $("#introduction-text").html(
-    document.getElementById("introduction").innerHTML
+    document.getElementById("introduction").innerHTML,
   );
   hide_elements([
     "yq2.6.1",
@@ -49,36 +49,36 @@ function initialise() {
   hide_intention_questions();
 }
 
-$(function () {
+$(() => {
   $('[data-toggle="tooltip"]').tooltip();
 });
 
 /* ----------- Show and hide elements ----------- */
 
-jQuery(function () {
+jQuery(() => {
   // when leaving #modal-2 show the parent modal window, which was hidden
-  $("#modal-2").on("hidden.bs.modal", function () {
+  $("#modal-2").on("hidden.bs.modal", () => {
     $("#modal-1").modal("show");
   });
 });
 
 function hide_elements(elements_to_hide) {
-  for (let element of elements_to_hide) {
+  for (const element of elements_to_hide) {
     hide_element(element);
   }
 }
 
 function show_elements(elements_to_show) {
-  for (let element of elements_to_show) {
+  for (const element of elements_to_show) {
     show_element(element);
   }
 }
 
 function hide_intention_questions() {
-  for (let [letter, questions] of fields) {
+  for (const [letter, questions] of fields) {
     if (letters.includes(letter)) {
       for (let i = 0; i < questions.length; i++) {
-        let question = letter.toLowerCase() + "q" + (i + 1).toString();
+        const question = letter.toLowerCase() + "q" + (i + 1).toString();
         hide_element(question + "-i");
       }
     }
@@ -135,14 +135,14 @@ function checked(element) {
 }
 
 function disable(elements) {
-  for (let element of elements) {
+  for (const element of elements) {
     document.getElementById(element).checked = 0;
     document.getElementById("l" + element).style.color = "#C0C0C0";
   }
 }
 
 function enable(elements) {
-  for (let element of elements) {
+  for (const element of elements) {
     document.getElementById("l" + element).style.color = "#000000";
   }
 }
@@ -192,7 +192,7 @@ function update_Y(question) {
 }
 
 function update_other(questions) {
-  for (let question of questions) {
+  for (const question of questions) {
     if (checked(question)) {
       show_element(question + ".1");
     } else {
@@ -234,11 +234,11 @@ function show_intention_question(question) {
 
 function update_print_letters(question) {
   if (question != null) {
-    let awareness_percent =
+    const awareness_percent =
       Math.floor((get_awareness_score() / number_fair_questions) * 10) * 10;
-    let willingness_percent =
+    const willingness_percent =
       Math.floor((get_willingness_score() / total_willingness_score) * 10) * 10;
-    for (let letter of letters) {
+    for (const letter of letters) {
       document.getElementById(("awareness-" + letter).toLowerCase()).src =
         "images/print/blue/" + letter + "_" + awareness_percent + ".jpg";
       document.getElementById(("willingness-" + letter).toLowerCase()).src =
@@ -253,7 +253,7 @@ function set_to_default_color(question) {
     question_key =
       (question.charAt(0).toUpperCase() + question.slice(1)).replace(
         "q",
-        "-i-"
+        "-i-",
       ) + "-title";
     document.getElementById(question_key).style.color = "#000000";
   }
@@ -262,16 +262,16 @@ function set_to_default_color(question) {
 /* ------------------ Domains --------------- */
 
 function show_domains() {
-  let domains = get_answers_for_a_question(
+  const domains = get_answers_for_a_question(
     "yq1",
-    get_number_of_domain_answers()
+    get_number_of_domain_answers(),
   );
   $("#show-domains").html(domains);
   document.getElementById("Y-i-1-title").style.color = "#000000";
 }
 
 function get_number_of_domain_answers() {
-  for (let [letter, questions] of fields) {
+  for (const [letter, questions] of fields) {
     if (letter == "Y") return questions[0];
   }
 }
@@ -280,14 +280,14 @@ function get_number_of_domain_answers() {
 
 function valid_input() {
   let unanswered = false;
-  for (let [letter, questions] of fields) {
+  for (const [letter, questions] of fields) {
     for (let i = 0; i < questions.length; i++) {
-      let number_of_answers = questions[i];
+      const number_of_answers = questions[i];
       let answered = false;
       let intention_questions_answered = 0;
-      let question = letter.toLowerCase() + "q" + (i + 1).toString();
+      const question = letter.toLowerCase() + "q" + (i + 1).toString();
       for (let j = 0; j < number_of_answers; j++) {
-        let choice = question + "." + (j + 1).toString();
+        const choice = question + "." + (j + 1).toString();
         if (checked(choice)) {
           answered = true;
           if (letters.includes(letter)) {
@@ -310,7 +310,7 @@ function valid_input() {
   if (unanswered) {
     write_to_modal(
       "Some questions are not answered yet.",
-      "They are marked in <font color='#d60000'>red</font>."
+      "They are marked in <font color='#d60000'>red</font>.",
     );
     return false;
   }
@@ -327,7 +327,7 @@ function excluded(question) {
 }
 
 function intention_questions_answer(question) {
-  let intention_questions = document.getElementsByName(question + "-i");
+  const intention_questions = document.getElementsByName(question + "-i");
   for (let i = 0; i < 5; i++) {
     if (intention_questions[i].checked) {
       return intention_questions[i].value;
@@ -339,18 +339,18 @@ function intention_questions_answer(question) {
 /* ------------------ Retrieve answers --------------- */
 
 function get_answers() {
-  let m = new Map();
+  const m = new Map();
   neg = new Map();
-  for (let [letter, questions] of fields) {
+  for (const [letter, questions] of fields) {
     for (let i = 0; i < questions.length; i++) {
       // question is e.g. "fq1"
-      let question = letter.toLowerCase() + "q" + (i + 1).toString();
-      let number_of_answers = questions[i];
+      const question = letter.toLowerCase() + "q" + (i + 1).toString();
+      const number_of_answers = questions[i];
       m.set(question, get_answers_for_a_question(question, number_of_answers));
       if (letters.includes(letter)) {
         m.set(
           question + "i",
-          get_intention_answer_for_a_question(question, number_of_answers)
+          get_intention_answer_for_a_question(question, number_of_answers),
         );
       }
     }
@@ -364,7 +364,7 @@ function get_answers() {
       .value.replace(/(\n)+/g, " ")
       .replace(/,/g, " ")
       .replace(/;/g, " ")
-      .trim()
+      .trim(),
   );
   m.set(
     "qq3",
@@ -373,7 +373,7 @@ function get_answers() {
       .value.replace(/(\n)+/g, " ")
       .replace(/,/g, " ")
       .replace(/;/g, " ")
-      .trim()
+      .trim(),
   );
 
   return JSON.stringify(Object.fromEntries(m));
@@ -383,7 +383,7 @@ function get_answers_for_a_question(question, number_of_answers) {
   let answers = "";
   let first = true;
   for (let j = 0; j < number_of_answers; j++) {
-    let choice = question + "." + (j + 1).toString();
+    const choice = question + "." + (j + 1).toString();
     if (checked(choice)) {
       answers += (first ? "" : " AND ") + get_answer(choice);
       first = false;
@@ -407,7 +407,7 @@ function get_answer(choice) {
         .replace(/;/g, " ")
         .trim();
     } else {
-      let answer = "l" + choice;
+      const answer = "l" + choice;
       return document
         .getElementById(answer)
         .textContent.replace(/,/g, " ")
@@ -420,7 +420,7 @@ function get_answer(choice) {
 function get_intention_answer_for_a_question(question, number_of_answers) {
   let intention = "";
   for (let j = 0; j < number_of_answers; j++) {
-    let choice = question + "." + (j + 1).toString();
+    const choice = question + "." + (j + 1).toString();
     if (checked(choice)) {
       intention = intention_questions_answer(question);
     }
@@ -453,7 +453,7 @@ function show_results() {
       get_awareness_score() +
       "/" +
       number_fair_questions +
-      ")"
+      ")",
   );
   $("#score-text-willingness").html(
     get_willingness_score_text() +
@@ -461,7 +461,7 @@ function show_results() {
       get_willingness_score() +
       "/" +
       total_willingness_score +
-      ")"
+      ")",
   );
   if (get_awareness_score() < number_fair_questions) {
     $("#guidance").html(get_guidance_texts());
@@ -483,7 +483,7 @@ function get_awareness_score() {
 }
 
 function get_awareness_score_text() {
-  let score = get_awareness_score();
+  const score = get_awareness_score();
   if (score < 6) {
     return "Low";
   } else if (score < 8) {
@@ -495,12 +495,12 @@ function get_awareness_score_text() {
 
 function get_willingness_score() {
   let count = 0;
-  for (let [letter, questions] of fields) {
+  for (const [letter, questions] of fields) {
     if (letters.includes(letter)) {
       for (let i = 0; i < questions.length; i++) {
-        let intention = letter.toLowerCase() + "q" + (i + 1).toString();
+        const intention = letter.toLowerCase() + "q" + (i + 1).toString();
         for (let j = 0; j < willingness_max; j++) {
-          let choice = intention + "." + (j + 1).toString() + "-i";
+          const choice = intention + "." + (j + 1).toString() + "-i";
           if (checked(choice)) {
             count += parseInt(get_answer(choice));
           }
@@ -512,7 +512,7 @@ function get_willingness_score() {
 }
 
 function get_willingness_score_text() {
-  let score = get_willingness_score();
+  const score = get_willingness_score();
   if (score < 30) {
     return "Low";
   } else if (score < 40) {
@@ -524,33 +524,33 @@ function get_willingness_score_text() {
 
 function get_guidance_texts() {
   let guidance = "";
-  let negative = get_negative_answers();
-  for (let question_key of negative) {
+  const negative = get_negative_answers();
+  for (const question_key of negative) {
     let additional_text = "";
-    let question = document
+    const question = document
       .getElementById(question_key + "-title")
       .textContent.bold();
-    let basic_text = document.getElementById(
-      question_key + "-default"
+    const basic_text = document.getElementById(
+      question_key + "-default",
     ).innerHTML;
-    let additional = document.getElementById(question_key + "-additional");
+    const additional = document.getElementById(question_key + "-additional");
     if (additional) {
       additional_text = additional.innerHTML;
     }
-    let text = basic_text + additional_text;
+    const text = basic_text + additional_text;
     guidance += question + "\n" + text;
   }
   return guidance;
 }
 
 function get_negative_answers() {
-  let neg = [];
-  for (let [letter, questions] of fields) {
+  const neg = [];
+  for (const [letter, questions] of fields) {
     for (let i = 0; i < questions.length; i++) {
-      let question = letter.toLowerCase() + "q" + (i + 1).toString();
-      let number_of_answers = questions[i];
+      const question = letter.toLowerCase() + "q" + (i + 1).toString();
+      const number_of_answers = questions[i];
       for (let j = 0; j < number_of_answers; j++) {
-        let choice = question + "." + (j + 1).toString();
+        const choice = question + "." + (j + 1).toString();
         if (checked(choice)) {
           if (get_answer(choice).toLowerCase() == "no") {
             question_key = letter + "-i-" + (i + 1).toString();
@@ -565,7 +565,7 @@ function get_negative_answers() {
 
 function get_number_of_fair_questions() {
   let number = 0;
-  for (let [letter, questions] of fields) {
+  for (const [letter, questions] of fields) {
     if (letters.includes(letter)) {
       number += questions.length;
     }
@@ -575,7 +575,7 @@ function get_number_of_fair_questions() {
 
 function get_total_willingness_score() {
   let total_score = 0;
-  for (let [letter, questions] of fields) {
+  for (const [letter, questions] of fields) {
     if (letters.includes(letter)) {
       total_score += questions.length * willingness_max;
     }
@@ -618,7 +618,7 @@ function print_results() {
 
 /* --------------------- Social media ------------------- */
 
-var social_media = function (media) {
+var social_media = (media) => {
   let url = "";
   switch (media) {
     case "twitter":

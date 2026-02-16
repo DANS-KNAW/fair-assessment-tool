@@ -5,8 +5,8 @@ var DOWNLOAD_FILE_NAME = "FAIRAware_results.csv";
 function submit_page() {
   document.getElementById("submit-button").style.display = "none";
 
-  let answers = get_answers();
-  let answersObj = JSON.parse(answers);
+  const answers = get_answers();
+  const answersObj = JSON.parse(answers);
 
   fetch("/api/submit", {
     method: "POST",
@@ -43,9 +43,9 @@ function read_database() {
 }
 
 function authenticate_and_download() {
-  let email = document.getElementById("download-id").value;
-  let password = document.getElementById("download-pw").value;
-  let code = document.getElementById("download-code").value;
+  const email = document.getElementById("download-id").value;
+  const password = document.getElementById("download-pw").value;
+  const code = document.getElementById("download-code").value;
 
   if (!email || !password || !code) {
     write_to_modal("VALIDATION ERROR", "Please fill in all fields");
@@ -83,7 +83,7 @@ function downloadAnswers(answers) {
   var csv =
     "Host, Date, Code, Domain, Role, Organization, FQ1, FQ1-i, FQ2, FQ2-i, FQ3, FQ3-i, AQ1, AQ1-i, AQ2, AQ2-i, IQ1, IQ1-i, RQ1, RQ1-i, RQ2, RQ2-i, RQ3, RQ3-i, RQ4, RQ4-i, Not understandable, Missing metrics, General feedback, Awareness raised\n";
 
-  answers.forEach(function (answer) {
+  answers.forEach((answer) => {
     const row = [
       answer.host || "",
       answer.date || "",
@@ -116,7 +116,15 @@ function downloadAnswers(answers) {
       answer.qq3 || "",
       answer.qq4 || "",
     ]
-      .map((val) => val.toString().replace(/,/g, " ").replace(/#/g, ""))
+      .map((val) =>
+        val
+          .toString()
+          .replace(/[\r\n\t]+/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .replace(/,/g, " ")
+          .replace(/#/g, ""),
+      )
       .join(",");
 
     csv += row + "\n";

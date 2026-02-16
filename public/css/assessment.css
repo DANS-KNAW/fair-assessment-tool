@@ -6,7 +6,9 @@ canvas {
 }
 body,
 label {
-  font: 14px "Avenir Next", sans-serif;
+  font:
+    14px "Avenir Next",
+    sans-serif;
   color: #000000;
 }
 a {
