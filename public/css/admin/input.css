@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@source "../../../src/components/**/*.tsx";
+@source "../../../src/admin/**/*.tsx";
+
+@theme {
+  --color-primary-50: #e8ecf3;
+  --color-primary-100: #c5cfe0;
+  --color-primary-200: #9eafcb;
+  --color-primary-300: #7790b6;
+  --color-primary-400: #5a79a6;
+  --color-primary-500: #3d6296;
+  --color-primary-600: #1e3a79;
+  --color-primary-700: #182f61;
+  --color-primary-800: #122349;
+  --color-primary-900: #0c1831;
+  --color-primary-950: #060c19;
+}
