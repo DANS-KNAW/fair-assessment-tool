@@ -3,19 +3,27 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
+    "dev:css": "npx @tailwindcss/cli -i ./public/css/admin/input.css -o ./public/css/admin.css --watch",
+    "build:css": "npx @tailwindcss/cli -i ./public/css/admin/input.css -o ./public/css/admin.css --minify",
+    "build": "pnpm run build:css && tsc",
+    "start": "node dist/index.js",
+    "lint": "biome check --write .",
+    "check": "biome check . && tsc --noEmit"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.5",
     "@hono/zod-validator": "^0.7.4",
+    "@node-rs/argon2": "^2.0.2",
     "dotenv": "^17.2.3",
     "hono": "^4.9.12",
     "mysql2": "^3.15.2",
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.0",
+    "@tailwindcss/cli": "^4.1.18",
     "@types/node": "^20.11.17",
+    "tailwindcss": "^4.1.18",
     "tsx": "^4.7.1",
     "typescript": "^5.8.3"
   }

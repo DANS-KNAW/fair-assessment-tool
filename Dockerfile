@@ -18,6 +18,7 @@ COPY src ./src
 COPY public ./public
 
 RUN pnpm install --frozen-lockfile && \
+    pnpm run build:css && \
     pnpm run build && \
     pnpm prune --prod
 
