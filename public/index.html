@@ -2325,19 +2325,6 @@
           </div>
         </footer>
       </div>
-      <div id="for-administrators">
-        <br /><br /><br /><br /><br /><br /><br /><br />
-        <button
-          id="download-button"
-          onclick="read_database()"
-          data-toggle="tooltip"
-          data-placement="bottom"
-        >
-          <i class="fa fa-download" aria-hidden="true"></i
-          ><span class="sr-only">Download</span>
-        </button>
-        <br /><br /><br />
-      </div>
     </div>
 
     <!-- ======================================================================================= -->
@@ -2381,55 +2368,6 @@
       </div>
     </div>
 
-    <div id="download-authorization" class="modal fade" role="dialog" aria-label="Download answers (restricted to administrators and trainers)">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-              &times;
-            </button>
-            <p>Download answers</p>
-            (restricted to administrators and trainers)
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-2 col-sm-0 col-xs-0">Email</div>
-              <div class="col-md-10 col-sm-12">
-                <input id="download-id" size="30" aria-label="Email" />
-              </div>
-              <br /><br />
-            </div>
-            <div class="row">
-              <div class="col-md-2 col-sm-0 col-xs-0">Password</div>
-              <div class="col-md-10 col-sm-12">
-                <input type="password" id="download-pw" size="30" aria-label="Password" />
-              </div>
-              <br /><br />
-            </div>
-            <div class="row">
-              <div class="col-md-2 col-sm-0 col-xs-0">Code</div>
-              <div class="col-md-10 col-sm-12">
-                <input id="download-code" size="30" aria-label="Code" />
-              </div>
-              <br /><br />
-              <div class="row">
-                <div class="col-md-2 col-sm-0 col-xs-0"></div>
-                <div class="col-md-10 col-sm-12">
-                  <button
-                    type="button"
-                    class="btn"
-                    data-dismiss="modal"
-                    onclick="authenticate_and_download()"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- ====================================================================================== -->
     <!-- ==================================== INTRODUCTION  =================================== -->

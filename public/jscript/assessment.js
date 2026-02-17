@@ -444,7 +444,6 @@ function show_results() {
     "contents",
     "summary-responses",
     "footer",
-    "download-button",
   ]);
   show_element("score-and-guidance");
   $("#score-text-awareness").html(
@@ -595,7 +594,6 @@ function print_results() {
     "logos",
     "icons",
     "footer",
-    "for-administrators",
     "image-f",
     "image-a",
     "image-i",
@@ -607,7 +605,6 @@ function print_results() {
     "logos",
     "icons",
     "footer",
-    "for-administrators",
     "image-f",
     "image-a",
     "image-i",

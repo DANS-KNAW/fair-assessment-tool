@@ -81,10 +81,6 @@ div .col-md-10 {
   font-size: 40px;
   color: #1e3a79;
 }
-.fa-download {
-  font-size: 10px;
-  color: #1e3a79;
-}
 .fa-twitter-square {
   color: #1da1f2;
 }
@@ -249,9 +245,6 @@ div .col-md-10 {
   }
   .fa-paper-plane {
     font-size: 20px;
-  }
-  .fa-download {
-    font-size: 2px;
   }
   .intention {
     padding-left: 15px;
