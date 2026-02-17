@@ -1,5 +1,3 @@
-import type { Pool } from "mysql2/promise";
-
 export interface AdminUser {
   id: string;
   email: string;
@@ -20,9 +18,6 @@ export interface SessionValidationResult {
 }
 
 export type AdminEnv = {
-  Bindings: {
-    pool: Pool;
-  };
   Variables: {
     user: AdminUser;
     session: Session;

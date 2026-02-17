@@ -19,22 +19,80 @@ import { CourseCodesPage } from "./components/pages/CourseCodesPage.js";
 import { DashboardPage } from "./components/pages/DashboardPage.js";
 import { LoginPage } from "./components/pages/LoginPage.js";
 import { UsersPage } from "./components/pages/UsersPage.js";
+import type { AssessmentDetailRow } from "./db/queries.js";
 import {
   createCourseCode,
+  getAllSubmissionsForDownload,
   getCourseCodeByCode,
+  getSubmissionById,
   getSubmissionsForDownload,
   getUserByEmail,
+  isOwnedCourseCode,
 } from "./db/queries.js";
 import type { AdminEnv } from "./types.js";
 
+function formatDownloadTimestamp(): string {
+  const now = new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+}
+
+const CSV_HEADER =
+  "Host,Date,Code,Domain,Role,Organization,FQ1,FQ1-i,FQ2,FQ2-i,FQ3,FQ3-i,AQ1,AQ1-i,AQ2,AQ2-i,IQ1,IQ1-i,RQ1,RQ1-i,RQ2,RQ2-i,RQ3,RQ3-i,RQ4,RQ4-i,Not understandable,Missing metrics,General feedback,Awareness raised\n";
+
+function buildCsv(rows: AssessmentDetailRow[]): string {
+  const csvRows = rows.map((row) => {
+    const fields = [
+      row.host,
+      row.submission_date,
+      row.cq1,
+      row.yq1,
+      row.yq2,
+      row.yq3,
+      row.fq1,
+      row.fq1i,
+      row.fq2,
+      row.fq2i,
+      row.fq3,
+      row.fq3i,
+      row.aq1,
+      row.aq1i,
+      row.aq2,
+      row.aq2i,
+      row.iq1,
+      row.iq1i,
+      row.rq1,
+      row.rq1i,
+      row.rq2,
+      row.rq2i,
+      row.rq3,
+      row.rq3i,
+      row.rq4,
+      row.rq4i,
+      row.qq1,
+      row.qq2,
+      row.qq3,
+      row.qq4,
+    ];
+    return fields
+      .map((val) => {
+        const str = (val ?? "")
+          .toString()
+          .replace(/[\r\n\t]+/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+        if (str.includes(",") || str.includes('"')) {
+          return `"${str.replace(/"/g, '""')}"`;
+        }
+        return str;
+      })
+      .join(",");
+  });
+  return CSV_HEADER + csvRows.join("\n");
+}
+
 export function createAdminApp(pool: Pool) {
   const app = new Hono<AdminEnv>();
-
-  // Bind pool to all requests
-  app.use("*", async (c, next) => {
-    c.env = { pool };
-    await next();
-  });
 
   app.use("*", logger());
   app.use("*", secureHeaders());
@@ -95,7 +153,7 @@ export function createAdminApp(pool: Pool) {
     if (c.req.path === "/admin/login" || c.req.path === "/admin/login/") {
       return next();
     }
-    return requireAuth(c, next);
+    return requireAuth(pool)(c, next);
   });
 
   app.get("/api/session", (c) => {
@@ -111,8 +169,37 @@ export function createAdminApp(pool: Pool) {
     return c.json({ available: existing === null });
   });
 
+  app.get("/api/download", async (c) => {
+    const user = c.get("user");
+    const userId = user.role === "trainer" ? user.id : undefined;
+    const rows = await getAllSubmissionsForDownload(pool, userId);
+
+    if (rows.length === 0) {
+      return c.redirect(
+        `/admin/course-codes?flash=${encodeURIComponent("No submissions found.")}&flashVariant=error`,
+      );
+    }
+
+    const csv = buildCsv(rows);
+    const timestamp = formatDownloadTimestamp();
+    const filename = `FAIRAware_all_results_${timestamp}.csv`;
+
+    c.header("Content-Type", "text/csv; charset=utf-8");
+    c.header("Content-Disposition", `attachment; filename="${filename}"`);
+    return c.body(csv);
+  });
+
   app.get("/api/download/:code", async (c) => {
+    const user = c.get("user");
     const code = c.req.param("code");
+
+    if (user.role === "trainer") {
+      const owned = await isOwnedCourseCode(pool, code, user.id);
+      if (!owned) {
+        return c.redirect("/admin/course-codes");
+      }
+    }
+
     const rows = await getSubmissionsForDownload(pool, code);
 
     if (rows.length === 0) {
@@ -121,59 +208,9 @@ export function createAdminApp(pool: Pool) {
       );
     }
 
-    const header =
-      "Host,Date,Code,Domain,Role,Organization,FQ1,FQ1-i,FQ2,FQ2-i,FQ3,FQ3-i,AQ1,AQ1-i,AQ2,AQ2-i,IQ1,IQ1-i,RQ1,RQ1-i,RQ2,RQ2-i,RQ3,RQ3-i,RQ4,RQ4-i,Not understandable,Missing metrics,General feedback,Awareness raised\n";
-
-    const csvRows = rows.map((row) => {
-      const fields = [
-        row.host,
-        row.submission_date,
-        row.cq1,
-        row.yq1,
-        row.yq2,
-        row.yq3,
-        row.fq1,
-        row.fq1i,
-        row.fq2,
-        row.fq2i,
-        row.fq3,
-        row.fq3i,
-        row.aq1,
-        row.aq1i,
-        row.aq2,
-        row.aq2i,
-        row.iq1,
-        row.iq1i,
-        row.rq1,
-        row.rq1i,
-        row.rq2,
-        row.rq2i,
-        row.rq3,
-        row.rq3i,
-        row.rq4,
-        row.rq4i,
-        row.qq1,
-        row.qq2,
-        row.qq3,
-        row.qq4,
-      ];
-      return fields
-        .map((val) => {
-          const str = (val ?? "")
-            .toString()
-            .replace(/[\r\n\t]+/g, " ")
-            .replace(/\s+/g, " ")
-            .trim();
-          if (str.includes(",") || str.includes('"') || str.includes("\n")) {
-            return `"${str.replace(/"/g, '""')}"`;
-          }
-          return str;
-        })
-        .join(",");
-    });
-
-    const csv = header + csvRows.join("\n");
-    const filename = `FAIRAware_${code}_results.csv`;
+    const csv = buildCsv(rows);
+    const timestamp = formatDownloadTimestamp();
+    const filename = `FAIRAware_${code}_results_${timestamp}.csv`;
 
     c.header("Content-Type", "text/csv; charset=utf-8");
     c.header("Content-Disposition", `attachment; filename="${filename}"`);
@@ -197,10 +234,11 @@ export function createAdminApp(pool: Pool) {
   app.get("/course-codes", async (c) => {
     const user = c.get("user");
     const flash = c.req.query("flash");
-    const flashVariant = c.req.query("flashVariant") as
-      | "success"
-      | "error"
-      | undefined;
+    const rawVariant = c.req.query("flashVariant");
+    const flashVariant =
+      rawVariant === "success" || rawVariant === "error"
+        ? rawVariant
+        : undefined;
     return c.html(
       <CourseCodesPage
         pool={pool}
@@ -241,6 +279,14 @@ export function createAdminApp(pool: Pool) {
   app.get("/course-codes/:code", async (c) => {
     const user = c.get("user");
     const code = c.req.param("code");
+
+    if (user.role === "trainer") {
+      const owned = await isOwnedCourseCode(pool, code, user.id);
+      if (!owned) {
+        return c.redirect("/admin/course-codes");
+      }
+    }
+
     const page = Math.max(1, Number(c.req.query("page")) || 1);
     return c.html(
       <CourseCodeDetailPage
@@ -259,6 +305,18 @@ export function createAdminApp(pool: Pool) {
     if (Number.isNaN(idParam) || idParam < 1) {
       return c.redirect("/admin");
     }
+
+    if (user.role === "trainer") {
+      const submission = await getSubmissionById(pool, idParam);
+      if (!submission || !submission.cq1) {
+        return c.redirect("/admin");
+      }
+      const owned = await isOwnedCourseCode(pool, submission.cq1, user.id);
+      if (!owned) {
+        return c.redirect("/admin");
+      }
+    }
+
     const from = c.req.query("from") ?? null;
     return c.html(
       <AssessmentDetailPage

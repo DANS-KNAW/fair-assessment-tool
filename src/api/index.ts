@@ -4,17 +4,13 @@ import { logger } from "hono/logger";
 import { assessmentAnswerSchema } from "../types/assessment-answers.js";
 import type { DatabaseHandler } from "../utils/database.js";
 
-const customLogger = (message: string, ...rest: string[]) => {
-  console.log(message, ...rest);
-};
-
 export function createApiApp(
   database: DatabaseHandler,
   assessmentHost: string,
 ) {
   const app = new Hono();
 
-  app.use("*", logger(customLogger));
+  app.use("*", logger());
   app.use(
     "*",
     cors({
@@ -31,7 +27,7 @@ export function createApiApp(
       try {
         body = await c.req.json();
       } catch (_jsonError) {
-        customLogger("/api/submit - body parse error");
+        console.log("/api/submit - body parse error");
         return c.json(
           {
             success: false,
@@ -44,7 +40,7 @@ export function createApiApp(
       const result = assessmentAnswerSchema.safeParse(body);
 
       if (!result.success) {
-        customLogger("/api/submit - validation failed");
+        console.log("/api/submit - validation failed");
         return c.json(
           {
             success: false,
@@ -59,7 +55,7 @@ export function createApiApp(
       }
 
       const insertId = await database.setAnswer(result.data, assessmentHost);
-      customLogger("/api/submit - answer submitted", `${insertId}`);
+      console.log("/api/submit - answer submitted", `${insertId}`);
 
       return c.json(
         {
@@ -74,8 +70,7 @@ export function createApiApp(
       return c.json(
         {
           success: false,
-          message:
-            error instanceof Error ? error.message : "Internal server error",
+          message: "Internal server error",
         },
         500,
       );
