@@ -4,9 +4,9 @@ import {
   getRecentSubmissions,
   getTotalSubmissions,
   getUniqueCourseCodeCount,
-  getUniqueDomainCount,
 } from "../../db/queries.js";
 import type { AdminUser } from "../../types.js";
+import { getFairLabel, getFairScore } from "../../utils/fair-score.js";
 import { AdminLayout } from "../layout/AdminLayout.js";
 import { StatCard } from "../ui/StatCard.js";
 
@@ -21,19 +21,13 @@ export async function DashboardPage({
   user,
   currentPath,
 }: DashboardPageProps) {
-  const [
-    totalSubmissions,
-    monthlySubmissions,
-    uniqueCodes,
-    uniqueDomains,
-    recentSubmissions,
-  ] = await Promise.all([
-    getTotalSubmissions(pool),
-    getMonthlySubmissions(pool),
-    getUniqueCourseCodeCount(pool),
-    getUniqueDomainCount(pool),
-    getRecentSubmissions(pool, 10),
-  ]);
+  const [totalSubmissions, monthlySubmissions, uniqueCodes, recentSubmissions] =
+    await Promise.all([
+      getTotalSubmissions(pool),
+      getMonthlySubmissions(pool),
+      getUniqueCourseCodeCount(pool),
+      getRecentSubmissions(pool, 10),
+    ]);
 
   return (
     <AdminLayout title="Dashboard" user={user} currentPath={currentPath}>
@@ -47,7 +41,7 @@ export async function DashboardPage({
       </div>
 
       {/* Stats grid */}
-      <div class="grid grid-cols-1 gap-px bg-gray-900/5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="grid grid-cols-1 gap-px bg-gray-900/5 sm:grid-cols-3">
         <StatCard
           name="Total Submissions"
           value={totalSubmissions.toLocaleString()}
@@ -57,10 +51,6 @@ export async function DashboardPage({
           value={monthlySubmissions.toLocaleString()}
         />
         <StatCard name="Course Codes" value={uniqueCodes.toLocaleString()} />
-        <StatCard
-          name="Research Domains"
-          value={uniqueDomains.toLocaleString()}
-        />
       </div>
 
       {/* Recent submissions */}
@@ -82,7 +72,7 @@ export async function DashboardPage({
                   scope="col"
                   class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                 >
-                  Domain
+                  FAIR Score
                 </th>
                 <th
                   scope="col"
@@ -103,27 +93,46 @@ export async function DashboardPage({
                   </td>
                 </tr>
               ) : (
-                recentSubmissions.map((row) => (
-                  <tr>
-                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                      {row.cq1 || "—"}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {row.yq1 || "—"}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {row.submission_date
-                        ? new Date(row.submission_date).toLocaleDateString(
-                            "en-GB",
-                          )
-                        : "—"}
-                    </td>
-                  </tr>
-                ))
+                recentSubmissions.map((row) => {
+                  const score = getFairScore(row);
+                  const label = getFairLabel(score);
+                  return (
+                    <tr class="hover:bg-gray-50">
+                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
+                        <a
+                          href={`/admin/assessments/${row.id}?from=/admin`}
+                          class="cursor-pointer text-primary-600 hover:text-primary-500"
+                        >
+                          {row.cq1 || "—"}
+                        </a>
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {score}/10 — {label}
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {row.submission_date
+                          ? new Date(row.submission_date).toLocaleString(
+                              "en-GB",
+                            )
+                          : "—"}
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>
         </div>
+        {recentSubmissions.length > 0 && (
+          <div class="mt-4 text-center">
+            <a
+              href="/admin/course-codes"
+              class="text-sm font-medium text-primary-600 hover:text-primary-500"
+            >
+              View all course codes &rarr;
+            </a>
+          </div>
+        )}
       </div>
     </AdminLayout>
   );
