@@ -43,17 +43,10 @@ export const assessmentAnswerSchema = z.object({
   qq4: z.string().max(50),
 });
 
-export const downloadRequestSchema = z.object({
-  email: z.email("Valid email is required").max(255),
-  password: z.string().min(1, "Password is required").max(255),
-  code: z.string().min(1, "Code is required").max(255),
-});
-
 export const completeAnswerSchema = assessmentAnswerSchema.extend({
   host: z.string().min(1, "Host is required").max(255),
   date: z.date(),
 });
 
 export type AssessmentAnswerDto = z.infer<typeof assessmentAnswerSchema>;
-export type DownloadRequest = z.infer<typeof downloadRequestSchema>;
 export type CompleteAnswerDto = z.infer<typeof completeAnswerSchema>;
