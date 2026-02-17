@@ -1,5 +1,4 @@
 import type { AdminUser } from "../../types.js";
-import { Badge } from "../ui/Badge.js";
 import { ArrowRightStartOnRectangleIcon } from "../ui/Icon.js";
 
 interface UserProfileProps {
@@ -11,31 +10,29 @@ export function UserProfile({ user }: UserProfileProps) {
   const initial = displayName.charAt(0).toUpperCase();
 
   return (
-    <li class="-mx-6 mt-auto border-t border-gray-200">
-      <div class="flex items-center gap-x-3 px-6 py-4">
-        <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary-600 text-sm font-semibold text-white">
+    <li class="mt-auto border-t border-gray-200 pt-4 pb-2">
+      {/* User info */}
+      <div class="-mx-2 flex items-center gap-x-3 rounded-md p-2">
+        <span class="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-600 text-xs font-semibold text-white">
           {initial}
         </span>
-        <span class="flex min-w-0 flex-1 flex-col">
+        <span class="flex min-w-0 flex-col">
           <span class="truncate text-sm font-semibold text-gray-900">
             {displayName}
           </span>
-          <Badge
-            text={user.role}
-            variant={user.role === "admin" ? "admin" : "trainer"}
-          />
+          <span class="text-xs text-gray-400">{user.role}</span>
         </span>
-        <form action="/admin/logout" method="post">
-          <button
-            type="submit"
-            class="rounded-md p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
-            title="Sign out"
-          >
-            <ArrowRightStartOnRectangleIcon class="size-5" />
-            <span class="sr-only">Sign out</span>
-          </button>
-        </form>
       </div>
+      {/* Sign out */}
+      <form action="/admin/logout" method="post">
+        <button
+          type="submit"
+          class="group -mx-2 mt-1 flex w-full cursor-pointer gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50 hover:text-primary-600"
+        >
+          <ArrowRightStartOnRectangleIcon class="size-6 shrink-0 text-gray-400 group-hover:text-primary-600" />
+          Sign out
+        </button>
+      </form>
     </li>
   );
 }

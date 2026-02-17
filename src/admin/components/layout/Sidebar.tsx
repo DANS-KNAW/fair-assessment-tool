@@ -1,8 +1,8 @@
 import type { AdminUser } from "../../types.js";
 import {
-  ChartBarIcon,
   ChartPieIcon,
   ClipboardDocumentListIcon,
+  UsersIcon,
 } from "../ui/Icon.js";
 import { NavItem } from "../ui/NavItem.js";
 import { NavGroup } from "./NavGroup.js";
@@ -26,20 +26,22 @@ export function Sidebar({ user, currentPath }: SidebarProps) {
               href="/admin"
               label="Dashboard"
               icon={<ChartPieIcon class="size-6" />}
-              current={currentPath === "/admin/" || currentPath === "/admin"}
+              current={currentPath === "/admin" || currentPath === "/admin/"}
             />
             <NavItem
-              href="/admin/submissions"
-              label="Submissions"
+              href="/admin/course-codes"
+              label="Course Codes"
               icon={<ClipboardDocumentListIcon class="size-6" />}
-              current={currentPath.startsWith("/admin/submissions")}
+              current={currentPath.startsWith("/admin/course-codes")}
             />
-            <NavItem
-              href="/admin/analytics"
-              label="Analytics"
-              icon={<ChartBarIcon class="size-6" />}
-              current={currentPath.startsWith("/admin/analytics")}
-            />
+            {user.role === "admin" && (
+              <NavItem
+                href="/admin/users"
+                label="Users"
+                icon={<UsersIcon class="size-6" />}
+                current={currentPath.startsWith("/admin/users")}
+              />
+            )}
           </NavGroup>
           <UserProfile user={user} />
         </ul>

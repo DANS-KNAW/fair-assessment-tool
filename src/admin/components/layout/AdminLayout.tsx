@@ -29,11 +29,11 @@ export function AdminLayout({
         <MobileSidebar user={user} currentPath={currentPath} />
 
         {/* Desktop sidebar */}
-        <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+        <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
           <Sidebar user={user} currentPath={currentPath} />
         </div>
 
-        <div class="lg:pl-72">
+        <div class="lg:pl-64">
           <MobileTopBar />
           <main class="py-10">
             <div class="px-4 sm:px-6 lg:px-8">{children}</div>
