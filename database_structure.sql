@@ -15,7 +15,7 @@ USE fair_aware;
 -- ============================================
 
 CREATE TABLE IF NOT EXISTS authorized_users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id CHAR(36) NOT NULL PRIMARY KEY DEFAULT (UUID()),
   email VARCHAR(255) NOT NULL UNIQUE,
   name VARCHAR(255) DEFAULT NULL COMMENT 'Display name for the admin dashboard',
   access_token VARCHAR(255) NOT NULL COMMENT 'Legacy token for /api/download backward compatibility',
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS authorized_users (
 
 CREATE TABLE IF NOT EXISTS user_sessions (
   id VARCHAR(48) NOT NULL PRIMARY KEY COMMENT 'Session identifier (24-char random string)',
-  user_id INT NOT NULL COMMENT 'FK to authorized_users.id',
+  user_id CHAR(36) NOT NULL COMMENT 'FK to authorized_users.id',
   secret_hash VARBINARY(32) NOT NULL COMMENT 'SHA-256 hash of the session secret',
   last_verified_at BIGINT NOT NULL COMMENT 'Unix timestamp (seconds) of last activity verification',
   created_at BIGINT NOT NULL COMMENT 'Unix timestamp (seconds) of session creation',
@@ -105,6 +105,21 @@ CREATE TABLE IF NOT EXISTS assessment_answers (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================
+-- Table 4: course_codes
+-- Pre-created course codes for assessment grouping
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS course_codes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  code VARCHAR(255) NOT NULL UNIQUE COMMENT 'Course code identifier',
+  created_by CHAR(36) NOT NULL COMMENT 'FK to authorized_users.id',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_code (code),
+  CONSTRAINT fk_course_code_creator
+    FOREIGN KEY (created_by) REFERENCES authorized_users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================
 -- Default Admin User (System Root Account)
 --
 -- Note: Only for non-production use!
@@ -115,8 +130,8 @@ CREATE TABLE IF NOT EXISTS assessment_answers (
 SET @admin_email = 'root@fairaware.system.com';
 SET @admin_token = 'ccfb09f1c2b847a6b0d10e24b9ac5545a28d2f91822f843c72a4c6c937f78e2045b23c9850e119f7';
 
-INSERT INTO authorized_users (email, name, access_token, role, created_at)
-SELECT @admin_email, 'System Admin', @admin_token, 'admin', NOW()
+INSERT INTO authorized_users (id, email, name, access_token, role, created_at)
+SELECT UUID(), @admin_email, 'System Admin', @admin_token, 'admin', NOW()
 WHERE NOT EXISTS (
   SELECT 1 FROM authorized_users WHERE email = @admin_email
 );

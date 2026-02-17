@@ -1,7 +1,7 @@
 import type { Pool } from "mysql2/promise";
 
 export interface AdminUser {
-  id: number;
+  id: string;
   email: string;
   name: string | null;
   role: "admin" | "trainer";
@@ -9,7 +9,7 @@ export interface AdminUser {
 
 export interface Session {
   id: string;
-  userId: number;
+  userId: string;
   lastVerifiedAt: number;
   createdAt: number;
 }

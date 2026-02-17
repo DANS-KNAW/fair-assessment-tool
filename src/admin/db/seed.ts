@@ -2,7 +2,7 @@ import type { Pool, RowDataPacket } from "mysql2/promise";
 import { hashPassword } from "../auth/password.js";
 
 interface AdminRow extends RowDataPacket {
-  id: number;
+  id: string;
   password_hash: string | null;
 }
 

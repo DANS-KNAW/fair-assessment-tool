@@ -41,7 +41,7 @@ function constantTimeEqual(a: Uint8Array, b: Uint8Array): boolean {
 
 export async function createSession(
   pool: Pool,
-  userId: number,
+  userId: string,
 ): Promise<string> {
   const sessionId = generateSecureRandomString(ID_LENGTH);
   const sessionSecret = generateSecureRandomString(ID_LENGTH);
