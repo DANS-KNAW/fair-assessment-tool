@@ -8,6 +8,8 @@ interface ButtonProps {
   variant?: ButtonVariant;
   children: Child;
   class?: string;
+  id?: string;
+  disabled?: boolean;
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
@@ -25,21 +27,25 @@ export function Button({
   variant = "primary",
   children,
   class: className = "",
+  id,
+  disabled,
 }: ButtonProps) {
   const baseClasses =
-    "rounded-md px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2";
-  const classes = `${baseClasses} ${variantClasses[variant]} ${className}`;
+    "cursor-pointer rounded-md px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2";
+  const disabledClasses = disabled ? "opacity-50 cursor-not-allowed" : "";
+  const classes =
+    `${baseClasses} ${variantClasses[variant]} ${disabledClasses} ${className}`.trim();
 
   if (href) {
     return (
-      <a href={href} class={classes}>
+      <a href={href} class={classes} id={id}>
         {children}
       </a>
     );
   }
 
   return (
-    <button type={type} class={classes}>
+    <button type={type} class={classes} id={id} disabled={disabled}>
       {children}
     </button>
   );

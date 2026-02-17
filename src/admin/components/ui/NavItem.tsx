@@ -9,7 +9,7 @@ interface NavItemProps {
 
 export function NavItem({ href, label, icon, current = false }: NavItemProps) {
   const baseClasses =
-    "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6";
+    "cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6";
   const activeClasses = current
     ? "bg-gray-50 text-primary-600"
     : "text-gray-700 hover:bg-gray-50 hover:text-primary-600";
