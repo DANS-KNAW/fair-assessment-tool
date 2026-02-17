@@ -6,7 +6,7 @@ export function MobileTopBar() {
       <button
         type="button"
         id="mobile-sidebar-open"
-        class="-m-2.5 p-2.5 text-gray-700 lg:hidden"
+        class="-m-2.5 p-2.5 text-gray-700"
       >
         <span class="sr-only">Open sidebar</span>
         <Bars3Icon class="size-6" />

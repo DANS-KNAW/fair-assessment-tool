@@ -21,12 +21,13 @@ export async function DashboardPage({
   user,
   currentPath,
 }: DashboardPageProps) {
+  const userId = user.role === "trainer" ? user.id : undefined;
   const [totalSubmissions, monthlySubmissions, uniqueCodes, recentSubmissions] =
     await Promise.all([
-      getTotalSubmissions(pool),
-      getMonthlySubmissions(pool),
-      getUniqueCourseCodeCount(pool),
-      getRecentSubmissions(pool, 10),
+      getTotalSubmissions(pool, userId),
+      getMonthlySubmissions(pool, userId),
+      getUniqueCourseCodeCount(pool, userId),
+      getRecentSubmissions(pool, 10, userId),
     ]);
 
   return (
@@ -101,7 +102,7 @@ export async function DashboardPage({
                       <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
                         <a
                           href={`/admin/assessments/${row.id}?from=/admin`}
-                          class="cursor-pointer text-primary-600 hover:text-primary-500"
+                          class="text-primary-600 hover:text-primary-500"
                         >
                           {row.cq1 || "—"}
                         </a>

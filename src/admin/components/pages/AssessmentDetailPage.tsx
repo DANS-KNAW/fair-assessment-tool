@@ -39,7 +39,7 @@ export async function AssessmentDetailPage({
         <div class="mb-4">
           <a
             href="/admin"
-            class="cursor-pointer text-sm text-primary-600 hover:text-primary-500"
+            class="text-sm text-primary-600 hover:text-primary-500"
           >
             &larr; Back to Dashboard
           </a>
@@ -67,7 +67,7 @@ export async function AssessmentDetailPage({
       <div class="mb-4">
         <a
           href={backHref}
-          class="cursor-pointer text-sm text-primary-600 hover:text-primary-500"
+          class="text-sm text-primary-600 hover:text-primary-500"
         >
           &larr; {backLabel}
         </a>
@@ -81,10 +81,10 @@ export async function AssessmentDetailPage({
             Date:{" "}
             {submission.submission_date
               ? new Date(submission.submission_date).toLocaleString("en-GB")
-              : "\u2014"}
+              : "—"}
           </span>
-          <span>Course: {submission.cq1 || "\u2014"}</span>
-          <span>Host: {submission.host || "\u2014"}</span>
+          <span>Course: {submission.cq1 || "—"}</span>
+          <span>Host: {submission.host || "—"}</span>
         </div>
       </div>
 
@@ -157,8 +157,8 @@ export async function AssessmentDetailPage({
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {intentionLabel
-                        ? `${intentionValue}/5 \u2014 ${intentionLabel}`
-                        : "\u2014"}
+                        ? `${intentionValue}/5 — ${intentionLabel}`
+                        : "—"}
                     </td>
                   </tr>
                 );
@@ -186,7 +186,7 @@ export async function AssessmentDetailPage({
 // ── Local helpers ──
 
 function AnswerBadge({ answer }: { answer: string | null }) {
-  if (!answer) return <span class="text-gray-400">{"\u2014"}</span>;
+  if (!answer) return <span class="text-gray-400">{"—"}</span>;
   const isYes = answer.toLowerCase() === "yes";
   const colors = isYes
     ? "bg-green-50 text-green-700 ring-green-600/20"
@@ -220,7 +220,7 @@ function DefinitionList({
         <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium text-gray-900">{item.label}</dt>
           <dd class="mt-1 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-            {item.value || "\u2014"}
+            {item.value || "—"}
           </dd>
         </div>
       ))}
@@ -229,21 +229,9 @@ function DefinitionList({
 }
 
 function getAvgIntention(submission: Record<string, unknown>): string {
-  const intentionKeys = [
-    "fq1i",
-    "fq2i",
-    "fq3i",
-    "aq1i",
-    "aq2i",
-    "iq1i",
-    "rq1i",
-    "rq2i",
-    "rq3i",
-    "rq4i",
-  ];
-  const values = intentionKeys
+  const values = FAIR_QUESTIONS.map((q) => `${q.key}i`)
     .map((k) => Number(submission[k]))
     .filter((v) => !Number.isNaN(v) && v > 0);
-  if (values.length === 0) return "\u2014";
+  if (values.length === 0) return "—";
   return (values.reduce((a, b) => a + b, 0) / values.length).toFixed(1);
 }

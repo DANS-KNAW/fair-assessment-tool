@@ -91,7 +91,7 @@ export async function CourseCodeDetailPage({
           <span>
             Created by: {courseCode.creator_name || courseCode.creator_email}
           </span>
-          <span>Host(s): {hosts.length > 0 ? hosts.join(", ") : "\u2014"}</span>
+          <span>Host(s): {hosts.length > 0 ? hosts.join(", ") : "—"}</span>
         </div>
       </div>
 
@@ -106,7 +106,7 @@ export async function CourseCodeDetailPage({
           value={
             stats.avgScore !== null
               ? `${Number(stats.avgScore).toFixed(1)}/10`
-              : "\u2014"
+              : "—"
           }
         />
         <StatCard name="Low" value={stats.low.toLocaleString()} unit="< 6" />
@@ -169,7 +169,7 @@ export async function CourseCodeDetailPage({
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     {question.yesAvgLikelihood !== null
                       ? `${question.yesAvgLikelihood.toFixed(1)}/5`
-                      : "\u2014"}
+                      : "—"}
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     {question.no}
@@ -177,7 +177,7 @@ export async function CourseCodeDetailPage({
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     {question.noAvgLikelihood !== null
                       ? `${question.noAvgLikelihood.toFixed(1)}/5`
-                      : "\u2014"}
+                      : "—"}
                   </td>
                 </tr>
               ))}
@@ -228,7 +228,7 @@ export async function CourseCodeDetailPage({
                       <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
                         <a
                           href={`/admin/assessments/${row.id}?from=/admin/course-codes/${encodeURIComponent(code)}`}
-                          class="cursor-pointer text-primary-600 hover:text-primary-500"
+                          class="text-primary-600 hover:text-primary-500"
                         >
                           {score}/10 — {label}
                         </a>
@@ -238,7 +238,7 @@ export async function CourseCodeDetailPage({
                           ? new Date(row.submission_date).toLocaleString(
                               "en-GB",
                             )
-                          : "\u2014"}
+                          : "—"}
                       </td>
                     </tr>
                   );

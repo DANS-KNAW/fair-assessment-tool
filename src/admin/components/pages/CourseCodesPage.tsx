@@ -20,7 +20,9 @@ export async function CourseCodesPage({
   flash,
   flashVariant,
 }: CourseCodesPageProps) {
-  const courseCodes = await getAllCourseCodes(pool);
+  const userId = user.role === "trainer" ? user.id : undefined;
+  const courseCodes = await getAllCourseCodes(pool, userId);
+  const isAdmin = user.role === "admin";
 
   return (
     <AdminLayout title="Course Codes" user={user} currentPath={currentPath}>
@@ -34,7 +36,12 @@ export async function CourseCodesPage({
             Manage course codes and view assessment analytics
           </p>
         </div>
-        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex gap-x-3">
+          {courseCodes.length > 0 && (
+            <Button href="/admin/api/download" variant="secondary">
+              Download All
+            </Button>
+          )}
           <Button id="create-modal-open" variant="primary">
             Create Course Code
           </Button>
@@ -77,12 +84,23 @@ export async function CourseCodesPage({
               >
                 Created
               </th>
+              {isAdmin && (
+                <th
+                  scope="col"
+                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                >
+                  Created by
+                </th>
+              )}
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200 bg-white">
             {courseCodes.length === 0 ? (
               <tr>
-                <td colspan={4} class="py-4 text-center text-sm text-gray-500">
+                <td
+                  colspan={isAdmin ? 5 : 4}
+                  class="py-4 text-center text-sm text-gray-500"
+                >
                   No course codes yet. Create one to get started.
                 </td>
               </tr>
@@ -103,11 +121,16 @@ export async function CourseCodesPage({
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     {row.avg_fair_score !== null
                       ? `${Number(row.avg_fair_score).toFixed(1)}/10`
-                      : "\u2014"}
+                      : "—"}
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     {new Date(row.created_at).toLocaleDateString("en-GB")}
                   </td>
+                  {isAdmin && (
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      {row.creator_name || row.creator_email}
+                    </td>
+                  )}
                 </tr>
               ))
             )}
