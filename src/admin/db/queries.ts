@@ -1,6 +1,20 @@
 import type { Pool, ResultSetHeader, RowDataPacket } from "mysql2/promise";
 import { FAIR_QUESTIONS } from "../utils/fair-score.js";
 
+// ── Shared SQL fragments ──
+
+const FAIR_SCORE_SQL = FAIR_QUESTIONS.map(
+  (q) => `(CASE WHEN LOWER(${q.key}) = 'yes' THEN 1 ELSE 0 END)`,
+).join(" +\n         ");
+
+const ASSESSMENT_DETAIL_COLUMNS = `id, host, submission_date, cq1,
+            yq1, yq2, yq3,
+            fq1, fq1i, fq2, fq2i, fq3, fq3i,
+            aq1, aq1i, aq2, aq2i,
+            iq1, iq1i,
+            rq1, rq1i, rq2, rq2i, rq3, rq3i, rq4, rq4i,
+            qq1, qq2, qq3, qq4`;
+
 // ── Session queries ──
 
 interface SessionRow extends RowDataPacket {
@@ -99,14 +113,37 @@ interface CountRow extends RowDataPacket {
   count: number;
 }
 
-export async function getTotalSubmissions(pool: Pool): Promise<number> {
+export async function getTotalSubmissions(
+  pool: Pool,
+  userId?: string,
+): Promise<number> {
+  if (userId) {
+    const [rows] = await pool.execute<CountRow[]>(
+      `SELECT COUNT(*) as count FROM assessment_answers
+       WHERE cq1 IN (SELECT code FROM course_codes WHERE created_by = ?)`,
+      [userId],
+    );
+    return rows[0].count;
+  }
   const [rows] = await pool.execute<CountRow[]>(
     "SELECT COUNT(*) as count FROM assessment_answers",
   );
   return rows[0].count;
 }
 
-export async function getMonthlySubmissions(pool: Pool): Promise<number> {
+export async function getMonthlySubmissions(
+  pool: Pool,
+  userId?: string,
+): Promise<number> {
+  if (userId) {
+    const [rows] = await pool.execute<CountRow[]>(
+      `SELECT COUNT(*) as count FROM assessment_answers
+       WHERE submission_date >= DATE_FORMAT(NOW(), '%Y-%m-01')
+         AND cq1 IN (SELECT code FROM course_codes WHERE created_by = ?)`,
+      [userId],
+    );
+    return rows[0].count;
+  }
   const [rows] = await pool.execute<CountRow[]>(
     `SELECT COUNT(*) as count FROM assessment_answers
      WHERE submission_date >= DATE_FORMAT(NOW(), '%Y-%m-01')`,
@@ -114,7 +151,17 @@ export async function getMonthlySubmissions(pool: Pool): Promise<number> {
   return rows[0].count;
 }
 
-export async function getUniqueCourseCodeCount(pool: Pool): Promise<number> {
+export async function getUniqueCourseCodeCount(
+  pool: Pool,
+  userId?: string,
+): Promise<number> {
+  if (userId) {
+    const [rows] = await pool.execute<CountRow[]>(
+      "SELECT COUNT(*) as count FROM course_codes WHERE created_by = ?",
+      [userId],
+    );
+    return rows[0].count;
+  }
   const [rows] = await pool.execute<CountRow[]>(
     "SELECT COUNT(DISTINCT cq1) as count FROM assessment_answers WHERE cq1 IS NOT NULL AND cq1 != ''",
   );
@@ -140,29 +187,25 @@ export interface SubmissionRow extends RowDataPacket {
 export async function getRecentSubmissions(
   pool: Pool,
   limit = 10,
+  userId?: string,
 ): Promise<SubmissionRow[]> {
+  if (userId) {
+    const [rows] = await pool.execute<SubmissionRow[]>(
+      `SELECT id, cq1, submission_date, fq1, fq2, fq3, aq1, aq2, iq1, rq1, rq2, rq3, rq4
+       FROM assessment_answers
+       WHERE cq1 IN (SELECT code FROM course_codes WHERE created_by = ?)
+       ORDER BY submission_date DESC
+       LIMIT ?`,
+      [userId, String(limit)],
+    );
+    return rows;
+  }
   const [rows] = await pool.execute<SubmissionRow[]>(
     `SELECT id, cq1, submission_date, fq1, fq2, fq3, aq1, aq2, iq1, rq1, rq2, rq3, rq4
      FROM assessment_answers
      ORDER BY submission_date DESC
      LIMIT ?`,
     [String(limit)],
-  );
-  return rows;
-}
-
-export async function getSubmissionsPage(
-  pool: Pool,
-  page: number,
-  pageSize: number,
-): Promise<SubmissionRow[]> {
-  const offset = (page - 1) * pageSize;
-  const [rows] = await pool.execute<SubmissionRow[]>(
-    `SELECT id, cq1, submission_date, fq1, fq2, fq3, aq1, aq2, iq1, rq1, rq2, rq3, rq4
-     FROM assessment_answers
-     ORDER BY submission_date DESC
-     LIMIT ? OFFSET ?`,
-    [String(pageSize), String(offset)],
   );
   return rows;
 }
@@ -208,13 +251,7 @@ export async function getSubmissionById(
   id: number,
 ): Promise<AssessmentDetailRow | null> {
   const [rows] = await pool.execute<AssessmentDetailRow[]>(
-    `SELECT id, host, submission_date, cq1,
-            yq1, yq2, yq3,
-            fq1, fq1i, fq2, fq2i, fq3, fq3i,
-            aq1, aq1i, aq2, aq2i,
-            iq1, iq1i,
-            rq1, rq1i, rq2, rq2i, rq3, rq3i, rq4, rq4i,
-            qq1, qq2, qq3, qq4
+    `SELECT ${ASSESSMENT_DETAIL_COLUMNS}
      FROM assessment_answers
      WHERE id = ?`,
     [String(id)],
@@ -231,6 +268,8 @@ interface CourseCodeRow extends RowDataPacket {
   created_at: string;
   submission_count: number;
   avg_fair_score: number | null;
+  creator_name: string | null;
+  creator_email: string;
 }
 
 export interface CourseCodeDetailRow extends RowDataPacket {
@@ -259,7 +298,12 @@ export interface QuestionStats {
   noAvgLikelihood: number | null;
 }
 
-export async function getAllCourseCodes(pool: Pool): Promise<CourseCodeRow[]> {
+export async function getAllCourseCodes(
+  pool: Pool,
+  userId?: string,
+): Promise<CourseCodeRow[]> {
+  const whereClause = userId ? "WHERE cc.created_by = ?" : "";
+  const params = userId ? [userId] : [];
   const [rows] = await pool.execute<CourseCodeRow[]>(
     `SELECT
        cc.id,
@@ -267,29 +311,23 @@ export async function getAllCourseCodes(pool: Pool): Promise<CourseCodeRow[]> {
        cc.created_by,
        cc.created_at,
        COALESCE(stats.submission_count, 0) AS submission_count,
-       stats.avg_fair_score
+       stats.avg_fair_score,
+       u.name AS creator_name,
+       u.email AS creator_email
      FROM course_codes cc
+     JOIN authorized_users u ON cc.created_by = u.id
      LEFT JOIN (
        SELECT
          cq1,
          COUNT(*) AS submission_count,
-         AVG(
-           (CASE WHEN LOWER(fq1) = 'yes' THEN 1 ELSE 0 END) +
-           (CASE WHEN LOWER(fq2) = 'yes' THEN 1 ELSE 0 END) +
-           (CASE WHEN LOWER(fq3) = 'yes' THEN 1 ELSE 0 END) +
-           (CASE WHEN LOWER(aq1) = 'yes' THEN 1 ELSE 0 END) +
-           (CASE WHEN LOWER(aq2) = 'yes' THEN 1 ELSE 0 END) +
-           (CASE WHEN LOWER(iq1) = 'yes' THEN 1 ELSE 0 END) +
-           (CASE WHEN LOWER(rq1) = 'yes' THEN 1 ELSE 0 END) +
-           (CASE WHEN LOWER(rq2) = 'yes' THEN 1 ELSE 0 END) +
-           (CASE WHEN LOWER(rq3) = 'yes' THEN 1 ELSE 0 END) +
-           (CASE WHEN LOWER(rq4) = 'yes' THEN 1 ELSE 0 END)
-         ) AS avg_fair_score
+         AVG(${FAIR_SCORE_SQL}) AS avg_fair_score
        FROM assessment_answers
        WHERE cq1 IS NOT NULL AND cq1 != ''
        GROUP BY cq1
      ) stats ON stats.cq1 = cc.code
+     ${whereClause}
      ORDER BY cc.created_at DESC`,
+    params,
   );
   return rows;
 }
@@ -359,17 +397,29 @@ export async function getSubmissionsForDownload(
   code: string,
 ): Promise<AssessmentDetailRow[]> {
   const [rows] = await pool.execute<AssessmentDetailRow[]>(
-    `SELECT id, host, submission_date, cq1,
-            yq1, yq2, yq3,
-            fq1, fq1i, fq2, fq2i, fq3, fq3i,
-            aq1, aq1i, aq2, aq2i,
-            iq1, iq1i,
-            rq1, rq1i, rq2, rq2i, rq3, rq3i, rq4, rq4i,
-            qq1, qq2, qq3, qq4
+    `SELECT ${ASSESSMENT_DETAIL_COLUMNS}
      FROM assessment_answers
      WHERE cq1 = ?
      ORDER BY submission_date DESC`,
     [code],
+  );
+  return rows;
+}
+
+export async function getAllSubmissionsForDownload(
+  pool: Pool,
+  userId?: string,
+): Promise<AssessmentDetailRow[]> {
+  const whereClause = userId
+    ? "WHERE cq1 IN (SELECT code FROM course_codes WHERE created_by = ?)"
+    : "";
+  const params = userId ? [userId] : [];
+  const [rows] = await pool.execute<AssessmentDetailRow[]>(
+    `SELECT ${ASSESSMENT_DETAIL_COLUMNS}
+     FROM assessment_answers
+     ${whereClause}
+     ORDER BY submission_date DESC`,
+    params,
   );
   return rows;
 }
@@ -398,54 +448,10 @@ export async function getCourseCodeStats(
   const [rows] = await pool.execute<CourseCodeStatsRow[]>(
     `SELECT
        COUNT(*) AS total,
-       AVG(
-         (CASE WHEN LOWER(fq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(fq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(fq3) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(aq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(aq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(iq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq3) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq4) = 'yes' THEN 1 ELSE 0 END)
-       ) AS avg_score,
-       SUM(CASE WHEN (
-         (CASE WHEN LOWER(fq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(fq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(fq3) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(aq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(aq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(iq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq3) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq4) = 'yes' THEN 1 ELSE 0 END)
-       ) < 6 THEN 1 ELSE 0 END) AS low_count,
-       SUM(CASE WHEN (
-         (CASE WHEN LOWER(fq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(fq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(fq3) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(aq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(aq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(iq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq3) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq4) = 'yes' THEN 1 ELSE 0 END)
-       ) BETWEEN 6 AND 7 THEN 1 ELSE 0 END) AS moderate_count,
-       SUM(CASE WHEN (
-         (CASE WHEN LOWER(fq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(fq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(fq3) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(aq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(aq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(iq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq1) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq2) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq3) = 'yes' THEN 1 ELSE 0 END) +
-         (CASE WHEN LOWER(rq4) = 'yes' THEN 1 ELSE 0 END)
-       ) >= 8 THEN 1 ELSE 0 END) AS high_count
+       AVG(${FAIR_SCORE_SQL}) AS avg_score,
+       SUM(CASE WHEN (${FAIR_SCORE_SQL}) < 6 THEN 1 ELSE 0 END) AS low_count,
+       SUM(CASE WHEN (${FAIR_SCORE_SQL}) BETWEEN 6 AND 7 THEN 1 ELSE 0 END) AS moderate_count,
+       SUM(CASE WHEN (${FAIR_SCORE_SQL}) >= 8 THEN 1 ELSE 0 END) AS high_count
      FROM assessment_answers
      WHERE cq1 = ?`,
     [code],
@@ -491,4 +497,18 @@ export async function getCourseCodeQuestionBreakdown(
     noAvgLikelihood:
       row[`${q.key}_no_avg`] != null ? Number(row[`${q.key}_no_avg`]) : null,
   }));
+}
+
+// ── Ownership check ──
+
+export async function isOwnedCourseCode(
+  pool: Pool,
+  code: string,
+  userId: string,
+): Promise<boolean> {
+  const [rows] = await pool.execute<CountRow[]>(
+    "SELECT COUNT(*) as count FROM course_codes WHERE code = ? AND created_by = ?",
+    [code, userId],
+  );
+  return rows[0].count > 0;
 }

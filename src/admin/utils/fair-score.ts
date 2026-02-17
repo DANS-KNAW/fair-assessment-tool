@@ -1,16 +1,3 @@
-const fairFields = [
-  "fq1",
-  "fq2",
-  "fq3",
-  "aq1",
-  "aq2",
-  "iq1",
-  "rq1",
-  "rq2",
-  "rq3",
-  "rq4",
-] as const;
-
 export const FAIR_QUESTIONS = [
   { key: "fq1", label: "F1: Persistent identifier" },
   { key: "fq2", label: "F2: Metadata for discovery" },
@@ -33,7 +20,8 @@ export const INTENTION_LABELS: Record<string, string> = {
 };
 
 export function getFairScore(row: Record<string, string | null>): number {
-  return fairFields.filter((f) => row[f]?.toLowerCase() === "yes").length;
+  return FAIR_QUESTIONS.filter((q) => row[q.key]?.toLowerCase() === "yes")
+    .length;
 }
 
 export function getFairLabel(score: number): string {

@@ -1,9 +1,8 @@
-import { readFileSync } from "node:fs";
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
 import { trimTrailingSlash } from "hono/trailing-slash";
-import { seedDefaultAdmin } from "./admin/db/seed.js";
+import { seedDefaultAdmin, seedDefaultTrainer } from "./admin/db/seed.js";
 import { createAdminApp } from "./admin/index.js";
 import { createApiApp } from "./api/index.js";
 import { DatabaseHandler } from "./utils/database.js";
@@ -19,7 +18,7 @@ const database = new DatabaseHandler({
   port: Number(process.env.MYSQL_DATABASE_PORT) || 3306,
 });
 
-const ASSESSMENT_HOST = process.env.HOST_INSTANCE || "unknown";
+const ASSESSMENT_HOST = process.env.ASSESSMENT_HOST || "unknown";
 
 // Trim trailing slashes (redirects /admin/ → /admin on 404)
 app.use(trimTrailingSlash());
@@ -32,17 +31,6 @@ const apiApp = createApiApp(database, ASSESSMENT_HOST);
 app.route("/api", apiApp);
 
 app.use("/*", serveStatic({ root: "./public" }));
-
-// Dirty wrapper to reuse and serve legacy HTML application.
-app.get("/", (c) => {
-  try {
-    const html = readFileSync("/public/index.html", "utf-8");
-    return c.html(html);
-  } catch (error) {
-    console.error("Failed to read index.html:", error);
-    return c.text("Internal Server Error", 500);
-  }
-});
 
 app.notFound((c) => {
   return c.json(
@@ -76,9 +64,12 @@ const server = serve(
   },
   (info) => {
     console.log(`Server is running on http://localhost:${info.port}`);
-    seedDefaultAdmin(database.getPool()).catch((err) => {
-      console.error("[admin] Failed to seed default admin:", err);
-    });
+    const pool = database.getPool();
+    seedDefaultAdmin(pool)
+      .then(() => seedDefaultTrainer(pool))
+      .catch((err) => {
+        console.error("[admin] Failed to seed users:", err);
+      });
   },
 );
 
@@ -115,10 +106,10 @@ process.on("SIGTERM", () => shutdown("SIGTERM"));
 
 process.on("uncaughtException", (error) => {
   console.error("Uncaught Exception:", error);
-  shutdown("uncaughtException");
+  process.exit(1);
 });
 
 process.on("unhandledRejection", (reason, promise) => {
   console.error("Unhandled Rejection at:", promise, "reason:", reason);
-  shutdown("unhandledRejection");
+  process.exit(1);
 });

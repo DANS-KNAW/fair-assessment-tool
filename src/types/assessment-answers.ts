@@ -43,10 +43,4 @@ export const assessmentAnswerSchema = z.object({
   qq4: z.string().max(50),
 });
 
-export const completeAnswerSchema = assessmentAnswerSchema.extend({
-  host: z.string().min(1, "Host is required").max(255),
-  date: z.date(),
-});
-
 export type AssessmentAnswerDto = z.infer<typeof assessmentAnswerSchema>;
-export type CompleteAnswerDto = z.infer<typeof completeAnswerSchema>;
