@@ -1,5 +1,5 @@
 import type { Pool } from "mysql2/promise";
-import { getAllCourseCodes } from "../../db/queries.js";
+import { getAllCourseCodes, getUnaffiliatedCount } from "../../db/queries.js";
 import type { AdminUser } from "../../types.js";
 import { AdminLayout } from "../layout/AdminLayout.js";
 import { Button } from "../ui/Button.js";
@@ -21,8 +21,11 @@ export async function CourseCodesPage({
   flashVariant,
 }: CourseCodesPageProps) {
   const userId = user.role === "trainer" ? user.id : undefined;
-  const courseCodes = await getAllCourseCodes(pool, userId);
   const isAdmin = user.role === "admin";
+  const [courseCodes, unaffiliatedCount] = await Promise.all([
+    getAllCourseCodes(pool, userId),
+    isAdmin ? getUnaffiliatedCount(pool) : Promise.resolve(0),
+  ]);
 
   return (
     <AdminLayout title="Course Codes" user={user} currentPath={currentPath}>
@@ -53,6 +56,44 @@ export async function CourseCodesPage({
         <div class="mb-6">
           <FlashMessage message={flash} variant={flashVariant} />
         </div>
+      )}
+
+      {/* Unaffiliated assessments card (admin only) */}
+      {isAdmin && (
+        <a
+          href="/admin/course-codes/_unaffiliated"
+          class="mt-6 block rounded-lg border border-gray-200 border-l-4 border-l-primary-600 bg-white p-4 shadow-sm hover:shadow-md hover:bg-gray-50 transition-all"
+        >
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-semibold text-gray-900">
+                Unaffiliated Assessments
+              </h3>
+              <p class="mt-1 text-sm text-gray-500">
+                Submissions without a course code
+              </p>
+            </div>
+            <div class="flex items-center gap-x-3">
+              <span class="text-2xl font-bold text-gray-700">
+                {unaffiliatedCount}
+              </span>
+              <svg
+                class="size-5 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </div>
+          </div>
+        </a>
       )}
 
       {/* Table */}

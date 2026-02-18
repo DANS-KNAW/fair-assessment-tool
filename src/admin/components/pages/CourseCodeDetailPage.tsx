@@ -1,4 +1,5 @@
 import type { Pool } from "mysql2/promise";
+import type { QuestionStats, SubmissionRow } from "../../db/queries.js";
 import {
   getCourseCodeByCode,
   getCourseCodeQuestionBreakdown,
@@ -6,6 +7,11 @@ import {
   getHostsByCourseCode,
   getSubmissionCountByCourseCode,
   getSubmissionsByCourseCode,
+  getUnaffiliatedHosts,
+  getUnaffiliatedQuestionBreakdown,
+  getUnaffiliatedStats,
+  getUnaffiliatedSubmissionCount,
+  getUnaffiliatedSubmissions,
 } from "../../db/queries.js";
 import type { AdminUser } from "../../types.js";
 import { getFairLabel, getFairScore } from "../../utils/fair-score.js";
@@ -18,6 +24,7 @@ interface CourseCodeDetailPageProps {
   currentPath: string;
   code: string;
   page: number;
+  unaffiliated?: boolean;
 }
 
 const PAGE_SIZE = 20;
@@ -28,7 +35,49 @@ export async function CourseCodeDetailPage({
   currentPath,
   code,
   page,
+  unaffiliated,
 }: CourseCodeDetailPageProps) {
+  const basePath = unaffiliated
+    ? "/admin/course-codes/_unaffiliated"
+    : `/admin/course-codes/${encodeURIComponent(code)}`;
+
+  const downloadPath = unaffiliated
+    ? "/admin/api/download/_unaffiliated"
+    : `/admin/api/download/${encodeURIComponent(code)}`;
+
+  if (unaffiliated) {
+    const [stats, breakdown, submissions, totalCount, hosts] =
+      await Promise.all([
+        getUnaffiliatedStats(pool),
+        getUnaffiliatedQuestionBreakdown(pool),
+        getUnaffiliatedSubmissions(pool, page, PAGE_SIZE),
+        getUnaffiliatedSubmissionCount(pool),
+        getUnaffiliatedHosts(pool),
+      ]);
+
+    const totalPages = Math.ceil(totalCount / PAGE_SIZE);
+    const start = (page - 1) * PAGE_SIZE + 1;
+    const end = Math.min(page * PAGE_SIZE, totalCount);
+
+    return renderDetail({
+      user,
+      currentPath,
+      title: "Unaffiliated Assessments",
+      stats,
+      breakdown,
+      submissions,
+      totalCount,
+      hosts,
+      totalPages,
+      start,
+      end,
+      page,
+      basePath,
+      downloadPath,
+      metadata: null,
+    });
+  }
+
   const [courseCode, stats, breakdown, submissions, totalCount, hosts] =
     await Promise.all([
       getCourseCodeByCode(pool, code),
@@ -59,8 +108,73 @@ export async function CourseCodeDetailPage({
   const start = (page - 1) * PAGE_SIZE + 1;
   const end = Math.min(page * PAGE_SIZE, totalCount);
 
+  return renderDetail({
+    user,
+    currentPath,
+    title: courseCode.code,
+    stats,
+    breakdown,
+    submissions,
+    totalCount,
+    hosts,
+    totalPages,
+    start,
+    end,
+    page,
+    basePath,
+    downloadPath,
+    metadata: {
+      createdAt: courseCode.created_at,
+      createdBy: courseCode.creator_name || courseCode.creator_email,
+    },
+  });
+}
+
+// ── Shared detail renderer ──
+
+interface RenderDetailProps {
+  user: AdminUser;
+  currentPath: string;
+  title: string;
+  stats: {
+    total: number;
+    avgScore: number | null;
+    low: number;
+    moderate: number;
+    high: number;
+  };
+  breakdown: QuestionStats[];
+  submissions: SubmissionRow[];
+  totalCount: number;
+  hosts: string[];
+  totalPages: number;
+  start: number;
+  end: number;
+  page: number;
+  basePath: string;
+  downloadPath: string;
+  metadata: { createdAt: string; createdBy: string } | null;
+}
+
+function renderDetail({
+  user,
+  currentPath,
+  title,
+  stats,
+  breakdown,
+  submissions,
+  totalCount,
+  hosts,
+  totalPages,
+  start,
+  end,
+  page,
+  basePath,
+  downloadPath,
+  metadata,
+}: RenderDetailProps) {
   return (
-    <AdminLayout title={code} user={user} currentPath={currentPath}>
+    <AdminLayout title={title} user={user} currentPath={currentPath}>
       {/* Back link */}
       <div class="mb-4">
         <a
@@ -74,10 +188,10 @@ export async function CourseCodeDetailPage({
       {/* Header */}
       <div class="mb-8">
         <div class="flex items-center justify-between">
-          <h1 class="text-2xl font-bold text-gray-900">{courseCode.code}</h1>
+          <h1 class="text-2xl font-bold text-gray-900">{title}</h1>
           {stats.total > 0 && (
             <a
-              href={`/admin/api/download/${encodeURIComponent(courseCode.code)}`}
+              href={downloadPath}
               class="inline-flex items-center gap-x-1.5 rounded-md bg-primary-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
             >
               Download CSV
@@ -85,12 +199,14 @@ export async function CourseCodeDetailPage({
           )}
         </div>
         <div class="mt-2 flex flex-wrap gap-x-6 text-sm text-gray-500">
-          <span>
-            Created: {new Date(courseCode.created_at).toLocaleString("en-GB")}
-          </span>
-          <span>
-            Created by: {courseCode.creator_name || courseCode.creator_email}
-          </span>
+          {metadata && (
+            <>
+              <span>
+                Created: {new Date(metadata.createdAt).toLocaleString("en-GB")}
+              </span>
+              <span>Created by: {metadata.createdBy}</span>
+            </>
+          )}
           <span>Host(s): {hosts.length > 0 ? hosts.join(", ") : "—"}</span>
         </div>
       </div>
@@ -113,7 +229,7 @@ export async function CourseCodeDetailPage({
         <StatCard
           name="Moderate"
           value={stats.moderate.toLocaleString()}
-          unit="6–7"
+          unit="6-7"
         />
         <StatCard name="High" value={stats.high.toLocaleString()} unit="8+" />
       </div>
@@ -227,7 +343,7 @@ export async function CourseCodeDetailPage({
                     <tr class="hover:bg-gray-50">
                       <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
                         <a
-                          href={`/admin/assessments/${row.id}?from=/admin/course-codes/${encodeURIComponent(code)}`}
+                          href={`/admin/assessments/${row.id}?from=${encodeURIComponent(basePath)}`}
                           class="text-primary-600 hover:text-primary-500"
                         >
                           {score}/10 — {label}
@@ -263,7 +379,7 @@ export async function CourseCodeDetailPage({
           <div class="flex gap-x-2">
             {page > 1 ? (
               <a
-                href={`/admin/course-codes/${encodeURIComponent(code)}?page=${page - 1}`}
+                href={`${basePath}?page=${page - 1}`}
                 class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               >
                 Previous
@@ -275,7 +391,7 @@ export async function CourseCodeDetailPage({
             )}
             {page < totalPages ? (
               <a
-                href={`/admin/course-codes/${encodeURIComponent(code)}?page=${page + 1}`}
+                href={`${basePath}?page=${page + 1}`}
                 class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               >
                 Next

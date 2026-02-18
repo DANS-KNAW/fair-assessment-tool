@@ -17,6 +17,7 @@ var fields = new Map([
   ["R", [2, 2, 2, 2]],
   ["Q", [10, 0, 0, 5]],
 ]);
+var courseCodeValid = null; // null = unchecked, true = valid, false = invalid
 var willingness_max = 5;
 var number_fair_questions = get_number_of_fair_questions();
 var total_willingness_score = get_total_willingness_score();
@@ -32,6 +33,7 @@ $(document).ready(initialise);
 $(document).ready(() => {
   $("[rel=tooltip]").tooltip({ trigger: "hover" });
 });
+$(document).ready(initCourseCodeValidation);
 
 function initialise() {
   $("#introduction-text").html(
@@ -326,6 +328,38 @@ function excluded(question) {
   );
 }
 
+function initCourseCodeValidation() {
+  var cq1 = document.getElementById("cq1");
+  var feedback = document.getElementById("cq1-feedback");
+
+  cq1.addEventListener("blur", function () {
+    var code = cq1.value.trim();
+    if (code === "") {
+      courseCodeValid = null;
+      feedback.textContent = "";
+      return;
+    }
+    fetch("/api/course-codes/validate?code=" + encodeURIComponent(code))
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (cq1.value.trim() !== code) return;
+        courseCodeValid = data.exists;
+        feedback.textContent = data.exists
+          ? ""
+          : "This course code does not exist. If left unchanged, your submission will be stored as unaffiliated.";
+      })
+      .catch(function () {
+        courseCodeValid = null;
+        feedback.textContent = "";
+      });
+  });
+
+  cq1.addEventListener("input", function () {
+    courseCodeValid = null;
+    feedback.textContent = "";
+  });
+}
+
 function intention_questions_answer(question) {
   const intention_questions = document.getElementsByName(question + "-i");
   for (let i = 0; i < 5; i++) {
@@ -355,8 +389,9 @@ function get_answers() {
       }
     }
   }
-  // set free text fields
-  m.set("cq1", document.getElementById("cq1").value.trim());
+  // set free text fields — only send course code if explicitly validated; otherwise store as unaffiliated
+  var cq1Value = document.getElementById("cq1").value.trim();
+  m.set("cq1", courseCodeValid === true ? cq1Value : "");
   m.set(
     "qq2",
     document

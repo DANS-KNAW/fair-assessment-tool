@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+import type { RowDataPacket } from "mysql2/promise";
 import { assessmentAnswerSchema } from "../types/assessment-answers.js";
 import type { DatabaseHandler } from "../utils/database.js";
 
@@ -75,6 +76,20 @@ export function createApiApp(
         500,
       );
     }
+  });
+
+  // Check if a course code exists
+  app.get("/course-codes/validate", async (c) => {
+    const code = c.req.query("code")?.trim() ?? "";
+    if (code === "") {
+      return c.json({ exists: false });
+    }
+    const pool = database.getPool();
+    const [rows] = await pool.execute<RowDataPacket[]>(
+      "SELECT 1 FROM course_codes WHERE code = ? LIMIT 1",
+      [code],
+    );
+    return c.json({ exists: rows.length > 0 });
   });
 
   app.get("/health", (c) => {
