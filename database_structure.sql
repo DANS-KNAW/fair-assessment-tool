@@ -18,9 +18,11 @@ CREATE TABLE IF NOT EXISTS authorized_users (
   id CHAR(36) NOT NULL PRIMARY KEY DEFAULT (UUID()),
   email VARCHAR(255) NOT NULL UNIQUE,
   name VARCHAR(255) DEFAULT NULL COMMENT 'Display name for the admin dashboard',
-  access_token VARCHAR(255) NOT NULL COMMENT 'Legacy token for /api/download backward compatibility',
+  access_token VARCHAR(255) DEFAULT NULL COMMENT 'Legacy token - no longer required for new users',
   password_hash VARCHAR(255) DEFAULT NULL COMMENT 'Argon2id hashed password for admin dashboard login',
   role ENUM('admin', 'trainer') NOT NULL DEFAULT 'trainer' COMMENT 'User role',
+  status ENUM('pending', 'active', 'disabled') NOT NULL DEFAULT 'active' COMMENT 'Account status',
+  last_login_at TIMESTAMP NULL DEFAULT NULL COMMENT 'Last successful login timestamp',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   INDEX idx_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -117,6 +119,22 @@ CREATE TABLE IF NOT EXISTS course_codes (
   INDEX idx_code (code),
   CONSTRAINT fk_course_code_creator
     FOREIGN KEY (created_by) REFERENCES authorized_users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================
+-- Table 5: user_invitations
+-- Invitation tokens for user account setup
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS user_invitations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id CHAR(36) NOT NULL COMMENT 'FK to authorized_users.id',
+  token_hash VARBINARY(32) NOT NULL COMMENT 'SHA-256 hash of the invitation token',
+  expires_at BIGINT NOT NULL COMMENT 'Unix timestamp (seconds) of token expiration',
+  created_at BIGINT NOT NULL COMMENT 'Unix timestamp (seconds) of invitation creation',
+  INDEX idx_user_id (user_id),
+  CONSTRAINT fk_invitation_user
+    FOREIGN KEY (user_id) REFERENCES authorized_users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================

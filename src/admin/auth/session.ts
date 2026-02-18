@@ -15,7 +15,7 @@ const ID_LENGTH = 24;
 const INACTIVITY_TIMEOUT = 60 * 60 * 24 * 10; // 10 days in seconds
 const ACTIVITY_CHECK_INTERVAL = 60 * 60; // 1 hour in seconds
 
-function generateSecureRandomString(length: number): string {
+export function generateSecureRandomString(length: number): string {
   const bytes = crypto.getRandomValues(new Uint8Array(length));
   let result = "";
   for (let i = 0; i < length; i++) {
@@ -24,13 +24,13 @@ function generateSecureRandomString(length: number): string {
   return result;
 }
 
-async function hashSecret(secret: string): Promise<Uint8Array> {
+export async function hashSecret(secret: string): Promise<Uint8Array> {
   const encoded = new TextEncoder().encode(secret);
   const digest = await crypto.subtle.digest("SHA-256", encoded);
   return new Uint8Array(digest);
 }
 
-function constantTimeEqual(a: Uint8Array, b: Uint8Array): boolean {
+export function constantTimeEqual(a: Uint8Array, b: Uint8Array): boolean {
   if (a.length !== b.length) return false;
   let result = 0;
   for (let i = 0; i < a.length; i++) {
@@ -108,6 +108,7 @@ export async function validateSessionToken(
       email: row.email,
       name: row.name,
       role: row.role,
+      status: row.status,
     },
   };
 }
