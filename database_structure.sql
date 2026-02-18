@@ -137,19 +137,3 @@ CREATE TABLE IF NOT EXISTS user_invitations (
     FOREIGN KEY (user_id) REFERENCES authorized_users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- Default Admin User (System Root Account)
---
--- Note: Only for non-production use!
--- The password_hash should be set at runtime
--- via the ADMIN_DEFAULT_PASSWORD env var.
--- ============================================
-
-SET @admin_email = 'root@fairaware.system.com';
-SET @admin_token = 'ccfb09f1c2b847a6b0d10e24b9ac5545a28d2f91822f843c72a4c6c937f78e2045b23c9850e119f7';
-
-INSERT INTO authorized_users (id, email, name, access_token, role, created_at)
-SELECT UUID(), @admin_email, 'System Admin', @admin_token, 'admin', NOW()
-WHERE NOT EXISTS (
-  SELECT 1 FROM authorized_users WHERE email = @admin_email
-);

@@ -2,11 +2,7 @@ import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
 import { trimTrailingSlash } from "hono/trailing-slash";
-import {
-  runMigrations,
-  seedDefaultAdmin,
-  seedDefaultTrainer,
-} from "./admin/db/seed.js";
+import { runMigrations } from "./admin/db/seed.js";
 import { createAdminApp } from "./admin/index.js";
 import { createApiApp } from "./api/index.js";
 import { DatabaseHandler } from "./utils/database.js";
@@ -69,12 +65,9 @@ const server = serve(
   (info) => {
     console.log(`Server is running on http://localhost:${info.port}`);
     const pool = database.getPool();
-    runMigrations(pool)
-      .then(() => seedDefaultAdmin(pool))
-      .then(() => seedDefaultTrainer(pool))
-      .catch((err) => {
-        console.error("[admin] Failed to seed users:", err);
-      });
+    runMigrations(pool).catch((err) => {
+      console.error("[admin] Failed to run migrations:", err);
+    });
   },
 );
 
