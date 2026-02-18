@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@hono/node-server':
         specifier: ^1.19.5
-        version: 1.19.5(hono@4.9.12)
+        version: 1.19.5(hono@4.11.7)
       '@hono/zod-validator':
         specifier: ^0.7.4
-        version: 0.7.4(hono@4.9.12)(zod@4.1.12)
+        version: 0.7.4(hono@4.11.7)(zod@4.1.12)
       '@node-rs/argon2':
         specifier: ^2.0.2
         version: 2.0.2
@@ -21,8 +21,8 @@ importers:
         specifier: ^17.2.3
         version: 17.2.3
       hono:
-        specifier: ^4.9.12
-        version: 4.9.12
+        specifier: ^4.11.7
+        version: 4.11.7
       mysql2:
         specifier: ^3.15.2
         version: 3.15.2
@@ -603,8 +603,8 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  hono@4.9.12:
-    resolution: {integrity: sha512-SrTC0YxqPwnN7yKa8gg/giLyQ2pILCKoideIHbYbFQlWZjYt68D2A4Ae1hehO/aDQ6RmTcpqOV/O2yBtMzx/VQ==}
+  hono@4.11.7:
+    resolution: {integrity: sha512-l7qMiNee7t82bH3SeyUCt9UF15EVmaBvsppY2zQtrbIhl/yzBTny+YUxsVjSjQ6gaqaeVtZmGocom8TzBlA4Yw==}
     engines: {node: '>=16.9.0'}
 
   iconv-lite@0.7.0:
@@ -906,13 +906,13 @@ snapshots:
   '@esbuild/win32-x64@0.25.10':
     optional: true
 
-  '@hono/node-server@1.19.5(hono@4.9.12)':
+  '@hono/node-server@1.19.5(hono@4.11.7)':
     dependencies:
-      hono: 4.9.12
+      hono: 4.11.7
 
-  '@hono/zod-validator@0.7.4(hono@4.9.12)(zod@4.1.12)':
+  '@hono/zod-validator@0.7.4(hono@4.11.7)(zod@4.1.12)':
     dependencies:
-      hono: 4.9.12
+      hono: 4.11.7
       zod: 4.1.12
 
   '@jridgewell/gen-mapping@0.3.13':
@@ -1197,7 +1197,7 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  hono@4.9.12: {}
+  hono@4.11.7: {}
 
   iconv-lite@0.7.0:
     dependencies:
