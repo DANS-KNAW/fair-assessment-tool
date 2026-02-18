@@ -5,10 +5,12 @@ import { logger } from "hono/logger";
 import { secureHeaders } from "hono/secure-headers";
 import type { Pool } from "mysql2/promise";
 import { requireAuth } from "./auth/middleware.js";
-import { verifyPassword } from "./auth/password.js";
+import { hashPassword, verifyPassword } from "./auth/password.js";
 import {
   createSession,
   deleteSessionCookie,
+  generateSecureRandomString,
+  hashSecret,
   invalidateSession,
   setSessionCookie,
   validateSessionToken,
@@ -18,16 +20,30 @@ import { CourseCodeDetailPage } from "./components/pages/CourseCodeDetailPage.js
 import { CourseCodesPage } from "./components/pages/CourseCodesPage.js";
 import { DashboardPage } from "./components/pages/DashboardPage.js";
 import { LoginPage } from "./components/pages/LoginPage.js";
+import { SetupPage } from "./components/pages/SetupPage.js";
+import { UserDetailPage } from "./components/pages/UserDetailPage.js";
 import { UsersPage } from "./components/pages/UsersPage.js";
 import type { AssessmentDetailRow } from "./db/queries.js";
 import {
+  checkEmailExists,
   createCourseCode,
+  createInvitation,
+  createUser,
+  deleteInvitationsByUserId,
+  deleteUser,
+  deleteUserSessions,
   getAllSubmissionsForDownload,
   getCourseCodeByCode,
+  getInvitationByTokenHash,
   getSubmissionById,
   getSubmissionsForDownload,
+  getUnaffiliatedSubmissionsForDownload,
   getUserByEmail,
+  getUserById,
   isOwnedCourseCode,
+  setUserPassword,
+  updateLastLoginAt,
+  updateUserStatus,
 } from "./db/queries.js";
 import type { AdminEnv } from "./types.js";
 
@@ -133,15 +149,113 @@ export function createAdminApp(pool: Pool) {
       return c.html(<LoginPage error="Invalid email or password." />, 401);
     }
 
+    if (user.status === "pending") {
+      return c.html(
+        <LoginPage error="Please complete your account setup first." />,
+        403,
+      );
+    }
+    if (user.status === "disabled") {
+      return c.html(<LoginPage error="Your account has been disabled." />, 403);
+    }
+
+    await updateLastLoginAt(pool, user.id);
     const token = await createSession(pool, user.id);
     setSessionCookie(c, token);
     return c.redirect("/admin");
   });
 
+  // ── Setup routes (unprotected) ──
+
+  app.get("/setup", async (c) => {
+    const token = c.req.query("token");
+    if (!token || token.length !== 48) {
+      return c.redirect("/admin/login");
+    }
+
+    const tokenHash = await hashSecret(token);
+    const invitation = await getInvitationByTokenHash(
+      pool,
+      Buffer.from(tokenHash),
+    );
+
+    if (!invitation) {
+      return c.redirect("/admin/login");
+    }
+
+    const now = Math.floor(Date.now() / 1000);
+    if (now > invitation.expires_at) {
+      return c.html(<SetupPage token="" expired />);
+    }
+
+    if (invitation.user_status !== "pending") {
+      return c.redirect("/admin/login");
+    }
+
+    return c.html(<SetupPage token={token} />);
+  });
+
+  app.post("/setup", csrf(), async (c) => {
+    const formData = await c.req.parseBody();
+    const token = formData.token;
+    const password = formData.password;
+    const confirmPassword = formData.confirm_password;
+
+    if (
+      typeof token !== "string" ||
+      token.length !== 48 ||
+      typeof password !== "string" ||
+      typeof confirmPassword !== "string"
+    ) {
+      return c.redirect("/admin/login");
+    }
+
+    const tokenHash = await hashSecret(token);
+    const invitation = await getInvitationByTokenHash(
+      pool,
+      Buffer.from(tokenHash),
+    );
+
+    if (!invitation) {
+      return c.redirect("/admin/login");
+    }
+
+    const now = Math.floor(Date.now() / 1000);
+    if (now > invitation.expires_at) {
+      return c.html(<SetupPage token="" expired />);
+    }
+
+    if (password.length < 8) {
+      return c.html(
+        <SetupPage
+          token={token}
+          error="Password must be at least 8 characters."
+        />,
+      );
+    }
+    if (password !== confirmPassword) {
+      return c.html(
+        <SetupPage token={token} error="Passwords do not match." />,
+      );
+    }
+
+    const passwordHash = await hashPassword(password);
+    await setUserPassword(pool, invitation.user_id, passwordHash);
+    await deleteInvitationsByUserId(pool, invitation.user_id);
+
+    return c.redirect("/admin/login");
+  });
+
   // Prevent browser from caching authenticated responses (OWASP baseline)
   app.use("*", async (c, next) => {
     await next();
-    if (c.req.path !== "/admin/login" && c.req.path !== "/admin/login/") {
+    const path = c.req.path;
+    if (
+      path !== "/admin/login" &&
+      path !== "/admin/login/" &&
+      path !== "/admin/setup" &&
+      path !== "/admin/setup/"
+    ) {
       c.res.headers.set("Cache-Control", "no-store, private");
     }
   });
@@ -149,8 +263,13 @@ export function createAdminApp(pool: Pool) {
   // ── Protected routes ──
 
   app.use("*", async (c, next) => {
-    // Skip auth for login routes
-    if (c.req.path === "/admin/login" || c.req.path === "/admin/login/") {
+    const path = c.req.path;
+    if (
+      path === "/admin/login" ||
+      path === "/admin/login/" ||
+      path === "/admin/setup" ||
+      path === "/admin/setup/"
+    ) {
       return next();
     }
     return requireAuth(pool)(c, next);
@@ -183,6 +302,29 @@ export function createAdminApp(pool: Pool) {
     const csv = buildCsv(rows);
     const timestamp = formatDownloadTimestamp();
     const filename = `FAIRAware_all_results_${timestamp}.csv`;
+
+    c.header("Content-Type", "text/csv; charset=utf-8");
+    c.header("Content-Disposition", `attachment; filename="${filename}"`);
+    return c.body(csv);
+  });
+
+  app.get("/api/download/_unaffiliated", async (c) => {
+    const user = c.get("user");
+    if (user.role !== "admin") {
+      return c.redirect("/admin/course-codes");
+    }
+
+    const rows = await getUnaffiliatedSubmissionsForDownload(pool);
+
+    if (rows.length === 0) {
+      return c.redirect(
+        `/admin/course-codes?flash=${encodeURIComponent("No unaffiliated submissions found.")}&flashVariant=error`,
+      );
+    }
+
+    const csv = buildCsv(rows);
+    const timestamp = formatDownloadTimestamp();
+    const filename = `FAIRAware_unaffiliated_results_${timestamp}.csv`;
 
     c.header("Content-Type", "text/csv; charset=utf-8");
     c.header("Content-Disposition", `attachment; filename="${filename}"`);
@@ -276,6 +418,24 @@ export function createAdminApp(pool: Pool) {
     );
   });
 
+  app.get("/course-codes/_unaffiliated", async (c) => {
+    const user = c.get("user");
+    if (user.role !== "admin") {
+      return c.redirect("/admin/course-codes");
+    }
+    const page = Math.max(1, Number(c.req.query("page")) || 1);
+    return c.html(
+      <CourseCodeDetailPage
+        pool={pool}
+        user={user}
+        currentPath={c.req.path}
+        code=""
+        page={page}
+        unaffiliated
+      />,
+    );
+  });
+
   app.get("/course-codes/:code", async (c) => {
     const user = c.get("user");
     const code = c.req.param("code");
@@ -329,12 +489,195 @@ export function createAdminApp(pool: Pool) {
     );
   });
 
+  // ── User management routes (admin only) ──
+
   app.get("/users", async (c) => {
     const user = c.get("user");
     if (user.role !== "admin") {
       return c.redirect("/admin");
     }
-    return c.html(<UsersPage user={user} currentPath={c.req.path} />);
+    const flash = c.req.query("flash");
+    const rawVariant = c.req.query("flashVariant");
+    const flashVariant =
+      rawVariant === "success" || rawVariant === "error"
+        ? rawVariant
+        : undefined;
+    return c.html(
+      <UsersPage
+        pool={pool}
+        user={user}
+        currentPath={c.req.path}
+        flash={flash}
+        flashVariant={flashVariant}
+      />,
+    );
+  });
+
+  app.post("/users", csrf(), async (c) => {
+    const user = c.get("user");
+    if (user.role !== "admin") {
+      return c.redirect("/admin");
+    }
+
+    const formData = await c.req.parseBody();
+    const email =
+      typeof formData.email === "string" ? formData.email.trim() : "";
+    const firstName =
+      typeof formData.firstName === "string" ? formData.firstName.trim() : "";
+    const lastName =
+      typeof formData.lastName === "string" ? formData.lastName.trim() : "";
+    const role = formData.role;
+
+    if (!email || !firstName || !lastName) {
+      return c.redirect(
+        `/admin/users?flash=${encodeURIComponent("All fields are required.")}&flashVariant=error`,
+      );
+    }
+    if (role !== "admin" && role !== "trainer") {
+      return c.redirect(
+        `/admin/users?flash=${encodeURIComponent("Invalid role.")}&flashVariant=error`,
+      );
+    }
+
+    const exists = await checkEmailExists(pool, email);
+    if (exists) {
+      return c.redirect(
+        `/admin/users?flash=${encodeURIComponent("A user with this email already exists.")}&flashVariant=error`,
+      );
+    }
+
+    const name = `${firstName} ${lastName}`;
+    const userId = await createUser(pool, { email, name, role });
+
+    return c.redirect(
+      `/admin/users/${userId}?flash=${encodeURIComponent("User created successfully.")}&flashVariant=success`,
+    );
+  });
+
+  app.get("/users/:id", async (c) => {
+    const user = c.get("user");
+    if (user.role !== "admin") {
+      return c.redirect("/admin");
+    }
+    const targetUserId = c.req.param("id");
+    const flash = c.req.query("flash");
+    const rawVariant = c.req.query("flashVariant");
+    const flashVariant =
+      rawVariant === "success" || rawVariant === "error"
+        ? rawVariant
+        : undefined;
+    return c.html(
+      <UserDetailPage
+        pool={pool}
+        user={user}
+        currentPath={c.req.path}
+        targetUserId={targetUserId}
+        flash={flash}
+        flashVariant={flashVariant}
+      />,
+    );
+  });
+
+  app.post("/api/users/:id/invite", async (c) => {
+    const user = c.get("user");
+    if (user.role !== "admin") {
+      return c.json({ error: "forbidden" }, 403);
+    }
+
+    const targetUserId = c.req.param("id");
+    const targetUser = await getUserById(pool, targetUserId);
+    if (!targetUser || targetUser.status !== "pending") {
+      return c.json({ error: "Invalid user" }, 400);
+    }
+
+    const token = generateSecureRandomString(48);
+    const tokenHash = await hashSecret(token);
+    const expiresAt = Math.floor(Date.now() / 1000) + 86400; // 24 hours
+
+    await createInvitation(
+      pool,
+      targetUserId,
+      Buffer.from(tokenHash),
+      expiresAt,
+    );
+
+    const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+    const host = c.req.header("host") || "localhost:3000";
+    const url = `${protocol}://${host}/admin/setup?token=${token}`;
+
+    return c.json({ url });
+  });
+
+  app.post("/users/:id/disable", csrf(), async (c) => {
+    const user = c.get("user");
+    if (user.role !== "admin") {
+      return c.redirect("/admin");
+    }
+    const targetUserId = c.req.param("id");
+
+    if (targetUserId === user.id) {
+      return c.redirect(
+        `/admin/users/${targetUserId}?flash=${encodeURIComponent("You cannot disable your own account.")}&flashVariant=error`,
+      );
+    }
+
+    await updateUserStatus(pool, targetUserId, "disabled");
+    await deleteUserSessions(pool, targetUserId);
+    return c.redirect(
+      `/admin/users/${targetUserId}?flash=${encodeURIComponent("User disabled.")}&flashVariant=success`,
+    );
+  });
+
+  app.post("/users/:id/enable", csrf(), async (c) => {
+    const user = c.get("user");
+    if (user.role !== "admin") {
+      return c.redirect("/admin");
+    }
+    const targetUserId = c.req.param("id");
+
+    await updateUserStatus(pool, targetUserId, "active");
+    return c.redirect(
+      `/admin/users/${targetUserId}?flash=${encodeURIComponent("User enabled.")}&flashVariant=success`,
+    );
+  });
+
+  app.post("/users/:id/delete", csrf(), async (c) => {
+    const user = c.get("user");
+    if (user.role !== "admin") {
+      return c.redirect("/admin");
+    }
+    const targetUserId = c.req.param("id");
+
+    if (targetUserId === user.id) {
+      return c.redirect(
+        `/admin/users/${targetUserId}?flash=${encodeURIComponent("You cannot delete your own account.")}&flashVariant=error`,
+      );
+    }
+
+    const formData = await c.req.parseBody();
+    if (formData.confirmation !== "delete") {
+      return c.redirect(
+        `/admin/users/${targetUserId}?flash=${encodeURIComponent("Deletion not confirmed.")}&flashVariant=error`,
+      );
+    }
+
+    await deleteUser(pool, targetUserId);
+    return c.redirect(
+      `/admin/users?flash=${encodeURIComponent("User deleted.")}&flashVariant=success`,
+    );
+  });
+
+  app.post("/users/:id/force-logout", csrf(), async (c) => {
+    const user = c.get("user");
+    if (user.role !== "admin") {
+      return c.redirect("/admin");
+    }
+    const targetUserId = c.req.param("id");
+
+    await deleteUserSessions(pool, targetUserId);
+    return c.redirect(
+      `/admin/users/${targetUserId}?flash=${encodeURIComponent("User sessions terminated.")}&flashVariant=success`,
+    );
   });
 
   return app;

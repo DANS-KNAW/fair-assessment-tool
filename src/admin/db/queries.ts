@@ -26,6 +26,7 @@ interface SessionRow extends RowDataPacket {
   email: string;
   name: string | null;
   role: "admin" | "trainer";
+  status: "pending" | "active" | "disabled";
 }
 
 interface CreateSessionParams {
@@ -59,7 +60,7 @@ export async function getSessionWithUser(
 ): Promise<SessionRow | null> {
   const [rows] = await pool.execute<SessionRow[]>(
     `SELECT s.id, s.user_id, s.secret_hash, s.last_verified_at, s.created_at,
-            u.email, u.name, u.role
+            u.email, u.name, u.role, u.status
      FROM user_sessions s
      JOIN authorized_users u ON s.user_id = u.id
      WHERE s.id = ?`,
@@ -94,6 +95,7 @@ interface UserRow extends RowDataPacket {
   name: string | null;
   password_hash: string | null;
   role: "admin" | "trainer";
+  status: "pending" | "active" | "disabled";
 }
 
 export async function getUserByEmail(
@@ -101,10 +103,20 @@ export async function getUserByEmail(
   email: string,
 ): Promise<UserRow | null> {
   const [rows] = await pool.execute<UserRow[]>(
-    "SELECT id, email, name, password_hash, role FROM authorized_users WHERE email = ?",
+    "SELECT id, email, name, password_hash, role, status FROM authorized_users WHERE email = ?",
     [email],
   );
   return rows[0] ?? null;
+}
+
+export async function updateLastLoginAt(
+  pool: Pool,
+  userId: string,
+): Promise<void> {
+  await pool.execute(
+    "UPDATE authorized_users SET last_login_at = NOW() WHERE id = ?",
+    [userId],
+  );
 }
 
 // ── Dashboard stat queries ──
@@ -499,6 +511,119 @@ export async function getCourseCodeQuestionBreakdown(
   }));
 }
 
+// ── Unaffiliated assessment queries ──
+
+const UNAFFILIATED_WHERE = "(cq1 IS NULL OR cq1 = '')";
+
+export async function getUnaffiliatedCount(pool: Pool): Promise<number> {
+  const [rows] = await pool.execute<CountRow[]>(
+    `SELECT COUNT(*) as count FROM assessment_answers WHERE ${UNAFFILIATED_WHERE}`,
+  );
+  return rows[0].count;
+}
+
+export async function getUnaffiliatedStats(pool: Pool): Promise<{
+  total: number;
+  avgScore: number | null;
+  low: number;
+  moderate: number;
+  high: number;
+}> {
+  const [rows] = await pool.execute<CourseCodeStatsRow[]>(
+    `SELECT
+       COUNT(*) AS total,
+       AVG(${FAIR_SCORE_SQL}) AS avg_score,
+       SUM(CASE WHEN (${FAIR_SCORE_SQL}) < 6 THEN 1 ELSE 0 END) AS low_count,
+       SUM(CASE WHEN (${FAIR_SCORE_SQL}) BETWEEN 6 AND 7 THEN 1 ELSE 0 END) AS moderate_count,
+       SUM(CASE WHEN (${FAIR_SCORE_SQL}) >= 8 THEN 1 ELSE 0 END) AS high_count
+     FROM assessment_answers
+     WHERE ${UNAFFILIATED_WHERE}`,
+  );
+  const row = rows[0];
+  return {
+    total: row.total ?? 0,
+    avgScore: row.avg_score,
+    low: row.low_count ?? 0,
+    moderate: row.moderate_count ?? 0,
+    high: row.high_count ?? 0,
+  };
+}
+
+export async function getUnaffiliatedQuestionBreakdown(
+  pool: Pool,
+): Promise<QuestionStats[]> {
+  const selectClauses = FAIR_QUESTIONS.map(
+    (q) =>
+      `SUM(CASE WHEN LOWER(${q.key}) = 'yes' THEN 1 ELSE 0 END) AS ${q.key}_yes,
+       AVG(CASE WHEN LOWER(${q.key}) = 'yes' THEN CAST(${q.key}i AS UNSIGNED) END) AS ${q.key}_yes_avg,
+       SUM(CASE WHEN LOWER(${q.key}) = 'no' THEN 1 ELSE 0 END) AS ${q.key}_no,
+       AVG(CASE WHEN LOWER(${q.key}) = 'no' THEN CAST(${q.key}i AS UNSIGNED) END) AS ${q.key}_no_avg`,
+  ).join(",\n       ");
+
+  const [rows] = await pool.execute<RowDataPacket[]>(
+    `SELECT ${selectClauses}, COUNT(*) AS total
+     FROM assessment_answers
+     WHERE ${UNAFFILIATED_WHERE}`,
+  );
+
+  const row = rows[0];
+  return FAIR_QUESTIONS.map((q) => ({
+    question: q.key,
+    label: q.label,
+    yes: Number(row[`${q.key}_yes`]) || 0,
+    yesAvgLikelihood:
+      row[`${q.key}_yes_avg`] != null ? Number(row[`${q.key}_yes_avg`]) : null,
+    no: Number(row[`${q.key}_no`]) || 0,
+    noAvgLikelihood:
+      row[`${q.key}_no_avg`] != null ? Number(row[`${q.key}_no_avg`]) : null,
+  }));
+}
+
+export async function getUnaffiliatedSubmissions(
+  pool: Pool,
+  page: number,
+  pageSize: number,
+): Promise<SubmissionRow[]> {
+  const offset = (page - 1) * pageSize;
+  const [rows] = await pool.execute<SubmissionRow[]>(
+    `SELECT id, cq1, submission_date, fq1, fq2, fq3, aq1, aq2, iq1, rq1, rq2, rq3, rq4
+     FROM assessment_answers
+     WHERE ${UNAFFILIATED_WHERE}
+     ORDER BY submission_date DESC
+     LIMIT ? OFFSET ?`,
+    [String(pageSize), String(offset)],
+  );
+  return rows;
+}
+
+export async function getUnaffiliatedSubmissionCount(
+  pool: Pool,
+): Promise<number> {
+  const [rows] = await pool.execute<CountRow[]>(
+    `SELECT COUNT(*) as count FROM assessment_answers WHERE ${UNAFFILIATED_WHERE}`,
+  );
+  return rows[0].count;
+}
+
+export async function getUnaffiliatedHosts(pool: Pool): Promise<string[]> {
+  const [rows] = await pool.execute<HostRow[]>(
+    `SELECT DISTINCT host FROM assessment_answers WHERE ${UNAFFILIATED_WHERE} ORDER BY host`,
+  );
+  return rows.map((r) => r.host);
+}
+
+export async function getUnaffiliatedSubmissionsForDownload(
+  pool: Pool,
+): Promise<AssessmentDetailRow[]> {
+  const [rows] = await pool.execute<AssessmentDetailRow[]>(
+    `SELECT ${ASSESSMENT_DETAIL_COLUMNS}
+     FROM assessment_answers
+     WHERE ${UNAFFILIATED_WHERE}
+     ORDER BY submission_date DESC`,
+  );
+  return rows;
+}
+
 // ── Ownership check ──
 
 export async function isOwnedCourseCode(
@@ -511,4 +636,204 @@ export async function isOwnedCourseCode(
     [code, userId],
   );
   return rows[0].count > 0;
+}
+
+// ── User management types ──
+
+const INACTIVITY_TIMEOUT_SECONDS = 60 * 60 * 24 * 10; // 10 days
+
+export interface UserListRow extends RowDataPacket {
+  id: string;
+  email: string;
+  name: string | null;
+  role: "admin" | "trainer";
+  status: "pending" | "active" | "disabled";
+  last_login_at: string | null;
+  created_at: string;
+  has_active_session: number;
+}
+
+export interface UserDetailRow extends RowDataPacket {
+  id: string;
+  email: string;
+  name: string | null;
+  role: "admin" | "trainer";
+  status: "pending" | "active" | "disabled";
+  last_login_at: string | null;
+  created_at: string;
+}
+
+export interface UserCourseCodeRow extends RowDataPacket {
+  code: string;
+  created_at: string;
+  submission_count: number;
+}
+
+// ── User management queries ──
+
+export async function getAllUsers(pool: Pool): Promise<UserListRow[]> {
+  const [rows] = await pool.execute<UserListRow[]>(
+    `SELECT
+       u.id, u.email, u.name, u.role, u.status, u.last_login_at, u.created_at,
+       CASE WHEN EXISTS (
+         SELECT 1 FROM user_sessions s
+         WHERE s.user_id = u.id
+           AND s.last_verified_at >= (UNIX_TIMESTAMP() - ?)
+       ) THEN 1 ELSE 0 END AS has_active_session
+     FROM authorized_users u
+     ORDER BY u.created_at DESC`,
+    [String(INACTIVITY_TIMEOUT_SECONDS)],
+  );
+  return rows;
+}
+
+export async function getUserById(
+  pool: Pool,
+  userId: string,
+): Promise<UserDetailRow | null> {
+  const [rows] = await pool.execute<UserDetailRow[]>(
+    "SELECT id, email, name, role, status, last_login_at, created_at FROM authorized_users WHERE id = ?",
+    [userId],
+  );
+  return rows[0] ?? null;
+}
+
+export async function getUserCourseCodesWithCounts(
+  pool: Pool,
+  userId: string,
+): Promise<UserCourseCodeRow[]> {
+  const [rows] = await pool.execute<UserCourseCodeRow[]>(
+    `SELECT
+       cc.code, cc.created_at,
+       COALESCE(COUNT(aa.id), 0) AS submission_count
+     FROM course_codes cc
+     LEFT JOIN assessment_answers aa ON aa.cq1 = cc.code
+     WHERE cc.created_by = ?
+     GROUP BY cc.id, cc.code, cc.created_at
+     ORDER BY cc.created_at DESC`,
+    [userId],
+  );
+  return rows;
+}
+
+export async function hasActiveSession(
+  pool: Pool,
+  userId: string,
+): Promise<boolean> {
+  const [rows] = await pool.execute<CountRow[]>(
+    `SELECT COUNT(*) as count FROM user_sessions
+     WHERE user_id = ? AND last_verified_at >= (UNIX_TIMESTAMP() - ?)`,
+    [userId, String(INACTIVITY_TIMEOUT_SECONDS)],
+  );
+  return rows[0].count > 0;
+}
+
+export async function createUser(
+  pool: Pool,
+  params: { email: string; name: string; role: "admin" | "trainer" },
+): Promise<string> {
+  const [idResult] = await pool.execute<RowDataPacket[]>("SELECT UUID() as id");
+  const userId = (idResult as Array<{ id: string }>)[0].id;
+
+  await pool.execute(
+    `INSERT INTO authorized_users (id, email, name, role, status)
+     VALUES (?, ?, ?, ?, 'pending')`,
+    [userId, params.email, params.name, params.role],
+  );
+  return userId;
+}
+
+export async function updateUserStatus(
+  pool: Pool,
+  userId: string,
+  status: "active" | "disabled",
+): Promise<void> {
+  await pool.execute("UPDATE authorized_users SET status = ? WHERE id = ?", [
+    status,
+    userId,
+  ]);
+}
+
+export async function deleteUser(pool: Pool, userId: string): Promise<void> {
+  await pool.execute("DELETE FROM authorized_users WHERE id = ?", [userId]);
+}
+
+export async function deleteUserSessions(
+  pool: Pool,
+  userId: string,
+): Promise<void> {
+  await pool.execute("DELETE FROM user_sessions WHERE user_id = ?", [userId]);
+}
+
+export async function setUserPassword(
+  pool: Pool,
+  userId: string,
+  passwordHash: string,
+): Promise<void> {
+  await pool.execute(
+    "UPDATE authorized_users SET password_hash = ?, status = 'active' WHERE id = ?",
+    [passwordHash, userId],
+  );
+}
+
+export async function checkEmailExists(
+  pool: Pool,
+  email: string,
+): Promise<boolean> {
+  const [rows] = await pool.execute<CountRow[]>(
+    "SELECT COUNT(*) as count FROM authorized_users WHERE email = ?",
+    [email],
+  );
+  return rows[0].count > 0;
+}
+
+// ── Invitation queries ──
+
+interface InvitationRow extends RowDataPacket {
+  id: number;
+  user_id: string;
+  token_hash: Buffer;
+  expires_at: number;
+  user_status: "pending" | "active" | "disabled";
+}
+
+export async function createInvitation(
+  pool: Pool,
+  userId: string,
+  tokenHash: Buffer,
+  expiresAt: number,
+): Promise<void> {
+  const now = Math.floor(Date.now() / 1000);
+  await pool.execute("DELETE FROM user_invitations WHERE user_id = ?", [
+    userId,
+  ]);
+  await pool.execute(
+    `INSERT INTO user_invitations (user_id, token_hash, expires_at, created_at)
+     VALUES (?, ?, ?, ?)`,
+    [userId, tokenHash, expiresAt, now],
+  );
+}
+
+export async function getInvitationByTokenHash(
+  pool: Pool,
+  tokenHash: Buffer,
+): Promise<InvitationRow | null> {
+  const [rows] = await pool.execute<InvitationRow[]>(
+    `SELECT i.id, i.user_id, i.token_hash, i.expires_at,
+            u.status AS user_status
+     FROM user_invitations i
+     JOIN authorized_users u ON i.user_id = u.id
+     WHERE i.token_hash = ?`,
+    [tokenHash],
+  );
+  return rows[0] ?? null;
+}
+
+export async function deleteInvitationsByUserId(
+  pool: Pool,
+  userId: string,
+): Promise<void> {
+  await pool.execute("DELETE FROM user_invitations WHERE user_id = ?", [
+    userId,
+  ]);
 }
