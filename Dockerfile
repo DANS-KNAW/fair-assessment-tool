@@ -25,6 +25,22 @@ RUN pnpm install --frozen-lockfile && \
 FROM base AS runner
 WORKDIR /app
 
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+
+LABEL org.opencontainers.image.title="fair-assessment-tool" \
+      org.opencontainers.image.description="FAIR-Aware assessment tool for evaluating the FAIRness of digital objects" \
+      org.opencontainers.image.url="https://github.com/DANS-KNAW/fair-assessment-tool" \
+      org.opencontainers.image.source="https://github.com/DANS-KNAW/fair-assessment-tool" \
+      org.opencontainers.image.documentation="https://github.com/DANS-KNAW/fair-assessment-tool" \
+      org.opencontainers.image.vendor="DANS-KNAW" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.base.name="node:22-alpine" \
+      org.opencontainers.image.created="${BUILD_DATE}" \
+      org.opencontainers.image.revision="${VCS_REF}" \
+      org.opencontainers.image.version="${VERSION}"
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 hono
 
