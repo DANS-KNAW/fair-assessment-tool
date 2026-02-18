@@ -8,43 +8,15 @@ FAIR-Aware is a self-assessment tool that raises awareness on data FAIRness (Fin
 
 Prerequisites: Node.js v22+, pnpm, Docker
 
-1. Clone the repository and install dependencies:
+```bash
+git clone https://github.com/DANS-KNAW/fair-assessment-tool.git
+cd fair-assessment-tool
+make setup
+```
 
-   ```bash
-   git clone https://github.com/FAIRsFAIR/fair-assessment-tool.git
-   cd fair-assessment-tool
-   pnpm install
-   ```
+This builds the full Docker stack, seeds a default admin account (`root@fairaware.system.com` / `admin123`), and starts the application.
 
-2. Configure the environment:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-3. Start the MySQL database and dev server:
-
-   ```bash
-   make dev
-   ```
-
-4. Seed a dev admin account (`root@fairaware.system.com` / `admin123`):
-
-   ```bash
-   make seed
-   ```
-
-> To reset the database and reseed from scratch, run `make reset`.
-
-### Makefile targets
-
-| Target       | Description                                               |
-| ------------ | --------------------------------------------------------- |
-| `make dev`   | Starts MySQL container and runs the dev server            |
-| `make seed`  | Seeds a dev admin account                                 |
-| `make reset` | Destroys the database volume, restarts MySQL, and reseeds |
-| `make build` | Builds the project for production                         |
-| `make clean` | Stops all Docker containers                               |
+Run `make help` to see all available commands.
 
 ## Production
 
