@@ -34,7 +34,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5.10.0
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/fair-assessment-tool
+          images: dansknaw/fair-assessment-tool
           tags: |
             type=semver,pattern={{version}}
             type=sha,prefix=sha-,format=short
