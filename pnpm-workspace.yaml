@@ -1,0 +1,7 @@
+# pnpm 11+ requires build-script permissions to be declared explicitly;
+# unapproved scripts are a fatal error during install. See https://pnpm.io/settings.
+# esbuild and @parcel/watcher are dev-only (tsx watch / Tailwind watch) and their
+# native binaries aren't needed for the production build, so their scripts are skipped.
+allowBuilds:
+  esbuild: false
+  '@parcel/watcher': false
